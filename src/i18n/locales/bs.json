@@ -1,0 +1,23 @@
+{
+    "gettingWrongSometimes": "I dalje ponekad griješim. Uvijek je najbolje konsultovati pravog islamskog učenjaka.",
+    "flaggingInstructions": "Ako kažem nešto pogrešno, zbunjujuće, sjajno, smiješno ili zanimljivo, molimo vas da to označite. Sve što je označeno biće pregledano od strane ljudi. Da označite razgovor, samo recite 'Želim označiti ovaj razgovor.'",
+    "multilingualMessage": "Ja sam višejezičan. Razumijem arapski (uključujući transliteraciju), turski, urdu, bahasa, bosanski i mnoge druge jezike.",
+    "promptPlaceholder": "Unesite poruku",
+    "duaToMake": "Dua za napraviti",
+    "inParticularSituation": "u konkretnoj situaciji",
+    "spiritualRemedies": "Duhovni lijekovi",
+    "challengesFacing": "za izazove sa kojima se suočavate",
+    "islamicPerspectives": "islamske perspektive",
+    "onTopics": "na teme",
+    "selectLanguage": "Odaberite jezik",
+    "messageSent": "poruka",
+    "information": "Informacije",
+    "comprehensiveGuide": "Kliknite <1>ovdje</1> za opsežniji vodič o tome šta Ansari može učiniti.",
+    "startConversation": "Započnite novi razgovor",
+    "newConversationConfirmation": "Jeste li sigurni da želite započeti novi razgovor?",
+    "conversationLostWarning": "Imajte na umu da će prethodni razgovor biti izgubljen.",
+    "cancel": "Otkaži",
+    "yes": "Da",
+    "backendErrorMessage": "Nešto je pošlo po zlu. Ako se ovaj problem nastavi, kontaktirajte nas putem našeg centra za pomoć na adresi <1>feedback@ansari.chat</1>",
+    "poweredBy": "Powered by Ansari"
+}

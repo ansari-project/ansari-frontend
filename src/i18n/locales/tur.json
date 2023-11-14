@@ -1,0 +1,23 @@
+{
+    "gettingWrongSometimes": "Hala bazen bazı şeyleri yanlış anlıyorum. Gerçek bir İslam alimi ile görüşmek her zaman en iyisidir.",
+    "flaggingInstructions": "Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. İşaretlenen her şey insanlar tarafından incelenecektir. Bir sohbeti işaretlemek için 'Bu sohbeti işaretlemek istiyorum' demeniz yeterli.",
+    "multilingualMessage": "Ben çok dilliyim. Arapça (harf çevirisi dahil), Türkçe, Urduca, Bahasa, Boşnakça ve diğer birçok dili anlayabiliyorum.",
+    "promptPlaceholder": "Mesaj yazın",
+    "duaToMake": "Yapmak için dua",
+    "inParticularSituation": "özel durumda",
+    "spiritualRemedies": "Manevi çareler",
+    "challengesFacing": "karşılaştığınız zorluklar için",
+    "islamicPerspectives": "İslami perspektifler",
+    "onTopics": "konularda",
+    "selectLanguage": "Bir dil seç",
+    "messageSent": "İleti",
+    "information": "Bilgi",
+    "comprehensiveGuide": "Ansari'nin neler yapabileceğine ilişkin daha kapsamlı bir kılavuz için <1>burayı</1> tıklayın.",
+    "startConversation": "Yeni Konuşma Başlat",
+    "newConversationConfirmation": "Yeni bir sohbet başlatmak istediğinizden emin misiniz?",
+    "conversationLostWarning": "Lütfen önceki görüşmenin kaybolacağını unutmayın.",
+    "cancel": "İptal etmek",
+    "yes": "Evet",
+    "poweredBy": "Ansari tarafından desteklenmektedir",
+    "backendErrorMessage": "Bir şeyler yanlış gitti. Bu sorun devam ederse lütfen şu adresteki yardım merkezimiz aracılığıyla bizimle iletişime geçin: <1>feedback@ansari.chat</1>"
+}

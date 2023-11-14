@@ -1,0 +1,61 @@
+# HTTP Server Configuration
+
+server {
+     listen 80;
+    listen [::]:80;
+    server_name {your-domain}; # Replace with your domain name
+     
+    if ($host = {your-domain}) {
+      return 301 https://$host$request_uri;
+    }
+
+     return 404;
+}
+
+server {
+    server_name {your-domain}; # Replace with your domain name
+    root {project-path}/build; # Replace with the path to your project build directory
+
+# HTTPS Server Configuration (Uncomment and configure if SSL is enabled)
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name {your-domain}; # Replace with your domain name
+
+    ssl_certificate {path-to-ssl-keys}/fullchain.pem; # SSL certificate path
+    ssl_certificate_key {path-to-ssl-keys}/privkey.pem; # SSL key path
+
+    # Default configurations
+    index index.html;
+    charset utf-8;
+
+    # Main location block
+    location / {
+        try_files $uri $uri/ /index.html?$query_string;
+    }
+
+    # Proxy Configuration (Uncomment and configure if needed)
+    # location /api {
+    #    proxy_buffering off;
+    #    proxy_pass {backend-path}/api; # Replace with your backend path
+    # }
+
+    # Static file caching
+    location ~* \.(ico|css|js|gif|jpe?g|png|webp)$ {
+       expires 30d;
+       add_header Vary Accept-Encoding;
+       access_log off;
+    }
+
+    # Security configurations
+    location ~ /\.ht {
+        deny all;
+    }
+
+    location ~ (/\.ht|web.config|/\.git|/\.env) {
+        deny all;
+    }
+
+    # Logging configurations
+    access_log off;
+    error_log  /var/log/nginx/error.log error;
+}

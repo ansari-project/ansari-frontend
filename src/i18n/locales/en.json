@@ -1,0 +1,23 @@
+{
+    "gettingWrongSometimes": "I still get things wrong sometimes. It is always best to consult a real Islamic Scholar.",
+    "flaggingInstructions": "If I say anything wrong, confusing, great, funny or interesting, please flag it. Anything flagged will be reviewed by humans. To flag a conversation, just say 'I want to flag this conversation.'",
+    "multilingualMessage": "I am multilingual. I can understand Arabic (including transliteration), Turkish, Urdu, Bahasa, Bosnian and many other languages.",
+    "promptPlaceholder": "Type message",
+    "duaToMake": "Dua to make",
+    "inParticularSituation": "in particular situation",
+    "spiritualRemedies": "Spiritual remedies",
+    "challengesFacing": "for challenges you are facing",
+    "islamicPerspectives": "Islamic perspectives",
+    "onTopics": "on topics",
+    "selectLanguage": "Select a Language",
+    "messageSent": "message",
+    "information": "Information",
+    "comprehensiveGuide": "Click <1>here</1> for a more comprehensive guide to what Ansari can do.",
+    "startConversation": "Start New Conversation",
+    "newConversationConfirmation": "Are you certain that you want to begin a new conversation?",
+    "conversationLostWarning": "Please note that the previous conversation will be lost.",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "backendErrorMessage": "Something went wrong. If this issue persists please contact us through our help center at <1>feedback@ansari.chat</1>",
+    "poweredBy": "Powered by Ansari"
+}

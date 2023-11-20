@@ -1,19 +1,45 @@
 import { flag, languageGreen } from 'assets'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { setShowIntroductionText } from 'store/message-slice'
+import { AppDispatch } from 'store/store'
 
 const IntroductionText: React.FC = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleClickInformation = (isShow: boolean) => {
+    dispatch(setShowIntroductionText(isShow))
+  }
+
   return (
-    <div className='flex flex-col p-4 gap-4 bg-white font-roboto'>
+    <div className='flex flex-col p-4 gap-4 font-roboto text-sm md:bg-white'>
       <div className='font-normal'>{t('gettingWrongSometimes')}</div>
       <div className='flex flex-row gap-4'>
-        <img src={flag} alt='Flag Icon' className='h-fit' />
-        <div className='md:font-light'>{t('flaggingInstructions')}</div>
+        <img src={flag} alt='Flag Icon' className='h-fit w-[14px]' />
+        <div className='hidden md:block font-normal'>{t('flaggingInstructions.desktop')}</div>
+        <div className='md:hidden font-normal'>
+          <Trans i18nKey='flaggingInstructions.mobile'>
+            If I say anything wrong, confusing, great, funny or interesting, please flag it.
+            <a className='text-green underline' onClick={() => handleClickInformation(true)}>
+              more
+            </a>
+          </Trans>
+        </div>
       </div>
       <div className='flex flex-row gap-4'>
-        <img src={languageGreen} alt='Language Icon' className='h-fit' />
-        <div className='md:font-light'>{t('multilingualMessage')}</div>
+        <img src={languageGreen} alt='Language Icon' className='h-fit w-[14px]' />
+        <div className='hidden md:block font-normal'>{t('multilingualMessage.desktop')}</div>
+
+        <div className='md:hidden font-normal'>
+          <Trans i18nKey='multilingualMessage.mobile'>
+            I am multilingual.
+            <a className='text-green underline' onClick={() => handleClickInformation(true)}>
+              more
+            </a>
+          </Trans>
+        </div>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@ This document provides detailed instructions for initializing and deploying the 
 
 ## 2. Environment Setup
 
-- Duplicate the `.env.example` file, rename it to `.env`, and modify the `REACT_APP_API_URL` to correspond with the backend API's URL or the relative path to `REACT_APP_PROXY_API_PATH`.
+- Duplicate the `.env.example` file, rename it to `.env`, and modify the `REACT_APP_API_URL` to correspond with the backend API's URL or the relative path to `REACT_APP_PROXY_HOST`.
 - Execute `yarn install` to procure all necessary dependencies.
 
 ## 3. Local Development Execution

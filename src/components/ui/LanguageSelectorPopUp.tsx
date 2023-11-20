@@ -22,6 +22,7 @@ const languages: LanguageObject = {
   tur: { nativeName: 'Türkçe' },
   bs: { nativeName: 'Bosanski' },
   id: { nativeName: 'Bahasa Indonesia' },
+  fr: { nativeName: 'Français' },
 }
 
 const LanguageSelectorPopUp: React.FC = () => {
@@ -48,7 +49,7 @@ const LanguageSelectorPopUp: React.FC = () => {
             style='auto'
             placement='bottom'
             content={
-              <div className='flex flex-col z-50'>
+              <div className='flex flex-col z-50 landscape:h-40 overflow-y-auto'>
                 {Object.keys(reorderedLanguages).map((langKey) => (
                   <button
                     key={langKey}
@@ -74,7 +75,7 @@ const LanguageSelectorPopUp: React.FC = () => {
             className={`${isOpen === true ? '' : 'invisible opacity-0'}`}
             style='auto'
             content={
-              <div className='flex flex-col'>
+              <div className='flex flex-col landscape:h-40 landscape:lg:h-auto overflow-y-auto'>
                 {Object.keys(reorderedLanguages).map((langKey) => (
                   <button
                     key={langKey}

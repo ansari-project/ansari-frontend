@@ -1,7 +1,13 @@
 {
     "gettingWrongSometimes": "Hala bazen bazı şeyleri yanlış anlıyorum. Gerçek bir İslam alimi ile görüşmek her zaman en iyisidir.",
-    "flaggingInstructions": "Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. İşaretlenen her şey insanlar tarafından incelenecektir. Bir sohbeti işaretlemek için 'Bu sohbeti işaretlemek istiyorum' demeniz yeterli.",
-    "multilingualMessage": "Ben çok dilliyim. Arapça (harf çevirisi dahil), Türkçe, Urduca, Bahasa, Boşnakça ve diğer birçok dili anlayabiliyorum.",
+    "flaggingInstructions":{
+        "desktop": "Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. İşaretlenen her şey insanlar tarafından incelenecektir. Bir sohbeti işaretlemek için 'Bu sohbeti işaretlemek istiyorum' demeniz yeterli.",
+        "mobile":"Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. <1>Daha</1>"
+    },
+    "multilingualMessage":{
+         "desktop":"Ben çok dilliyim. Arapça (harf çevirisi dahil), Türkçe, Urduca, Bahasa, Boşnakça ve diğer birçok dili anlayabiliyorum.",
+         "mobile": "Ben çok dilliyim. <1>Daha</1>"
+        }, 
     "promptPlaceholder": "Mesaj yazın",
     "duaToMake": "Yapmak için dua",
     "inParticularSituation": "özel durumda",

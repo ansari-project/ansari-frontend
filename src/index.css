@@ -12,6 +12,11 @@
   }
 }
 
+html {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 /** Update Scrollbar UI */
 ::-webkit-scrollbar {
   height: 1rem;

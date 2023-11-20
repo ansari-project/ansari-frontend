@@ -1,0 +1,29 @@
+{
+    "gettingWrongSometimes": "Il m'arrive encore de me tromper parfois. Il est toujours préférable de consulter un véritable érudit islamique.",
+     "flaggingInstructions":{
+        "desktop": "Si je dis quelque chose de faux, de déroutant, de génial, de drôle ou d'intéressant, veuillez le signaler. Tout ce qui est signalé sera examiné par des humains. Pour signaler une conversation, dites simplement 'Je veux signaler cette conversation.'",
+        "mobile": "Si je dis quelque chose de faux, de déroutant, de génial, de drôle ou d'intéressant, veuillez le signaler. <1>plus</1>"
+    },
+    "multilingualMessage":{
+         "desktop":"Je suis multilingue. Je peux comprendre l'arabe (y compris la translittération), le turc, l'ourdou, le bahasa, le bosniaque et bien d'autres langues.",
+         "mobile": "Je suis multilingue. <1>plus</1>"
+        }, 
+     "promptPlaceholder": "Tapez le message",
+     "duaToMake": "Dua à faire",
+     "inParticularSituation": "dans une situation particulière",
+     "spiritualRemedies": "Remèdes spirituels",
+     "challengesFacing": "pour les défis auxquels vous êtes confronté",
+     "islamicPerspectives": "Perspectives islamiques",
+     "onTopics": "sur les sujets",
+     "selectLanguage": "Sélectionnez une langue",
+     "messageSent": "message",
+     "informations": "Informations",
+     "comprehensiveGuide": "Cliquez <1>ici</1> pour un guide plus complet de ce qu'Ansari peut faire.",
+     "startConversation": "Démarrer une nouvelle conversation",
+     "newConversationConfirmation": "Êtes-vous certain de vouloir démarrer une nouvelle conversation ?",
+     "conversationLostWarning": "Veuillez noter que la conversation précédente sera perdue.",
+     "cancel": "Annuler",
+     "yes": "Oui",
+     "backendErrorMessage": "Quelque chose s'est mal passé. Si ce problème persiste, veuillez nous contacter via notre centre d'aide à <1>feedback@ansari.chat</1>",
+     "poweredBy": "Propulsé par Ansari"
+}

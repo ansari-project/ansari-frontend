@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://ansari.chat/static/css/main.634cee6a.css",
-    "main.js": "https://ansari.chat/static/js/main.ae317e1f.js",
+    "main.js": "https://ansari.chat/static/js/main.672fa989.js",
     "static/js/496.0908b6ad.chunk.js": "https://ansari.chat/static/js/496.0908b6ad.chunk.js",
     "static/media/compositeLogo.svg": "https://ansari.chat/static/media/compositeLogo.316705e3d9f51e155685d95c54b5978c.svg",
     "static/media/backgroundImage.svg": "https://ansari.chat/static/media/backgroundImage.a6ecb59e7fceee8ba332e72a9a2a7fa1.svg",
@@ -26,11 +26,11 @@
     "static/media/chatDeleteLine.svg": "https://ansari.chat/static/media/chatDeleteLine.fc758875b883cdd0d49d26825c3724b1.svg",
     "static/media/flag.svg": "https://ansari.chat/static/media/flag.9e5f16974d8d9499372259788a3ffaf2.svg",
     "main.634cee6a.css.map": "https://ansari.chat/static/css/main.634cee6a.css.map",
-    "main.ae317e1f.js.map": "https://ansari.chat/static/js/main.ae317e1f.js.map",
+    "main.672fa989.js.map": "https://ansari.chat/static/js/main.672fa989.js.map",
     "496.0908b6ad.chunk.js.map": "https://ansari.chat/static/js/496.0908b6ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.634cee6a.css",
-    "static/js/main.ae317e1f.js"
+    "static/js/main.672fa989.js"
   ]
 }

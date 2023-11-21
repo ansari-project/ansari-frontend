@@ -1,7 +1,13 @@
 {
     "gettingWrongSometimes": "I still get things wrong sometimes. It is always best to consult a real Islamic Scholar.",
-    "flaggingInstructions": "If I say anything wrong, confusing, great, funny or interesting, please flag it. Anything flagged will be reviewed by humans. To flag a conversation, just say 'I want to flag this conversation.'",
-    "multilingualMessage": "I am multilingual. I can understand Arabic (including transliteration), Turkish, Urdu, Bahasa, Bosnian and many other languages.",
+    "flaggingInstructions":{
+        "desktop": "If I say anything wrong, confusing, great, funny or interesting, please flag it. Anything flagged will be reviewed by humans. To flag a conversation, just say 'I want to flag this conversation.',",
+        "mobile": "If I say anything wrong, confusing, great, funny or interesting, please flag it. <1>more</1>"
+    },
+    "multilingualMessage":{
+         "desktop":"I am multilingual. I can understand Arabic (including transliteration), Turkish, Urdu, Bahasa, Bosnian and many other languages.",
+         "mobile": "I am multilingual. <1>more</1>"
+        }, 
     "promptPlaceholder": "Type message",
     "duaToMake": "Dua to make",
     "inParticularSituation": "in particular situation",

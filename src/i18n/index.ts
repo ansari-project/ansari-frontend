@@ -6,6 +6,7 @@ import en from './locales/en.json'
 import id from './locales/id.json'
 import tur from './locales/tur.json'
 import ur from './locales/ur.json'
+import fr from './locales/fr.json'
 
 i18n.use(initReactI18next).init({
   fallbackLng: 'en',
@@ -29,10 +30,13 @@ i18n.use(initReactI18next).init({
     bs: {
       translations: bs,
     },
+    fr: {
+      translations: fr,
+    },
   },
   ns: ['translations'],
   defaultNS: 'translations',
 })
 
-i18n.languages = ['en', 'ar', 'tur', 'ur', 'id', 'bs']
+i18n.languages = ['en', 'ar', 'tur', 'ur', 'id', 'bs', 'fr']
 export default i18n

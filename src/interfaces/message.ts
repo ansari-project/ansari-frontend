@@ -1,5 +1,7 @@
+import { Role } from 'constant'
+
 export interface MessageModel {
-  role: string
+  role: Role
   content: string
   error?: boolean
 }

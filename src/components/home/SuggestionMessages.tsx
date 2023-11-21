@@ -31,12 +31,12 @@ const SuggestionMessages: React.FC = () => {
   ]
 
   return (
-    <div className='flex flex-col gap-2 md:flex-row md:gap-5 w-full md:flex-wrap lg:flex-nowrap overflow-y-auto landscape:pt-12 landscape:h-56 landscape:md:h-64 lg:landscape:h-auto'>
+    <div className='flex flex-col gap-2 md:flex-row md:gap-5 w-full md:flex-wrap lg:flex-nowrap'>
       {suggestionData.map(({ icon, header, text }, index) => (
         <div
           key={index}
           onClick={() => handleSendMessage(`${header} ${text}`)}
-          className='flex flex-row  p-4 gap-6 rounded-sm bg-white w-full hover:text-orange hover:cursor-pointer'
+          className='flex flex-row p-3 md:p-4 gap-6 rounded-sm bg-white w-full hover:text-orange hover:cursor-pointer'
         >
           <img src={icon} alt='Suggestion Icon' className='w-8 my-auto' />
           <div className='flex flex-col'>

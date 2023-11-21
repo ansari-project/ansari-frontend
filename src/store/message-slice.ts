@@ -6,18 +6,22 @@ import { RootState } from './store'
 
 interface MessagesSlice {
   messages: MessageModel[]
+  showIntroductionText: boolean
   streamMessage: string
   hasError: boolean
   isAssistantWriting: boolean
   isAssistantReading: boolean
+  isAssistantStopped: boolean
 }
 
 const initialState: MessagesSlice = {
   messages: [],
+  showIntroductionText: false,
   hasError: false,
   streamMessage: '',
   isAssistantWriting: false,
   isAssistantReading: false,
+  isAssistantStopped: false,
 }
 
 const writeStreamMessage = createAsyncThunk(
@@ -76,38 +80,59 @@ export const messagesSlice = createSlice({
     clearMessages: (state) => {
       state.messages = []
     },
+    stopAssistant: (state) => {
+      state.isAssistantStopped = true
+    },
+    setShowIntroductionText: (state, action: PayloadAction<boolean>) => {
+      state.showIntroductionText = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(readMessagesAsync.pending, (state) => {
+      state.isAssistantStopped = false
       state.isAssistantReading = true
       state.isAssistantWriting = true
       state.streamMessage = ' '
       state.hasError = false
     })
     builder.addCase(readMessagesAsync.fulfilled, (state) => {
+      state.isAssistantStopped = false
       state.isAssistantReading = false
       state.hasError = false
     })
     builder.addCase(readMessagesAsync.rejected, (state) => {
-      state.isAssistantReading = false
+      if (state.isAssistantStopped) {
+        state.hasError = false
+        state.messages = [
+          ...state.messages,
+          {
+            role: Role.ASSISTANT,
+            content: state.streamMessage,
+          },
+        ]
+      } else {
+        state.hasError = true
+        state.streamMessage = ''
+        state.messages = [
+          ...state.messages,
+          {
+            role: Role.ASSISTANT,
+            error: true,
+            content: ' ',
+          },
+        ]
+      }
       state.isAssistantWriting = false
-      state.hasError = true
-      state.streamMessage = ''
-      state.messages = [
-        ...state.messages,
-        {
-          role: Role.ASSISTANT,
-          error: true,
-          content: ' ',
-        },
-      ]
+      state.isAssistantReading = false
     })
 
     builder.addCase(writeStreamMessage.pending, (state) => {
+      state.isAssistantStopped = false
       state.isAssistantWriting = true
       state.hasError = false
     })
     builder.addCase(writeStreamMessage.fulfilled, (state, action) => {
+      state.isAssistantStopped = false
       state.isAssistantWriting = false
       state.hasError = false
       state.streamMessage = ''
@@ -120,23 +145,40 @@ export const messagesSlice = createSlice({
       ]
     })
     builder.addCase(writeStreamMessage.rejected, (state) => {
+      if (state.isAssistantStopped) {
+        state.hasError = false
+        state.messages = [
+          ...state.messages,
+          {
+            role: Role.ASSISTANT,
+            content: state.streamMessage,
+          },
+        ]
+      } else {
+        state.hasError = true
+        state.streamMessage = ''
+        state.messages = [
+          ...state.messages,
+          {
+            role: Role.ASSISTANT,
+            error: true,
+            content: ' ',
+          },
+        ]
+      }
       state.isAssistantWriting = false
       state.isAssistantReading = false
-      state.hasError = true
-      state.streamMessage = ''
-      state.messages = [
-        ...state.messages,
-        {
-          role: Role.ASSISTANT,
-          error: true,
-          content: ' ',
-        },
-      ]
     })
   },
 })
 
-const { addMessage: addMessageAction, updateStreamAssistantMessage: updateLastMessage, clearMessages } = messagesSlice.actions
+const {
+  addMessage: addMessageAction,
+  updateStreamAssistantMessage: updateLastMessage,
+  clearMessages,
+  stopAssistant,
+  setShowIntroductionText,
+} = messagesSlice.actions
 
 const addMessage = (text: string) => {
   return ((dispatch: Dispatch) => {
@@ -144,5 +186,5 @@ const addMessage = (text: string) => {
     dispatch(readMessagesAsync() as unknown as AnyAction)
   }) as unknown as AnyAction
 }
-export { addMessage, clearMessages }
+export { addMessage, clearMessages, stopAssistant, setShowIntroductionText }
 export default messagesSlice.reducer

@@ -1,16 +1,17 @@
 import { chatDeleteLine, flag, information, languageGreen } from 'assets'
-import React, { useState } from 'react'
+import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { RootState } from 'store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowIntroductionText } from 'store/message-slice'
+import { AppDispatch, RootState } from 'store/store'
 const InformationPopUp: React.FC = () => {
   const { t } = useTranslation()
-  const [showIntroductionText, setShowIntroductionText] = useState(false)
   const isRtl = document.dir === 'rtl'
   const messages = useSelector((state: RootState) => state.messagesReducer.messages)
-
+  const showIntroductionText = useSelector((state: RootState) => state.messagesReducer.showIntroductionText)
+  const dispatch = useDispatch<AppDispatch>()
   const handleClickInformation = () => {
-    setShowIntroductionText(!showIntroductionText)
+    dispatch(setShowIntroductionText(!showIntroductionText))
   }
 
   const containerClass = `z-50 flex fixed top-0 ${isRtl ? 'left-0' : 'right-0 '} min-h-screen duration-300 transition-opacity`
@@ -39,11 +40,11 @@ const InformationPopUp: React.FC = () => {
               <div className='font-normal'>{t('gettingWrongSometimes')}</div>
               <div className='flex flex-row gap-4'>
                 <img src={flag} alt='Flag Icon' className='h-fit' />
-                <div className='md:font-light'>{t('flaggingInstructions')}</div>
+                <div className='md:font-light'>{t('flaggingInstructions.desktop')}</div>
               </div>
               <div className='flex flex-row gap-4'>
                 <img src={languageGreen} alt='Language Icon' className='h-fit' />
-                <div className='md:font-light'>{t('multilingualMessage')}</div>
+                <div className='md:font-light'>{t('multilingualMessage.desktop')}</div>
               </div>
               <div>
                 <Trans i18nKey='comprehensiveGuide'>

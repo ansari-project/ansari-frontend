@@ -1,7 +1,13 @@
 {
     "gettingWrongSometimes": "Terkadang saya masih melakukan kesalahan. Yang terbaik adalah selalu berkonsultasi dengan Cendekiawan Islam sejati.",
-    "flaggingInstructions": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. Apa pun yang ditandai akan ditinjau oleh manusia. Untuk menandai percakapan, cukup ucapkan 'Saya ingin menandai percakapan ini'.",
-    "multilingualMessage": "Saya multibahasa. Saya bisa memahami bahasa Arab (termasuk transliterasi), Turki, Urdu, Indonesia, Bosnia dan banyak bahasa lainnya.",
+    "flaggingInstructions":{
+        "desktop": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. Apa pun yang ditandai akan ditinjau oleh manusia. Untuk menandai percakapan, cukup ucapkan 'Saya ingin menandai percakapan ini'.",
+        "mobile":"Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. <1>lagi</1>"
+    },
+    "multilingualMessage":{
+         "desktop":"Saya multibahasa. Saya bisa memahami bahasa Arab (termasuk transliterasi), Turki, Urdu, Indonesia, Bosnia dan banyak bahasa lainnya.",
+         "mobile": "Saya multibahasa. <1>lagi</1>"
+        }, 
     "promptPlaceholder": "Ketik pesan",
     "duaToMake": "Dua yang harus dilakukan",
     "inParticularSituation": "dalam situasi tertentu",

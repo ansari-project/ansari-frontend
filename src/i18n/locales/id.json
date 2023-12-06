@@ -1,13 +1,13 @@
 {
     "gettingWrongSometimes": "Terkadang saya masih melakukan kesalahan. Yang terbaik adalah selalu berkonsultasi dengan Cendekiawan Islam sejati.",
-    "flaggingInstructions":{
+    "flaggingInstructions": {
         "desktop": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. Apa pun yang ditandai akan ditinjau oleh manusia. Untuk menandai percakapan, cukup ucapkan 'Saya ingin menandai percakapan ini'.",
-        "mobile":"Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. <1>lagi</1>"
+        "mobile": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, harap tandai. <1>lagi</1>"
     },
-    "multilingualMessage":{
-         "desktop":"Saya multibahasa. Saya bisa memahami bahasa Arab (termasuk transliterasi), Turki, Urdu, Indonesia, Bosnia dan banyak bahasa lainnya.",
-         "mobile": "Saya multibahasa. <1>lagi</1>"
-        }, 
+    "multilingualMessage": {
+        "desktop": "Saya multibahasa. Saya bisa memahami bahasa Arab (termasuk transliterasi), Turki, Urdu, Indonesia, Bosnia dan banyak bahasa lainnya.",
+        "mobile": "Saya multibahasa. <1>lagi</1>"
+    },
     "promptPlaceholder": "Ketik pesan",
     "duaToMake": "Dua yang harus dilakukan",
     "inParticularSituation": "dalam situasi tertentu",
@@ -24,6 +24,6 @@
     "conversationLostWarning": "Harap dicatat bahwa percakapan sebelumnya akan hilang.",
     "cancel": "Membatalkan",
     "yes": "Ya",
-    "poweredBy": "didukung oleh Ansari",
+    "subscribe": "didukung oleh Ansari",
     "backendErrorMessage": "Ada yang salah. Jika masalah ini terus berlanjut, harap hubungi kami melalui pusat bantuan kami di <1>feedback@ansari.chat</1>"
 }

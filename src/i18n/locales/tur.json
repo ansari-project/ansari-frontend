@@ -1,13 +1,13 @@
 {
     "gettingWrongSometimes": "Hala bazen bazı şeyleri yanlış anlıyorum. Gerçek bir İslam alimi ile görüşmek her zaman en iyisidir.",
-    "flaggingInstructions":{
+    "flaggingInstructions": {
         "desktop": "Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. İşaretlenen her şey insanlar tarafından incelenecektir. Bir sohbeti işaretlemek için 'Bu sohbeti işaretlemek istiyorum' demeniz yeterli.",
-        "mobile":"Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. <1>Daha</1>"
+        "mobile": "Yanlış, kafa karıştırıcı, harika, komik veya ilginç bir şey söylersem lütfen işaretleyin. <1>Daha</1>"
     },
-    "multilingualMessage":{
-         "desktop":"Ben çok dilliyim. Arapça (harf çevirisi dahil), Türkçe, Urduca, Bahasa, Boşnakça ve diğer birçok dili anlayabiliyorum.",
-         "mobile": "Ben çok dilliyim. <1>Daha</1>"
-        }, 
+    "multilingualMessage": {
+        "desktop": "Ben çok dilliyim. Arapça (harf çevirisi dahil), Türkçe, Urduca, Bahasa, Boşnakça ve diğer birçok dili anlayabiliyorum.",
+        "mobile": "Ben çok dilliyim. <1>Daha</1>"
+    },
     "promptPlaceholder": "Mesaj yazın",
     "duaToMake": "Yapmak için dua",
     "inParticularSituation": "özel durumda",
@@ -24,6 +24,6 @@
     "conversationLostWarning": "Lütfen önceki görüşmenin kaybolacağını unutmayın.",
     "cancel": "İptal etmek",
     "yes": "Evet",
-    "poweredBy": "Ansari tarafından desteklenmektedir",
+    "subscribe": "Ansari tarafından desteklenmektedir",
     "backendErrorMessage": "Bir şeyler yanlış gitti. Bu sorun devam ederse lütfen şu adresteki yardım merkezimiz aracılığıyla bizimle iletişime geçin: <1>feedback@ansari.chat</1>"
 }

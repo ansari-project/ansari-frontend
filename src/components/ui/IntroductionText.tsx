@@ -18,7 +18,19 @@ const IntroductionText: React.FC = () => {
       <div className='font-normal'>{t('gettingWrongSometimes')}</div>
       <div className='flex flex-row gap-4'>
         <img src={flag} alt='Flag Icon' className='h-fit w-[14px]' />
-        <div className='hidden md:block font-normal'>{t('flaggingInstructions.desktop')}</div>
+        <div className='hidden md:block font-normal'>
+          <Trans i18nKey='flaggingInstructions.desktop'>
+            If I say anything wrong, confusing, great, funny or interesting, please let my authors know by sending e-mail to
+            <a
+              href='mailto:feedback@ansari.chat'
+              target='_blank'
+              rel='noreferrer'
+              className='text-green-bold  hover:text-green underline font-normal'
+            >feedback@ansari.chat
+            </a>
+          </Trans>
+        </div>
+
         <div className='md:hidden font-normal'>
           <Trans i18nKey='flaggingInstructions.mobile'>
             If I say anything wrong, confusing, great, funny or interesting, please flag it.

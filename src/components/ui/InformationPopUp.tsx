@@ -40,7 +40,18 @@ const InformationPopUp: React.FC = () => {
               <div className='font-normal'>{t('gettingWrongSometimes')}</div>
               <div className='flex flex-row gap-4'>
                 <img src={flag} alt='Flag Icon' className='h-fit' />
-                <div className='md:font-light'>{t('flaggingInstructions.desktop')}</div>
+                <div>
+                  <Trans i18nKey='flaggingInstructions.desktop'>
+                    If I say anything wrong, confusing, great, funny or interesting, please let my authors know by sending e-mail to
+                    <a
+                      href='mailto:feedback@ansari.chat'
+                      target='_blank'
+                      rel='noreferrer'
+                      className='text-green-bold  hover:text-green underline font-normal'
+                    >feedback@ansari.chat
+                    </a>
+                  </Trans>
+                </div>
               </div>
               <div className='flex flex-row gap-4'>
                 <img src={languageGreen} alt='Language Icon' className='h-fit' />
@@ -58,12 +69,19 @@ const InformationPopUp: React.FC = () => {
                     here
                   </a>
                   for a more comprehensive guide
-                </Trans>
+                </Trans>.
               </div>
-              <div className='flex flex-col mb-16 flex-grow justify-end'>
-                <h2 className={`text-center text-xs text-black ${messages.length !== 0 && 'md:mb-12'} mb-6 mx-4 font-normal`}>
-                  {t('poweredBy')}
-                </h2>
+              <div>
+                <Trans i18nKey='subscribe'>
+                  Subscribe
+                  <a
+                    href='http://eepurl.com/iFCJaA'
+                    target='_blank'
+                    rel='noreferrer'
+                    className='text-green-bold  hover:text-green underline font-normal'
+                  > to the Ansari mailing list for updates!
+                  </a>
+                </Trans>
               </div>
             </div>
           </div>

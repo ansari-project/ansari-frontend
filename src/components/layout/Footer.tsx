@@ -1,7 +1,6 @@
 import { Container, InformationPopUp, LanguageSelectorPopUp } from 'components/ui'
-import { useTranslation } from 'react-i18next'
+import { Trans } from 'react-i18next'
 const Footer = () => {
-  const { t } = useTranslation()
 
   return (
     <Container>
@@ -9,7 +8,18 @@ const Footer = () => {
         <div className='p-2 md:p-4 px-3 md:px-6 hidden md:block'>
           <LanguageSelectorPopUp />
         </div>
-        <div className='text-center text-xs text-black py-2 flex-grow block'>{t('poweredBy')}</div>
+        <div className='text-center text-xs text-black py-2 flex-grow block'>
+          <Trans i18nKey='subscribe'>
+            Subscribe
+            <a
+              href='http://eepurl.com/iFCJaA'
+              target='_blank'
+              rel='noreferrer'
+              className='text-green-bold  hover:text-green underline font-normal'
+            > to the Ansari mailing list for updates!
+            </a>
+          </Trans>
+        </div>
         <div className='p-2 md:p-4 px-3 md:px-6 hidden md:block'>
           <InformationPopUp />
         </div>

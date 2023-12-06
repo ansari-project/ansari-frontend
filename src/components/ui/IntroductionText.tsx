@@ -26,7 +26,8 @@ const IntroductionText: React.FC = () => {
               target='_blank'
               rel='noreferrer'
               className='text-green-bold  hover:text-green underline font-normal'
-            >feedback@ansari.chat
+            >
+              feedback@ansari.chat
             </a>
           </Trans>
         </div>

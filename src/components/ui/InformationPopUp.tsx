@@ -48,7 +48,8 @@ const InformationPopUp: React.FC = () => {
                       target='_blank'
                       rel='noreferrer'
                       className='text-green-bold  hover:text-green underline font-normal'
-                    >feedback@ansari.chat
+                    >
+                      feedback@ansari.chat
                     </a>
                   </Trans>
                 </div>
@@ -69,7 +70,8 @@ const InformationPopUp: React.FC = () => {
                     here
                   </a>
                   for a more comprehensive guide
-                </Trans>.
+                </Trans>
+                .
               </div>
               <div>
                 <Trans i18nKey='subscribe'>
@@ -79,7 +81,9 @@ const InformationPopUp: React.FC = () => {
                     target='_blank'
                     rel='noreferrer'
                     className='text-green-bold  hover:text-green underline font-normal'
-                  > to the Ansari mailing list for updates!
+                  >
+                    {' '}
+                    to the Ansari mailing list for updates!
                   </a>
                 </Trans>
               </div>

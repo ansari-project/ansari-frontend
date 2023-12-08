@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "repository": "git@github.com:EndeavorPal/ansari-frontend.git",
+  "homepage": "https://ansari.chat",
   "author": "EndeavorPal <apps@endeavorpal.com>",
   "license": "EndeavorPal",
   "scripts": {

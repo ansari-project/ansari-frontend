@@ -16,13 +16,20 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
-
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "prettier"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "camelcase": "error",
     "spaced-comment": "error",
-    "quotes": ["error", "single"],
+    "quotes": [
+      "error",
+      "single"
+    ],
     "no-duplicate-imports": "error"
   },
   "settings": {
@@ -31,8 +38,15 @@
     },
     "import/resolver": {
       "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "paths": [
+          "src"
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
       },
       "typescript": {}
     }

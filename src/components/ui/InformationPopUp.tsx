@@ -62,7 +62,7 @@ const InformationPopUp: React.FC = () => {
                 <Trans i18nKey='comprehensiveGuide'>
                   Click
                   <a
-                    href='https://waleedkadous.github.io/ansari-backend/'
+                    href='https://ansari.chat/docs/index.html'
                     target='_blank'
                     rel='noreferrer'
                     className='text-green-bold  hover:text-green underline font-normal'

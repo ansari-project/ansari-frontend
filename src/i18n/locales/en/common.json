@@ -1,0 +1,33 @@
+{
+    "gettingWrongSometimes": "Assalamu alaikum! My name is Ansari. I can help you with your questions about Islam.\nI still get things wrong sometimes. It is always best to consult a real Islamic Scholar.",
+    "flaggingInstructions": {
+        "desktop": "If I say anything wrong, confusing, great, funny or interesting, please e-mail <1>{{email}}</1>.",
+        "mobile": "Feedback? Please email us! <1>more</1>"
+    },
+    "multilingualMessage": {
+        "desktop": "I am multilingual. I can understand Arabic (including transliteration), Bahasa, Bosnian, French Turkish, Urdu and many other languages.",
+        "mobile": "I am multilingual. <1>more</1>"
+    },
+    "promptPlaceholder": "Type message",
+    "duaToMake": "Dua to make",
+    "inParticularSituation": "in particular situation",
+    "spiritualRemedies": "Spiritual remedies",
+    "challengesFacing": "for challenges you are facing",
+    "islamicPerspectives": "Islamic perspectives",
+    "onTopics": "on topics",
+    "selectLanguage": "Select a Language",
+    "messageSent": "message",
+    "information": "Information",
+    "comprehensiveGuide": "Click <1>here</1> for a more comprehensive guide to what Ansari can do.",
+    "startConversation": "Start New Conversation",
+    "newConversationConfirmation": "Are you certain that you want to begin a new conversation?",
+    "conversationLostWarning": "Please note that the previous conversation will be lost.",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "backendErrorMessage": "Something went wrong. If this issue persists please contact us through our help center at <1>{{email}}</1>",
+    "subscribe": "<1>Subscribe</1> to our mailing list for updates!",
+    "cantChangeLanguageWhileAnsariWritingAlertMessage": "You can't change language before get Ansari response",
+    "cantChangeLanguageWhileAnsariWritingAlertTitle": "Can't change language",
+    "copy": "Copy",
+    "selectText": "Select text"
+}

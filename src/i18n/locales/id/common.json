@@ -1,0 +1,33 @@
+{
+  "gettingWrongSometimes": "Assalamu alaikum! Nama saya Ansari. Saya dapat membantu menjawab pertanyaan Anda tentang Islam.\nTerkadang saya masih melakukan kesalahan. Yang terbaik adalah selalu berkonsultasi dengan Cendekiawan Islam sejati.",
+  "flaggingInstructions": {
+    "desktop": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu atau menarik, silakan kirim email ke <1>{{email}}</1>.",
+    "mobile": "Masukan? Silakan kirim email kepada kami! <1>lebih</1>"
+  },
+  "multilingualMessage": {
+    "desktop": "Saya multibahasa. Saya bisa memahami bahasa Arab (termasuk transliterasi), Turki, Urdu, Indonesia, Bosnia dan banyak bahasa lainnya.",
+    "mobile": "Saya multibahasa. <1>lagi</1>"
+  },
+  "promptPlaceholder": "Ketik pesan",
+  "duaToMake": "Dua yang harus dilakukan",
+  "inParticularSituation": "dalam situasi tertentu",
+  "spiritualRemedies": "Pengobatan rohani",
+  "challengesFacing": "untuk tantangan yang Anda hadapi",
+  "islamicPerspectives": "perspektif Islam",
+  "onTopics": "pada topik",
+  "selectLanguage": "Pilih Bahasa",
+  "messageSent": "pesan",
+  "information": "Informasi",
+  "comprehensiveGuide": "Klik <1>di sini</1> untuk panduan lebih komprehensif tentang apa yang dapat dilakukan Ansari.",
+  "startConversation": "Mulai Percakapan Baru",
+  "newConversationConfirmation": "Apakah Anda yakin ingin memulai percakapan baru?",
+  "conversationLostWarning": "Harap dicatat bahwa percakapan sebelumnya akan hilang.",
+  "cancel": "Membatalkan",
+  "yes": "Ya",
+  "subscribe": "<1>Berlangganan</1> ke milis kami untuk mendapatkan informasi terbaru!",
+  "backendErrorMessage": "Ada yang salah. Jika masalah ini terus berlanjut, harap hubungi kami melalui pusat bantuan kami di <1>{{email}}</1>",
+  "cantChangeLanguageWhileAnsariWritingAlertMessage": "Anda tidak dapat mengubah bahasa sebelum mendapat tanggapan Ansari",
+  "cantChangeLanguageWhileAnsariWritingAlertTitle": "Tidak dapat mengubah bahasa",
+  "copy": "Menyalin",
+  "selectText": "Pilih teks"
+}

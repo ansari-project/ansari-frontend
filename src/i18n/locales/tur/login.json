@@ -1,0 +1,13 @@
+{
+  "title": "Giriş Yap",
+  "email": "E-posta",
+  "password": "Şifre",
+  "submit": "Gönder",
+  "register": "Kayıt Ol",
+  "dontHaveAccount": "Hesabın yok mu?",
+  "successMessage": "Giriş başarılı",
+  "errorMessage": "Giriş başarısız. Lütfen tekrar deneyin.",
+  "invalidCredentials": "Geçersiz kimlik bilgileri",
+  "emailRequiredField": "E-posta alanı gereklidir",
+  "passwordRequiredField": "Şifre alanı gereklidir"
+}

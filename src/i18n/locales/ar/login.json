@@ -1,0 +1,16 @@
+{
+  "title": "تسجيل الدخول",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "submit": "إرسال",
+  "register": "تسجيل",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "successMessage": "تم تسجيل الدخول بنجاح",
+  "errorMessage": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+  "invalidCredentials": "اعتمادات غير صحيحة",
+  "emailRequiredField": "حقل البريد الإلكتروني مطلوب.",
+  "emailInvalid": "البريد الإلكتروني غير صحيح.",
+  "passwordRequiredField": "حقل كلمة المرور مطلوب.",
+  "passwordLength": "يجب ألا تقل كلمة المرور عن 8 أحرف.",
+  "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا."
+}

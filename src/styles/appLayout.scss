@@ -1,0 +1,78 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* High z-index to ensure it's above other content */
+  height: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff; //f2f2f2
+  padding: 8px 16px;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .left-content,
+  .right-content {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 0px 16px;
+  }
+}
+
+.app-content {
+  display: flex; /* Use flexbox to center children */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full height of the viewport */
+  width: 100vw; /* Full width of the viewport */
+  position: relative;
+}
+
+.language-selector {
+  // Add your styles for the language selector dropdown
+}
+
+.info-icon {
+  cursor: pointer;
+  // Adjust the size if necessary, or use a different class provided by the icon library
+  font-size: 24px;
+  color: #08786b; // Or any color that fits your design
+}
+.info-popup {
+  position: absolute;
+  top: 100%; // Position below the header
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0px 56px;
+  padding: 0px 16px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1001; // Ensure it's above other content
+}
+
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* Same z-index as the header to ensure consistency */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  /* Add your background color, padding, etc. */
+}

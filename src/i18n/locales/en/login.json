@@ -1,0 +1,16 @@
+{
+  "title": "Login",
+  "email": "Email",
+  "password": "Password",
+  "submit": "Submit",
+  "register": "Register",
+  "dontHaveAccount": "Don't have an account?",
+  "successMessage": "Login successful",
+  "errorMessage": "Login failed. Please try again.",
+  "invalidCredentials": "Invalid credentials",
+  "emailRequiredField": "Email is required.",
+  "emailInvalid": "Enter a valid email.",
+  "passwordRequiredField": "Password is required.",
+  "passwordLength": "Password must be at least 8 characters long.",
+  "unexpectedError": "An unexpected error occurred. Please try again later."
+}

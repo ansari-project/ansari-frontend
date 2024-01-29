@@ -1,0 +1,13 @@
+{
+  "title": "Prijava",
+  "email": "E-pošta",
+  "password": "Lozinka",
+  "submit": "Pošalji",
+  "register": "Registruj se",
+  "dontHaveAccount": "Nemate račun?",
+  "successMessage": "Prijava uspješna",
+  "errorMessage": "Prijava nije uspjela. Molimo Vas da pokušate ponovo.",
+  "invalidCredentials": "Nevažeće credencijale",
+  "emailRequiredField": "Polje e-pošte je obavezno",
+  "passwordRequiredField": "Polje lozinke je obavezno"
+}

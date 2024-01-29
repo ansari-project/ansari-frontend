@@ -1,0 +1,13 @@
+{
+  "title": "Connexion",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "submit": "Envoyer",
+  "register": "Inscription",
+  "dontHaveAccount": "Vous n'avez pas de compte ?",
+  "successMessage": "Connexion réussie",
+  "errorMessage": "Échec de la connexion. Veuillez réessayer.",
+  "invalidCredentials": "Identifiants invalides",
+  "emailRequiredField": "Le champ e-mail est requis",
+  "passwordRequiredField": "Le champ mot de passe est requis"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Register",
+  "email": "Email",
+  "password": "Password",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "confirmPassword": "Confirm password",
+  "register": "Register",
+  "alreadyHaveAccount": "Already have an account?",
+  "goToLogin": "Go to login",
+  "emailRequired": "Email is required.",
+  "emailInvalid": "Email is invalid.",
+  "passwordRequired": "Password is required.",
+  "passwordLength": "Password must be at least 8 characters long.",
+  "confirmPasswordRequired": "Confirm password is required.",
+  "confirmPasswordMatch": "Passwords must match.",
+  "firstNameRequired": "First name is required.",
+  "lastNameRequired": "Last name is required.",
+  "registerSuccess": "Registration successful.",
+  "registerFailure": "Registration failed.",
+  "loginHere": "Log in"
+}

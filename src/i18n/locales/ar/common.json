@@ -1,0 +1,33 @@
+{
+  "gettingWrongSometimes": "السلام عليكم. !سمي إنصاري. ما زلت أخطئ في بعض الأحيان. ومن الأفضل دائمًا استشارة عالم إسلامي حقيقي. ",
+  "flaggingInstructions": {
+    "desktop": "إذا قلت أي شيء خاطئ أو مربك أو رائع أو مضحك أو مثير للاهتمام، يرجى إرسال بريد إلكتروني إلى <1>{{email}}</1>.",
+    "mobile": "تعليق؟ يرجى مراسلتنا عبر البريد الإلكتروني! <1>المزيد</1>"
+  },
+  "multilingualMessage": {
+    "desktop": "أنا متعدد اللغات. أستطيع أن أفهم اللغة العربية (بما في ذلك الترجمة الصوتية)، والتركية، والأردية، والبهاسا، والبوسنية والعديد من اللغات الأخرى.",
+    "mobile": "أنا متعدد اللغات. <1> المزيد</1>"
+  },
+  "promptPlaceholder": "اكتب رسالة",
+  "duaToMake": "ماذا ادعو",
+  "inParticularSituation": "في حالات معينة",
+  "spiritualRemedies": "العلاجات الروحانية ",
+  "challengesFacing": "للتحديات التي اواجهها",
+  "islamicPerspectives": "وجهات نظر إسلامية",
+  "onTopics": "عن المواضيع",
+  "selectLanguage": "اختر لغة",
+  "messageSent": "رسالة ",
+  "information": "معلومات",
+  "comprehensiveGuide": "انقر <1>هنا</1> للحصول على دليل أكثر شمولاً حول ما يمكن أن يفعله أنصاري.",
+  "startConversation": "ابدأ محادثة جديدة",
+  "newConversationConfirmation": "هل أنت متأكد أنك تريد بدء محادثة جديدة؟",
+  "conversationLostWarning": "يرجى ملاحظة أنه سيتم فقدان المحادثة السابقة.",
+  "cancel": "إلغاء",
+  "yes": "نعم",
+  "backendErrorMessage": "هناك خطأ ما. إذا استمرت هذه المشكلة، فيرجى الاتصال بنا من خلال مركز المساعدة الخاص بنا على <1>{{email}}</1>",
+  "subscribe": "<1>اشترك</1> في قائمتنا البريدية للحصول على التحديثات!",
+  "cantChangeLanguageWhileAnsariWritingAlertMessage": "لا يمكنك تغيير اللغة قبل الحصول على رد الأنصاري على رسالتك الأخيرة",
+  "cantChangeLanguageWhileAnsariWritingAlertTitle": "لا يمكن تغيير اللغة",
+  "copy": "نسخ",
+  "selectText": "تحديد النص"
+}

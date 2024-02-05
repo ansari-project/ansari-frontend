@@ -1,39 +1,21 @@
-// import React from 'react'
-// import InfoPopup from './InfoPopup'
-// import LanguageSelector from './LanguageSelector'
-
-// const Header: React.FC = () => {
-//   return (
-//     <header className='app-header'>
-//       <h1 style={{ color: '#082521', fontFamily: 'Lexend', fontWeight: '500', wordWrap: 'break-word' }}>ANSARI</h1>
-//       <LanguageSelector />
-//       <InfoPopup />
-//       {/* Add other header elements like navigation links or icons */}
-//     </header>
-//   )
-// }
-
-// export default Header
-
 import React from 'react'
+import { Text, View } from 'react-native'
+import styles from '../styles/nativeAppLayout'
 import InfoPopup from './InfoPopup'
 import LanguageSelector from './LanguageSelector'
 
 const Header: React.FC = () => {
   return (
-    <header className='app-header'>
-      <div className='header-content'>
-        <div></div>
-        <h1 style={{ color: '#082521', fontFamily: 'Lexend', fontWeight: '500', wordWrap: 'break-word' }}>ANSARI</h1>
-        <div className='right-content'>
+    <View style={styles.appHeader}>
+      <View style={styles.headerContent}>
+        <View></View>
+        <Text style={{ fontWeight: '500', fontSize: 24 }}>{'ANSARI'}</Text>
+        <View style={styles.rightContent}>
           <LanguageSelector />
           <InfoPopup />
-        </div>
-      </div>
-    </header>
+        </View>
+      </View>
+    </View>
   )
 }
-
 export default Header
-
-// SCSS file

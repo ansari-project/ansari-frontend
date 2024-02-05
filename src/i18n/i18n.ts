@@ -22,7 +22,7 @@ i18n
       tur: loadLocaleFiles('tur'),
       ur: loadLocaleFiles('ur'),
     },
-    fallbackLng: 'ar',
+    fallbackLng: 'en',
     debug: true,
     ns: ['common', 'login', 'register'], // defining namespaces
     defaultNS: 'common',

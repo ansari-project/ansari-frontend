@@ -1,19 +1,19 @@
 import React, { PropsWithChildren } from 'react'
-import Header from './Header'
+import { ScrollView, View } from 'react-native'
 import Footer from './Footer'
-import '../styles/appLayout.scss'
+import Header from './Header'
+// import '../styles/appLayout.scss'
+import styles from '../styles/nativeAppLayout' // I'm assuming you have a separate stylesheet for native
 
 type AppLayoutProps = PropsWithChildren<{ children?: React.ReactNode }>
 
-const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <>
+    <View style={styles.container}>
       <Header />
-      <main className='app-content'>
-        {children} {/* This is where your screen content will be rendered */}
-      </main>
+      <ScrollView contentContainerStyle={styles.appContent}>{children}</ScrollView>
       <Footer />
-    </>
+    </View>
   )
 }
 

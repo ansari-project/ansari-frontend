@@ -32,7 +32,9 @@ const LanguageSelector = () => {
     selectedLang.isBold = true
     return [selectedLang, ...languagesBeforeSelected, ...languagesAfterSelected]
   }
-  const reorderedLanguages = reorderLanguages(languages, i18n.language)
+  // Extract the language code from i18n.language if it comes in the form of en-US
+  const languageCode = i18n.language.split('-')[0]
+  const reorderedLanguages = reorderLanguages(languages, languageCode)
 
   /**
    * Handles the change of language.

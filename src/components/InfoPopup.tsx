@@ -1,31 +1,36 @@
-import React, { useState } from 'react'
+import { AppDispatch, RootState } from '@/store/store'
+import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Modal, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '../assets'
+import { useScreenSize } from '../hooks'
+import { toggleInformationPopup } from '../store/slices/informationPopupSlice'
 import { GetEnv } from '../utils'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false)
   const { t, i18n } = useTranslation()
-  const { width } = useWindowDimensions()
+  const { isMobile } = useScreenSize()
 
+  const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
+  const dispatch = useDispatch<AppDispatch>()
   const togglePopup = () => {
-    setIsOpen(!isOpen)
+    dispatch(toggleInformationPopup(!isInfoPopupOpen))
   }
 
   return (
     <>
       <Pressable
         onPress={() => {
-          setIsOpen(true)
+          togglePopup()
         }}
         style={styles.button}
       >
         <InfoIcon />
       </Pressable>
 
-      <Modal animationType='fade' transparent={true} visible={isOpen} onRequestClose={togglePopup}>
+      <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen} onRequestClose={togglePopup}>
         <View style={styles.container} onClick={togglePopup}>
           <View style={styles.modalView}>
             <Pressable onPress={togglePopup} style={styles.infoContainer}>
@@ -76,7 +81,7 @@ const InfoPopup: React.FC = () => {
                 </Pressable>
               </View>
 
-              <View style={styles.bottomContainer}>{width <= 768 && <Subscription />}</View>
+              <View style={styles.bottomContainer}>{isMobile && <Subscription />}</View>
             </View>
           </View>
         </View>
@@ -154,14 +159,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#161616',
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#343434',
-    fontFamily: 'Roboto', // Make sure you have this font loaded on native
-    lineHeight: 21,
-    textAlign: 'left',
-    flexShrink: 1, // ensure the text wraps
   },
   infoContainer: {
     flexDirection: 'row',

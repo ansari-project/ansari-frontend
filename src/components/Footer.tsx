@@ -1,14 +1,13 @@
-// src/components/Footer.tsx
-
 import React from 'react'
+import { View } from 'react-native'
 import Subscription from './Subscription'
+import styles from '../styles/nativeAppLayout'
 
 const Footer: React.FC = () => {
   return (
-    <footer className='app-footer'>
+    <View styles={styles.appFooter}>
       <Subscription />
-      {/* Add other footer elements like links or copyright notice */}
-    </footer>
+    </View>
   )
 }
 

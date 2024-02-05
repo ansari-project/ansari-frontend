@@ -25,12 +25,18 @@ export type LoginResponse = {
   token?: string
   message?: string
   error?: string
-  user?: AppUser
+  first_name?: string
+  last_name?: string
 }
 
 // Type for Application User
-export type AppUser = {
+export type User = {
   firstName: string
   lastName: string
   email: string
+}
+
+// Type for Application User
+export type Error = {
+  message: string
 }

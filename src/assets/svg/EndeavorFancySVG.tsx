@@ -7,9 +7,12 @@ import { View } from 'react-native'
  *
  * @param {object} props - The props to pass to the SVG component.
  * @param {string} props.xmlns - The XML namespace for the SVG element.
- * @param {string} props.width - The width of the SVG element.
- * @param {string} props.height - The height of the SVG element.
+ * @param {string | number} props.width - The width of the SVG element.
+ * @param {string | number} props.height - The height of the SVG element.
  * @param {string} props.viewBox - The view box of the SVG element.
+ * @param {string} props.fill - The fill of the SVG element.
+ * @param {string} props.stroke - The stroke of the SVG element.
+ * @param {string} props.strokeWidth - The stroke width of the SVG element.
  * @param {string} props.x - The x-coordinate of the SVG element.
  * @param {string} props.y - The y-coordinate of the SVG element.
  * @param {object} props.style - The style object for the SVG container.
@@ -21,11 +24,14 @@ import { View } from 'react-native'
 
 type SVGProps = React.SVGProps<SVGSVGElement>
 
-type Props = {
+export type Props = {
   xmlns?: string
   width?: string | number
   height?: string | number
   viewBox?: string
+  fill?: string
+  stroke?: string
+  strokeWidth?: string | number
   x?: string
   y?: string
   style?: object

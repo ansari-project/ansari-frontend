@@ -3,6 +3,7 @@
   "email": "Email",
   "password": "Password",
   "submit": "Submit",
+  "submitting": "Loading",
   "register": "Register",
   "dontHaveAccount": "Don't have an account?",
   "successMessage": "Login successful",

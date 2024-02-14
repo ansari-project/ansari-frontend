@@ -1,7 +1,7 @@
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Pressable, Text, View } from 'react-native'
-import { useScreenSize } from '../hooks'
+import { useScreenInfo } from '../hooks'
 
 /**
  * Subscription Component
@@ -17,7 +17,7 @@ const Subscription: React.FC = () => {
   const { i18n } = useTranslation()
 
   // Get the window dimensions to adjust the text size based on the screen size
-  const { width } = useScreenSize()
+  const { width } = useScreenInfo()
 
   return (
     // Wrap the Pressable component in a View component to allow styling the container
@@ -31,6 +31,7 @@ const Subscription: React.FC = () => {
       }}
     >
       <Pressable
+        style={{ flexShrink: 1 }}
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {

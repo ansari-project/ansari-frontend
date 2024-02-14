@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { ChatService } from '../../services/chatService'
+import { ChatService } from '../../services/'
 import {
   addMessageToActiveThread,
   addStreamMessageToActiveThread,
@@ -14,22 +14,20 @@ import { Message, Thread, ThreadNameRequest, UserRole } from '../types/chatTypes
 // Async thunk for creating a new thread
 export const createThread = createAsyncThunk('chat/createThread', async (_, { dispatch, getState }) => {
   try {
-    dispatch(
-      setActiveThread({
-        id: String(45),
-        name: 'New chat',
-        messages: [],
-      } as Thread),
-    ) // Temporary placeholder until real data is returned.
-    console.log((getState() as RootState).auth)
     // Get the current user and their role from the state
-    // const { isAuthenticated, token } = (getState() as RootState).auth
-    // const chatService = new ChatService(isAuthenticated, token)
-    // dispatch(setLoading(true))
-    // const newThread = await chatService.createThread()
-    // dispatch(setActiveThread(newThread))
+    const { isAuthenticated, token } = (getState() as RootState).auth
+    const chatService = new ChatService(isAuthenticated, token)
+    dispatch(setLoading(true))
+    const newThread = await chatService.createThread()
+    // Convert the created Date to a serializable format (timestamp)
+    if (newThread.created instanceof Date) {
+      newThread.created = newThread.created.getTime()
+    }
+    // // Convert the timestamp back to a Date object before dispatching the setActiveThread action
+    // const newThreadWithDate = { ...newThread, created: new Date(newThread.created!) }
+    dispatch(fetchThreads()) // refresh the list of threads after creating a new thread
     // You can dispatch more actions here if needed
-    // return newThread as Thread
+    return newThread as Thread
   } catch (error) {
     dispatch(setError(error.toString()))
   } finally {
@@ -44,30 +42,21 @@ export const addMessage = createAsyncThunk(
     { threadId, content, signal }: { threadId: string; content: string; signal: AbortSignal },
     { dispatch, getState },
   ) => {
-    // alert('chat/addMessage')
     try {
-      console.log('add message -->', threadId, content)
       const { isAuthenticated, token } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, token)
+      const requestMessageId = ChatService.generateUniqueId()
       dispatch(setLoading(true))
-      dispatch(addMessageToActiveThread({ content, role: UserRole.User }))
+      dispatch(addMessageToActiveThread({ id: requestMessageId, content, role: UserRole.User }))
       // Assuming chatService.addMessage will return the new message data
-      console.log(
-        'chat/addMessage ---> calling chatService.addMessage with content ',
-        threadId,
-        { content, role: UserRole.User },
-        signal,
-      )
       const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal)
 
       if (!stream || stream === null || stream === undefined) {
-        // alert('stream not defined!')
         dispatch(setError('Error adding message'))
         return
       }
       let responseMessage = ''
-      const messageId = ChatService.generateUniqueId()
-      // alert('messageId: ' + messageId)
+      const responseMessageId = ChatService.generateUniqueId()
       try {
         const reader = stream.getReader()
         const decoder = new TextDecoder()
@@ -79,17 +68,9 @@ export const addMessage = createAsyncThunk(
           }
           const decodedChunk = decoder.decode(value, { stream: true })
           responseMessage += decodedChunk
-
-          console.log('chat/addMessage ---> stream response ', {
-            id: messageId,
-            role: UserRole.Assistant,
-            content: responseMessage,
-            timestamp: new Date().getTime().toString(),
-          })
-
           dispatch(
             addStreamMessageToActiveThread({
-              id: messageId,
+              id: responseMessageId,
               role: UserRole.Assistant,
               content: responseMessage,
               timestamp: new Date().getTime().toString(),
@@ -97,14 +78,13 @@ export const addMessage = createAsyncThunk(
           )
         }
         const message: Message = {
-          id: messageId,
+          id: responseMessageId,
           role: UserRole.Assistant,
           content: responseMessage,
           timestamp: new Date().getTime().toString(),
         }
-        console.log('chat/addMessage ---> return message response ', message)
         return message
-      } catch {
+      } catch (error) {
         dispatch(setError('Error adding message'))
         return
       }
@@ -134,6 +114,7 @@ export const fetchThreads = createAsyncThunk('chat/fetchThreads', async (_, { di
     dispatch(setLoading(true))
     const threads = await chatService.getAllThreads()
     dispatch(setThreads(threads))
+    return threads
   } catch (error) {
     dispatch(setError(error.toString()))
   } finally {
@@ -163,7 +144,7 @@ export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadI
     const chatService = new ChatService(isAuthenticated, token)
     dispatch(setLoading(true))
     await chatService.deleteThread(threadId)
-    // Here, you might want to update the threads list or handle UI changes
+    dispatch(fetchThreads()) // refresh the list of threads after deletion
   } catch (error) {
     dispatch(setError(error.toString()))
   } finally {
@@ -180,7 +161,7 @@ export const setThreadName = createAsyncThunk(
       const chatService = new ChatService(isAuthenticated, token)
       dispatch(setLoading(true))
       await chatService.setThreadName(threadId, name)
-      // Update thread's name in the state, if necessary
+      dispatch(fetchThreads()) // refresh the list of threads after deletion
     } catch (error) {
       dispatch(setError(error.toString()))
     } finally {

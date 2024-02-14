@@ -1,6 +1,6 @@
-import { AddMessageRequest, Thread, ThreadNameRequest } from '../store/types/chatTypes'
+import { AddMessageRequest, Message, Thread, ThreadNameRequest } from '../store/types/chatTypes'
 
-export class ChatService {
+class ChatService {
   token: string | null
   isAuthenticated: boolean
   API_URL: string | undefined
@@ -47,13 +47,13 @@ export class ChatService {
       id: String(data.thread_id), // Convert thread_id to a string to match the Thread interface
       name: 'New chat', // Initialize with 'New chat' since the API response doesn't include name
       messages: [], // Initialize with an empty array since the API response doesn't include messages
+      created: new Date(),
     }
 
     return thread
   }
 
   async addMessage(threadId: string, message: AddMessageRequest, signal: AbortSignal) {
-    // alert('Chat Service/addMessage')
     const response = await fetch(`${this.API_URL}/threads/${threadId}`, {
       method: 'POST',
       headers: this.createHeaders(),
@@ -94,7 +94,24 @@ export class ChatService {
     if (!response.ok) {
       throw new Error('Error fetching all threads')
     }
-    return response.json()
+    const rawThreads = await response.json()
+
+    // Convert rawThreads to an array of Thread objects
+    type RawThread = {
+      thread_id: number
+      thread_name?: string | null
+      created_at?: string
+      messages?: Message[]
+    }
+    const threads: Thread[] = rawThreads.map((rawThread: RawThread) => {
+      return {
+        id: String(rawThread.thread_id),
+        name: rawThread.thread_name || 'New chat',
+        messages: rawThread.messages || [],
+        created: rawThread.created_at ? new Date(rawThread.created_at).toISOString() : undefined,
+      }
+    })
+    return threads
   }
 
   async deleteThread(threadId: string): Promise<void> {
@@ -118,3 +135,5 @@ export class ChatService {
     }
   }
 }
+
+export default ChatService

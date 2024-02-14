@@ -11,6 +11,7 @@ export type RegisterResponse = {
   status: string
   message?: string
   error?: string
+  detail?: string
 }
 
 // Type for Login request data

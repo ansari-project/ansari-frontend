@@ -10,7 +10,7 @@ import { useAuth } from './useAuth'
  * @param pathIfAuthenticated The URL path to redirect to if the user is authenticated.
  * @param pathIfNotAuthenticated The URL path to redirect to if the user is not authenticated.
  */
-export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated: string) => {
+export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated: string): void => {
   // Retrieve the current authentication status
   const { isAuthenticated, token } = useAuth()
 
@@ -22,7 +22,7 @@ export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated:
     navigate(isAuthenticated && token ? pathIfAuthenticated : pathIfNotAuthenticated)
 
     // Dependencies: The effect re-runs if any of these values change.
-  }, [isAuthenticated, navigate, pathIfAuthenticated, pathIfNotAuthenticated])
+  }, [navigate, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, token])
 }
 
 export default useRedirect

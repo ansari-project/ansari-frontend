@@ -1,10 +1,9 @@
 import React from 'react'
+import { useDirection } from '../../hooks'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
-import { useTranslation } from 'react-i18next'
 
 const SendIcon: React.FC<Props> = (props: Props) => {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.dir() === 'rtl' ? true : false
+  const { isRTL } = useDirection()
   const svgProps = {
     width: props.width || '20',
     height: props.height || '20',

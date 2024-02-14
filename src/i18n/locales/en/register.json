@@ -6,6 +6,7 @@
   "lastName": "Last name",
   "confirmPassword": "Confirm password",
   "register": "Register",
+  "registering": "Loading",
   "alreadyHaveAccount": "Already have an account?",
   "goToLogin": "Go to login",
   "emailRequired": "Email is required.",

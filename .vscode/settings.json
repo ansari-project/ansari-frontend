@@ -15,5 +15,7 @@
   "prettier.useTabs": true,
   "prettier.vueIndentScriptAndStyle": true,
   "vs-code-prettier-eslint.prettierLast": true,
-  "editor.columnSelection": false
+  "editor.columnSelection": false,
+  "todo-tree.tree.showBadges": false,
+  "todo-tree.tree.disableCompactFolders": true
 }

@@ -4,15 +4,17 @@ import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '../assets'
-import { useScreenSize } from '../hooks'
+import { useDirection, useScreenInfo } from '../hooks'
 import { toggleInformationPopup } from '../store/slices/informationPopupSlice'
 import { GetEnv } from '../utils'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
-  const { isMobile } = useScreenSize()
-
+  const { isSmallScreen } = useScreenInfo()
+  const { isRTL } = useDirection()
+  const textDirection = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
+  const modalTextStyle = [styles.modalText, textDirection]
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const togglePopup = () => {
@@ -31,7 +33,7 @@ const InfoPopup: React.FC = () => {
       </Pressable>
 
       <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen} onRequestClose={togglePopup}>
-        <View style={styles.container} onClick={togglePopup}>
+        <View style={[styles.container]} onClick={togglePopup}>
           <View style={styles.modalView}>
             <Pressable onPress={togglePopup} style={styles.infoContainer}>
               {/* Replace CloseIcon with an icon from react-native-vector-icons */}
@@ -39,11 +41,11 @@ const InfoPopup: React.FC = () => {
               <CloseIcon />
             </Pressable>
             <View style={styles.modalContent}>
-              <Text style={styles.modalText}>{t('gettingWrongSometimes')}</Text>
+              <Text style={modalTextStyle}>{t('gettingWrongSometimes')}</Text>
               <View style={styles.rowGap16}>
                 <FlagIcon />
-                <Pressable style={styles.modalText} onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}>
-                  <Text style={styles.modalText}>
+                <Pressable style={modalTextStyle} onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}>
+                  <Text style={modalTextStyle}>
                     <Trans
                       i18n={i18n}
                       parent={Text}
@@ -58,11 +60,11 @@ const InfoPopup: React.FC = () => {
               </View>
               <View style={styles.rowGap16}>
                 <LanguageIcon />
-                <Text style={styles.modalText}>{t('multilingualMessage.desktop')}</Text>
+                <Text style={modalTextStyle}>{t('multilingualMessage.desktop')}</Text>
               </View>
               <View style={styles.rowGap16}>
-                <Pressable style={styles.modalText}>
-                  <Text style={styles.modalText}>
+                <Pressable style={modalTextStyle}>
+                  <Text style={modalTextStyle}>
                     <Trans
                       i18nKey='comprehensiveGuide'
                       components={{
@@ -81,7 +83,7 @@ const InfoPopup: React.FC = () => {
                 </Pressable>
               </View>
 
-              <View style={styles.bottomContainer}>{isMobile && <Subscription />}</View>
+              <View style={styles.bottomContainer}>{isSmallScreen && <Subscription />}</View>
             </View>
           </View>
         </View>
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: document.dir === 'rtl' ? 'flex-start' : 'flex-end',
+    alignItems: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     fontFamily: 'Roboto',
   },

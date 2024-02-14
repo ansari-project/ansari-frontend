@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Message } from '../../store/types/chatTypes'
 import Markdown from 'react-markdown'
 import { UserIcon, LogoIcon } from '../../assets'
+import { useDirection } from '../../hooks'
 // import rehypeRaw from 'rehype-raw'
 
 interface MessageBubbleProps {
@@ -11,9 +12,10 @@ interface MessageBubbleProps {
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) => {
-  // console.log('MessageBubble -->', isOutgoing, message)
+  const { isRTL } = useDirection()
   const messageStyle = isOutgoing ? styles.outgoingMessage : styles.incomingMessage
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
+  const textAlign = isRTL ? 'right' : 'left'
 
   return (
     <View style={[styles.messageBubble, messageStyle]}>
@@ -28,7 +30,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) =>
         </View>
       )}
       <View style={{ flexShrink: 1 }}>
-        <Markdown components={{ p: (props) => <Text style={[styles.messageText, textStyle]}>{props.children}</Text> }}>
+        <Markdown
+          components={{
+            p: (props) => <Text style={[styles.messageText, textStyle, { textAlign }]}>{props.children}</Text>,
+          }}
+        >
           {message.content}
         </Markdown>
       </View>
@@ -46,6 +52,7 @@ const styles = StyleSheet.create({
   },
   outgoingMessage: {
     backgroundColor: '#f2f9ff', // A light green background for outgoing messages
+    alignItems: 'center',
     alignSelf: 'flex-start',
     display: 'flex',
     flexDirection: 'row',

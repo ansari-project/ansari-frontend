@@ -1,39 +1,31 @@
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { backgroundImage } from '../assets'
-import { useScreenSize } from '../hooks'
+import { backgroundImage } from '../assets' // Ensure this import points to the correct file
+import { useScreenInfo } from '../hooks'
 
 const BackgroundImage: React.FC = () => {
-  const { isMobile } = useScreenSize()
+  const { isSmallScreen } = useScreenInfo()
+
   return (
-    <>
+    <View style={styles.container}>
       <Image
         source={backgroundImage}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          ...{ opacity: 0.8 },
-          ...(isMobile && { backgroundSize: 'cover' }),
-        }}
+        resizeMode={isSmallScreen ? 'cover' : 'contain'} // 'cover' for mobile, 'contain' for larger screens
+        style={styles.backgroundImage}
       />
-      <View style={[styles.backgroundImage, isMobile && styles.backgroundImageCover]} />
-    </>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    opacity: 0.8,
+  container: {
+    ...StyleSheet.absoluteFillObject, // This ensures the container fills the entire parent
   },
-  backgroundImageCover: {
-    backgroundSize: '100vh 100vw',
+  backgroundImage: {
+    ...StyleSheet.absoluteFillObject, // This makes the image fill the container
+    opacity: 0.8, // Set the desired opacity
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
   },
 })
 

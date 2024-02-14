@@ -1,27 +1,37 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { EndeavorFancySVG } from '../../assets'
-import { useScreenSize } from '../../hooks'
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native'
+import { EndeavorFancySVG } from '../../assets' // Ensure correct import path
+import { useDirection, useScreenInfo } from '../../hooks'
 
 interface PromptCardProps {
   title: string
   subtitle: string
   Icon: typeof EndeavorFancySVG
   onPress: () => void
+  stacked?: boolean
 }
 
-const PromptCard: React.FC<PromptCardProps> = ({ title, subtitle, Icon, onPress }) => {
+const PromptCard: React.FC<PromptCardProps> = ({ title, subtitle, Icon, onPress, stacked }) => {
   const [isPressed, setIsPressed] = React.useState(false)
   const [isHovered, setIsHovered] = React.useState(false)
-  const { isSmallScreen } = useScreenSize()
+  const { isSmallScreen } = useScreenInfo()
+  const { isRTL } = useDirection()
+
+  const cardContainerStyles = [
+    styles.cardContainer,
+    { width: isSmallScreen ? '100%' : stacked ? '100%' : '33%' },
+    (isPressed || isHovered) && styles.cardContainerPressedHovered,
+  ]
+
+  const cardIconStyle = isRTL
+    ? { marginLeft: 16 }
+    : {
+        marginRight: 16,
+      }
+
   return (
     <Pressable
-      style={({ pressed }) => [
-        styles.cardContainer,
-        { width: isSmallScreen ? '100%' : '30%' },
-        pressed && styles.cardContainerPressed,
-        isHovered && { backgroundColor: '#FFF' },
-      ]}
+      style={cardContainerStyles}
       onPress={() => {
         onPress()
         setIsPressed(true)
@@ -30,14 +40,12 @@ const PromptCard: React.FC<PromptCardProps> = ({ title, subtitle, Icon, onPress 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <View style={styles.cardIcon}>
+      <View style={cardIconStyle}>
         <Icon fill={isPressed || isHovered ? '#F29B00' : ''} />
       </View>
-      <View>
-        <Text style={[styles.cardTitle, isPressed && styles.cardTitlePressed, isHovered && { color: '#F29B00' }]}>
-          {title}
-        </Text>
-        <Text style={[styles.cardSubtitle, isPressed && styles.cardSubtitlePressed, isHovered && { color: '#F29B00' }]}>
+      <View style={styles.textContent}>
+        <Text style={[styles.cardTitle, (isPressed || isHovered) && styles.cardTitlePressedHovered]}>{title}</Text>
+        <Text style={[styles.cardSubtitle, (isPressed || isHovered) && styles.cardSubtitlePressedHovered]}>
           {subtitle}
         </Text>
       </View>
@@ -47,39 +55,35 @@ const PromptCard: React.FC<PromptCardProps> = ({ title, subtitle, Icon, onPress 
 
 const styles = StyleSheet.create({
   cardContainer: {
-    display: 'flex',
-    height: 68,
-    padding: 16,
-    gap: 24,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexShrink: 0,
+    padding: 16,
+    marginBottom: 16, // Adjust spacing between cards
     borderRadius: 4,
-    backgroundColor: '#FFF',
-    boxShadowColor: '#000',
-    boxShadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    boxShadowOpacity: 0.25,
-    boxShadowRadius: 3.84,
+    backgroundColor: '#ffffff80',
+    // Apply elevation for Android shadow
     elevation: 5,
+    // Apply shadow for iOS
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+      },
+    }),
   },
-  cardContainerPressed: {
-    backgroundColor: '#FFF', // Maintain the same background color
+  cardContainerPressedHovered: {
+    backgroundColor: '#ffffff80', // Maintain the same background color
   },
-  cardIcon: {
-    // width: 32,
-    // height: 32,
-    // marginRight: 4,
+  textContent: {
+    flex: 1, // Ensure text content takes the remaining space
   },
   cardTitle: {
     color: '#343434',
     fontSize: 14,
     fontWeight: '600',
   },
-  cardTitlePressed: {
+  cardTitlePressedHovered: {
     color: '#F29B00',
   },
   cardSubtitle: {
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
   },
-  cardSubtitlePressed: {
+  cardSubtitlePressedHovered: {
     color: '#F29B00',
   },
 })

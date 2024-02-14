@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Error, User } from 'types'
-import { login, logout } from '../actions/authActions'
+import { Error, User } from '../../types'
+import { login } from '../actions/authActions'
 
 interface AuthState {
   loading: boolean
@@ -41,7 +41,7 @@ const authSlice = createSlice({
         state.message = action.payload.message
         state.status = action.payload.status
         state.loading = false
-        saveAuthStateToLocalStorage(state)
+        saveAuthStateToLocalStorage({ ...state })
       })
       .addCase(login.rejected, (state, action) => {
         state.isAuthenticated = false
@@ -51,13 +51,21 @@ const authSlice = createSlice({
         state.status = null
         state.loading = false
         state.error = (action.payload as Error).message
-        saveAuthStateToLocalStorage(state)
+        saveAuthStateToLocalStorage({ ...state })
       })
-      .addCase(logout, () => {
-        // Reset state to initial state on logout
-        saveAuthStateToLocalStorage(initialState)
-        return initialState
-      })
+      .addMatcher(
+        (action) => action.type.startsWith('auth/logout'),
+        (state) => {
+          state.isAuthenticated = false
+          state.user = null
+          state.token = null
+          state.message = null
+          state.status = null
+          state.loading = false
+          state.error = null
+          saveAuthStateToLocalStorage({ ...state })
+        },
+      )
   },
 })
 
@@ -89,6 +97,11 @@ export function loadAuthStateFromLocalStorage() {
     return authState
   }
   return initialState
+}
+
+// Helper to clear state from localStorage
+export const clearAuthStateFromLocalStorage = () => {
+  localStorage.removeItem('authState')
 }
 
 export default authSlice.reducer

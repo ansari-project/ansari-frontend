@@ -1,46 +1,46 @@
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
+// src\screens\LoginScreen.tsx
+import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, Text } from 'react-native'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
+import { BackgroundImage } from '../components'
+import { useDirection, useRedirect } from '../hooks'
 import { login } from '../store/actions/authActions'
 import { AppDispatch } from '../store/store'
-import '../styles/loginScreen.scss'
 import { LoginRequest } from '../types'
 import { useLoginSchema } from '../validation'
-import { useRedirect } from '../hooks'
 
 const LoginScreen: React.FC = () => {
-  useRedirect('/chat', '/login')
+  const location = useLocation()
+  const urlParams = new URLSearchParams(location.search)
+  const successMessage = urlParams.get('s') || null
+  useRedirect('/', '/login' + (urlParams.size ? `?${urlParams.toString()}` : ''))
+
+  const navigate = useNavigate()
   const { t } = useTranslation('login')
   const loginSchema = useLoginSchema()
-  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
+  const { isRTL } = useDirection()
 
-  const initialValues: LoginRequest = {
-    email: '',
-    password: '',
-  }
-
-  const successMessage = useLocation().state?.successMessage || ''
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = (values: LoginRequest, formikHelpers: FormikHelpers<LoginRequest>) => {
     formikHelpers.setSubmitting(true)
     setErrorMessage(null)
     dispatch(login(values))
-      .unwrap() // Unwrap the payload from the fulfilled action
+      .unwrap()
       .then((response) => {
         if (response.status === 'error') {
           setErrorMessage(response.message || t('loginFailed'))
         } else {
-          // Handle successful login
-          // navigate('/home')
+          navigate('/')
         }
       })
       .catch((error) => {
+        formikHelpers.setSubmitting(false)
         setErrorMessage(error.message || t('loginFailed'))
       })
       .finally(() => {
@@ -48,72 +48,157 @@ const LoginScreen: React.FC = () => {
       })
   }
 
+  const initialValues: LoginRequest = {
+    email: '',
+    password: '',
+  }
+
   return (
     <>
-      <div
-        className='background-image'
-        style={{
-          ...(window.innerWidth < 768 && { backgroundSize: 'cover' }),
-        }}
-      />
-      <div className='login-container'>
-        <h1>{t('title')}</h1>
+      <BackgroundImage />
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        {successMessage && <Text style={{ color: 'white' }}>{successMessage}</Text>}
+        <Text style={styles.title}>{t('title')}</Text>
         <Formik
           initialValues={initialValues}
           validationSchema={Yup.object(loginSchema)}
-          onSubmit={(values, formikHelpers) => {
-            handleSubmit(values, formikHelpers)
-          }}
+          onSubmit={(values, formikHelpers) => handleSubmit(values, formikHelpers)}
         >
-          {({ isSubmitting, handleSubmit }) => (
-            <Form className='login-form'>
-              <div>{successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}</div>
-              {/* <div className='form-field'> */}
-              <Field className='form-field' name='email' type='email' placeholder={t('email')} autoComplete='off' />
-              {/* </div> */}
-              <ErrorMessage name='email' component='div' className='error-message' />
-              {/* <div className='form-field'> */}
-              <Field className='form-field' name='password' type='password' placeholder={t('password')} />
-              {/* </div> */}
-              <ErrorMessage name='password' component='div' className='error-message' />
-              {/* Displaying the error message */}
-              {errorMessage && (
-                <div className='error-message' style={{ marginBottom: '10px' }}>
-                  {errorMessage}
-                </div>
-              )}
-              <Pressable style={{ width: 'fit-content' }} type='submit' disabled={isSubmitting} onPress={handleSubmit}>
-                <Text
-                  style={{
-                    width: '100%',
-                    maxWidth: 100,
-                    backgroundColor: isSubmitting ? '#dddddd' : '#ffffff',
-                    color: '#08786b',
-                    borderRadius: 2,
-                    paddingVertical: 8,
-                    paddingHorizontal: 16,
-                    fontWeight: 'bold',
-                    fontSize: 16,
-                    margin: 8,
-                    textAlign: 'center',
-                  }}
-                >
-                  {isSubmitting ? t('submitting') : t('submit')}
-                </Text>
+          {({ handleChange, handleBlur, handleSubmit, values, isSubmitting, errors }) => (
+            <View>
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                placeholder={t('email')}
+                style={[styles.input, isRTL && styles.textAlignRight]}
+                autocomplete='off'
+              />
+              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+
+              <TextInput
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                placeholder={t('password')}
+                secureTextEntry
+                style={[styles.input, isRTL && styles.textAlignRight]}
+              />
+              {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
+              {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+
+              <Pressable
+                style={[styles.button, isSubmitting && styles.buttonDisabled]}
+                onPress={handleSubmit}
+                disabled={isSubmitting}
+              >
+                <Text style={styles.buttonText}>{isSubmitting ? t('submitting') : t('submit')}</Text>
               </Pressable>
 
-              <div className='register-prompt' style={{ textAlign: 'right' }}>
-                {t('dontHaveAccount')}{' '}
-                <a href='#' className='register-link' onClick={() => navigate('/register')}>
+              <Text style={[styles.registerPrompt, isRTL ? styles.textAlignLeft : styles.textAlignRight]}>
+                {t('dontHaveAccount')}
+                <Text style={[styles.registerLink, isRTL && { marginRight: 10 }]} onPress={() => navigate('/register')}>
                   {t('register')}
-                </a>
-              </div>
-            </Form>
+                </Text>
+              </Text>
+            </View>
           )}
         </Formik>
-      </div>
+      </KeyboardAvoidingView>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...Platform.select({
+      web: {
+        position: 'relative',
+        zIndex: 1,
+        color: '#ffffff',
+        backgroundColor: '#082521',
+        width: '100%',
+        minWidth: 420,
+        paddingHorizontal: 16,
+        paddingVertical: 24,
+        borderRadius: 3,
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      default: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 20,
+        backgroundColor: '#F2F2F2',
+      },
+    }),
+  },
+  title: {
+    ...Platform.select({
+      web: {
+        textAlign: 'center',
+        marginBottom: 24,
+        fontSize: 24,
+        fontWeight: 500,
+        color: 'darkorange',
+      },
+      default: {
+        fontSize: 24,
+        fontWeight: 500,
+        marginBottom: 24,
+        textAlign: 'center',
+        color: 'darkorange',
+      },
+    }),
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 4,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+  button: {
+    backgroundColor: '#08786b',
+    padding: 10,
+    borderRadius: 4,
+    alignItems: 'center',
+    maxWidth: 100,
+    marginTop: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  buttonDisabled: {
+    backgroundColor: '#dddddd',
+  },
+  errorText: {
+    color: 'darkorange',
+    marginBottom: 10,
+  },
+  registerPrompt: {
+    textAlign: 'right',
+    marginTop: 10,
+    color: 'white',
+  },
+  registerLink: {
+    color: 'darkorange',
+    textDecorationLine: 'underline',
+    marginLeft: 10,
+  },
+  textAlignRight: {
+    textAlign: 'right',
+  },
+  textAlignLeft: {
+    textAlign: 'left',
+  },
+  // ... other styles as needed
+})
 
 export default LoginScreen

@@ -1,57 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
-import { BackgroundImage, PromptList, Welcome } from '../components'
-import { useScreenSize } from '../hooks'
+import { useDispatch } from 'react-redux'
+import { BackgroundImage, ChatContainer, PromptList, Welcome } from '../components'
+import { useRedirect, useScreenInfo } from '../hooks'
+import { setActiveThread } from '../store/slices/chatSlice'
+import { AppDispatch } from '../store/store'
 
 const HomeScreen: React.FC = () => {
-  const { isSmallScreen } = useScreenSize()
+  useRedirect('/', '/login')
+
+  const { isSmallScreen } = useScreenInfo()
+  const dispatch = useDispatch<AppDispatch>()
+  // Initialize activeThread to an empty object when the component mounts
+  useEffect(() => {
+    dispatch(setActiveThread(null))
+  }, [])
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
       <BackgroundImage />
-      <View style={styles.content}>
-        <Welcome />
-      </View>
-      <View style={styles.content}>
-        <View style={[styles.promptContent, { width: isSmallScreen ? '100%' : '80%' }]}>
-          <PromptList />
+      <ChatContainer isHome={true}>
+        <View style={styles.contentWrapper}>
+          <Welcome />
+          <View style={[styles.promptContent, isSmallScreen ? styles.promptSmallScreen : styles.promptLargeScreen]}>
+            <PromptList />
+          </View>
         </View>
-      </View>
+      </ChatContainer>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    width: '100vw',
-    height: '100vh',
-    gap: 0,
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'stretch', // This centers the children along the cross axis (vertically)
-    backgroundColor: '#F2F2F2', // Assuming this is the background color for the entire screen
-    fontFamily: 'Roboto',
-    paddingLeft: 112,
-    paddingRight: 112,
-    paddingTop: 56,
+    backgroundColor: '#F2F2F2',
+    alignItems: 'center', // Ensure content is centered
+    justifyContent: 'space-between', // Distributes children evenly
   },
-  content: {
+  contentWrapper: {
+    width: '100%', // Use full width for smaller screens
+    alignItems: 'center', // Center content horizontally
+    justifyContent: 'center', // Center content vertically
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'Roboto',
-    marginVertical: 40,
   },
   promptContent: {
-    height: 'fit-content',
-    borderRadius: 0,
-    alignItems: 'flex-start',
-    gap: 16,
-    width: '80%',
+    width: '100%', // Ensure it uses the full width of its container
+    alignItems: 'flex-start', // Center items for consistency
   },
-  // Add more styles if needed
+  promptSmallScreen: {
+    alignItems: 'stretch',
+    // Additional styles for small screens if necessary
+  },
+  promptLargeScreen: {
+    // alignItems: 'stretch',
+    // Additional styles for large screens, e.g., padding or margins
+  },
+  // Additional styles as needed
 })
 
 export default HomeScreen

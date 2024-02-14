@@ -21,7 +21,7 @@ code {
 /** Update Scrollbar UI */
 ::-webkit-scrollbar {
   height: 1rem;
-  width: 0.5rem;
+  width: 0.1rem;
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -31,18 +31,20 @@ code {
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
-  border-radius: 9999px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   --tw-border-opacity: 1;
-  background-color: rgba(217, 217, 227, 0.8);
+  /* background-color: rgba(217, 217, 227, 0.8); */
+  background-color: rgba(83, 82, 82, 0.5);
+
   border-color: rgba(255, 255, 255, var(--tw-border-opacity));
-  border-radius: 9999px;
+  border-radius: 5px;
   border-width: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(236, 236, 241, var(--tw-bg-opacity));
+  background-color: rgba(2242, 155, 0, var(--tw-bg-opacity));
 }

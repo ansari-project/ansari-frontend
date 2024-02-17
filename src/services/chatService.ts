@@ -11,16 +11,6 @@ class ChatService {
     this.API_URL = process.env.REACT_APP_API_V2_URL
   }
 
-  static generateUniqueId(): string {
-    let result = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    for (let i = 0; i < 32; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength))
-    }
-    return result
-  }
-
   private createHeaders = () => {
     if (!this.isAuthenticated || !this.token) throw new Error('Authentication token not found')
     return {
@@ -47,7 +37,7 @@ class ChatService {
       id: String(data.thread_id), // Convert thread_id to a string to match the Thread interface
       name: 'New chat', // Initialize with 'New chat' since the API response doesn't include name
       messages: [], // Initialize with an empty array since the API response doesn't include messages
-      created: new Date(),
+      date: new Date(),
     }
 
     return thread
@@ -100,7 +90,7 @@ class ChatService {
     type RawThread = {
       thread_id: number
       thread_name?: string | null
-      created_at?: string
+      updated_at?: string
       messages?: Message[]
     }
     const threads: Thread[] = rawThreads.map((rawThread: RawThread) => {
@@ -108,7 +98,7 @@ class ChatService {
         id: String(rawThread.thread_id),
         name: rawThread.thread_name || 'New chat',
         messages: rawThread.messages || [],
-        created: rawThread.created_at ? new Date(rawThread.created_at).toISOString() : undefined,
+        date: rawThread.updated_at ? new Date(rawThread.updated_at).toISOString() : undefined,
       }
     })
     return threads

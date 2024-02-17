@@ -41,7 +41,7 @@ const getGroupedThreads = (threads: Thread[]): GroupedThreads => {
   }
 
   threads.forEach((thread) => {
-    const threadDate = new Date(thread.created!).setHours(0, 0, 0, 0)
+    const threadDate = new Date(thread.date!).setHours(0, 0, 0, 0)
 
     if (threadDate === today) {
       groupedThreads.today.push(thread)
@@ -65,10 +65,10 @@ const getGroupedThreads = (threads: Thread[]): GroupedThreads => {
   Object.keys(groupedThreads).forEach((group) => {
     if (group === 'older') {
       Object.keys(groupedThreads.older).forEach((year) => {
-        groupedThreads.older[year].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+        groupedThreads.older[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       })
     } else {
-      groupedThreads[group].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+      groupedThreads[group].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     }
   })
 
@@ -161,7 +161,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
             ))
           ) : (
             <View>
-              <Text style={[styles.dateHeader, textAlignStyle]}>{dateHeader(date, threads[0].created)}</Text>
+              <Text style={[styles.dateHeader, textAlignStyle]}>{dateHeader(date, threads[0].date)}</Text>
               {threads.map((thread: Thread) => (
                 <ThreadCard
                   key={thread.id}

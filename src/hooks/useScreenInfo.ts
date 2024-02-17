@@ -31,9 +31,9 @@ export const useScreenInfo = (): ScreenInfo => {
   const cpl = isLargeScreen ? 75 : isMediumScreen ? 60 : 50
   const basePaddingHorizontal = isSmallScreen ? 20 : (width - (isLargeScreen ? 960 : 768)) / 2
   const paddingHorizontal = Math.max(basePaddingHorizontal, 20)
-  const contentWidth = isSmallScreen ? width - 2 * paddingHorizontal : isLargeScreen ? 960 : 768
   const actualPaddingHorizontal = getAppContentPadding(width, paddingHorizontal)
-
+  // const contentWidth = isSmallScreen ? width - 2 * paddingHorizontal : isLargeScreen ? 960 : 768
+  const contentWidth = width - actualPaddingHorizontal * 2
   // Assuming an average character width (ACW) for the Roboto font at the desired font size
   const averageCharWidthPx = 9 // Example value in pixels
   const desiredWidth = cpl * averageCharWidthPx

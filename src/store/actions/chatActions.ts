@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ChatService } from '../../services/'
+import { Helpers } from '../../utils'
 import {
   addMessageToActiveThread,
   addStreamMessageToActiveThread,
@@ -20,11 +21,10 @@ export const createThread = createAsyncThunk('chat/createThread', async (_, { di
     dispatch(setLoading(true))
     const newThread = await chatService.createThread()
     // Convert the created Date to a serializable format (timestamp)
-    if (newThread.created instanceof Date) {
-      newThread.created = newThread.created.getTime()
+    if (newThread.date instanceof Date) {
+      newThread.date = newThread.date.getTime()
     }
-    // // Convert the timestamp back to a Date object before dispatching the setActiveThread action
-    // const newThreadWithDate = { ...newThread, created: new Date(newThread.created!) }
+
     dispatch(fetchThreads()) // refresh the list of threads after creating a new thread
     // You can dispatch more actions here if needed
     return newThread as Thread
@@ -45,10 +45,8 @@ export const addMessage = createAsyncThunk(
     try {
       const { isAuthenticated, token } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, token)
-      const requestMessageId = ChatService.generateUniqueId()
-      dispatch(setLoading(true))
+      const requestMessageId = Helpers.generateUniqueId()
       dispatch(addMessageToActiveThread({ id: requestMessageId, content, role: UserRole.User }))
-      // Assuming chatService.addMessage will return the new message data
       const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal)
 
       if (!stream || stream === null || stream === undefined) {
@@ -56,7 +54,7 @@ export const addMessage = createAsyncThunk(
         return
       }
       let responseMessage = ''
-      const responseMessageId = ChatService.generateUniqueId()
+      const responseMessageId = Helpers.generateUniqueId()
       try {
         const reader = stream.getReader()
         const decoder = new TextDecoder()
@@ -76,6 +74,9 @@ export const addMessage = createAsyncThunk(
               timestamp: new Date().getTime().toString(),
             }),
           )
+          if (responseMessage) {
+            dispatch(setLoading(true))
+          }
         }
         const message: Message = {
           id: responseMessageId,
@@ -88,16 +89,6 @@ export const addMessage = createAsyncThunk(
         dispatch(setError('Error adding message'))
         return
       }
-
-      // const message: Message = {
-      //   id: messageId,
-      //   role: UserRole.Assistant,
-      //   content: responseMessage,
-      //   timestamp: new Date().getTime().toString(),
-      // }
-
-      // dispatch(addMessageToActiveThread(message))
-      // return message
     } catch (error) {
       dispatch(setError(error.toString()))
     } finally {

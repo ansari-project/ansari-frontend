@@ -20,6 +20,7 @@
     "i18next": "^23.7.20",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.2",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.1",
@@ -45,7 +46,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-	"depcheck": "./node_modules/.bin/depcheck"
+    "depcheck": "./node_modules/.bin/depcheck"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",
     "@types/yup": "^0.32.0",

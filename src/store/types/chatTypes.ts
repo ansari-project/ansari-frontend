@@ -17,7 +17,7 @@ export interface Thread {
   id: string // Unique identifier for the thread
   name?: string // Thread name
   messages: Message[] // Array of messages in the thread
-  created?: Date | number | null // Creation timestamp
+  date?: Date | number | null // Creation/Update timestamp
 }
 
 // Represents a single message in a thread

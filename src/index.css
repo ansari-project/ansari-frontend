@@ -21,7 +21,7 @@ code {
 /** Update Scrollbar UI */
 ::-webkit-scrollbar {
   height: 1rem;
-  width: 0.1rem;
+  width: 0.3rem;
 }
 
 ::-webkit-scrollbar:horizontal {

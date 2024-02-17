@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native'
 import { SendIcon, StopIcon } from '../../assets'
-import { useDirection, useScreenInfo } from '../../hooks'
+import { useDirection } from '../../hooks'
 
 interface ChatInputProps {
   value: string
@@ -23,30 +23,18 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange, isSending, onCancelSend }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
-  const inputWidthRef = useRef(0)
   const inputHeightRef = useRef(0)
   const inputLengthRef = useRef(0)
   const { t } = useTranslation()
 
   const { isRTL } = useDirection()
-  const { paddingHorizontal } = useScreenInfo()
   const sendButtonOpacityValue = value.length === 0 ? '0.3' : '1.0'
 
   const handleContentSizeChange = (event: TextInputContentSizeChangeEvent) => {
     if (Platform.OS === 'web') {
-      inputWidthRef.current = event.nativeEvent.contentSize.width
       inputHeightRef.current = event.nativeEvent.contentSize.height
     } else {
-      inputWidthRef.current = event.nativeEvent.contentSize.width * PixelRatio.get()
       inputHeightRef.current = event.nativeEvent.contentSize.height * PixelRatio.get()
-    }
-
-    inputHeightRef.current = inputHeightRef.current < 45 ? 45 : inputHeightRef.current
-    if (value.length === 0) {
-      inputWidthRef.current = paddingHorizontal
-      inputHeightRef.current = 45
-    } else {
-      inputHeightRef.current = Math.min(inputHeightRef.current, 200)
     }
   }
 
@@ -75,7 +63,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           styles.input,
           {
             ...(isRTL ? { marginLeft: 10, textAlign: 'right' } : { marginRight: 10, textAlign: 'left' }),
-            width: inputWidthRef.current,
             height: inputHeightRef.current,
             borderColor: isFocused ? '#000' : '#ccc',
             outline: isFocused ? '#000' : '#ccc',
@@ -108,9 +95,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     paddingTop: 10,
-    alignItems: 'center',
+    alignItems: 'end',
     width: '100%',
-    minWidth: 300,
   },
   input: {
     flex: 1,
@@ -120,7 +106,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     minHeight: 45, // Provide a minimum height
-    maxHeight: 200, // Maximum height before scrolling
   },
   button: {
     justifyContent: 'center',

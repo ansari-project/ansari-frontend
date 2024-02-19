@@ -1,3 +1,5 @@
+import { SendIcon, StopIcon } from '@endeavorpal/assets'
+import { useDirection } from '@endeavorpal/hooks'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -9,8 +11,6 @@ import {
   TextInputContentSizeChangeEvent,
   View,
 } from 'react-native'
-import { SendIcon, StopIcon } from '../../assets'
-import { useDirection } from '../../hooks'
 
 interface ChatInputProps {
   value: string

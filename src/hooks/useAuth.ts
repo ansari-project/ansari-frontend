@@ -3,7 +3,7 @@
 // (such as the current user, authentication status, and token) from the Redux store.
 
 import { useSelector } from 'react-redux'
-import { RootState } from '../store/store'
+import { RootState } from '@endeavorpal/store'
 
 /**
  * A hook that abstracts the Redux state access for authentication.

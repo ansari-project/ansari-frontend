@@ -1,4 +1,9 @@
 // src\screens\LoginScreen.tsx
+import { BackgroundImage } from '@endeavorpal/components'
+import { useDirection, useRedirect } from '@endeavorpal/hooks'
+import { AppDispatch, login } from '@endeavorpal/store'
+import { LoginRequest } from '@endeavorpal/types'
+import { useLoginSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,12 +11,6 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
-import { BackgroundImage } from '../components'
-import { useDirection, useRedirect } from '../hooks'
-import { login } from '../store/actions/authActions'
-import { AppDispatch } from '../store/store'
-import { LoginRequest } from '../types'
-import { useLoginSchema } from '../validation'
 
 const LoginScreen: React.FC = () => {
   const location = useLocation()

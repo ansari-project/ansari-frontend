@@ -1,7 +1,7 @@
+import { LanguageIcon } from '@endeavorpal/assets'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
-import { LanguageIcon } from '../assets'
 
 const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState(false)

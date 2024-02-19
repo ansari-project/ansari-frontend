@@ -1,11 +1,10 @@
+import { BackgroundImage, ChatContainer, PromptList, Toast, Welcome } from '@endeavorpal/components'
+import { useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, setActiveThread } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { BackgroundImage, ChatContainer, PromptList, Toast, Welcome } from '../components'
-import { useRedirect, useScreenInfo } from '../hooks'
-import { setActiveThread } from '../store/slices/chatSlice'
-import { AppDispatch } from '../store/store'
 
 const HomeScreen: React.FC = () => {
   useRedirect('/', '/login')

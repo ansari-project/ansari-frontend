@@ -1,8 +1,8 @@
+import { useDirection } from '@endeavorpal/hooks'
+import { Thread } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useNavigate } from 'react-router-dom'
-import { useDirection } from '../../hooks'
-import { Thread } from '../../store/types/chatTypes'
 import IconContainer from './IconContainer'
 
 type ThreadCardProps = {

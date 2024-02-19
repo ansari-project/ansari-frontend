@@ -1,5 +1,5 @@
+import { Error, User } from '@endeavorpal/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { Error, User } from '../../types'
 import { login } from '../actions/authActions'
 
 interface AuthState {

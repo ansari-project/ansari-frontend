@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Thread } from '../store/types/chatTypes'
-import { AppDispatch, RootState } from '../store/store'
+import { addMessage, AppDispatch, createThread, RootState, setActiveThread, Thread } from '@endeavorpal/store'
 import { useRef } from 'react'
-import { addMessage, createThread } from '../store/actions/chatActions'
-import { setActiveThread } from '../store/slices/chatSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface UseChatReturn {
   isLoading: boolean

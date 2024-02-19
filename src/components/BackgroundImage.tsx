@@ -1,7 +1,7 @@
+import { backgroundImage } from '@endeavorpal/assets' // Ensure this import points to the correct file
+import { useScreenInfo } from '@endeavorpal/hooks'
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { backgroundImage } from '../assets' // Ensure this import points to the correct file
-import { useScreenInfo } from '../hooks'
 
 const BackgroundImage: React.FC = () => {
   const { isSmallScreen } = useScreenInfo()

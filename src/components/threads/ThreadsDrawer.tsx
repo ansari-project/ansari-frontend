@@ -1,10 +1,9 @@
+import { LogoIcon, LogoTextIcon, MenuIcon } from '@endeavorpal/assets'
+import { AppDispatch, fetchThreads, RootState } from '@endeavorpal/store'
+import { User } from '@endeavorpal/types'
 import React, { useEffect, useState } from 'react'
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { LogoIcon, LogoTextIcon, MenuIcon } from '../../assets'
-import { fetchThreads } from '../../store/actions/chatActions'
-import { AppDispatch, RootState } from '../../store/store'
-import { User } from '../../types'
 import LogoutButton from '../Logout'
 import ThreadsList from './ThreadsList'
 

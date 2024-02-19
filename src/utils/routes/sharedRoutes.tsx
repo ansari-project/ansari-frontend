@@ -1,5 +1,5 @@
+import { ChatScreen, HomeScreen, LoginScreen, RegisterScreen } from '@endeavorpal/screens'
 import { RouteObject } from 'react-router'
-import { ChatScreen, HomeScreen, LoginScreen, RegisterScreen } from '../../screens'
 
 const sharedRoutes: RouteObject[] = [
   { path: '/', element: <HomeScreen /> },

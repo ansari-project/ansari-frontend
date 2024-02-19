@@ -1,7 +1,7 @@
+import { EndeavorFancySVG } from '@endeavorpal/assets' // Ensure correct import path
+import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
 import React from 'react'
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native'
-import { EndeavorFancySVG } from '../../assets' // Ensure correct import path
-import { useDirection, useScreenInfo } from '../../hooks'
 
 interface PromptCardProps {
   title: string

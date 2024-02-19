@@ -1,12 +1,12 @@
 import { AppDispatch, RootState } from '@/store/store'
+import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '@endeavorpal/assets'
+import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { toggleInformationPopup } from '@endeavorpal/store'
+import { GetEnv } from '@endeavorpal/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '../assets'
-import { useDirection, useScreenInfo } from '../hooks'
-import { toggleInformationPopup } from '../store/slices/informationPopupSlice'
-import { GetEnv } from '../utils'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {

@@ -1,5 +1,10 @@
 // src/screens/RegisterScreen.tsx
-import { EyeIcon } from '../assets'
+import { EyeIcon } from '@endeavorpal/assets'
+import { BackgroundImage } from '@endeavorpal/components'
+import { useDirection, useRedirect } from '@endeavorpal/hooks'
+import { AppDispatch, register } from '@endeavorpal/store'
+import { RegisterRequest } from '@endeavorpal/types'
+import { useRegisterSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,12 +12,6 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
-import { BackgroundImage } from '../components'
-import { useDirection, useRedirect } from '../hooks'
-import { register } from '../store/actions/authActions'
-import { AppDispatch } from '../store/store'
-import { useRegisterSchema } from '../validation'
-import { RegisterRequest } from '../types'
 interface RegisterFormValues {
   email: string
   password: string

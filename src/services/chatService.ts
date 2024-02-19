@@ -1,6 +1,6 @@
-import { ApplicationError, NotFoundError } from '../errors'
-import { AddMessageRequest, Message, Thread, ThreadNameRequest } from '../store/types/chatTypes'
-import { Helpers } from '../utils'
+import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
+import { AddMessageRequest, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
+import { Helpers } from '@endeavorpal/utils'
 
 class ChatService {
   token: string | null

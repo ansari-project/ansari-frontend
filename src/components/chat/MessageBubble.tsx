@@ -1,6 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import Markdown from 'react-markdown'
-import { Clipboard, Pressable, StyleSheet, Text, View } from 'react-native'
 import {
   CheckIcon,
   CopyIcon,
@@ -10,9 +7,12 @@ import {
   LikeIcon,
   LogoIcon,
   UserIcon,
-} from '../../assets'
-import { useDirection } from '../../hooks'
-import { Message } from '../../store/types/chatTypes'
+} from '@endeavorpal/assets'
+import { useDirection } from '@endeavorpal/hooks'
+import { Message } from '@endeavorpal/store'
+import React, { useCallback, useEffect, useState } from 'react'
+import Markdown from 'react-markdown'
+import { Clipboard, Pressable, StyleSheet, Text, View } from 'react-native'
 // import rehypeRaw from 'rehype-raw'
 
 interface MessageBubbleProps {

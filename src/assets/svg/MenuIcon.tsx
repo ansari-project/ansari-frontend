@@ -1,5 +1,5 @@
+import { useDirection } from '@endeavorpal/hooks'
 import React from 'react'
-import { useDirection } from '../../hooks'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 
 const MenuIcon: React.FC<Props> = (props: Props) => {

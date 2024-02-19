@@ -1,2 +1,2 @@
-export { default as AuthService } from './authService'
-export { default as ChatService } from './chatService'
+export { default as AuthService } from './AuthService'
+export { default as ChatService } from './ChatService'

@@ -1,4 +1,4 @@
-import { useDirection } from '../../hooks'
+import { useDirection } from '@endeavorpal/hooks'
 import React from 'react'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 

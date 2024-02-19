@@ -1,8 +1,8 @@
+import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '@endeavorpal/assets'
+import { useScreenInfo } from '@endeavorpal/hooks'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '../../assets'
-import { useScreenInfo } from '../../hooks'
 import PromptCard from './PromptCard'
 
 const PromptList: React.FC = () => {

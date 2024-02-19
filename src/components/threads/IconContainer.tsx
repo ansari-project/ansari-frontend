@@ -1,7 +1,7 @@
+import { DeleteIcon, RenameIcon } from '@endeavorpal/assets'
+import { Thread } from '@endeavorpal/store'
 import React from 'react'
-import { View, Pressable, StyleSheet } from 'react-native'
-import { DeleteIcon, RenameIcon } from '../../assets'
-import { Thread } from '../../store/types/chatTypes'
+import { Pressable, StyleSheet, View } from 'react-native'
 
 type IconContainerProps = {
   thread: Thread

@@ -1,11 +1,9 @@
+import { LogoutIcon } from '@endeavorpal/assets'
+import { useAuth } from '@endeavorpal/hooks'
+import { AppDispatch, clearAuthStateFromLocalStorage, logout } from '@endeavorpal/store'
 import React from 'react'
 import { Pressable } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { LogoutIcon } from '../assets'
-import { useAuth } from '../hooks'
-import { logout } from '../store/actions/authActions'
-import { clearAuthStateFromLocalStorage } from '../store/slices/authSlice'
-import { AppDispatch } from '../store/store'
 
 const LogoutButton: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()

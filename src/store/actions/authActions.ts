@@ -1,6 +1,6 @@
+import AuthService from '@endeavorpal/services/AuthService'
+import { LoginRequest, RegisterRequest, RegisterResponse, User } from '@endeavorpal/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { LoginRequest, RegisterRequest, RegisterResponse, User } from '../../types'
-import AuthService from '../../services/authService'
 
 // Define the structure of the payload returned on successful login
 interface LoginSuccessPayload {
@@ -19,7 +19,8 @@ export const register = createAsyncThunk<RegisterResponse, RegisterRequest, { re
   'auth/register',
   async (registerData: RegisterRequest, { rejectWithValue }) => {
     try {
-      const response = await AuthService.register(registerData)
+      const authService = new AuthService()
+      const response = await authService.register(registerData)
       if (response.status === 'success') {
         return response as RegisterResponse
       } else {
@@ -38,7 +39,8 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
   'auth/login',
   async (loginData: LoginRequest, { rejectWithValue }) => {
     try {
-      const response = await AuthService.login(loginData)
+      const authService = new AuthService()
+      const response = await authService.login(loginData)
       if (response.token) {
         const user: User = {
           firstName: response.first_name || '',
@@ -67,7 +69,8 @@ export const logout = createAsyncThunk<void, string, { rejectValue: FailurePaylo
   'auth/logout',
   async (token: string, { rejectWithValue }) => {
     try {
-      await AuthService.logout(token)
+      const authService = new AuthService()
+      await authService.logout(token)
     } catch (error) {
       const message = (error instanceof Error && error.message) || 'Logout failed'
       return rejectWithValue({ message: message })

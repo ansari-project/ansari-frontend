@@ -1,11 +1,10 @@
+import { BackgroundImage, ChatContainer } from '@endeavorpal/components'
+import { useChat, useRedirect } from '@endeavorpal/hooks'
+import { AppDispatch, fetchThread } from '@endeavorpal/store'
 import React, { useEffect } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { BackgroundImage, ChatContainer } from '../components'
-import { useChat, useRedirect } from '../hooks'
-import { fetchThread } from '../store/actions/chatActions'
-import { AppDispatch } from '../store/store'
 
 /**
  * Displays a chat interface allowing users to send and view messages within a thread.

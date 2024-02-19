@@ -1,7 +1,7 @@
+import { useScreenInfo } from '@endeavorpal/hooks'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Pressable, Text, View } from 'react-native'
-import { useScreenInfo } from '../hooks'
 
 /**
  * Subscription Component

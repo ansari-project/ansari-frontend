@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   PixelRatio,
@@ -23,19 +23,30 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange, isSending, onCancelSend }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
-  const inputHeightRef = useRef(0)
-  const inputLengthRef = useRef(0)
+  const inputHeightRef = useRef<number>(45)
+  const inputLengthRef = useRef<number>(0)
+  const chatInputRef = useRef<TextInput>(null)
+  const [forceUpdate, setForceUpdate] = useState<number>(0) // Used to force update
   const { t } = useTranslation()
 
   const { isRTL } = useDirection()
   const sendButtonOpacityValue = value.length === 0 ? '0.3' : '1.0'
 
   const handleContentSizeChange = (event: TextInputContentSizeChangeEvent) => {
-    if (Platform.OS === 'web') {
+    if (value.length === 0) {
+      inputHeightRef.current = 45
+    } else if (Platform.OS === 'web') {
       inputHeightRef.current = event.nativeEvent.contentSize.height
     } else {
       inputHeightRef.current = event.nativeEvent.contentSize.height * PixelRatio.get()
     }
+
+    if (chatInputRef.current) {
+      chatInputRef.current.style.height = `${inputHeightRef.current}px` // Adjust the height directly
+    }
+
+    // Force a re-render in case the height adjustment doesn't take effect immediately
+    setForceUpdate((prev) => prev + 1)
   }
 
   const handleChange = (text: string) => {
@@ -47,14 +58,27 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
       inputHeightRef.current = Math.max(inputHeightRef.current, 45) // Set a minimum height for the input
     }
 
+    if (chatInputRef.current) {
+      chatInputRef.current.style.height = `${inputHeightRef.current}px` // Adjust the height directly
+    }
+
     if (onInputChange) {
       onInputChange(text)
     }
   }
 
+  // UseLayoutEffect to apply changes immediately after DOM updates
+  useLayoutEffect(() => {
+    if (chatInputRef.current) {
+      // Initial height adjustment if necessary
+      chatInputRef.current.style.height = `${inputHeightRef.current}px`
+    }
+  }, [forceUpdate])
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
+        ref={chatInputRef}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onChangeText={handleChange}
@@ -63,7 +87,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           styles.input,
           {
             ...(isRTL ? { marginLeft: 10, textAlign: 'right' } : { marginRight: 10, textAlign: 'left' }),
-            height: inputHeightRef.current,
+            maxHeight: '50vh',
+            height: 'auto',
             borderColor: isFocused ? '#000' : '#ccc',
             outline: isFocused ? '#000' : '#ccc',
           },
@@ -73,7 +98,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
         placeholderTextColor='#999'
         multiline={true}
         textAlignVertical='top'
-        rows={1}
+        rows={3}
       />
       {isSending ? (
         <Pressable onPress={onCancelSend} style={[styles.button]} type='submit'>
@@ -100,6 +125,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    scrollbarWidth: 0.01,
     borderWidth: 1,
     borderColor: 'lightgrey',
     borderRadius: 4,

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { BackgroundImage, ChatContainer, PromptList, Welcome } from '../components'
+import { useLocation } from 'react-router-dom'
+import { BackgroundImage, ChatContainer, PromptList, Toast, Welcome } from '../components'
 import { useRedirect, useScreenInfo } from '../hooks'
 import { setActiveThread } from '../store/slices/chatSlice'
 import { AppDispatch } from '../store/store'
@@ -11,10 +12,20 @@ const HomeScreen: React.FC = () => {
 
   const { isSmallScreen } = useScreenInfo()
   const dispatch = useDispatch<AppDispatch>()
+  const [toastVisible, setToastVisible] = useState<boolean>(false)
+  const location = useLocation()
+  const errorMessage = location.state?.errorMsg || null
   // Initialize activeThread to an empty object when the component mounts
   useEffect(() => {
     dispatch(setActiveThread(null))
   }, [])
+
+  useEffect(() => {
+    if (errorMessage !== null && errorMessage.length > 0) {
+      setToastVisible(true)
+    }
+    return () => setToastVisible(false)
+  }, [errorMessage])
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -27,6 +38,7 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
       </ChatContainer>
+      {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
     </SafeAreaView>
   )
 }

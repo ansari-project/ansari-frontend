@@ -1,9 +1,18 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Message } from '../../store/types/chatTypes'
+import React, { useCallback, useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
-import { UserIcon, LogoIcon } from '../../assets'
+import { Clipboard, Pressable, StyleSheet, Text, View } from 'react-native'
+import {
+  CheckIcon,
+  CopyIcon,
+  DislikeFilledIcon,
+  DislikeIcon,
+  LikeFilledIcon,
+  LikeIcon,
+  LogoIcon,
+  UserIcon,
+} from '../../assets'
 import { useDirection } from '../../hooks'
+import { Message } from '../../store/types/chatTypes'
 // import rehypeRaw from 'rehype-raw'
 
 interface MessageBubbleProps {
@@ -13,9 +22,37 @@ interface MessageBubbleProps {
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) => {
   const { isRTL } = useDirection()
+  const [copySuccess, setCopySuccess] = useState<boolean>(false)
+  const [selectedIcon, setSelectedIcon] = useState<string | null>(null)
+
   const messageStyle = isOutgoing ? styles.outgoingMessage : styles.incomingMessage
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
   const textAlign = isRTL ? 'right' : 'left'
+  const iconMargin = isRTL ? styles.iconMarginRight : styles.iconMarginLeft
+
+  const copyMessage = useCallback(() => {
+    Clipboard.setString(message.content)
+    setCopySuccess(true)
+  }, [message.content])
+
+  useEffect(() => {
+    if (copySuccess) {
+      const timeoutId = setTimeout(() => {
+        setCopySuccess(false)
+      }, 1000) // Hide the CheckIcon after 1 second
+      return () => clearTimeout(timeoutId)
+    }
+  }, [copySuccess])
+
+  const handleLikePress = useCallback(() => {
+    console.log('Like!')
+    setSelectedIcon('like')
+  }, [setSelectedIcon])
+
+  const handleDislikePress = useCallback(() => {
+    console.log('Dislike!')
+    setSelectedIcon('dislike')
+  }, [setSelectedIcon])
 
   return (
     <View style={[styles.messageBubble, messageStyle]}>
@@ -30,13 +67,36 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) =>
         </View>
       )}
       <View style={{ flexShrink: 1 }}>
-        <Markdown
-          components={{
-            p: (props) => <Text style={[styles.messageText, textStyle, { textAlign }]}>{props.children}</Text>,
-          }}
-        >
-          {message.content}
-        </Markdown>
+        <View style={styles.contentWrapper}>
+          <Markdown
+            components={{
+              p: (props) => <Text style={[styles.messageText, textStyle, { textAlign }]}>{props.children}</Text>,
+            }}
+          >
+            {message.content}
+          </Markdown>
+        </View>
+        {!isOutgoing && (
+          <View style={[styles.iconsWrapper]}>
+            <Pressable onPress={copyMessage} style={(styles.icon, iconMargin)}>
+              {copySuccess ? <CheckIcon width={20} height={20} /> : <CopyIcon width={20} height={20} />}
+            </Pressable>
+            <Pressable onPress={handleDislikePress} style={(styles.icon, iconMargin)}>
+              {selectedIcon === 'dislike' ? (
+                <DislikeFilledIcon width={20} height={20} />
+              ) : (
+                <DislikeIcon width={20} height={20} />
+              )}
+            </Pressable>
+            <Pressable onPress={handleLikePress} style={(styles.icon, iconMargin)}>
+              {selectedIcon === 'like' ? (
+                <LikeFilledIcon width={20} height={20} />
+              ) : (
+                <LikeIcon width={20} height={20} />
+              )}
+            </Pressable>
+          </View>
+        )}
       </View>
     </View>
   )
@@ -49,6 +109,23 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     borderRadius: 4,
     gap: 16,
+  },
+  contentWrapper: {
+    flex: 1,
+  },
+  iconsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  iconMarginLeft: {
+    marginLeft: 8,
+  },
+  iconMarginRight: {
+    marginRight: 8,
+  },
+  icon: {
+    width: 20,
+    height: 20,
   },
   outgoingMessage: {
     backgroundColor: '#f2f9ff', // A light green background for outgoing messages

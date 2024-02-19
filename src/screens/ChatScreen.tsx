@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { BackgroundImage, ChatContainer } from '../components'
 import { useChat, useRedirect } from '../hooks'
 import { fetchThread } from '../store/actions/chatActions'
@@ -15,6 +15,7 @@ const ChatScreen: React.FC = () => {
   const { threadId } = useParams<{ threadId?: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
+  const navigate = useNavigate()
 
   useRedirect(`/chat/${threadId}`, '/login')
 
@@ -22,8 +23,13 @@ const ChatScreen: React.FC = () => {
   useEffect(() => {
     if (threadId) {
       dispatch(fetchThread(threadId))
+        .unwrap()
+        .catch((error) => {
+          console.error(error)
+          navigate('/', { state: { errorMsg: error.message || 'An unknown error occurred.' } })
+        })
     }
-  }, [threadId, dispatch])
+  }, [threadId, dispatch, navigate])
 
   // Clean up the abort controller on unmount or when the component is no longer active
   useEffect(() => {

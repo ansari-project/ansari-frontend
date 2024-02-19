@@ -140,10 +140,10 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
 
   const groupedThreads = getGroupedThreads(threads)
   const mappedThreads = Object.entries(groupedThreads).map(
-    ([date, threads]) =>
+    ([dateCategory, threads]) =>
       !Helpers.isBlank(threads) && (
-        <View key={date}>
-          {date === 'older' ? (
+        <View key={dateCategory}>
+          {dateCategory === 'older' ? (
             Object.entries(threads).map(([year, yearThreads]: [string, Thread[]]) => (
               <View key={year}>
                 <Text style={[styles.dateHeader, textAlignStyle]}>{year}</Text>
@@ -161,7 +161,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
             ))
           ) : (
             <View>
-              <Text style={[styles.dateHeader, textAlignStyle]}>{dateHeader(date, threads[0].date)}</Text>
+              <Text style={[styles.dateHeader, textAlignStyle]}>{dateHeader(dateCategory, threads[0].date)}</Text>
               {threads.map((thread: Thread) => (
                 <ThreadCard
                   key={thread.id}
@@ -206,14 +206,14 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
  * and optionally a specific date (used for 'older' threads) to generate a descriptive
  * header indicating the time period of the threads being listed.
  *
- * @param {string} date - A predefined key representing a date range or category.
+ * @param {string} dateCategory - A predefined key representing a date range or category.
  * @param {Date} threadDate - The date of the thread, used for 'older' threads to generate a month and year string.
  * @returns {string} A descriptive header based on the input. This can be 'Today', 'Yesterday',
  * 'Previous 7 Days', 'Previous 30 Days', or a formatted string representing the month and year
  * for 'older' threads.
  */
-const dateHeader = (date: string, threadDate: Date): string => {
-  switch (date) {
+const dateHeader = (dateCategory: string, threadDate: Date): string => {
+  switch (dateCategory) {
     case 'today':
       return 'Today'
     case 'yesterday':

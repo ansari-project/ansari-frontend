@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { ApplicationError, NotFoundError } from '../../errors'
 import { ChatService } from '../../services/'
 import { Helpers } from '../../utils'
 import {
@@ -122,7 +123,18 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
     const thread = await chatService.getThread(threadId)
     dispatch(setActiveThread(thread))
   } catch (error) {
-    dispatch(setError(error.toString()))
+    if (error instanceof NotFoundError) {
+      dispatch(setError(error.toString()))
+      throw error // Re-throw so it can be caught by the parent Catch block
+    } else if (error instanceof ApplicationError) {
+      dispatch(setError(error.toString()))
+      throw error // Re-throw so it can be caught by the parent Catch block
+    } else {
+      // Handle unexpected errors here
+      console.error(error)
+      dispatch(setError('An unexpected error occurred'))
+      throw error
+    }
   } finally {
     dispatch(setLoading(false))
   }

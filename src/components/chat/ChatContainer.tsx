@@ -144,7 +144,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome, children }) => {
               scrollEventThrottle={16}
               ListFooterComponent={isLoading ? <ActivityIndicator size='large' color='#09786b' /> : null}
               extraData={activeThread}
-              showsVerticalScrollIndicator={true}
+              showsVerticalScrollIndicator={false}
               scrollEnabled={true}
               onScroll={handleScroll}
               onContentSizeChange={handleContentSizeChange}
@@ -179,7 +179,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome, children }) => {
             scrollEventThrottle={16}
             ListFooterComponent={isSending && !isLoading ? <ActivityIndicator size='small' color='#09786b' /> : null}
             extraData={activeThread}
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
             scrollEnabled={true}
             onScroll={handleScroll}
             onContentSizeChange={handleContentSizeChange}

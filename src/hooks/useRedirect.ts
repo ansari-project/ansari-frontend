@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
 
 /**
@@ -13,13 +13,20 @@ import { useAuth } from './useAuth'
 export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated: string): void => {
   // Retrieve the current authentication status
   const { isAuthenticated, token } = useAuth()
-
-  // Hook for programmatically navigating to different routes
+  const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Conditional navigation based on the authentication status of the user
-    navigate(isAuthenticated && token ? pathIfAuthenticated : pathIfNotAuthenticated)
+    // Get the current path
+    const currentPath = location.pathname
+    // Conditional navigation based on the authentication status of the user and the current path
+    if (isAuthenticated && token) {
+      if (currentPath !== pathIfAuthenticated) {
+        navigate(pathIfAuthenticated)
+      }
+    } else {
+      navigate(pathIfNotAuthenticated)
+    }
 
     // Dependencies: The effect re-runs if any of these values change.
   }, [navigate, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, token])

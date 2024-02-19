@@ -1,4 +1,6 @@
+import { ApplicationError, NotFoundError } from '../errors'
 import { AddMessageRequest, Message, Thread, ThreadNameRequest } from '../store/types/chatTypes'
+import { Helpers } from '../utils'
 
 class ChatService {
   token: string | null
@@ -62,19 +64,22 @@ class ChatService {
       headers: this.createHeaders(),
     })
     if (!response.ok) {
-      throw new Error('Error fetching thread')
+      throw new ApplicationError('Error fetching thread ' + threadId)
     }
     const data = await response.json()
 
-    // The API returns { thread_id: 1 } and we need to convert it to the Thread type
-    // No messages are returned in the creation response, so initializing with an empty array
-    const thread: Thread = {
-      id: String(threadId), // Convert thread_id to a string to match the Thread interface
-      name: data.thread_name ?? 'New chat', // Initialize with 'New chat' since the API response doesn't include name
-      messages: data.messages, // Initialize with an empty array since the API response doesn't include messages
+    if (Helpers.isBlank(data)) {
+      throw new NotFoundError('Unable to load thread ' + threadId)
+    } else {
+      // The API returns { thread_id: 1 } and we need to convert it to the Thread type
+      // No messages are returned in the creation response, so initializing with an empty array
+      const thread: Thread = {
+        id: String(threadId), // Convert thread_id to a string to match the Thread interface
+        name: data.thread_name ?? 'New chat', // Initialize with 'New chat' since the API response doesn't include name
+        messages: data.messages, // Initialize with an empty array since the API response doesn't include messages
+      }
+      return thread
     }
-
-    return thread
   }
 
   async getAllThreads(): Promise<Thread[]> {

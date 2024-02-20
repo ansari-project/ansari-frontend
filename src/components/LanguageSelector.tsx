@@ -1,11 +1,15 @@
 import { LanguageIcon } from '@endeavorpal/assets'
-import { useState } from 'react'
+import { useAuth } from '@endeavorpal/hooks'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 
 const LanguageSelector = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   const { i18n } = useTranslation()
+  const { isAuthenticated } = useAuth()
+  const touchableRef = useRef(null)
 
   const languages: { code: string; name: string; isBold: boolean }[] = [
     { code: 'en', name: 'English', isBold: false },
@@ -47,30 +51,58 @@ const LanguageSelector = () => {
       document.dir = i18n.dir(language)
     })
 
-    setIsOpen(false) // Close the language selector after selection.
+    setIsVisible(false) // Close the language selector after selection.
   }
 
+  const iconColor = isAuthenticated ? '#fff' : '#08786b'
+  const popupContentPosition = isAuthenticated ? { bottom: '56px' } : { top: '56px' }
+
   return (
-    <>
-      <Pressable style={styles.button} onPress={() => setIsOpen(true)}>
-        <LanguageIcon />
+    <View>
+      <Pressable ref={touchableRef} style={styles.button} onPress={() => setIsVisible(!isVisible)}>
+        <LanguageIcon stroke={iconColor} />
       </Pressable>
-      <Modal visible={isOpen} animationType='fade' transparent={true}>
-        <View style={styles.modalContainer} onClick={() => setIsOpen(false)}>
-          <View style={styles.modalContent}>
+      {/* This ensures that the Popover is only attempted to be rendered when touchableRef.current is not null,
+      indicating that the Pressable has been mounted and the ref has been attached. */}
+      {touchableRef.current && (
+        <Popover
+          from={touchableRef}
+          mode={PopoverMode.RN_MODAL}
+          placement={PopoverPlacement.FLOATING}
+          isVisible={isVisible}
+          onRequestClose={() => setIsVisible(false)}
+          popoverShift={isAuthenticated ? { x: -1, y: 1 } : { x: -1, y: -1 }}
+          popoverStyle={[
+            styles.popupContent,
+            popupContentPosition,
+            {
+              paddingTop: 20, // add some space for the arrow
+              paddingBottom: 10, // adjust the padding to fit the arrow
+              paddingLeft: 16,
+              paddingRight: 16,
+              overflow: 'visible', // make sure the arrow is visible outside the container
+            },
+          ]}
+        >
+          <View
+            style={[
+              styles.popupItems,
+              // { transform: [{ translateX: 740 }, { translateY: 48 }, { scale: 1 }] }
+            ]}
+          >
             {reorderedLanguages.map((language) => (
               <Pressable
                 key={language.code}
-                style={styles.modalButton}
+                style={styles.popupItem}
                 onPress={() => handleLanguageChange(language.code)}
               >
-                <Text style={[styles.modalText, language.isBold && styles.boldText]}>{language.name}</Text>
+                <Text style={[styles.popupItemText, language.isBold && styles.boldText]}>{language.name}</Text>
               </Pressable>
             ))}
           </View>
-        </View>
-      </Modal>
-    </>
+        </Popover>
+      )}
+    </View>
   )
 }
 const styles = StyleSheet.create({
@@ -80,30 +112,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#fffff',
     borderRadius: 4,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: document.dir === 'rtl' ? 'flex-start' : 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  modalContent: {
-    backgroundColor: '#fff',
+  popupContent: {
+    width: 180,
     borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#000',
+    backgroundColor: '#fff',
     padding: 8,
     position: 'absolute',
-    top: '56px',
-    width: '180px',
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 40,
+    marginRight: 40,
   },
-  modalButton: {
+  popupItems: {
+    width: '100%',
+  },
+  popupItem: {
     padding: 8,
     borderRadius: 4,
     border: '1px solid #ffffff',
     alignItems: 'center',
   },
-  modalText: {
-    color: '#08786b',
+  popupItemText: {
+    color: '#000',
   },
   boldText: {
     fontWeight: 'bold',

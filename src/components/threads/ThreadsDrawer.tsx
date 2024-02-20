@@ -2,9 +2,11 @@ import { LogoIcon, LogoTextIcon, MenuIcon } from '@endeavorpal/assets'
 import { AppDispatch, fetchThreads, RootState } from '@endeavorpal/store'
 import { User } from '@endeavorpal/types'
 import React, { useEffect, useState } from 'react'
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Modal, Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import LogoutButton from '../Logout'
+import InfoPopup from '../InfoPopup'
+import LanguageSelector from '../LanguageSelector'
+import NameContainer from './NameContainer'
 import ThreadsList from './ThreadsList'
 
 const ThreadsDrawer: React.FC = () => {
@@ -52,12 +54,13 @@ const ThreadsDrawer: React.FC = () => {
               <ThreadsList onSelectCard={togglePopup} />
             </View>
             <View style={styles.bottomContainer}>
-              <LogoutButton />
-              <Pressable style={[styles.userNameContainer]}>
-                <Text style={styles.userNameText}>
-                  {user?.firstName} {user?.lastName}
-                </Text>
-              </Pressable>
+              <View>
+                <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
+              </View>
+              <View style={styles.bottomRightContent}>
+                <InfoPopup />
+                <LanguageSelector />
+              </View>
             </View>
           </View>
         </View>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'relative',
     width: '100%',
-    maxWidth: '420px',
+    maxWidth: '260px',
     backgroundColor: '#082521',
     borderRadius: 0,
     paddingHorizontal: 5,
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     padding: 10,
     marginBottom: '70px',
-    maxWidth: '420px',
+    maxWidth: '260px',
     top: '40px',
     alignItems: 'flex-start',
     boxShadowColor: '#000',
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     position: 'fixed',
     zIndex: 1,
     flexDirection: 'row',
-    maxWidth: '415px',
+    maxWidth: '255px',
     width: '100%',
     height: 72,
     padding: 24,
@@ -156,10 +159,10 @@ const styles = StyleSheet.create({
     position: 'fixed',
     bottom: 0,
     height: '40px', // 32 * 2 for density pixels
-    maxWidth: '415px',
+    maxWidth: '260px',
     zIndex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'start',
     marginTop: 'auto', // push the bottomContent to the bottom of the modalContent view
     borderTopColor: '#E0E0E0',
     borderTopWidth: 1,
@@ -172,9 +175,6 @@ const styles = StyleSheet.create({
   },
   userNameContainer: {
     flex: 1,
-    justifyContent: 'center',
-    marginRight: 16,
-    alignItems: 'end',
   },
   userNameText: {
     fontSize: 18,
@@ -183,6 +183,11 @@ const styles = StyleSheet.create({
     letterSpacing: '0em',
     color: '#fff',
     textAlign: 'left',
+  },
+  bottomRightContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
 })
 

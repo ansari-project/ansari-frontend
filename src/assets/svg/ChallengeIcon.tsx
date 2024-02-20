@@ -1,15 +1,25 @@
+import { useDirection } from '@endeavorpal/hooks'
 import React from 'react'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 
 const ChallengeIcon: React.FC<Props> = (props: Props) => {
+  const { isRTL } = useDirection()
+  const transform = isRTL ? 'rotate(0)matrix(-1, 0, 0, 1, 0, 0)' : 'rotate(0)matrix(1, 0, 0, 1, 0, 0)'
   const svgProps = {
     width: props.width || '32',
     height: props.height || '32',
     viewBox: props.viewBox || '0 0 32 32',
     fill: props.fill || '#08786B',
+    transform: props.transform || transform,
   }
   return (
-    <EndeavorFancySVG width={svgProps.width} height={svgProps.height} viewBox={svgProps.viewBox} fill={svgProps.fill}>
+    <EndeavorFancySVG
+      width={svgProps.width}
+      height={svgProps.height}
+      viewBox={svgProps.viewBox}
+      fill={svgProps.fill}
+      transform={svgProps.transform}
+    >
       <g id='challenge 1'>
         <path
           id='Vector'

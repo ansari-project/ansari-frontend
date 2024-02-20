@@ -1,13 +1,18 @@
+import { useDirection } from '@endeavorpal/hooks'
 import React from 'react'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 
 const FlagIcon: React.FC<Props> = (props: Props) => {
+  const { isRTL } = useDirection()
+  const transform = isRTL ? 'rotate(0)matrix(-1, 0, 0, 1, 0, 0)' : 'rotate(0)matrix(1, 0, 0, 1, 0, 0)'
+
   return (
     <EndeavorFancySVG
       width={props.width || '24'}
       height={props.height || '24'}
       viewBox={props.viewBox || '0 0 24 24'}
       fill={props.fill || '#08786B'}
+      transform={props.transform || transform}
     >
       <g id='Group 2380'>
         <path

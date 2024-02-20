@@ -1,4 +1,4 @@
-import { useAuth } from '@endeavorpal/hooks'
+import { useAuth, useDirection } from '@endeavorpal/hooks'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigate } from 'react-router-dom'
@@ -8,23 +8,31 @@ import ThreadsDrawer from './threads/ThreadsDrawer'
 
 const Header: React.FC = () => {
   const { isAuthenticated } = useAuth()
+  const { isRTL } = useDirection()
   const navigate = useNavigate()
   // Function to handle press on ANSARI text
   const handlePress = () => {
     // Navigate to the home page here
     navigate('/')
   }
+  const flexDirection = { flexDirection: isRTL ? 'row-reverse' : 'row' }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.contentWarper}>
-        <View style={styles.leftContent}>{isAuthenticated && <ThreadsDrawer />}</View>
+    <View style={[styles.container]}>
+      <View style={[styles.contentWarper]}>
+        <View style={[styles.leftContent, flexDirection]}>
+          {isAuthenticated && <ThreadsDrawer />}
+          {!isAuthenticated && (
+            <>
+              <InfoPopup />
+              <LanguageSelector />
+            </>
+          )}
+        </View>
         <Pressable onPress={handlePress}>
           <Text style={{ fontWeight: '500', fontSize: 24 }}>{'ANSARI'}</Text>
         </Pressable>
-        <View style={styles.rightContent}>
-          <LanguageSelector />
-          <InfoPopup />
-        </View>
+        <View style={[styles.rightContent, flexDirection]}> </View>
       </View>
     </View>
   )
@@ -52,14 +60,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   leftContent: {
-    flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 10,
   },
   rightContent: {
-    flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 10,
+    backgroundColor: 'red',
   },
 })
 export default Header

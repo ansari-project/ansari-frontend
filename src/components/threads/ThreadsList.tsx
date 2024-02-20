@@ -232,7 +232,7 @@ const dateHeader = (dateCategory: string, threadDate: Date): string => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minWidth: '350px',
+    minWidth: '255px',
   },
   list: {
     flex: 1,

@@ -1,6 +1,6 @@
 import { AppDispatch, RootState } from '@/store/store'
 import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '@endeavorpal/assets'
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
 import { toggleInformationPopup } from '@endeavorpal/store'
 import { GetEnv } from '@endeavorpal/utils'
 import React from 'react'
@@ -13,6 +13,7 @@ const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
   const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
+  const { isAuthenticated } = useAuth()
   const textDirection = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
   const modalTextStyle = [styles.modalText, textDirection]
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
@@ -20,6 +21,8 @@ const InfoPopup: React.FC = () => {
   const togglePopup = () => {
     dispatch(toggleInformationPopup(!isInfoPopupOpen))
   }
+
+  const iconColor = isAuthenticated ? '#fff' : '#08786b'
 
   return (
     <>
@@ -29,11 +32,11 @@ const InfoPopup: React.FC = () => {
         }}
         style={styles.button}
       >
-        <InfoIcon />
+        <InfoIcon stroke={iconColor} />
       </Pressable>
 
       <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen} onRequestClose={togglePopup}>
-        <View style={[styles.container]} onClick={togglePopup}>
+        <View style={styles.container} onClick={togglePopup}>
           <View style={styles.modalView}>
             <Pressable onPress={togglePopup} style={styles.infoContainer}>
               {/* Replace CloseIcon with an icon from react-native-vector-icons */}
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     fontFamily: 'Roboto',
   },

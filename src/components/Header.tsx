@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         <Pressable onPress={handlePress}>
           <Text style={{ fontWeight: '500', fontSize: 24 }}>{'ANSARI'}</Text>
         </Pressable>
-        <View style={[styles.rightContent, flexDirection]}> </View>
+        <View style={[styles.rightContent, flexDirection]} />
       </View>
     </View>
   )

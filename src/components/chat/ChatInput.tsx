@@ -1,8 +1,9 @@
 import { SendIcon, StopIcon } from '@endeavorpal/assets'
-import { useDirection } from '@endeavorpal/hooks'
+import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+  KeyboardEvent,
   PixelRatio,
   Platform,
   Pressable,
@@ -28,8 +29,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   const chatInputRef = useRef<TextInput>(null)
   const [forceUpdate, setForceUpdate] = useState<number>(0) // Used to force update
   const { t } = useTranslation()
-
   const { isRTL } = useDirection()
+  const { isMobile } = useScreenInfo()
+
   const sendButtonOpacityValue = value.length === 0 ? '0.3' : '1.0'
 
   const handleContentSizeChange = (event: TextInputContentSizeChangeEvent) => {
@@ -75,12 +77,26 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
     }
   }, [forceUpdate])
 
+  /**
+   * Handles key press events for a text input, specifically invoking the send action on pressing the Enter key in non-mobile environments.
+   *
+   * @param event The key press event captured from the TextInput component.
+   */
+  const handleKeyPress = (event: KeyboardEvent): void => {
+    // Check if the Enter key was pressed and prevent its default action.
+    if (!isMobile && event.key === 'Enter') {
+      event.preventDefault() // This might need adjustment based on the actual event type used.
+      onSendPress() // Invoke the provided onSendPress callback.
+    }
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         ref={chatInputRef}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
         onChangeText={handleChange}
         onContentSizeChange={handleContentSizeChange}
         style={[

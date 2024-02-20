@@ -40,8 +40,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome, children }) => {
     if (!inputText.trim() || isSending) return
     try {
       setIsSending(true)
-      const { threadId } = await sendNewMessage(inputText, activeThread?.id)
       setInputText('')
+      const { threadId } = await sendNewMessage(inputText, activeThread?.id)
       setIsSending(false)
       if (isHome && threadId) {
         navigate(`/chat/${threadId}`) // Navigate to the chat screen with the new thread ID

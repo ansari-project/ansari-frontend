@@ -7,7 +7,16 @@ import { useLoginSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  NativeSyntheticEvent,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -47,6 +56,13 @@ const LoginScreen: React.FC = () => {
       })
   }
 
+  const handleKeyPress = (event: NativeSyntheticEvent<TextInput>, submitForm: () => Promise<void>): void => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      submitForm()
+    }
+  }
+
   const initialValues: LoginRequest = {
     email: '',
     password: '',
@@ -63,11 +79,12 @@ const LoginScreen: React.FC = () => {
           validationSchema={Yup.object(loginSchema)}
           onSubmit={(values, formikHelpers) => handleSubmit(values, formikHelpers)}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, isSubmitting, errors }) => (
+          {({ handleChange, handleBlur, handleSubmit, submitForm, values, isSubmitting, errors }) => (
             <View>
               <TextInput
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
+                onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.email}
                 placeholder={t('email')}
                 style={[styles.input, isRTL && styles.textAlignRight]}
@@ -78,6 +95,7 @@ const LoginScreen: React.FC = () => {
               <TextInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
+                onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.password}
                 placeholder={t('password')}
                 secureTextEntry

@@ -3,9 +3,7 @@ site_url: https://ansari.chat/docs
 nav:
   - Home: index.md
   - What Ansari can do: capabilities.md
-  - Validation: 
-    - Validating correctness: validation.md
-    - Ramadan Validation: ramadan-results.md
+  - Validation: validation.md
   - FAQ: faq.md
   - Additional material: material.md
 

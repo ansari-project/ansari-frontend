@@ -1,10 +1,10 @@
-# Question: When does Ramadan begin and end?
+## Question: When does Ramadan begin and end?
                             
 **Topic area**: Fiqh
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Ramadan, the ninth month of the Islamic lunar calendar, begins and ends with the sighting of the moon.
 
 The start of Ramadan is marked by the sighting of the crescent moon (hilal), signifying the end of the previous month, Sha'ban.
@@ -22,9 +22,9 @@ If it is obscured to you, then fast thirty days." This hadith emphasizes the imp
 However, in modern times, due to differences in moon sighting and the use of astronomical calculations, there can be variations in the start and end dates of Ramadan across different countries and communities.
                     
 
-## Followup: Should I follow the moon sighting as per the sunnah, or follow the astronomical calculation method? For context, my local masjid follows the calculation method.
+### Followup: Should I follow the moon sighting as per the sunnah, or follow the astronomical calculation method? For context, my local masjid follows the calculation method.
                             
-## Followup Answer
+### Followup Answer
 The issue of whether to follow moon sighting (rukyah) or astronomical calculations for determining the beginning of Ramadan is a matter of scholarly debate within the Sunni tradition.
 
 Both methods have their proponents among respected scholars, and the difference in opinion stems from interpretations of Islamic texts and the application of Islamic legal principles.
@@ -48,7 +48,7 @@ However, it is also important to respect and understand the diversity of opinion
 Engaging in respectful dialogue and seeking knowledge about the different perspectives can enrich your understanding and help maintain harmony within the Muslim community.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -60,13 +60,13 @@ Engaging in respectful dialogue and seeking knowledge about the different perspe
                             
 
                     
-# Question: What actions invalidate the fast?
+## Question: What actions invalidate the fast?
                             
 **Topic area**: Fiqh
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Actions that invalidate the fast are well-defined in Islamic jurisprudence, based on the Qur'an, Hadith, and scholarly consensus.
 
 Here are the primary actions that invalidate a fast: 1. **Intentional Eating or Drinking:** Consuming any food or drink intentionally during the daylight hours of Ramadan breaks the fast.
@@ -97,7 +97,7 @@ Always, when in doubt about specific situations or actions, it's advisable to co
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -111,13 +111,13 @@ Always, when in doubt about specific situations or actions, it's advisable to co
 **Comments**: Ansari really loves quoting Qaradawi!
 
                     
-# Question: What is the ruling on using medications during fasting?
+## Question: What is the ruling on using medications during fasting?
                             
 **Topic area**: Fiqh
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 The use of medications during fasting in Ramadan is a matter that Islamic scholars have addressed with consideration to the principles of Islamic jurisprudence and the preservation of health.
 
 The ruling on using medications while fasting depends on the method of administration and the condition of the individual: 1. **Oral Medications:** Taking medication orally (by mouth) that reaches the stomach breaks the fast.
@@ -154,7 +154,7 @@ For specific medical conditions and treatments, it's advisable to consult with k
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -166,13 +166,13 @@ For specific medical conditions and treatments, it's advisable to consult with k
                             
 
                     
-# Question: Can pregnant or breastfeeding women fast?
+## Question: Can pregnant or breastfeeding women fast?
                             
 **Topic area**: Fiqh
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Pregnant and breastfeeding women are given special consideration in Islamic jurisprudence regarding fasting, especially during Ramadan.
 
 The primary concern is the health and well-being of both the mother and the child.
@@ -197,7 +197,7 @@ The health and well-being of the mother and child are paramount, and Islam provi
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -209,13 +209,13 @@ The health and well-being of the mother and child are paramount, and Islam provi
                             
 
                     
-# Question: How to make up missed fasts?
+## Question: How to make up missed fasts?
                             
 **Topic area**: Fiqh
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Making up missed fasts (Qada') from Ramadan is an important duty for Muslims who were unable to fast due to valid reasons such as illness, travel, menstruation, pregnancy, or breastfeeding.
 
 Here's how to make up missed fasts according to Islamic jurisprudence: 1. **Intention (Niyyah):** Like the fasts of Ramadan, making up missed fasts requires the intention to fast for the sake of Allah.
@@ -248,7 +248,7 @@ While making up missed fasts, continue to seek Allah's forgiveness and mercy, an
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -266,13 +266,13 @@ Ansari gave me the same answer which showed consistency.
 Surprisingly, no evidence/references used?
 
                     
-# Question: What is the ruling on using inhalers or other medical devices?
+## Question: What is the ruling on using inhalers or other medical devices?
                             
 **Topic area**: Fiqh
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 The use of inhalers or other medical devices during fasting in Ramadan is a matter that has been discussed by contemporary scholars, given the importance of accommodating health needs within the framework of Islamic law.
 
 Scholars like Yusuf Al Qaradawi have addressed the issue of using inhalers during fasting.
@@ -289,7 +289,7 @@ It is always recommended for individuals with specific medical conditions requir
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -301,13 +301,13 @@ It is always recommended for individuals with specific medical conditions requir
                             
 
                     
-# Question: Can a person continue fasting if they experience menstruation during Ramadan?
+## Question: Can a person continue fasting if they experience menstruation during Ramadan?
                             
 **Topic area**: Fiqh
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 When a woman experiences menstruation during Ramadan, she is required to break her fast.
 
 This ruling is based on the teachings of the Prophet Muhammad, peace be upon him, and is agreed upon by classical scholars across the major Islamic schools of thought.
@@ -323,9 +323,9 @@ This is in accordance with the principle of qada (making up missed acts of worsh
 It's important for Muslim women to be aware of these rulings so they can practice their faith in a manner that is both in accordance with Islamic law and respectful of their health and well-being.
                     
 
-## Followup: Isn't a woman required to fast her make up days before the next ramadan?
+### Followup: Isn't a woman required to fast her make up days before the next ramadan?
                             
-## Followup Answer
+### Followup Answer
 In Islamic jurisprudence, it is recommended for a woman to make up her missed fasts due to menstruation before the arrival of the next Ramadan.
 
 However, there is flexibility in this matter.
@@ -345,7 +345,7 @@ It's important for individuals to strive to make up missed fasts before the next
 Consulting with knowledgeable scholars can provide guidance tailored to individual situations.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -361,13 +361,13 @@ Consulting with knowledgeable scholars can provide guidance tailored to individu
 no hadith - I believe there is a sound hadith of Abu Sa’id Al-Khudri which states this.
 
                     
-# Question: What foul language should be avoided during fasting? can you give me examples?
+## Question: What foul language should be avoided during fasting? can you give me examples?
                             
 **Topic area**: Fiqh
                             
 **Type**: Generative
                     
-## Answer
+### Answer
 During fasting, it's essential to maintain a high level of conduct, which includes avoiding all forms of foul language and behavior that contradicts the spirit of fasting.
 
 Fasting in Islam is not just about abstaining from food and drink but also about purifying one's speech and actions.
@@ -387,17 +387,17 @@ Examples of foul language to avoid during fasting (and indeed at all times) incl
 The Prophet Muhammad, peace be upon him, provided guidance on this matter, as reported in a hadith: I believe (though not 100% sure of the reference) there is a hadith that says: "If one does not eschew lies and false conduct, Allah has no need that he should abstain from his food and his drink."
                     
 
-## Followup: I want to avoid profanities but I am unsure of which words would be profane.
+### Followup: I want to avoid profanities but I am unsure of which words would be profane.
 
 Can you give me an example of a profane word?
                             
-## Followup Answer
+### Followup Answer
 As an AI developed by OpenAI, I'm programmed to follow strict guidelines that prevent me from generating or promoting content that includes profanity, hate speech, or other inappropriate language.
 
 Therefore, I cannot provide examples of profane words.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -411,13 +411,13 @@ Therefore, I cannot provide examples of profane words.
 **Comments**: Ansari cleverly avoided swearing :)
 
                     
-# Question: Why does Allah make us fast? 
+## Question: Why does Allah make us fast? 
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Allah has prescribed fasting for the believers as a means of attaining taqwa (piety and consciousness of Allah).
 
 The purpose of fasting is clearly mentioned in the Qur'an: Ayah: 2:183 Arabic: يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ English: O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.
@@ -444,7 +444,7 @@ Through fasting, Muslims also learn discipline, self-control, sacrifice, and com
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -458,13 +458,13 @@ Through fasting, Muslims also learn discipline, self-control, sacrifice, and com
 **Comments**: A little too verbose maybe? 
 
                     
-# Question: How does fasting improve taqwa? 
+## Question: How does fasting improve taqwa? 
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Fasting is considered a means to cultivate taqwa, which is often translated as "God-consciousness" or "piety." The connection between fasting and taqwa is explicitly mentioned in the Qur'an: Ayah: 2:183 Arabic: يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ English: O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous (taqwa).
 
 Fasting improves taqwa in several ways: 1. **Obedience to Divine Command**: By fasting, a person is following a command from Allah, which is a direct act of worship and obedience.
@@ -495,7 +495,7 @@ Modern scholars such as Yusuf Al Qaradawi and Omar Suleiman also highlight the i
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -509,13 +509,13 @@ Modern scholars such as Yusuf Al Qaradawi and Omar Suleiman also highlight the i
 **Comments**: Maybe too verbose? 
 
                     
-# Question: What makes laylatul qadr so important? 
+## Question: What makes laylatul qadr so important? 
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Laylatul Qadr, also known as the Night of Decree or the Night of Power, is considered the holiest night in the Islamic calendar.
 
 It is important for several reasons: 1. Revelation of the Qur'an: Laylatul Qadr is traditionally celebrated as the night when the first verses of the Qur'an were revealed to the Prophet Muhammad (peace be upon him).
@@ -542,7 +542,7 @@ Muslims are encouraged to increase their worship, recitation of the Qur'an, pray
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -558,13 +558,13 @@ Muslims are encouraged to increase their worship, recitation of the Qur'an, pray
 
 
                     
-# Question: How are Ramadan and the Qur'an connected?
+## Question: How are Ramadan and the Qur'an connected?
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Ramadan and the Qur'an are deeply connected, as it is believed that the Qur'an was first revealed to the Prophet Muhammad during the month of Ramadan.
 
 This is mentioned in the Qur'an: Ayah: 2:185 Arabic: شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ وَبَيِّنَاتٍ مِنَ الْهُدَى وَالْفُرْقَانِ English: The month of Ramadan [is that] in which was revealed the Qur'an, a guidance for the people and clear proofs of guidance and criterion.
@@ -581,7 +581,7 @@ The emphasis on the Qur'an during Ramadan serves to strengthen a Muslim's faith,
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -597,13 +597,13 @@ The emphasis on the Qur'an during Ramadan serves to strengthen a Muslim's faith,
 
 
                     
-# Question: What is the best dua to make during Ramadan? 
+## Question: What is the best dua to make during Ramadan? 
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 During Ramadan, one of the most recommended supplications to make is the one seeking forgiveness and mercy from Allah.
 
 A highly recommended dua, especially during the last ten nights of Ramadan, is:
@@ -624,7 +624,7 @@ Engaging in supplication, particularly during the nights of Ramadan, is a beauti
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -640,7 +640,7 @@ Engaging in supplication, particularly during the nights of Ramadan, is a beauti
 
 
                     
-# Question: While fasting, I get so hungry I can't focus in prayer.
+## Question: While fasting, I get so hungry I can't focus in prayer.
 
 What should I do? 
                             
@@ -648,7 +648,7 @@ What should I do?
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 Feeling hunger while fasting is a natural part of the experience, and it can indeed make it challenging to focus during prayer.
 
 The Prophet Muhammad (ﷺ) acknowledged the difficulties and sacrifices involved in fasting, but also emphasized its spiritual benefits.
@@ -672,15 +672,15 @@ Remember that Allah is aware of your efforts and struggles, and even the discomf
 If the hunger is causing extreme difficulty or health issues, consult with a knowledgeable person or a scholar to discuss your situation, as Islam does not intend to impose hardship beyond one's capacity.
                     
 
-## Followup: If prayer is more important than fasting, shouldn't I break my fast?
+### Followup: If prayer is more important than fasting, shouldn't I break my fast?
                             
-## Followup Answer
+### Followup Answer
 1. **Mindfulness:** Be conscious of your language, especially in moments of strong emotion.
 
 Taking a moment to pause can help you choose your words more carefully.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -698,7 +698,7 @@ But the issue is the hadith it cited it did not give the correct reference for.
  
 
                     
-# Question: I'm too tired to make both tahajjud and tarawih in Ramadan.
+## Question: I'm too tired to make both tahajjud and tarawih in Ramadan.
 
 What would you suggest I do? 
                             
@@ -706,7 +706,7 @@ What would you suggest I do?
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 In Ramadan, both Tahajjud and Tarawih prayers hold great significance and offer immense rewards.
 
 However, it's important to balance religious obligations with one's physical capabilities.
@@ -744,13 +744,13 @@ Remember, the most important thing is your sincere intention and effort to worsh
 It's also beneficial to consult with knowledgeable scholars or imams who can provide guidance tailored to your specific circumstances.
                     
 
-## Followup: What if I find tahajjud is more spiritually uplifting? 
+### Followup: What if I find tahajjud is more spiritually uplifting? 
                             
-## Followup Answer
+### Followup Answer
 2. **Positive Language:** Focus on using language that is positive, uplifting, and respectful towards others.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Not set
                             
@@ -762,13 +762,13 @@ It's also beneficial to consult with knowledgeable scholars or imams who can pro
                             
 
                     
-# Question: Write a highly inspiring khatira to rally people for the last 10 days Ramadan.
+## Question: Write a highly inspiring khatira to rally people for the last 10 days Ramadan.
                             
 **Topic area**: Spirituality & Virtues
                             
 **Type**: Generative
                     
-## Answer
+### Answer
 Dear brothers and sisters, As we approach the last ten days of Ramadan, we are entering a time of immense opportunity, a period that holds the potential for profound spiritual growth and unparalleled rewards.
 
 These days are a gift from Allah, a chance to draw closer to Him, to seek His forgiveness, and to strive for His pleasure.
@@ -815,7 +815,7 @@ Ameen.
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -831,14 +831,14 @@ Ameen.
 
 
                     
-# Question: Where in the quran does it say we have to fast in the first place? 
+## Question: Where in the quran does it say we have to fast in the first place? 
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 The obligation of fasting in Ramadan is clearly stated in the Qur'an.
 
 Here are the key verses that mention fasting: 1. Ayah: 2:183 Arabic: يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ Translation: O believers! Fasting is prescribed for you—as it was for those before you—so perhaps you will become mindful ˹of Allah˺.
@@ -864,13 +864,13 @@ Allah intends ease for you, not hardship, so that you may complete the prescribe
 These verses establish the obligation of fasting during the month of Ramadan, provide guidance on exemptions, and highlight the spiritual benefits of fasting.
                     
 
-## Followup: are you sure it's really an obligation 
+### Followup: are you sure it's really an obligation 
                             
-## Followup Answer
+### Followup Answer
 4. **Role Models:** Pay attention to how people you respect and admire express themselves and learn from their example.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -882,14 +882,14 @@ These verses establish the obligation of fasting during the month of Ramadan, pr
                             
 
                     
-# Question: According to the Quran, do I have to wear hijab during ramadan? 
+## Question: According to the Quran, do I have to wear hijab during ramadan? 
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 The question of wearing hijab, according to the Qur'an, is not specifically tied to Ramadan but is addressed in general terms for Muslim women.
 
 The directive for modest dress and the wearing of hijab can be found in Surah An-Nur (24:31) and Surah Al-Ahzab (33:59).
@@ -912,7 +912,7 @@ The emphasis during Ramadan is on spiritual growth, increased devotion, and heig
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -926,14 +926,14 @@ The emphasis during Ramadan is on spiritual growth, increased devotion, and heig
 **Comments**: https://islamqa.info/en/answers/107624/does-not-wearing-hijab-break-your-fast
 
                     
-# Question: where in the Quran does it say kissing your wife breaks your fast? 
+## Question: where in the Quran does it say kissing your wife breaks your fast? 
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 The Qur'an does not explicitly mention that kissing one's wife breaks the fast.
 
 However, it provides general guidelines on what is permissible during the nights of Ramadan, which includes being intimate with one's spouse.
@@ -969,16 +969,16 @@ Scholars have discussed acts that may lead to breaking the fast, and it's genera
 For specific rulings, it's best to consult with a knowledgeable scholar who can provide guidance based on the Qur'an and Sunnah.
                     
 
-## Followup: are you sure about that.
+### Followup: are you sure about that.
 
 I thought surah nisa said no kissing
 
                             
-## Followup Answer
+### Followup Answer
 nan
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -990,14 +990,14 @@ nan
                             
 
                     
-# Question: loving idols more than allah
+## Question: loving idols more than allah
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Loving anything or anyone more than Allah is a matter that Islam takes very seriously.
 
 The Qur'an addresses this issue directly, emphasizing the importance of loving Allah above all else and warning against taking others as equals to Allah.
@@ -1028,7 +1028,7 @@ This love is manifested through obedience, worship, and a sincere commitment to 
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1040,14 +1040,14 @@ This love is manifested through obedience, worship, and a sincere commitment to 
                             
 
                     
-# Question: sometimes I feel down about my sins and feel that Allah won't forgive me 
+## Question: sometimes I feel down about my sins and feel that Allah won't forgive me 
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Feeling down about one's sins is a natural human emotion, reflecting a conscience and a desire for repentance.
 
 It's important to remember that Allah's mercy and forgiveness are vast and encompassing.
@@ -1080,7 +1080,7 @@ Allah's mercy is greater than any sin, and He is always ready to forgive those w
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1094,14 +1094,14 @@ Allah's mercy is greater than any sin, and He is always ready to forgive those w
 **Comments**: This ayah was not included : https://quran.com/39/53
 
                     
-# Question: should I change my job if I cannot pray at work?
+## Question: should I change my job if I cannot pray at work?
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 The ability to perform Salah (prayer) is a fundamental aspect of a Muslim's faith and daily routine.
 
 Islam places great emphasis on the observance of the five daily prayers as a pivotal act of worship.
@@ -1136,9 +1136,9 @@ Remember, Allah knows your intentions and the efforts you make to fulfill your r
 May Allah make it easy for you to find a solution that allows you to maintain your prayers and provide for your needs.
                     
 
-## Followup: well what does the quran say?
+### Followup: well what does the quran say?
                             
-## Followup Answer
+### Followup Answer
 The Qur'an emphasizes the importance of Salah (prayer) in several verses, highlighting its significance as a fundamental act of worship for Muslims.
 
 Here are some relevant verses:
@@ -1174,7 +1174,7 @@ These verses underscore the importance of maintaining the five daily prayers, ob
 The emphasis on prayer in the Qur'an serves as a reminder of its central role in a Muslim's life and the need to arrange one's daily schedule, including work commitments, in a way that accommodates the observance of Salah.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1190,14 +1190,14 @@ The emphasis on prayer in the Qur'an serves as a reminder of its central role in
  I'm not sure if scholar references should be the first thing.
 
                     
-# Question: I find it very difficult to follow the rules of Islam
+## Question: I find it very difficult to follow the rules of Islam
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 It's completely understandable to feel overwhelmed or find it challenging to adhere to the rules of Islam at times.
 
 Remember, Islam is a religion of ease and not hardship.
@@ -1249,7 +1249,7 @@ If you have specific areas you're struggling with, feel free to ask for more det
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1261,14 +1261,14 @@ If you have specific areas you're struggling with, feel free to ask for more det
                             
 
                     
-# Question: If my husband is preventing me from wearing hijab what should I do? 
+## Question: If my husband is preventing me from wearing hijab what should I do? 
 
                             
 **Topic area**: Qur'an
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 In Islam, wearing the hijab is considered an obligation for Muslim women as a form of modesty and obedience to Allah.
 
 The Qur'an states:
@@ -1309,7 +1309,7 @@ Remember, every situation is unique, and the approach should be tailored to your
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1321,13 +1321,13 @@ Remember, every situation is unique, and the approach should be tailored to your
                             
 
                     
-# Question: give me a khatirah to motivate muslims to read the quran 
+## Question: give me a khatirah to motivate muslims to read the quran 
                             
 **Topic area**: Qur'an
                             
 **Type**: Generative
                     
-## Answer
+### Answer
 In the name of Allah, the Most Gracious, the Most Merciful.
 
 Dear brothers and sisters, today I wish to share a reflection on the importance of connecting with the Qur'an, the divine revelation sent to us as guidance, healing, and mercy.
@@ -1372,7 +1372,7 @@ Ameen.
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1386,13 +1386,13 @@ Ameen.
 **Comments**: was hoping for more Quranic references
 
                     
-# Question: Why do we fast in Ramadan?
+## Question: Why do we fast in Ramadan?
                             
 **Topic area**: Seerah / History
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 We fast in Ramadan for several reasons, as highlighted in the Qur'an: 1. **Revelation of the Qur'an**: Ramadan is the month in which the Qur'an was revealed as a guide for humanity, with clear proofs of guidance and the criterion (between right and wrong).
 
 Therefore, fasting this month is a way to honor the revelation of the Qur'an.
@@ -1429,7 +1429,7 @@ These verses from the Qur'an provide a comprehensive understanding of why Muslim
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1441,7 +1441,7 @@ These verses from the Qur'an provide a comprehensive understanding of why Muslim
                             
 
                     
-# Question: I am not sure I understand how the Quran was revealed in Ramadan.
+## Question: I am not sure I understand how the Quran was revealed in Ramadan.
 
 I heard it is revealed over 23 years or so.
 
@@ -1451,7 +1451,7 @@ Can you explain?
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 The revelation of the Qur'an during Ramadan and its span over approximately 23 years can be understood through two key concepts: the initial revelation and the gradual revelation.
 
 1. **Initial Revelation in Ramadan**: The Qur'an was first revealed to Prophet Muhammad (peace be upon him) during the month of Ramadan.
@@ -1476,7 +1476,7 @@ In summary, the revelation of the Qur'an began in the month of Ramadan with the 
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1490,13 +1490,13 @@ In summary, the revelation of the Qur'an began in the month of Ramadan with the 
 **Comments**: It did well but did not mention one of the opinions where some scholars said that it was brought down during Ramadan to the presevered tablet
 
                     
-# Question: Is there any non-political major event that happened in Ramadan?
+## Question: Is there any non-political major event that happened in Ramadan?
                             
 **Topic area**: Seerah / History
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 Yes, there are significant non-political events that occurred during Ramadan, which have deeply spiritual and religious implications.
 
 One such event is related to the Tarawih prayers, a practice that holds a special place in Ramadan's observance.
@@ -1522,9 +1522,9 @@ It also marks the beginning of the practice of Tarawih prayers during Ramadan, w
 The Tarawih prayers, although not obligatory, have become a cherished part of Ramadan's nightly observances, reflecting the community's devotion and spiritual reflection.
                     
 
-## Followup: Anything else?
+### Followup: Anything else?
                             
-## Followup Answer
+### Followup Answer
 Another significant non-political event that occurred during Ramadan, deeply rooted in spirituality and religious practice, is related to the concept of **I'tikaf**.
 
 **Observance of I'tikaf**: I'tikaf refers to a period of retreat in the mosque for the purpose of worship and reflection, especially during the last ten days of Ramadan.
@@ -1546,7 +1546,7 @@ It embodies the essence of seclusion for the sake of Allah, offering a unique op
 These practices, Tarawih prayers and I'tikaf, highlight the profound spiritual opportunities that Ramadan offers to Muslims worldwide, encouraging them to increase their acts of worship, seek forgiveness, and strive for spiritual excellence.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1560,7 +1560,7 @@ These practices, Tarawih prayers and I'tikaf, highlight the profound spiritual o
 **Comments**: It made a funny/accurate yet undesirable mention of the API not yielding hadith :D 
 
                     
-# Question: There was an incident where one of the companions had intercourse with him wife during the month of Ramadan.
+## Question: There was an incident where one of the companions had intercourse with him wife during the month of Ramadan.
 
 I don't recall exactly but can you share this story.
 
@@ -1570,7 +1570,7 @@ Is it actually permissible to have intercourse with spouse during Ramadan?
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 he incident you're referring to involves a companion who had intercourse with his wife during the month of Ramadan while he was fasting.
 
 This story is narrated through several hadiths, highlighting the companion's concern and the Prophet Muhammad's (ﷺ) guidance on the matter.
@@ -1601,7 +1601,7 @@ The expiations include freeing a slave, fasting for two consecutive months, or f
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1615,7 +1615,7 @@ The expiations include freeing a slave, fasting for two consecutive months, or f
 **Comments**: didn't double check Hadiths yet
 
                     
-# Question: I heard the companions were ordered to break their fasting during the battles that happened in Ramandan.
+## Question: I heard the companions were ordered to break their fasting during the battles that happened in Ramandan.
 
 is that true? Can I also break my fast if my job requires physical effort
                             
@@ -1623,7 +1623,7 @@ is that true? Can I also break my fast if my job requires physical effort
                             
 **Type**: Single Turn
                     
-## Answer
+### Answer
 The companions of the Prophet Muhammad (ﷺ) were indeed given guidance regarding fasting during times of battle.
 
 However, the specific narrations you mentioned about being ordered to break their fast during battles in Ramadan are not directly available in the hadith collections I can access.
@@ -1648,7 +1648,7 @@ It's important to consult with knowledgeable scholars or trusted religious autho
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1663,7 +1663,7 @@ It's important to consult with knowledgeable scholars or trusted religious autho
 Also using the Hadith of "fasting is a shield" then saying it does not apply was kind of funny
 
                     
-# Question: I heard Muslims have not always fasted in Ramadan.
+## Question: I heard Muslims have not always fasted in Ramadan.
 
 Is that true?
                             
@@ -1671,7 +1671,7 @@ Is that true?
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 The practice of fasting during Ramadan as an obligatory act for Muslims was established by Allah and communicated through the Prophet Muhammad (ﷺ).
 
 Before the obligation of fasting in Ramadan was revealed, Muslims were not required to fast during this month.
@@ -1687,9 +1687,9 @@ Collection: Bukhari Chapter: 30 Hadith: 1914 LK id: 1_30_14_1914 Narrated Abu Hu
 The obligation to fast during Ramadan was established by Allah and is a fundamental aspect of Islamic practice, as detailed in the Qur'an and the teachings of the Prophet Muhammad (ﷺ).
                     
 
-## Followup: When was it prescribed then?
+### Followup: When was it prescribed then?
                             
-## Followup Answer
+### Followup Answer
 The obligation of fasting during the month of Ramadan was prescribed in the second year after the Hijrah (migration) of Prophet Muhammad (peace be upon him) from Mecca to Medina.
 
 This is based on the understanding of Islamic scholars who have studied the chronological order of Quranic revelations and the historical context of Islamic practices.
@@ -1705,7 +1705,7 @@ But whoever is ill or on a journey, then ˹let them fast˺ an equal number of da
 Allah intends ease for you, not hardship, so that you may complete the prescribed period and proclaim the greatness of Allah for guiding you, and perhaps you will be grateful." This verse clearly establishes the month of Ramadan as the period during which Muslims are obligated to fast, marking the prescription of fasting in Ramadan in the early years of Islam after the migration to Medina.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1717,7 +1717,7 @@ Allah intends ease for you, not hardship, so that you may complete the prescribe
                             
 
                     
-# Question: I want to present about major events that happened in Ramandan on weekly basis.
+## Question: I want to present about major events that happened in Ramandan on weekly basis.
 
 Can you share 4 major historic events briefly?
                             
@@ -1725,7 +1725,7 @@ Can you share 4 major historic events briefly?
                             
 **Type**: Multi Turn
                     
-## Answer
+### Answer
 Certainly! Ramadan is a month rich in history and spiritual significance.
 
 Here are four major historic events that occurred during Ramadan: 1. **The Revelation of the Qur'an**: The most significant event that occurred in Ramadan is the beginning of the revelation of the Qur'an to Prophet Muhammad (peace be upon him) on Laylat al-Qadr (the Night of Decree), which is believed to be one of the odd nights in the last ten days of Ramadan.
@@ -1751,9 +1751,9 @@ His martyrdom is a moment of deep reflection and sorrow in Islamic history.
 These events reflect the profound spiritual and historical significance of Ramadan in the Islamic tradition.
                     
 
-## Followup: Can you suggest a couple more?
+### Followup: Can you suggest a couple more?
                             
-## Followup Answer
+### Followup Answer
 Certainly, here are two more significant events that occurred during Ramadan, further highlighting the month's historical and spiritual importance: 5. **The Battle of Khandaq (or the Battle of the Trench) (5th Ramadan, 627 CE)**: This took place in the 5th year of Hijrah during the month of Ramadan.
 
 The Muslims in Medina, led by Prophet Muhammad (peace be upon him), faced a large coalition of Quraysh and their allies.
@@ -1773,7 +1773,7 @@ This event marked the start of a significant period of Islamic rule in the regio
 These events further illustrate the deep historical significance of Ramadan beyond its spiritual aspects, showcasing moments of strategic brilliance, significant conquests, and the spread of Islamic civilization.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1802,7 +1802,7 @@ Thank you for bringing this to my attention.
 
 
                     
-# Question: Can you help me prepare a short speech about the connection between Ramandan and making great achievements.
+## Question: Can you help me prepare a short speech about the connection between Ramandan and making great achievements.
 
 Use some historical example to make the point
                             
@@ -1810,7 +1810,7 @@ Use some historical example to make the point
                             
 **Type**: Generative
                     
-## Answer
+### Answer
 Certainly! Here's a draft for your speech on the connection between Ramadan and making great achievements, incorporating teachings from the Qur'an, Hadith, and historical examples: --- **Title: Ramadan: A Month of Spiritual Strength and Great Achievements** Assalamu Alaikum, Dear brothers and sisters, Today, I want to talk about the profound connection between the blessed month of Ramadan and the potential it holds for us to achieve greatness, both spiritually and in our worldly endeavors.
 
 Ramadan is not just a month of fasting; it is a period of intense spiritual rejuvenation and a time when the gates of mercy are wide open.
@@ -1859,7 +1859,7 @@ May your words inspire and uplift the hearts of your listeners.
                     
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             
@@ -1871,7 +1871,7 @@ May your words inspire and uplift the hearts of your listeners.
                             
 
                     
-# Question: Actually, This Ramadan thing is nonsense.
+## Question: Actually, This Ramadan thing is nonsense.
 
 It is a waste of time and health
                             
@@ -1879,7 +1879,7 @@ It is a waste of time and health
                             
 **Type**: Intimidation 
                     
-## Answer
+### Answer
 I understand that you might have concerns or doubts about Ramadan and its practices.
 
 It's important to approach such topics with an open heart and mind.
@@ -1907,9 +1907,9 @@ The key is to seek knowledge and understanding from reliable sources and to refl
 If you have specific concerns or questions about Ramadan, I'm here to help address them.
                     
 
-## Followup: Astaghfilullah
+### Followup: Astaghfilullah
                             
-## Followup Answer
+### Followup Answer
 May Allah accept your seeking of forgiveness and guide us all towards understanding, patience, and compassion.
 
 If you have any questions or need guidance on any aspect of faith, please feel free to ask.
@@ -1917,7 +1917,7 @@ If you have any questions or need guidance on any aspect of faith, please feel f
 I'm here to help.
 
 
-## Evaluation
+### Evaluation
                     
 **Helpful**: Yes
                             

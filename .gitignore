@@ -24,3 +24,4 @@ yarn-error.log*
 .history
 .env
 docs/build
+.venv

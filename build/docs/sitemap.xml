@@ -21,6 +21,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://ansari.chat/docs/ramadan-results/</loc>
+         <lastmod>2024-02-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://ansari.chat/docs/validation/</loc>
          <lastmod>2024-02-28</lastmod>
          <changefreq>daily</changefreq>

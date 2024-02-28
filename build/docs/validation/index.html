@@ -47,8 +47,9 @@
                 <li class="toctree-l1"><a class="reference internal" href="../capabilities/">What Ansari can do</a>
                 </li>
               </ul>
+              <p class="caption"><span class="caption-text">Validation</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Validating correctness</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Validating correctness</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#importance-of-validation">Importance of validation</a>
     </li>
@@ -72,8 +73,18 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ramadan-validation">Ramadan validation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#results_2">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data">Data</a>
+    </li>
+        </ul>
+    </li>
     </ul>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ramadan-results/">Ramadan Validation</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../faq/">FAQ</a>
@@ -97,6 +108,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Validation</li>
       <li class="breadcrumb-item active">Validating correctness</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -129,12 +141,26 @@
 <h4 id="results_1">Results</h4>
 <p>On the Qur'an portion of the course, Ansari achieved <strong>80%</strong>. </p>
 <p>On the Theology portion of the course, Ansari achieved <strong>78%</strong>. </p>
+<h2 id="ramadan-validation">Ramadan validation</h2>
+<p>To prepare for the month of Ramadan, we generated a list of 34 questions across a variety of topics (Fiqh, Spirituality, Qur'an and Seerah). We also tried single turn, multi turn and generative capabilities. We rated answers on a 1 to 5 point scale, we also had a set of flags: helpful, references used, hallucination, toxic answer. </p>
+<p>Special thanks to Wael Hamza who led this effort as well as Saifeldeen Hadid and Iman Sadreddin for their help with this. </p>
+<h3 id="results_2">Results</h3>
+<ul>
+<li>On a 5 point scale, Ansari scored 4.41 overall. </li>
+<li>in 33 out of 33 ratings (100%) it was helpful (one was "not set"). </li>
+<li>It used references on 26 out of 32 questions (82%). It did not use references on 6 questions, and there were 2 "no ratings." </li>
+<li>There were 0 instances of hallucination detected.  </li>
+<li>There were 0 instances of toxic language usage. </li>
+</ul>
+<h3 id="data">Data</h3>
+<p>You can find the csv file of questions and ratings in this <a href="https://github.com/waleedkadous/ansari-backend/blob/api-v2/evals/ramadan/questions_answers_eval.csv">csv file</a>. </p>
+<p>We have generated a human version of the report <a href="../ramadan-results/">here</a>. </p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../capabilities/" class="btn btn-neutral float-left" title="What Ansari can do"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../faq/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ramadan-results/" class="btn btn-neutral float-right" title="Ramadan Validation">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -160,7 +186,7 @@
       <span><a href="../capabilities/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../faq/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../ramadan-results/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

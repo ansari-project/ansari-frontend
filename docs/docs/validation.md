@@ -44,4 +44,22 @@ On the Qur'an portion of the course, Ansari achieved **80%**.
 
 On the Theology portion of the course, Ansari achieved **78%**. 
 
+## Ramadan validation
 
+To prepare for the month of Ramadan, we generated a list of 34 questions across a variety of topics (Fiqh, Spirituality, Qur'an and Seerah). We also tried single turn, multi turn and generative capabilities. We rated answers on a 1 to 5 point scale, we also had a set of flags: helpful, references used, hallucination, toxic answer. 
+
+Special thanks to Wael Hamza who led this effort as well as Saifeldeen Hadid and Iman Sadreddin for their help with this. 
+
+### Results
+
+- On a 5 point scale, Ansari scored 4.41 overall. 
+- in 33 out of 33 ratings (100%) it was helpful (one was "not set"). 
+- It used references on 26 out of 32 questions (82%). It did not use references on 6 questions, and there were 2 "no ratings." 
+- There were 0 instances of hallucination detected.  
+- There were 0 instances of toxic language usage. 
+
+### Data
+
+You can find the csv file of questions and ratings in this [csv file](https://github.com/waleedkadous/ansari-backend/blob/api-v2/evals/ramadan/questions_answers_eval.csv). 
+
+We have generated a human version of the report [here](ramadan-results.md). 

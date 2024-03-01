@@ -40,8 +40,10 @@ const ForgetPasswordScreen: React.FC = () => {
   const handleSubmit = async () => {
     try {
       await validateEmail(emailState.email)
-      await UserService.requestPasswordReset(emailState.email)
-      setEmailState({ ...emailState, submitted: true })
+      if (emailState.email.trim().length !== 0 && Object.keys(errors).length === 0) {
+        await UserService.requestPasswordReset(emailState.email)
+        setEmailState({ ...emailState, submitted: true })
+      }
     } catch (error) {
       console.error('Error sending password reset email:', error)
     }

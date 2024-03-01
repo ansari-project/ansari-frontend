@@ -160,8 +160,7 @@ class ChatService {
         throw new Error('Network response was not ok')
       }
 
-      const result = await response.json()
-      console.log(result)
+      await response.json()
       // Handle success, e.g., show a confirmation message
     } catch (error) {
       console.error('Error sending feedback:', error)

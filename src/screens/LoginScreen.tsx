@@ -1,8 +1,7 @@
 import { BackgroundImage } from '@endeavorpal/components'
 import { useDirection, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, login, guestLogin } from '@endeavorpal/store'
+import { AppDispatch, guestLogin, login } from '@endeavorpal/store'
 import { LoginRequest } from '@endeavorpal/types'
-import { Helpers } from '@endeavorpal/utils'
 import { useLoginSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
@@ -35,21 +34,21 @@ const LoginScreen: React.FC = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hovered, setHovered] = useState<number>(0)
+  const [guestLoading, setGuestLoading] = useState<boolean>(false)
 
   // Inside your LoginScreen component, add the following function for guest login
 
   const handleGuestLogin = () => {
-    const { email, password } = Helpers.generateGuestCredentials()
-
-    console.log('Guest credentials:', { email, password })
-
+    setGuestLoading(true)
     dispatch(guestLogin())
       .unwrap()
       .then(() => {
         navigate('/') // Navigate to the home page or dashboard
+        setGuestLoading(false)
       })
       .catch((error) => {
         console.error('Error logging in as guest:', error)
+        setGuestLoading(false)
         // Handle error (e.g., show an error message)
       })
   }
@@ -149,11 +148,19 @@ const LoginScreen: React.FC = () => {
                 onPress={handleSubmit}
                 disabled={isSubmitting}
               >
-                <Text style={styles.buttonText}>{isSubmitting ? t('submitting') : t('submit')}</Text>
+                <Text style={[styles.buttonText, isSubmitting && styles.buttonTextDisabled]}>
+                  {isSubmitting ? t('submitting') : t('submit')}
+                </Text>
               </Pressable>
 
-              <Pressable style={[styles.button, { backgroundColor: '#657786' }]} onPress={handleGuestLogin}>
-                <Text style={styles.buttonText}> {t('guestLogin')}</Text>
+              <Pressable
+                style={[styles.button, { backgroundColor: '#657786' }, guestLoading && styles.buttonDisabled]}
+                onPress={handleGuestLogin}
+                disabled={guestLoading}
+              >
+                <Text style={[styles.buttonText, guestLoading && styles.buttonTextDisabled]}>
+                  {guestLoading ? t('submitting') : t('guestLogin')}
+                </Text>
               </Pressable>
 
               <Text
@@ -243,8 +250,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonText: {
-    color: 'white',
+    color: '#ffffff',
     fontWeight: 'bold',
+  },
+  buttonTextDisabled: {
+    color: 'darkorange',
   },
   buttonDisabled: {
     backgroundColor: '#dddddd',

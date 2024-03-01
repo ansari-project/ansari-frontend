@@ -1,4 +1,4 @@
-import { SettingIcon } from '@endeavorpal/assets' // Assuming this import is correct
+import { SettingIcon } from '@endeavorpal/assets'
 import React, { useRef, useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
@@ -28,7 +28,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name }) => {
         </View>
       </Pressable>
       <Popover
-        from={touchableRef}
+        from={touchableRef.current}
         mode={PopoverMode.RN_MODAL}
         placement={PopoverPlacement.FLOATING}
         isVisible={isVisible}
@@ -56,7 +56,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name }) => {
               { marginBottom: 0, borderTopWidth: 1, paddingTop: 5, borderColor: 'rgba(0,0,0,0.1)' },
             ]}
           >
-            <LogoutButton />
+            <LogoutButton onHandelPress={setIsVisible} />
           </Pressable>
         </View>
       </Popover>

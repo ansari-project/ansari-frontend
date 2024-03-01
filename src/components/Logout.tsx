@@ -2,20 +2,24 @@ import { LogoutIcon } from '@endeavorpal/assets'
 import { useAuth } from '@endeavorpal/hooks'
 import { AppDispatch, clearAuthState, logout } from '@endeavorpal/store'
 import React from 'react'
-import { Pressable, Text, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-const LogoutButton: React.FC = () => {
+type LogoutButtonProps = {
+  onHandelPress: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const LogoutButton: React.FC<LogoutButtonProps> = ({ onHandelPress }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { token } = useAuth()
 
   const handleLogout = async () => {
-    if (token) {
-      try {
-        await dispatch(logout(token))
-      } catch (error) {
-        console.error('Error logging out:', error)
-      }
+    onHandelPress(false)
+    try {
+      await dispatch(logout(String(token)))
+    } catch (error) {
+      console.error('Error logging out:', error)
+    } finally {
       clearAuthState()
     }
   }

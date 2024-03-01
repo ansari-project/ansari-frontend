@@ -40,10 +40,6 @@ const ForgetPasswordScreen: React.FC = () => {
   const handleSubmit = async () => {
     try {
       await validateEmail(emailState.email)
-      if (!emailState.submitted) {
-        alert('handleSubmit')
-        return
-      }
       await UserService.requestPasswordReset(emailState.email)
       setEmailState({ ...emailState, submitted: true })
     } catch (error) {
@@ -63,7 +59,6 @@ const ForgetPasswordScreen: React.FC = () => {
           errors[path as string] = message // Cast path as string
         })
         setErrors(errors)
-        console.error('Validation error:', errors)
       } else {
         console.error('Error sending password reset email:', error)
       }

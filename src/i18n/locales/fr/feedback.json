@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "Correct",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "Facile à comprendre",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "Complète",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "Offensif / Dangereux",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "Pas exactement correct",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "Autre",
+      "value": "other"
+    }
+  ]
+}

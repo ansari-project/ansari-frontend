@@ -29,5 +29,9 @@
   "cantChangeLanguageWhileAnsariWritingAlertMessage": "Vous ne pouvez pas changer de langue avant d'avoir reçu la réponse d'Ansari",
   "cantChangeLanguageWhileAnsariWritingAlertTitle": "Impossible de changer de langue",
   "copy": "Copie",
-  "selectText": "Sélectionnez le texte"
+  "selectText": "Sélectionnez le texte",
+  "whyDidYouChooseThisRating": "Pourquoi avez-vous choisi cette note ?",
+  "optional": "facultatif",
+  "submit": "Soumettre",
+  "additionalFeedbackPlaceholder": "Fournir un retour supplémentaire"
 }

@@ -1,4 +1,5 @@
-export { clearAuthStateFromLocalStorage, default as authSlice, loadAuthStateFromLocalStorage } from './authSlice'
+export { default as authSlice, clearAuthState, loadAuthState } from './authSlice'
+export type { AuthState } from './authSlice'
 export {
   addMessageToActiveThread,
   addStreamMessageToActiveThread,
@@ -9,3 +10,5 @@ export {
   setThreads,
 } from './chatSlice'
 export { default as informationPopupSlice, toggleInformationPopup } from './informationPopupSlice'
+export { default as reactionButtonsSlice, setReactionButton } from './reactionButtonsSlice'
+export type { ReactionButtonsState } from './reactionButtonsSlice'

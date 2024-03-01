@@ -1,23 +1,51 @@
 import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '@endeavorpal/assets'
 import { useScreenInfo } from '@endeavorpal/hooks'
-import React from 'react'
+import PromptsService, { PromptsByCategory } from '@endeavorpal/services/PromptsService'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import PromptCard from './PromptCard'
 
-const PromptList: React.FC = () => {
-  const { t } = useTranslation()
+type PromptListProps = {
+  // eslint-disable-next-line no-unused-vars
+  onPromptSelect: (description: string) => void
+}
+
+const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
+  const { t, i18n } = useTranslation()
   const { isSmallScreen } = useScreenInfo()
 
-  const prompts = [
-    { id: '1', title: t('duaToMake'), subtitle: t('inParticularSituation'), Icon: PrayingIcon, Options: {} },
-    { id: '2', title: t('islamicPerspectives'), subtitle: t('onTopics'), Icon: ChatIcon, Options: {} },
-    { id: '3', title: t('spiritualRemedies'), subtitle: t('challengesFacing'), Icon: ChallengeIcon, Options: {} },
-  ]
+  const [loadedPrompts, setLoadedPrompts] = useState<PromptsByCategory>({} as PromptsByCategory)
 
-  const handleSelectPrompt = (promptId: string) => {
-    // Placeholder for navigation logic
-    console.log('Prompt selected:', promptId)
+  useEffect(() => {
+    const loadPrompts = async () => {
+      const promptsForLanguage = await PromptsService(i18n.language)
+      setLoadedPrompts(promptsForLanguage)
+    }
+    loadPrompts()
+  }, [i18n.language])
+
+  const promptOptions = new Map()
+  promptOptions.set('duaIcon', PrayingIcon)
+  promptOptions.set('duaTitle', t('duaToMake'))
+  promptOptions.set('perspectivesTitle', t('islamicPerspectives'))
+  promptOptions.set('perspectivesIcon', ChatIcon)
+  promptOptions.set('remediesTitle', t('spiritualRemedies'))
+  promptOptions.set('remediesIcon', ChallengeIcon)
+
+  const prompts = Object.keys(loadedPrompts).flatMap((category) => [
+    {
+      id: loadedPrompts[category][0]['id'],
+      title: promptOptions.get(`${category}Title`),
+      subtitle: loadedPrompts[category][0]['title'],
+      description: loadedPrompts[category][0]['description'],
+      Icon: promptOptions.get(`${category}Icon`),
+      Options: {},
+    },
+  ])
+
+  const handleSelectPrompt = (promptDescription: string) => {
+    onPromptSelect(promptDescription)
   }
 
   return (
@@ -32,7 +60,7 @@ const PromptList: React.FC = () => {
             title={prompt.title}
             subtitle={prompt.subtitle}
             Icon={prompt.Icon as typeof EndeavorFancySVG}
-            onPress={() => handleSelectPrompt(prompt.id)}
+            onPress={() => handleSelectPrompt(prompt.description)}
             stacked={isSmallScreen}
           />
         ))}

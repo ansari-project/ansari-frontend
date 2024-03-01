@@ -23,7 +23,7 @@ i18n
       ur: loadLocaleFiles('ur'),
     },
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
     ns: ['common', 'login', 'register'], // defining namespaces
     defaultNS: 'common',
     interpolation: {

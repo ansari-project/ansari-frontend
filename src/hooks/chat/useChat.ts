@@ -1,10 +1,14 @@
 import { addMessage, AppDispatch, createThread, RootState, setActiveThread, Thread } from '@endeavorpal/store'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface UseChatReturn {
   isLoading: boolean
   activeThread: Thread | null
+  inputText: string
+  // eslint-disable-next-line no-unused-vars
+  setInputText: (text: string) => void
+  isSending: boolean
   sendNewMessage: (
     // eslint-disable-next-line no-unused-vars
     content: string,
@@ -28,6 +32,8 @@ export function useChat(): UseChatReturn {
   const isLoading = useSelector((state: RootState) => state.chat.loading)
   const activeThread = useSelector((state: RootState) => state.chat.activeThread)
   const abortControllerRef = useRef<AbortController | null>(null)
+  const [inputText, setInputText] = useState<string>('')
+  const [isSending, setIsSending] = useState<boolean>(false)
 
   /**
    * Sends a new message to the specified thread or creates a new thread if none is specified.
@@ -39,22 +45,21 @@ export function useChat(): UseChatReturn {
   const sendNewMessage = async (
     content: string,
     currentThreadId?: string,
-  ): Promise<{ threadId: string | undefined }> => {
+  ): Promise<{ threadId: string | undefined; error?: Error }> => {
+    setIsSending(true)
     abortControllerRef.current = new AbortController()
     let threadId = currentThreadId
-
-    if (!threadId) {
-      // Create a new thread if no current thread ID is provided
-      const resultAction = await dispatch(createThread()).unwrap()
-      if (resultAction) {
-        dispatch(setActiveThread(resultAction))
-        threadId = resultAction.id
+    // Proceed to send the message if thread ID is available and content is not just whitespace
+    try {
+      if (!threadId) {
+        // Create a new thread if no current thread ID is provided
+        const resultAction = await dispatch(createThread()).unwrap()
+        if (resultAction) {
+          dispatch(setActiveThread(resultAction))
+          threadId = resultAction.id
+        }
       }
-    }
-
-    if (threadId && content.trim()) {
-      // Proceed to send the message if thread ID is available and content is not just whitespace
-      try {
+      if (threadId && content.trim()) {
         await dispatch(
           addMessage({
             threadId: threadId,
@@ -62,11 +67,16 @@ export function useChat(): UseChatReturn {
             signal: abortControllerRef.current.signal,
           }),
         ).unwrap()
-      } catch (error) {
-        console.error('Failed to send message:', error)
-      } finally {
-        abortControllerRef.current = null
+        return { threadId } // Plus any additional success feedback
       }
+    } catch (error) {
+      console.error('Failed to send message:', error)
+      setIsSending(false)
+      return { threadId: undefined, error } // Include error feedback
+    } finally {
+      setInputText('') // Clear input text on successful send
+      setIsSending(false)
+      abortControllerRef.current = null
     }
     return { threadId } // Return the thread ID
   }
@@ -81,9 +91,19 @@ export function useChat(): UseChatReturn {
     }
   }
 
+  // Cleanup function to abort pending requests when the hook unmounts or a component using this hook unmounts
+  useEffect(() => {
+    return () => {
+      abortRequest()
+    }
+  }, [])
+
   return {
     isLoading,
     activeThread,
+    inputText,
+    setInputText,
+    isSending,
     sendNewMessage,
     abortRequest,
   }

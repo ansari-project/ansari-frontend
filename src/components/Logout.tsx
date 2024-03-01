@@ -1,6 +1,6 @@
 import { LogoutIcon } from '@endeavorpal/assets'
 import { useAuth } from '@endeavorpal/hooks'
-import { AppDispatch, clearAuthStateFromLocalStorage, logout } from '@endeavorpal/store'
+import { AppDispatch, clearAuthState, logout } from '@endeavorpal/store'
 import React from 'react'
 import { Pressable, Text, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
@@ -16,7 +16,7 @@ const LogoutButton: React.FC = () => {
       } catch (error) {
         console.error('Error logging out:', error)
       }
-      clearAuthStateFromLocalStorage()
+      clearAuthState()
     }
   }
 

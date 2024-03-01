@@ -29,5 +29,9 @@
   "cantChangeLanguageWhileAnsariWritingAlertMessage": "لا يمكنك تغيير اللغة قبل الحصول على رد الأنصاري على رسالتك الأخيرة",
   "cantChangeLanguageWhileAnsariWritingAlertTitle": "لا يمكن تغيير اللغة",
   "copy": "نسخ",
-  "selectText": "تحديد النص"
+  "selectText": "تحديد النص",
+  "whyDidYouChooseThisRating": "لماذا اخترت هذا التقييم؟",
+  "optional": "اختياري",
+  "submit": "إرسال",
+  "additionalFeedbackPlaceholder": "تقديم تعليقات إضافية"
 }

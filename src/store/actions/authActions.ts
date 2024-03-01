@@ -1,9 +1,19 @@
 import AuthService from '@endeavorpal/services/AuthService'
 import { LoginRequest, RegisterRequest, RegisterResponse, User } from '@endeavorpal/types'
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit'
+import { AuthState } from '../slices'
+import { Helpers } from '@endeavorpal/utils'
 
 // Define the structure of the payload returned on successful login
 interface LoginSuccessPayload {
+  status: string
+  message: string
+  token: string
+  user: User
+}
+
+// Extend the existing types with the guest login payload
+interface GuestLoginSuccessPayload {
   status: string
   message: string
   token: string
@@ -77,3 +87,47 @@ export const logout = createAsyncThunk<void, string, { rejectValue: FailurePaylo
     }
   },
 )
+
+/**
+ * Async thunk for guest login.
+ * This function generates guest credentials, registers the guest, and logs them in.
+ */
+export const guestLogin = createAsyncThunk<GuestLoginSuccessPayload, undefined, { rejectValue: FailurePayload }>(
+  'auth/guestLogin',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      // Generate guest credentials
+      const { email, password } = Helpers.generateGuestCredentials()
+
+      // Prepare registration and login data
+      const registerRequest: RegisterRequest = {
+        email: email,
+        password: password,
+        // eslint-disable-next-line camelcase
+        first_name: 'Welcome',
+        // eslint-disable-next-line camelcase
+        last_name: 'Guest',
+      }
+      const loginData: LoginRequest = { email, password }
+
+      // Register the guest user
+      const registerResponse = await dispatch(register(registerRequest)).unwrap()
+
+      if (registerResponse.status === 'success') {
+        // Upon successful registration, log the guest user in
+        const loginResponse = await dispatch(login(loginData)).unwrap()
+
+        return loginResponse
+      } else {
+        return rejectWithValue({ message: 'Guest registration failed' })
+      }
+    } catch (error) {
+      // Handle errors for both registration and login
+      const message = (error instanceof Error && error.message) || 'Guest login failed'
+      return rejectWithValue({ message })
+    }
+  },
+)
+
+// Create a regular action for setting the auth state
+export const setAuthState = createAction<AuthState>('auth/setAuthState')

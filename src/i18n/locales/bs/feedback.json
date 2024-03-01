@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "Ispravno",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "Jednostavno razumljivo",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "Potpuno",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "Neprikladno / Neposredno",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "Nepravilno faktično",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "Drugo",
+      "value": "other"
+    }
+  ]
+}

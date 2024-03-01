@@ -1,0 +1,158 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Hidayet İçin Dua",
+      "description": "Allah'ım, kararlarımda bana rehberlik et ve onları benim için bir bereket kaynağı yap."
+    },
+    {
+      "id": "dua2",
+      "title": "Şifa İçin Dua",
+      "description": "Allah'ım, bana sağlık ver ve hastalığımdan beni iyileştir, çünkü Sen en büyük şifacısın."
+    },
+    {
+      "id": "dua3",
+      "title": "Korunma İçin Dua",
+      "description": "Allah'ım, beni ve ailemi her türlü zarardan koru ve bizi emniyetinle muhafaza et."
+    },
+    {
+      "id": "dua4",
+      "title": "İlim İçin Dua",
+      "description": "Allah'ım, ilmimi ve hikmetimi artır, ve onu benim ve başkaları için faydalı kıl."
+    },
+    {
+      "id": "dua5",
+      "title": "Refah İçin Dua",
+      "description": "Allah'ım, rızkımı bereketli kıl, bana refah ver ve bana verdiklerinle beni memnun et."
+    },
+    {
+      "id": "dua6",
+      "title": "Barış İçin Dua",
+      "description": "Allah'ım, kalbimde ve hayatımda bana barış ve huzur ver."
+    },
+    {
+      "id": "dua7",
+      "title": "Affetme İçin Dua",
+      "description": "Allah'ım, beni, ebeveynimi ve kıyamet gününde tüm müminleri affet."
+    },
+    {
+      "id": "dua8",
+      "title": "Tövbe İçin Dua",
+      "description": "Allah'ım, Sana samimi bir tövbe ile dönüyorum, lütfen tövbemi kabul et."
+    },
+    {
+      "id": "dua9",
+      "title": "Doğru Yola İletilme İçin Dua",
+      "description": "Allah'ım, beni doğru yola, üzerine nimet yağdırdıklarının yoluna ilet, gazaba uğrayanların ya da sapkınların yoluna değil."
+    },
+    {
+      "id": "dua10",
+      "title": "Kötülükten Korunma İçin Dua",
+      "description": "Allah'ım, işlediğim, işlemekte olduğum ve bana yüklenen kötülüklerden Sana sığınırım."
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "Sabır Üzerine",
+      "description": "Sabır sadece bekleyebilme yeteneği değil, aynı zamanda beklerken nasıl davrandığımızdır. İslam bize sabrın iman ve güç belirtisi olduğunu öğretir."
+    },
+    {
+      "id": "perspective2",
+      "title": "Sadaka Üzerine",
+      "description": "İslam'da sadaka sadece verme eylemi değil, aynı zamanda topluma ve ahirete yapılan bir yatırımdır. Bu, hem malı hem de kalpleri temizler."
+    },
+    {
+      "id": "perspective3",
+      "title": "Affetmek Üzerine",
+      "description": "Affetmek, kalpten yükleri kaldıran bir erdemdir. İslam, başkalarını affetmemizi teşvik eder, böylece Allah'tan da af dileyebiliriz."
+    },
+    {
+      "id": "perspective4",
+      "title": "Şükretmek Üzerine",
+      "description": "İslam'da şükretmek, imanın temel taşıdır. Bu, günlük yaşamı bereketlere dönüştürür ve bireyin memnuniyetini ve huzurunu artırır."
+    },
+    {
+      "id": "perspective5",
+      "title": "Allah'a Güvenmek Üzerine",
+      "description": "İslam'da Allah'a güvenmek temeldir. Her şeyin kontrolünün O'nda olduğuna ve O'nun planının her zaman en iyisi olduğuna inanmak demektir, henüz anlamasak bile."
+    },
+    {
+      "id": "perspective6",
+      "title": "Kendini Muhasara Etmek Üzerine",
+      "description": "Kendini muhasebe etmek, İslam'da kişisel büyümenin önemli bir parçasıdır. Düşüncelerimizi, sözlerimizi ve davranışlarımızı inceleyerek iyileştirme alanlarını belirler ve olumlu değişiklikler yapmak için Allah'ın rehberliğini ararız."
+    },
+    {
+      "id": "perspective7",
+      "title": "Özdisiplin Üzerine",
+      "description": "Özdisiplin, İslam'da başarının anahtarıdır. Arzularımızı ve dürtülerimizi kontrol altına almayı ve İslami değerler ve prensiplerle uyumlu alışkanlıklar geliştirmeyi içerir."
+    },
+    {
+      "id": "perspective8",
+      "title": "Kendini Geliştirmek Üzerine",
+      "description": "Kendini geliştirme, İslam'da ömür boyu süren bir yolculuktur. Kendimizin en iyi versiyonu olmaya çalışmayı, bilgi aramayı ve kendimize ve başkalarına fayda sağlayacak beceriler geliştirmeyi içerir."
+    },
+    {
+      "id": "perspective9",
+      "title": "Empati Üzerine",
+      "description": "Empati, İslami değerlerin temel bir yönüdür. Başkalarının duygularını anlamayı ve onlara karşı nazik, merhametli ve saygılı olmayı içerir."
+    },
+    {
+      "id": "perspective10",
+      "title": "Alçakgönüllülük Üzerine",
+      "description": "Alçakgönüllülük, İslam'da yüksek değer verilen bir erdemdir. Kendi sınırlarımızı tanımayı, davranışlarımızda mütevazı olmayı ve kibir ve gururdan kaçınmayı içerir."
+    }
+  ],
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Anksiyete İçin",
+      "description": "Namaza, Kur'an okumaya ve dua etmeye yönelmek, kalbe huzur getirebilir ve anksiyeteyi azaltabilir."
+    },
+    {
+      "id": "remedy2",
+      "title": "Mali Sıkıntılar İçin",
+      "description": "Sabır göstermek, kişisel ihtiyaçlara rağmen sadaka vermek ve Allah'ın rızkına güvenmek mali zorlukları hafifletebilir."
+    },
+    {
+      "id": "remedy3",
+      "title": "Sağlık Sorunları İçin",
+      "description": "Tıbbi tedavi ararken dua etmek ve Allah'ın şifasına güvenmek sağlık sorunlarına çözüm olabilir."
+    },
+    {
+      "id": "remedy4",
+      "title": "Kayıp ve Yas İçin",
+      "description": "Ahirette sevdiklerimizle tekrar birleşme inancı, kayıp acısını hafifletebilir."
+    },
+    {
+      "id": "remedy5",
+      "title": "Ruhani Şüpheler İçin",
+      "description": "Bilgi aramak, toplulukla etkileşimde bulunmak ve rehberlik için dua etmek ruhani şüphelerin üstesinden gelmeye yardımcı olabilir."
+    },
+    {
+      "id": "remedy6",
+      "title": "Düşük Özsaygı İçin",
+      "description": "Allah'ın sevgisini ve merhametini hatırlamak, bilgi aramak ve ibadetle meşgul olmak özgüven ve özsaygıyı artırabilir."
+    },
+    {
+      "id": "remedy7",
+      "title": "Yalnızlık İçin",
+      "description": "Toplulukla bağlantı kurmak, gönüllü çalışmalar yapmak ve sosyal etkinliklere katılmak yalnızlık ve izolasyon hissini hafifletebilir."
+    },
+    {
+      "id": "remedy8",
+      "title": "Erteleme İçin",
+      "description": "Net hedefler belirlemek, görevleri daha küçük adımlara bölmek ve sorumluluk aramak erteleme alışkanlığını yenmeye ve üretkenliği artırmaya yardımcı olabilir."
+    },
+    {
+      "id": "remedy9",
+      "title": "Negatif Düşünce İçin",
+      "description": "Negatif düşünceleri yeniden çerçevelemek, şükran pratiği yapmak ve pozitif kendini konuşma yapmak, bakış açımızı değiştirmemize ve hayata olan görüşümüzü iyileştirmemize yardımcı olabilir."
+    },
+    {
+      "id": "remedy10",
+      "title": "Tükenmişlik İçin",
+      "description": "Mola vermek, kendine iyi bakmak ve sevdiklerden ve profesyonellerden destek almak tükenmişliği önlemeye ve hafifletmeye yardımcı olabilir."
+    }
+  ]
+}

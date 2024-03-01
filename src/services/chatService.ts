@@ -1,20 +1,21 @@
 import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
-import { AddMessageRequest, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
+import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
 import { Helpers } from '@endeavorpal/utils'
+import { fetchWithAuthRetry } from './api'
 
 class ChatService {
   token: string | null
   isAuthenticated: boolean
-  API_URL: string | undefined
+  baseURL: string | undefined
 
   constructor(isAuthenticated: boolean, token: string | null) {
     this.isAuthenticated = isAuthenticated
     this.token = token
-    this.API_URL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.REACT_APP_API_V2_URL
   }
 
   private createHeaders = () => {
-    if (!this.isAuthenticated || !this.token) throw new Error('Authentication token not found')
+    if (!this.isAuthenticated || !this.token) throw new ApplicationError('Authentication token not found')
     return {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.token}`,
@@ -23,7 +24,7 @@ class ChatService {
   }
 
   async createThread(): Promise<Thread> {
-    const response = await fetch(`${this.API_URL}/threads`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads`, {
       method: 'POST',
       headers: this.createHeaders(),
     })
@@ -46,7 +47,7 @@ class ChatService {
   }
 
   async addMessage(threadId: string, message: AddMessageRequest, signal: AbortSignal) {
-    const response = await fetch(`${this.API_URL}/threads/${threadId}`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
       method: 'POST',
       headers: this.createHeaders(),
       body: JSON.stringify(message),
@@ -60,7 +61,7 @@ class ChatService {
   }
 
   async getThread(threadId: string): Promise<Thread> {
-    const response = await fetch(`${this.API_URL}/threads/${threadId}`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
       headers: this.createHeaders(),
     })
     if (!response.ok) {
@@ -83,7 +84,7 @@ class ChatService {
   }
 
   async getAllThreads(): Promise<Thread[]> {
-    const response = await fetch(`${this.API_URL}/threads`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads`, {
       headers: this.createHeaders(),
     })
     if (!response.ok) {
@@ -110,7 +111,7 @@ class ChatService {
   }
 
   async deleteThread(threadId: string): Promise<void> {
-    const response = await fetch(`${this.API_URL}/threads/${threadId}`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
       method: 'DELETE',
       headers: this.createHeaders(),
     })
@@ -120,13 +121,51 @@ class ChatService {
   }
 
   async setThreadName(threadId: string, name: ThreadNameRequest): Promise<void> {
-    const response = await fetch(`${this.API_URL}/threads/${threadId}/name`, {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}/name`, {
       method: 'POST',
       headers: this.createHeaders(),
       body: JSON.stringify(name),
     })
     if (!response.ok) {
       throw new Error('Error setting thread name')
+    }
+  }
+
+  async sendFeedback(
+    threadId: string,
+    messageId: string,
+    feedbackClass: FeedbackClass,
+    comment: string,
+  ): Promise<void> {
+    /*
+     * The server expects the following format for a request to /feedback:
+     */
+    const feedbackRequest = {
+      /* eslint-disable camelcase */
+      thread_id: threadId,
+      message_id: messageId,
+      feedback_class: feedbackClass,
+      /* eslint-disable camelcase */
+      comment: comment,
+    }
+
+    try {
+      const response = await fetchWithAuthRetry(`${this.baseURL}/feedback`, {
+        method: 'POST',
+        headers: this.createHeaders(),
+        body: JSON.stringify(feedbackRequest),
+      })
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      const result = await response.json()
+      console.log(result)
+      // Handle success, e.g., show a confirmation message
+    } catch (error) {
+      console.error('Error sending feedback:', error)
+      // Handle error, e.g., show an error message
     }
   }
 }

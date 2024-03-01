@@ -9,5 +9,7 @@
   "errorMessage": "Prijava nije uspjela. Molimo Vas da pokušate ponovo.",
   "invalidCredentials": "Nevažeće credencijale",
   "emailRequiredField": "Polje e-pošte je obavezno",
-  "passwordRequiredField": "Polje lozinke je obavezno"
+  "passwordRequiredField": "Polje lozinke je obavezno",
+  "forgetPassword": "Zaboravili ste šifru?",
+  "guestLogin": "Prijavite se kao gost"
 }

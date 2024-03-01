@@ -9,5 +9,7 @@
   "errorMessage": "Giriş başarısız. Lütfen tekrar deneyin.",
   "invalidCredentials": "Geçersiz kimlik bilgileri",
   "emailRequiredField": "E-posta alanı gereklidir",
-  "passwordRequiredField": "Şifre alanı gereklidir"
+  "passwordRequiredField": "Şifre alanı gereklidir",
+  "forgetPassword": "Parolanızı mı unuttunuz?",
+  "guestLogin": "Misafir olarak giriş yap"
 }

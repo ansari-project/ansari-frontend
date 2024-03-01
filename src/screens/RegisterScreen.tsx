@@ -1,4 +1,3 @@
-// src/screens/RegisterScreen.tsx
 import { EyeIcon } from '@endeavorpal/assets'
 import { BackgroundImage } from '@endeavorpal/components'
 import { useDirection, useRedirect } from '@endeavorpal/hooks'
@@ -39,6 +38,7 @@ const RegisterScreen: React.FC = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [passwordVisible, setPasswordVisible] = useState(false)
+  const [hovered, setHovered] = useState<boolean>(false)
 
   const initialValues: RegisterFormValues = {
     email: '',
@@ -174,9 +174,20 @@ const RegisterScreen: React.FC = () => {
                 <Text style={styles.buttonText}>{isSubmitting ? t('registering') : t('register')}</Text>
               </Pressable>
 
-              <Text style={[styles.loginPrompt, isRTL ? styles.textAlignLeft : styles.textAlignRight]}>
+              <Text
+                style={[
+                  styles.loginPrompt,
+                  isRTL ? styles.textAlignLeft : styles.textAlignRight,
+                  Platform.OS === 'web' && hovered ? styles.boldText : null,
+                ]}
+              >
                 {t('alreadyHaveAccount')}
-                <Text style={[styles.loginLink, isRTL && { marginRight: 10 }]} onPress={() => navigate('/login')}>
+                <Text
+                  style={[styles.loginLink, isRTL && { marginRight: 10 }]}
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                  onPress={() => navigate('/login')}
+                >
                   {t('loginHere')}
                 </Text>
               </Text>
@@ -192,13 +203,14 @@ const styles = StyleSheet.create({
   container: {
     ...Platform.select({
       web: {
+        flex: 1,
+        height: '100vh',
         position: 'relative',
         zIndex: 1,
         color: '#ffffff',
-        backgroundColor: '#082521',
+        backgroundColor: 'rgba(8, 37, 33, 0.8)', // #082521
         width: '100%',
         minWidth: 420,
-        maxWidth: 420,
         paddingHorizontal: 16,
         paddingVertical: 12,
         borderRadius: 3,
@@ -223,18 +235,19 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         fontSize: 24,
         fontWeight: 500,
-        color: 'darkorange',
+        color: '#ffffff',
       },
       default: {
         fontSize: 24,
         fontWeight: 500,
         marginBottom: 24,
         textAlign: 'center',
-        color: 'darkorange',
+        color: '#ffffff',
       },
     }),
   },
   input: {
+    width: '100%',
     borderWidth: 1,
     borderColor: 'gray',
     padding: 10,
@@ -256,7 +269,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     alignItems: 'center',
-    maxWidth: 100,
     marginTop: 5,
   },
   buttonText: {
@@ -278,14 +290,25 @@ const styles = StyleSheet.create({
   },
   loginLink: {
     color: 'darkorange',
-    textDecorationLine: 'underline',
+    textDecorationLine: 'none',
     marginLeft: 10,
+    ...Platform.select({
+      web: {
+        ':hover': {
+          color: 'darkorange',
+          fontWeight: 'bold',
+        },
+      },
+    }),
   },
   textAlignRight: {
     textAlign: 'right',
   },
   textAlignLeft: {
     textAlign: 'left',
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
   // ... other styles as needed
 })

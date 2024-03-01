@@ -9,5 +9,7 @@
   "errorMessage": "لاگ ان کا فشار نا موفق. کृपया دوبارہ کوشش کریں.",
   "invalidCredentials": "نامعتبر اعتراف بندی",
   "emailRequiredField": "ایمیل خانہ مطلوب ہے",
-  "passwordRequiredField": "پاسورڈ خانہ مطلوب ہے"
+  "passwordRequiredField": "پاسورڈ خانہ مطلوب ہے",
+  "forgetPassword": "اپنا پاس ورڈ بھول گئے؟",
+  "guestLogin": "بطور مہمان لاگ ان کریں۔"
 }

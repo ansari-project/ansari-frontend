@@ -29,5 +29,9 @@
   "cantChangeLanguageWhileAnsariWritingAlertMessage": "Ne možete promijeniti jezik prije nego što dobijete Ansari odgovor",
   "cantChangeLanguageWhileAnsariWritingAlertTitle": "Ne mogu promijeniti jezik",
   "copy": "Kopiraj",
-  "selectText": "Odaberite tekst"
+  "selectText": "Odaberite tekst",
+  "whyDidYouChooseThisRating": "Zašto ste odabrali ovu ocjenu?",
+  "optional": "opcionalno",
+  "submit": "Pošalji",
+  "additionalFeedbackPlaceholder": "Pružite dodatne povratne informacije"
 }

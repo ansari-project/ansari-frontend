@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     fontFamily: 'Roboto',
-    backgroundColor: '#F2F2F2',
+    // backgroundColor: '#F2F2F2',
+    backgroundColor: '#FFF',
     alignItems: 'center', // Center children horizontally
     justifyContent: 'space-between',
     height: '100vh',

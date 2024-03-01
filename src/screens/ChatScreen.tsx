@@ -27,6 +27,8 @@ const ChatScreen: React.FC = () => {
           console.error(error)
           navigate('/', { state: { errorMsg: error.message || 'An unknown error occurred.' } })
         })
+    } else {
+      navigate('/', { state: { errorMsg: 'Please provide a valid threadId.' } })
     }
   }, [threadId, dispatch, navigate])
 
@@ -48,7 +50,7 @@ const ChatScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F2',
+    // backgroundColor: '#F2F2F2',
     alignItems: 'center', // Ensure content is centered
     justifyContent: 'space-between', // Distributes children evenly
     marginTop: 5,

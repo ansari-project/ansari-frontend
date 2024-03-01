@@ -1,8 +1,8 @@
-// src\screens\LoginScreen.tsx
 import { BackgroundImage } from '@endeavorpal/components'
 import { useDirection, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, login } from '@endeavorpal/store'
+import { AppDispatch, login, guestLogin } from '@endeavorpal/store'
 import { LoginRequest } from '@endeavorpal/types'
+import { Helpers } from '@endeavorpal/utils'
 import { useLoginSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
@@ -34,6 +34,25 @@ const LoginScreen: React.FC = () => {
   const { isRTL } = useDirection()
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [hovered, setHovered] = useState<number>(0)
+
+  // Inside your LoginScreen component, add the following function for guest login
+
+  const handleGuestLogin = () => {
+    const { email, password } = Helpers.generateGuestCredentials()
+
+    console.log('Guest credentials:', { email, password })
+
+    dispatch(guestLogin())
+      .unwrap()
+      .then(() => {
+        navigate('/') // Navigate to the home page or dashboard
+      })
+      .catch((error) => {
+        console.error('Error logging in as guest:', error)
+        // Handle error (e.g., show an error message)
+      })
+  }
 
   const handleSubmit = (values: LoginRequest, formikHelpers: FormikHelpers<LoginRequest>) => {
     formikHelpers.setSubmitting(true)
@@ -70,8 +89,8 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <BackgroundImage />
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <BackgroundImage />
         {successMessage && <Text style={{ color: 'white' }}>{successMessage}</Text>}
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
@@ -82,6 +101,8 @@ const LoginScreen: React.FC = () => {
           {({ handleChange, handleBlur, handleSubmit, submitForm, values, isSubmitting, errors }) => (
             <View>
               <TextInput
+                id='email'
+                name='email'
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
@@ -89,10 +110,13 @@ const LoginScreen: React.FC = () => {
                 placeholder={t('email')}
                 style={[styles.input, isRTL && styles.textAlignRight]}
                 autocomplete='off'
+                inputMode='email'
               />
               {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
               <TextInput
+                id='password'
+                name='password'
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
@@ -105,6 +129,21 @@ const LoginScreen: React.FC = () => {
 
               {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
+              <Text style={[styles.prompt, isRTL ? styles.textAlignLeft : styles.textAlignRight]}>
+                <Text
+                  style={[
+                    styles.forgetLink,
+                    isRTL && { marginRight: 10 },
+                    Platform.OS === 'web' && hovered === 1 ? styles.boldText : null,
+                  ]}
+                  onMouseEnter={() => setHovered(1)}
+                  onMouseLeave={() => setHovered(0)}
+                  onPress={() => navigate('/forgot-password')}
+                >
+                  {t('forgetPassword')}
+                </Text>
+              </Text>
+
               <Pressable
                 style={[styles.button, isSubmitting && styles.buttonDisabled]}
                 onPress={handleSubmit}
@@ -113,9 +152,24 @@ const LoginScreen: React.FC = () => {
                 <Text style={styles.buttonText}>{isSubmitting ? t('submitting') : t('submit')}</Text>
               </Pressable>
 
-              <Text style={[styles.registerPrompt, isRTL ? styles.textAlignLeft : styles.textAlignRight]}>
+              <Pressable style={[styles.button, { backgroundColor: '#657786' }]} onPress={handleGuestLogin}>
+                <Text style={styles.buttonText}> {t('guestLogin')}</Text>
+              </Pressable>
+
+              <Text
+                style={[
+                  styles.prompt,
+                  isRTL ? styles.textAlignLeft : styles.textAlignRight,
+                  Platform.OS === 'web' && hovered === 2 ? styles.boldText : null,
+                ]}
+              >
                 {t('dontHaveAccount')}
-                <Text style={[styles.registerLink, isRTL && { marginRight: 10 }]} onPress={() => navigate('/register')}>
+                <Text
+                  style={[styles.registerLink, isRTL && { marginRight: 10 }]}
+                  onMouseEnter={() => setHovered(2)}
+                  onMouseLeave={() => setHovered(0)}
+                  onPress={() => navigate('/register')}
+                >
                   {t('register')}
                 </Text>
               </Text>
@@ -131,10 +185,11 @@ const styles = StyleSheet.create({
   container: {
     ...Platform.select({
       web: {
+        flex: 1,
         position: 'relative',
         zIndex: 1,
         color: '#ffffff',
-        backgroundColor: '#082521',
+        backgroundColor: 'rgba(8, 37, 33, 0.8)', // #082521
         width: '100%',
         minWidth: 420,
         paddingHorizontal: 16,
@@ -160,14 +215,14 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         fontSize: 24,
         fontWeight: 500,
-        color: 'darkorange',
+        color: '#ffffff',
       },
       default: {
         fontSize: 24,
         fontWeight: 500,
         marginBottom: 24,
         textAlign: 'center',
-        color: 'darkorange',
+        color: '#ffffff',
       },
     }),
   },
@@ -185,8 +240,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     alignItems: 'center',
-    maxWidth: 100,
-    marginTop: 5,
+    marginVertical: 10,
   },
   buttonText: {
     color: 'white',
@@ -199,21 +253,45 @@ const styles = StyleSheet.create({
     color: 'darkorange',
     marginBottom: 10,
   },
-  registerPrompt: {
+  prompt: {
     textAlign: 'right',
     marginTop: 10,
     color: 'white',
   },
   registerLink: {
     color: 'darkorange',
-    textDecorationLine: 'underline',
+    textDecorationLine: 'none',
     marginLeft: 10,
+    ...Platform.select({
+      web: {
+        ':hover': {
+          color: 'darkorange',
+          fontWeight: 'bold',
+        },
+      },
+    }),
+  },
+  forgetLink: {
+    color: '#fff',
+    textDecorationLine: 'none',
+    marginLeft: 10,
+    ...Platform.select({
+      web: {
+        ':hover': {
+          color: '#fff',
+          fontWeight: 'bold',
+        },
+      },
+    }),
   },
   textAlignRight: {
     textAlign: 'right',
   },
   textAlignLeft: {
     textAlign: 'left',
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
   // ... other styles as needed
 })

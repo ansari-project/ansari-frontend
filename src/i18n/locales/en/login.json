@@ -13,5 +13,7 @@
   "emailInvalid": "Enter a valid email.",
   "passwordRequiredField": "Password is required.",
   "passwordLength": "Password must be at least 8 characters long.",
-  "unexpectedError": "An unexpected error occurred. Please try again later."
+  "unexpectedError": "An unexpected error occurred. Please try again later.",
+  "forgetPassword": "Forgot your password?",
+  "guestLogin": "Login as Guest"
 }

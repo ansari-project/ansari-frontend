@@ -41,3 +41,5 @@ export type User = {
 export type Error = {
   message: string
 }
+
+export type ResetPasswordResponse = { status: string }

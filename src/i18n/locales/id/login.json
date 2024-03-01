@@ -9,5 +9,9 @@
   "errorMessage": "Masuk gagal. Silakan coba lagi.",
   "invalidCredentials": "Kredensial tidak valid",
   "emailRequiredField": "Email wajib diisi",
-  "passwordRequiredField": "Kata sandi wajib diisi"
+  "passwordRequiredField": "Kata sandi wajib diisi",
+  "forgetPassword": "lupa kata sandi Anda?",
+  "guestLogin": "Masuk sebagai Tamu",
+  "forgetPassword": "Forgot your password?",
+  "guestLogin": "Login as Guest"
 }

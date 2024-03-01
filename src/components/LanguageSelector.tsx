@@ -1,5 +1,5 @@
 import { LanguageIcon } from '@endeavorpal/assets'
-import { useAuth } from '@endeavorpal/hooks'
+import { useScreenInfo } from '@endeavorpal/hooks'
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -8,8 +8,9 @@ import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-vie
 const LanguageSelector = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const { i18n } = useTranslation()
-  const { isAuthenticated } = useAuth()
   const touchableRef = useRef(null)
+  const { width } = useScreenInfo()
+  const isRTL = i18n.dir() === 'rtl'
 
   const languages: { code: string; name: string; isBold: boolean }[] = [
     { code: 'en', name: 'English', isBold: false },
@@ -54,13 +55,10 @@ const LanguageSelector = () => {
     setIsVisible(false) // Close the language selector after selection.
   }
 
-  const iconColor = isAuthenticated ? '#fff' : '#08786b'
-  const popupContentPosition = isAuthenticated ? { bottom: '56px' } : { top: '56px' }
-
   return (
     <View>
       <Pressable ref={touchableRef} style={styles.button} onPress={() => setIsVisible(!isVisible)}>
-        <LanguageIcon stroke={iconColor} />
+        <LanguageIcon stroke='#08786b' />
       </Pressable>
       {/* This ensures that the Popover is only attempted to be rendered when touchableRef.current is not null,
       indicating that the Pressable has been mounted and the ref has been attached. */}
@@ -71,13 +69,18 @@ const LanguageSelector = () => {
           placement={PopoverPlacement.FLOATING}
           isVisible={isVisible}
           onRequestClose={() => setIsVisible(false)}
-          popoverShift={isAuthenticated ? { x: -1, y: 1 } : { x: -1, y: -1 }}
+          displayArea={{
+            x: isRTL ? -1 * width + 230 : width - 230,
+            y: -1,
+            width: 180,
+            height: 50 * reorderedLanguages.length,
+          }}
           popoverStyle={[
             styles.popupContent,
-            popupContentPosition,
             {
+              alignItems: 'flex-end',
               paddingTop: 20, // add some space for the arrow
-              paddingBottom: 10, // adjust the padding to fit the arrow
+              paddingBottom: 20, // adjust the padding to fit the arrow
               paddingLeft: 16,
               paddingRight: 16,
               overflow: 'visible', // make sure the arrow is visible outside the container
@@ -87,7 +90,7 @@ const LanguageSelector = () => {
           <View
             style={[
               styles.popupItems,
-              // { transform: [{ translateX: 740 }, { translateY: 48 }, { scale: 1 }] }
+              // { transform: [{ translateX: 0 }, { translateY: 0 }, { scale: 1 }] }
             ]}
           >
             {reorderedLanguages.map((language) => (
@@ -113,6 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   popupContent: {
+    top: '30px',
     width: 180,
     borderRadius: 4,
     borderWidth: 1,

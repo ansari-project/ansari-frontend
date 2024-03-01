@@ -1,0 +1,158 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Doa untuk Petunjuk",
+      "description": "Ya Allah, berilah aku petunjuk dalam keputusanku dan jadikanlah itu sumber berkah bagiku."
+    },
+    {
+      "id": "dua2",
+      "title": "Doa untuk Kesembuhan",
+      "description": "Ya Allah, berikanlah aku kesehatan dan sembuhkanlah aku dari penyakitku, karena Engkau adalah penyembuh yang sejati."
+    },
+    {
+      "id": "dua3",
+      "title": "Doa untuk Perlindungan",
+      "description": "Ya Allah, lindungilah aku dan keluargaku dari segala bahaya dan jaga kami dalam perlindunganMu."
+    },
+    {
+      "id": "dua4",
+      "title": "Doa untuk Ilmu",
+      "description": "Ya Allah, tambahkanlah ilmu dan hikmahku, dan jadikanlah itu bermanfaat bagiku dan orang lain."
+    },
+    {
+      "id": "dua5",
+      "title": "Doa untuk Kemakmuran",
+      "description": "Ya Allah, berkahi nafkahku, berikanlah aku kemakmuran, dan buatlah aku puas dengan apa yang telah Engkau berikan."
+    },
+    {
+      "id": "dua6",
+      "title": "Doa untuk Kedamaian",
+      "description": "Ya Allah, berikanlah aku kedamaian dan ketenangan di hatiku dan dalam hidupku."
+    },
+    {
+      "id": "dua7",
+      "title": "Doa untuk Pengampunan",
+      "description": "Ya Allah, ampunilah aku, orang tuaku, dan semua orang beriman pada Hari Pengadilan."
+    },
+    {
+      "id": "dua8",
+      "title": "Doa untuk Taubat",
+      "description": "Ya Allah, aku bertaubat kepadaMu dan kembali kepadaMu dengan taubat yang tulus, maka terimalah taubatku."
+    },
+    {
+      "id": "dua9",
+      "title": "Doa untuk Petunjuk ke Jalan yang Lurus",
+      "description": "Ya Allah, tunjukkanlah aku ke jalan yang lurus, jalan orang-orang yang telah Engkau beri nikmat, bukan jalan mereka yang dimurkai ataupun yang sesat."
+    },
+    {
+      "id": "dua10",
+      "title": "Doa untuk Perlindungan dari Kejahatan",
+      "description": "Ya Allah, aku berlindung kepadaMu dari kejahatan yang telah aku lakukan, yang sedang aku lakukan, dan yang akan aku lakukan."
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "Tentang Kesabaran",
+      "description": "Kesabaran bukan hanya kemampuan untuk menunggu, tetapi bagaimana kita bersikap selama menunggu. Islam mengajarkan bahwa kesabaran adalah tanda iman dan kekuatan."
+    },
+    {
+      "id": "perspective2",
+      "title": "Tentang Sedekah",
+      "description": "Sedekah dalam Islam bukan hanya tindakan memberi, tetapi investasi dalam masyarakat dan akhirat. Ini membersihkan kekayaan dan hati."
+    },
+    {
+      "id": "perspective3",
+      "title": "Tentang Pengampunan",
+      "description": "Pengampunan adalah kebajikan yang mengangkat beban dari hati. Islam mendorong kita untuk memaafkan orang lain, agar kita juga dapat mencari pengampunan dari Allah."
+    },
+    {
+      "id": "perspective4",
+      "title": "Tentang Rasa Syukur",
+      "description": "Rasa syukur dalam Islam adalah pilar iman. Ini mengubah kehidupan sehari-hari menjadi berkah dan meningkatkan kepuasan dan kedamaian seseorang."
+    },
+    {
+      "id": "perspective5",
+      "title": "Tentang Kepercayaan kepada Allah",
+      "description": "Menaruh kepercayaan pada Allah adalah dasar dalam Islam. Ini berarti percaya bahwa Dia mengendalikan dan rencanaNya selalu yang terbaik, meskipun kita belum mengerti."
+    },
+    {
+      "id": "perspective6",
+      "title": "Tentang Introspeksi Diri",
+      "description": "Introspeksi diri adalah bagian penting dari pertumbuhan pribadi dalam Islam. Ini melibatkan pemeriksaan pemikiran, kata-kata, dan tindakan kita untuk mengidentifikasi area untuk perbaikan dan mencari petunjuk Allah dalam membuat perubahan positif."
+    },
+    {
+      "id": "perspective7",
+      "title": "Tentang Disiplin Diri",
+      "description": "Disiplin diri adalah komponen kunci kesuksesan dalam Islam. Ini melibatkan mengendalikan keinginan dan impuls kita, dan mengembangkan kebiasaan yang sejalan dengan nilai dan prinsip Islam."
+    },
+    {
+      "id": "perspective8",
+      "title": "Tentang Peningkatan Diri",
+      "description": "Peningkatan diri adalah perjalanan seumur hidup dalam Islam. Ini melibatkan berusaha menjadi versi terbaik dari diri kita sendiri, mencari ilmu, dan mengembangkan keterampilan yang bermanfaat bagi diri sendiri dan orang lain."
+    },
+    {
+      "id": "perspective9",
+      "title": "Tentang Empati",
+      "description": "Empati adalah aspek fundamental dari nilai-nilai Islam. Ini melibatkan memahami dan berbagi perasaan orang lain, dan memperlakukan mereka dengan kebaikan, kasih sayang, dan hormat."
+    },
+    {
+      "id": "perspective10",
+      "title": "Tentang Kerendahan Hati",
+      "description": "Kerendahan hati adalah kebajikan yang sangat dihargai dalam Islam. Ini melibatkan mengakui keterbatasan kita, bersikap rendah hati dalam perilaku kita, dan menghindari kesombongan dan kebanggaan."
+    }
+  ],
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Untuk Kecemasan",
+      "description": "Berbalik ke sholat, membaca Qur'an, dan berdoa dapat membawa kedamaian ke hati dan mengurangi kecemasan."
+    },
+    {
+      "id": "remedy2",
+      "title": "Untuk Kesulitan Finansial",
+      "description": "Berlatih kesabaran, memberi sedekah meskipun dalam kebutuhan pribadi, dan percaya pada rezeki Allah dapat meringankan kesulitan finansial."
+    },
+    {
+      "id": "remedy3",
+      "title": "Untuk Masalah Kesehatan",
+      "description": "Mencari pengobatan medis sambil juga berdoa dan mengandalkan penyembuhan Allah dapat mengatasi tantangan kesehatan."
+    },
+    {
+      "id": "remedy4",
+      "title": "Untuk Kehilangan dan Kesedihan",
+      "description": "Menemukan penghiburan dalam keyakinan akan kehidupan setelah kematian dan pertemuan kembali dengan orang terkasih di akhirat dapat meredakan rasa sakit dari kehilangan."
+    },
+    {
+      "id": "remedy5",
+      "title": "Untuk Keraguan Spiritual",
+      "description": "Mencari ilmu, berinteraksi dengan komunitas, dan berdoa untuk petunjuk dapat membantu mengatasi keraguan spiritual."
+    },
+    {
+      "id": "remedy6",
+      "title": "Untuk Rendah Diri",
+      "description": "Mengingat cinta dan rahmat Allah, mencari ilmu, dan terlibat dalam ibadah dapat membantu membangun kepercayaan diri dan harga diri."
+    },
+    {
+      "id": "remedy7",
+      "title": "Untuk Kesepian",
+      "description": "Terhubung dengan komunitas, sukarelawan, dan terlibat dalam kegiatan sosial dapat membantu mengurangi perasaan kesepian dan isolasi."
+    },
+    {
+      "id": "remedy8",
+      "title": "Untuk Prokrastinasi",
+      "description": "Menetapkan tujuan yang jelas, memecah tugas menjadi langkah-langkah yang lebih kecil, dan mencari pertanggungjawaban dapat membantu mengatasi prokrastinasi dan meningkatkan produktivitas."
+    },
+    {
+      "id": "remedy9",
+      "title": "Untuk Berpikir Negatif",
+      "description": "Merubah pemikiran negatif, berlatih rasa syukur, dan terlibat dalam pembicaraan diri yang positif dapat membantu mengubah pola pikir kita dan meningkatkan pandangan hidup kita."
+    },
+    {
+      "id": "remedy10",
+      "title": "Untuk Kelelahan",
+      "description": "Mengambil istirahat, berlatih perawatan diri, dan mencari dukungan dari orang terkasih dan profesional dapat membantu mencegah dan meredakan kelelahan."
+    }
+  ]
+}

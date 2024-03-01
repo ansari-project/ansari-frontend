@@ -1,29 +1,24 @@
-import {
-  CheckIcon,
-  CopyIcon,
-  DislikeFilledIcon,
-  DislikeIcon,
-  LikeFilledIcon,
-  LikeIcon,
-  LogoIcon,
-  UserIcon,
-} from '@endeavorpal/assets'
+import { CheckIcon, CopyIcon, LogoIcon, UserIcon } from '@endeavorpal/assets'
 import { useDirection } from '@endeavorpal/hooks'
-import { Message } from '@endeavorpal/store'
+import { AppDispatch, FeedbackClass, FeedbackRequest, Message, sendFeedback } from '@endeavorpal/store'
 import React, { useCallback, useEffect, useState } from 'react'
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown' // import rehypeRaw from 'rehype-raw'
 import { Clipboard, Pressable, StyleSheet, Text, View } from 'react-native'
-// import rehypeRaw from 'rehype-raw'
+import { useDispatch } from 'react-redux'
 
-interface MessageBubbleProps {
+import ReactionButtons from './ReactionButtons'
+
+export type MessageBubbleProps = {
+  threadId: string
+  isSending: boolean
   isOutgoing: boolean
   message: Message
 }
 
-const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) => {
+const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOutgoing, message }) => {
+  const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()
   const [copySuccess, setCopySuccess] = useState<boolean>(false)
-  const [selectedIcon, setSelectedIcon] = useState<string | null>(null)
 
   const messageStyle = isOutgoing ? styles.outgoingMessage : styles.incomingMessage
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
@@ -44,15 +39,18 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) =>
     }
   }, [copySuccess])
 
-  const handleLikePress = useCallback(() => {
-    console.log('Like!')
-    setSelectedIcon('like')
-  }, [setSelectedIcon])
-
-  const handleDislikePress = useCallback(() => {
-    console.log('Dislike!')
-    setSelectedIcon('dislike')
-  }, [setSelectedIcon])
+  const handelOnSendFeedback = useCallback(
+    (threadId: string, messageId: string, feedbackClass: FeedbackClass, comment: string) => {
+      const feedbackRequest: FeedbackRequest = {
+        threadId,
+        messageId,
+        feedbackClass,
+        comment,
+      }
+      dispatch(sendFeedback({ feedbackRequest }))
+    },
+    [],
+  )
 
   return (
     <View style={[styles.messageBubble, messageStyle]}>
@@ -76,25 +74,12 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ isOutgoing, message }) =>
             {message.content}
           </Markdown>
         </View>
-        {!isOutgoing && (
-          <View style={[styles.iconsWrapper]}>
+        {!isOutgoing && !isSending && (
+          <View style={[styles.iconsWrapper]} key={message.id}>
             <Pressable onPress={copyMessage} style={(styles.icon, iconMargin)}>
               {copySuccess ? <CheckIcon width={20} height={20} /> : <CopyIcon width={20} height={20} />}
             </Pressable>
-            <Pressable onPress={handleDislikePress} style={(styles.icon, iconMargin)}>
-              {selectedIcon === 'dislike' ? (
-                <DislikeFilledIcon width={20} height={20} />
-              ) : (
-                <DislikeIcon width={20} height={20} />
-              )}
-            </Pressable>
-            <Pressable onPress={handleLikePress} style={(styles.icon, iconMargin)}>
-              {selectedIcon === 'like' ? (
-                <LikeFilledIcon width={20} height={20} />
-              ) : (
-                <LikeIcon width={20} height={20} />
-              )}
-            </Pressable>
+            <ReactionButtons threadId={threadId} messageId={message.id} onSendFeedback={handelOnSendFeedback} />
           </View>
         )}
       </View>

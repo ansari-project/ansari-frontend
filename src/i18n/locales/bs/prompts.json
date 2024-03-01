@@ -1,0 +1,158 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Dova za Uputu",
+      "description": "Allahu, uputi me u mojim odlukama i učini ih izvorom blagoslova za mene."
+    },
+    {
+      "id": "dua2",
+      "title": "Dova za Ozdravljenje",
+      "description": "Allahu, podari mi zdravlje i izliječi me od moje bolesti, jer Ti si krajnji iscjelitelj."
+    },
+    {
+      "id": "dua3",
+      "title": "Dova za Zaštitu",
+      "description": "Allahu, zaštiti me i moju porodicu od svake štete i čuvaj nas sigurne pod Tvojom brizom."
+    },
+    {
+      "id": "dua4",
+      "title": "Dova za Znanje",
+      "description": "Allahu, povećaj moje znanje i mudrost, i učini ga korisnim za mene i druge."
+    },
+    {
+      "id": "dua5",
+      "title": "Dova za Prosperitet",
+      "description": "Allahu, blagoslovi moj životopis, podari mi prosperitet i učini me zadovoljnim onim što si mi dao."
+    },
+    {
+      "id": "dua6",
+      "title": "Dova za Mir",
+      "description": "Allahu, podari mi mir i spokoj u mom srcu i u mom životu."
+    },
+    {
+      "id": "dua7",
+      "title": "Dova za Oprost",
+      "description": "Allahu, oprosti meni, mojim roditeljima i svim vjernicima na Danu Sudnjem."
+    },
+    {
+      "id": "dua8",
+      "title": "Dova za Pokajanje",
+      "description": "Allahu, ja se kajem Tebi i okrećem Tebi u iskrenom pokajanju, pa prihvati moje pokajanje."
+    },
+    {
+      "id": "dua9",
+      "title": "Dova za Uputu na Pravi Put",
+      "description": "Allahu, uputi me na pravi put, put onih na koje si Ti blagodati spustio, ne onih na koje si se srdio, niti onih koji su zalutali."
+    },
+    {
+      "id": "dua10",
+      "title": "Dova za Zaštitu od Zla",
+      "description": "Allahu, tražim zaštitu kod Tebe od zla koje sam počinio, koje ću počiniti i koje mi je nametnuto."
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "O Strpljenju",
+      "description": "Strpljenje nije samo sposobnost čekanja, već kako se ponašamo dok čekamo. Islam nas uči da je strpljenje znak vjere i snage."
+    },
+    {
+      "id": "perspective2",
+      "title": "O Dobrotvornosti",
+      "description": "Dobrotvornost u Islamu nije samo akt davanja već investicija u društvo i ahiret. Čisti bogatstvo i srca."
+    },
+    {
+      "id": "perspective3",
+      "title": "O Oprostu",
+      "description": "Oprost je vrlina koja skida teret s srca. Islam nas potiče da opraštamo drugima, kako bismo i mi tražili oprost od Allaha."
+    },
+    {
+      "id": "perspective4",
+      "title": "O Zahvalnosti",
+      "description": "Zahvalnost u Islamu je temelj vjere. Pretvara svakodnevni život u blagoslove i povećava zadovoljstvo i mir."
+    },
+    {
+      "id": "perspective5",
+      "title": "O Povjerenju u Allaha",
+      "description": "Postavljanje povjerenja u Allaha je temeljno u Islamu. Znači vjerovati da On kontrolira i da je Njegov plan uvijek za najbolje, čak i ako ga još ne razumijemo."
+    },
+    {
+      "id": "perspective6",
+      "title": "O Samopromišljanju",
+      "description": "Samopromišljanje je ključni dio ličnog rasta u Islamu. Uključuje ispitivanje naših misli, riječi i djela kako bismo identificirali područja za poboljšanje i tražili Allahovu uputu u činjenju pozitivnih promjena."
+    },
+    {
+      "id": "perspective7",
+      "title": "O Samodisciplini",
+      "description": "Samodisciplina je ključna komponenta uspjeha u Islamu. Uključuje kontrolu naših želja i impulsa, i razvoj navika koje su u skladu s islamskim vrijednostima i principima."
+    },
+    {
+      "id": "perspective8",
+      "title": "O Samopoboljšanju",
+      "description": "Samopoboljšanje je doživotno putovanje u Islamu. Uključuje težnju da postanemo najbolja verzija sebe, traženje znanja i razvoj vještina koje koriste sebi i drugima."
+    },
+    {
+      "id": "perspective9",
+      "title": "O Empatiji",
+      "description": "Empatija je temeljni aspekt islamskih vrijednosti. Uključuje razumijevanje i dijeljenje osjećaja drugih, i postupanje prema njima s ljubaznošću, saosjećanjem i poštovanjem."
+    },
+    {
+      "id": "perspective10",
+      "title": "O Skromnosti",
+      "description": "Skromnost je vrlina koja se visoko cijeni u Islamu. Uključuje prepoznavanje naših ograničenja, biti skroman u ponašanju, i izbjegavanje arogancije i ponosa."
+    }
+  ],
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Za Anksioznost",
+      "description": "Obratiti se molitvi, učenju Kur'ana i dovi može donijeti mir srcu i smanjiti anksioznost."
+    },
+    {
+      "id": "remedy2",
+      "title": "Za Finansijske Teškoće",
+      "description": "Prakticiranje strpljenja, davanje u dobrotvornost uprkos ličnoj potrebi, i povjerenje u Allahovu opskrbu može olakšati finansijske poteškoće."
+    },
+    {
+      "id": "remedy3",
+      "title": "Za Zdravstvene Probleme",
+      "description": "Traženje medicinskog tretmana dok se također dova i oslanjanje na Allahovo iscjeljenje može rješavati zdravstvene izazove."
+    },
+    {
+      "id": "remedy4",
+      "title": "Za Gubitak i Tugu",
+      "description": "Pronalaženje utjehe u vjerovanju u život nakon smrti i ponovnom susretu s voljenima u ahiretu može ublažiti bol od gubitka."
+    },
+    {
+      "id": "remedy5",
+      "title": "Za Duhovne Sumnje",
+      "description": "Traženje znanja, angažovanje sa zajednicom i dova za uputstvo mogu pomoći prevladati duhovne sumnje."
+    },
+    {
+      "id": "remedy6",
+      "title": "Za Nisko Samopoštovanje",
+      "description": "Sjećanje na Allahovu ljubav i milost, traženje znanja i angažovanje u ibadetu mogu pomoći izgraditi samopouzdanje i samopoštovanje."
+    },
+    {
+      "id": "remedy7",
+      "title": "Za Usamljenost",
+      "description": "Povezivanje s zajednicom, volontiranje i uključivanje u socijalne aktivnosti mogu pomoći ublažiti osjećaje usamljenosti i izolacije."
+    },
+    {
+      "id": "remedy8",
+      "title": "Za Odlaganje",
+      "description": "Postavljanje jasnih ciljeva, razbijanje zadataka na manje korake i traženje odgovornosti može pomoći prevladati odgađanje i povećati produktivnost."
+    },
+    {
+      "id": "remedy9",
+      "title": "Za Negativno Razmišljanje",
+      "description": "Preoblikovanje negativnih misli, prakticiranje zahvalnosti i angažovanje u pozitivnom samogovoru mogu pomoći promijeniti našu perspektivu i poboljšati naš pogled na život."
+    },
+    {
+      "id": "remedy10",
+      "title": "Za Izgaranje",
+      "description": "Uzimanje pauza, prakticiranje samozbrinjavanja i traženje podrške od voljenih i profesionalaca mogu pomoći spriječiti i ublažiti izgaranje."
+    }
+  ]
+}

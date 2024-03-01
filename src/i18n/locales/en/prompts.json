@@ -1,0 +1,158 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Dua for Guidance",
+      "description": "O Allah, guide me in my decisions and make them a source of blessings for me."
+    },
+    {
+      "id": "dua2",
+      "title": "Dua for Healing",
+      "description": "O Allah, grant me health and heal me from my illness, for You are the ultimate healer."
+    },
+    {
+      "id": "dua3",
+      "title": "Dua for Protection",
+      "description": "O Allah, protect me and my family from all harm and keep us safe under Your care."
+    },
+    {
+      "id": "dua4",
+      "title": "Dua for Knowledge",
+      "description": "O Allah, increase my knowledge and wisdom, and make it beneficial for me and others."
+    },
+    {
+      "id": "dua5",
+      "title": "Dua for Prosperity",
+      "description": "O Allah, bless my livelihood, grant me prosperity, and make me content with what You have provided."
+    },
+    {
+      "id": "dua6",
+      "title": "Dua for Peace",
+      "description": "O Allah, grant me peace and tranquility in my heart and in my life."
+    },
+    {
+      "id": "dua7",
+      "title": "Dua for Forgiveness",
+      "description": "O Allah, forgive me and my parents and all the believers on the Day of Judgment."
+    },
+    {
+      "id": "dua8",
+      "title": "Dua for Repentance",
+      "description": "O Allah, I repent to You and turn to You in sincere repentance, so accept my repentance."
+    },
+    {
+      "id": "dua9",
+      "title": "Dua for Guidance to the Right Path",
+      "description": "O Allah, guide me to the straight path, the path of those upon whom You have bestowed favor, not of those who have evoked Your anger or of those who are astray."
+    },
+    {
+      "id": "dua10",
+      "title": "Dua for Protection from Evil",
+      "description": "O Allah, I seek refuge in You from the evil that I have done, that I am about to do, and that I have been caused to do."
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "On Patience",
+      "description": "Patience is not just the ability to wait, but how we behave while waiting. Islam teaches us that patience is a sign of faith and strength."
+    },
+    {
+      "id": "perspective2",
+      "title": "On Charity",
+      "description": "Charity in Islam is not just an act of giving but an investment in society and the hereafter. It purifies wealth and hearts alike."
+    },
+    {
+      "id": "perspective3",
+      "title": "On Forgiveness",
+      "description": "Forgiveness is a virtue that lifts burdens off the heart. Islam encourages us to forgive others, so we may also seek forgiveness from Allah."
+    },
+    {
+      "id": "perspective4",
+      "title": "On Gratitude",
+      "description": "Gratitude in Islam is a cornerstone of faith. It transforms everyday life into blessings and increases one's contentment and peace."
+    },
+    {
+      "id": "perspective5",
+      "title": "On Trust in Allah",
+      "description": "Placing trust in Allah is fundamental in Islam. It means believing that He is in control and that His plan is always for the best, even if we do not yet understand it."
+    },
+    {
+      "id": "perspective6",
+      "title": "On Self-Reflection",
+      "description": "Self-reflection is an essential part of personal growth in Islam. It involves examining our thoughts, words, and actions to identify areas for improvement and to seek Allah's guidance in making positive changes."
+    },
+    {
+      "id": "perspective7",
+      "title": "On Self-Discipline",
+      "description": "Self-discipline is a key component of success in Islam. It involves controlling our desires and impulses, and developing habits that align with Islamic values and principles."
+    },
+    {
+      "id": "perspective8",
+      "title": "On Self-Improvement",
+      "description": "Self-improvement is a lifelong journey in Islam. It involves striving to become the best version of ourselves, seeking knowledge, and developing skills that benefit ourselves and others."
+    },
+    {
+      "id": "perspective9",
+      "title": "On Empathy",
+      "description": "Empathy is a fundamental aspect of Islamic values. It involves understanding and sharing the feelings of others, and treating them with kindness, compassion, and respect."
+    },
+    {
+      "id": "perspective10",
+      "title": "On Humility",
+      "description": "Humility is a virtue that is highly valued in Islam. It involves recognizing our limitations, being modest in our behavior, and avoiding arrogance and pride."
+    }
+  ],
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "For Anxiety",
+      "description": "Turning to prayer, recitation of Qur'an, and making dua can bring peace to the heart and alleviate anxiety."
+    },
+    {
+      "id": "remedy2",
+      "title": "For Financial Hardship",
+      "description": "Practicing patience, giving in charity despite personal need, and trusting in Allah's provision can ease financial difficulties."
+    },
+    {
+      "id": "remedy3",
+      "title": "For Health Issues",
+      "description": "Seeking medical treatment while also engaging in dua and relying on Allah's healing can address health challenges."
+    },
+    {
+      "id": "remedy4",
+      "title": "For Loss and Grief",
+      "description": "Finding solace in the belief of life after death and the reunion with loved ones in the hereafter can ease the pain of loss."
+    },
+    {
+      "id": "remedy5",
+      "title": "For Spiritual Doubts",
+      "description": "Seeking knowledge, engaging with the community, and making dua for guidance can help overcome spiritual doubts."
+    },
+    {
+      "id": "remedy6",
+      "title": "For Low Self-Esteem",
+      "description": "Remembering Allah's love and mercy, seeking knowledge, and engaging in acts of worship can help build self-confidence and self-worth."
+    },
+    {
+      "id": "remedy7",
+      "title": "For Loneliness",
+      "description": "Connecting with the community, volunteering, and engaging in social activities can help alleviate feelings of loneliness and isolation."
+    },
+    {
+      "id": "remedy8",
+      "title": "For Procrastination",
+      "description": "Setting clear goals, breaking tasks into smaller steps, and seeking accountability can help overcome procrastination and increase productivity."
+    },
+    {
+      "id": "remedy9",
+      "title": "For Negative Thinking",
+      "description": "Reframing negative thoughts, practicing gratitude, and engaging in positive self-talk can help shift our mindset and improve our outlook on life."
+    },
+    {
+      "id": "remedy10",
+      "title": "For Burnout",
+      "description": "Taking breaks, practicing self-care, and seeking support from loved ones and professionals can help prevent and alleviate burnout."
+    }
+  ]
+}

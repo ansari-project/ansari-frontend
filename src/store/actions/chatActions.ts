@@ -11,9 +11,16 @@ import {
   setThreads,
 } from '../slices/chatSlice'
 import { RootState } from '../store'
-import { Message, Thread, ThreadNameRequest, UserRole } from '../types/chatTypes'
+import { Message, Thread, ThreadNameRequest, UserRole, FeedbackRequest } from '../types/chatTypes'
 
-// Async thunk for adding a message to a thread
+/**
+ * Adds a message to the chat.
+ *
+ * @param threadId - The ID of the thread where the message will be added.
+ * @param content - The content of the message.
+ * @param signal - An AbortSignal object that can be used to abort the message addition process.
+ * @returns A Promise that resolves to the added message.
+ */
 export const addMessage = createAsyncThunk(
   'chat/addMessage',
   async (
@@ -75,7 +82,14 @@ export const addMessage = createAsyncThunk(
   },
 )
 
-// Async thunk for creating a new thread
+/**
+ * Creates a new thread asynchronously.
+ *
+ * @param _ - The placeholder parameter, not used in this action.
+ * @param dispatch - The Redux dispatch function.
+ * @param getState - The Redux getState function.
+ * @returns A Promise that resolves to the newly created thread.
+ */
 export const createThread = createAsyncThunk('chat/createThread', async (_, { dispatch, getState }) => {
   try {
     // Get the current user and their role from the state
@@ -98,7 +112,14 @@ export const createThread = createAsyncThunk('chat/createThread', async (_, { di
   }
 })
 
-// Async thunk for deleting a thread
+/**
+ * Deletes a thread asynchronously.
+ *
+ * @param threadId - The ID of the thread to delete.
+ * @param dispatch - The dispatch function from Redux.
+ * @param getState - The getState function from Redux.
+ * @returns A Promise that resolves when the thread is deleted.
+ */
 export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadId: string, { dispatch, getState }) => {
   try {
     const { isAuthenticated, token } = (getState() as RootState).auth
@@ -113,7 +134,16 @@ export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadI
   }
 })
 
-// Async thunk for fetching a specific thread
+/**
+ * Fetches a thread from the chat service.
+ *
+ * @param threadId - The ID of the thread to fetch.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param getState - The getState function from the Redux store.
+ * @returns A Promise that resolves to the fetched thread.
+ * @throws {NotFoundError} If the thread is not found.
+ * @throws {ApplicationError} If an application error occurs.
+ */
 export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId: string, { dispatch, getState }) => {
   try {
     const { isAuthenticated, token } = (getState() as RootState).auth
@@ -139,7 +169,14 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
   }
 })
 
-// Async thunk for fetching all threads
+/**
+ * Fetches threads from the chat service asynchronously.
+ *
+ * @param _ - The placeholder parameter, not used in the function.
+ * @param dispatch - The Redux dispatch function.
+ * @param getState - The Redux getState function.
+ * @returns A Promise that resolves to the fetched threads.
+ */
 export const fetchThreads = createAsyncThunk('chat/fetchThreads', async (_, { dispatch, getState }) => {
   try {
     const { isAuthenticated, token } = (getState() as RootState).auth
@@ -154,7 +191,14 @@ export const fetchThreads = createAsyncThunk('chat/fetchThreads', async (_, { di
     dispatch(setLoading(false))
   }
 })
-// Async thunk for setting a thread's name
+
+/**
+ * Sets the name of a thread asynchronously.
+ *
+ * @param threadId - The ID of the thread.
+ * @param name - The new name for the thread.
+ * @returns A Promise that resolves when the thread name is successfully set.
+ */
 export const setThreadName = createAsyncThunk(
   'chat/setThreadName',
   async ({ threadId, name }: { threadId: string; name: ThreadNameRequest }, { dispatch, getState }) => {
@@ -164,6 +208,34 @@ export const setThreadName = createAsyncThunk(
       dispatch(setLoading(true))
       await chatService.setThreadName(threadId, name)
       dispatch(fetchThreads()) // refresh the list of threads after deletion
+    } catch (error) {
+      dispatch(setError(error.toString()))
+    } finally {
+      dispatch(setLoading(false))
+    }
+  },
+)
+
+/**
+ * Sends feedback asynchronously.
+ * @param feedbackRequest - The feedback request object.
+ * @param dispatch - The dispatch function from Redux.
+ * @param getState - The getState function from Redux.
+ */
+export const sendFeedback = createAsyncThunk(
+  'chat/sendFeedback',
+  async ({ feedbackRequest }: { feedbackRequest: FeedbackRequest }, { dispatch, getState }) => {
+    try {
+      const { isAuthenticated, token } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, token)
+      dispatch(setLoading(true))
+      await chatService.sendFeedback(
+        feedbackRequest.threadId,
+        feedbackRequest.messageId,
+        feedbackRequest.feedbackClass,
+        feedbackRequest.comment,
+      )
+      // dispatch(setFeedback) // refresh the list of threads after deletion
     } catch (error) {
       dispatch(setError(error.toString()))
     } finally {

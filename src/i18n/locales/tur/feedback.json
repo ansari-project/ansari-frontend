@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "Doğru",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "Kolay Anlaşılır",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "Tam",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "Saldırgan / Tehlikeli",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "Tamamen Doğru Değil",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "Diğer",
+      "value": "other"
+    }
+  ]
+}

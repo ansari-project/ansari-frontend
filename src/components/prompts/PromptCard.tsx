@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16, // Adjust spacing between cards
     borderRadius: 4,
-    backgroundColor: '#ffffff80',
+    backgroundColor: '#F2F2F280',
     // Apply elevation for Android shadow
     elevation: 5,
     // Apply shadow for iOS

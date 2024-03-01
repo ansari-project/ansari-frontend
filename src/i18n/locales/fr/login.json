@@ -9,5 +9,7 @@
   "errorMessage": "Échec de la connexion. Veuillez réessayer.",
   "invalidCredentials": "Identifiants invalides",
   "emailRequiredField": "Le champ e-mail est requis",
-  "passwordRequiredField": "Le champ mot de passe est requis"
+  "passwordRequiredField": "Le champ mot de passe est requis",
+  "forgetPassword": "Mot de passe oublié?",
+  "guestLogin": "Connectez-vous en tant qu'invité"
 }

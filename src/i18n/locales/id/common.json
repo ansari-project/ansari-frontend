@@ -29,5 +29,9 @@
   "cantChangeLanguageWhileAnsariWritingAlertMessage": "Anda tidak dapat mengubah bahasa sebelum mendapat tanggapan Ansari",
   "cantChangeLanguageWhileAnsariWritingAlertTitle": "Tidak dapat mengubah bahasa",
   "copy": "Menyalin",
-  "selectText": "Pilih teks"
+  "selectText": "Pilih teks",
+  "whyDidYouChooseThisRating": "Mengapa Anda memilih penilaian ini?",
+  "optional": "opsional",
+  "submit": "Kirim",
+  "additionalFeedbackPlaceholder": "Berikan masukan tambahan"
 }

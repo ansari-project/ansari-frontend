@@ -1,11 +1,9 @@
 import { LogoIcon, LogoTextIcon, MenuIcon } from '@endeavorpal/assets'
-import { AppDispatch, fetchThreads, RootState } from '@endeavorpal/store'
+import { AppDispatch, RootState, fetchThreads } from '@endeavorpal/store'
 import { User } from '@endeavorpal/types'
 import React, { useEffect, useState } from 'react'
 import { Modal, Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import InfoPopup from '../InfoPopup'
-import LanguageSelector from '../LanguageSelector'
 import NameContainer from './NameContainer'
 import ThreadsList from './ThreadsList'
 
@@ -56,10 +54,6 @@ const ThreadsDrawer: React.FC = () => {
             <View style={styles.bottomContainer}>
               <View>
                 <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
-              </View>
-              <View style={styles.bottomRightContent}>
-                <InfoPopup />
-                <LanguageSelector />
               </View>
             </View>
           </View>
@@ -172,22 +166,6 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: '#082521', // '#FFA500',
     paddingHorizontal: 16,
-  },
-  userNameContainer: {
-    flex: 1,
-  },
-  userNameText: {
-    fontSize: 18,
-    lineHeight: 18,
-    fontWeight: '600',
-    letterSpacing: '0em',
-    color: '#fff',
-    textAlign: 'left',
-  },
-  bottomRightContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 10,
   },
 })
 

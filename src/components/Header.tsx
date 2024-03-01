@@ -20,19 +20,14 @@ const Header: React.FC = () => {
   return (
     <View style={[styles.container]}>
       <View style={[styles.contentWarper]}>
-        <View style={[styles.leftContent, flexDirection]}>
-          {isAuthenticated && <ThreadsDrawer />}
-          {!isAuthenticated && (
-            <>
-              <InfoPopup />
-              <LanguageSelector />
-            </>
-          )}
-        </View>
+        <View style={[styles.leftContent, flexDirection]}>{isAuthenticated && <ThreadsDrawer />}</View>
         <Pressable onPress={handlePress}>
           <Text style={{ fontWeight: '500', fontSize: 24 }}>{'ANSARI'}</Text>
         </Pressable>
-        <View style={[styles.rightContent, flexDirection]} />
+        <View style={[styles.rightContent, flexDirection]}>
+          <InfoPopup />
+          <LanguageSelector />
+        </View>
       </View>
     </View>
   )
@@ -66,7 +61,6 @@ const styles = StyleSheet.create({
   rightContent: {
     alignItems: 'center',
     marginHorizontal: 10,
-    backgroundColor: 'red',
   },
 })
 export default Header

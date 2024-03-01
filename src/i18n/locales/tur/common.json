@@ -29,5 +29,9 @@
   "cantChangeLanguageWhileAnsariWritingAlertMessage": "Ansari yanıtı almadan dili değiştiremezsiniz",
   "cantChangeLanguageWhileAnsariWritingAlertTitle": "Dil değiştirilemiyor",
   "copy": "Kopyala",
-  "selectText": "Metin seç"
+  "selectText": "Metin seç",
+  "whyDidYouChooseThisRating": "Bu puanlamayı neden seçtiniz?",
+  "optional": "isteğe bağlı",
+  "submit": "Gönder",
+  "additionalFeedbackPlaceholder": "Ek geri bildirim sağlayın"
 }

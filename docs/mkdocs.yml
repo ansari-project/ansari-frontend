@@ -1,0 +1,11 @@
+site_name: Ansari
+site_url: https://beta.ansari.chat/docs
+nav:
+  - Home: index.md
+  - What Ansari can do: capabilities.md
+  - Validation: validation.md
+  - FAQ: faq.md
+  - Additional material: material.md
+
+theme: readthedocs
+

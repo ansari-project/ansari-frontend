@@ -4,13 +4,13 @@ html {
 }
 body {
   margin: 0;
-  font-family: 'Roboto';
+  font-family: 'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: font-roboto font-semibold;
+  font-family: 'Inter' font-semibold;
 }
 
 #root {
@@ -36,8 +36,8 @@ code {
 
 ::-webkit-scrollbar-thumb {
   --tw-border-opacity: 1;
-  /* background-color: rgba(217, 217, 227, 0.8); */
-  background-color: rgba(83, 82, 82, 0.5);
+  background-color: rgba(217, 217, 227, 0.8);
+  /* background-color: rgba(83, 82, 82, 0.5); */
 
   border-color: rgba(255, 255, 255, var(--tw-border-opacity));
   border-radius: 5px;
@@ -46,5 +46,5 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(2242, 155, 0, var(--tw-bg-opacity));
+  background-color: rgba(83, 82, 82, var(--tw-bg-opacity));
 }

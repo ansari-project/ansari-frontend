@@ -6,6 +6,7 @@ import { Helpers } from '@endeavorpal/utils'
 
 // Define the structure of the payload returned on successful login
 interface LoginSuccessPayload {
+  guest: boolean
   status: string
   message: string
   token: string
@@ -59,6 +60,7 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
         }
 
         return {
+          guest: loginData.guest || false,
           status: response.status || '',
           message: response.message || '',
           token: response.token,
@@ -108,7 +110,7 @@ export const guestLogin = createAsyncThunk<GuestLoginSuccessPayload, undefined, 
         // eslint-disable-next-line camelcase
         last_name: 'Guest',
       }
-      const loginData: LoginRequest = { email, password }
+      const loginData: LoginRequest = { email, password, guest: true }
 
       // Register the guest user
       const registerResponse = await dispatch(register(registerRequest)).unwrap()

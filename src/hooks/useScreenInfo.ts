@@ -60,11 +60,12 @@ interface ScreenInfo {
   paddingHorizontal: number // Horizontal padding to center content within screen
   actualPaddingHorizontal: number // Horizontal padding to center content within screen and ensure it's 768px max
   contentWidth: number // Actual width available for content, accounting for padding
-  desiredWidth: number // Calculated width based on CPL and average character width of the Roboto font
+  desiredWidth: number // Calculated width based on CPL and average character width of the Inter font
   isLargeScreen: boolean // Indicates if the screen is larger than 1024px
   isMediumScreen: boolean // Indicates if the screen is between 768px and 1024px
   isSmallScreen: boolean // Indicates if the screen is smaller than 768px
   isMobile: boolean // Indicates if we are running on mobile or small screen
+  sideMenuDrawer: number // Width of the side menu drawer for mobile screen
 }
 
 /**
@@ -73,25 +74,28 @@ interface ScreenInfo {
  * @returns An object containing detailed screen information and calculated values for optimal layout and typography.
  */
 
-export const useScreenInfo = (): ScreenInfo => {
+export const useScreenInfo = (sideMenuWidth: number = 0): ScreenInfo => {
   const { width, height } = useWindowDimensions()
-
   const isLargeScreen = width > 1024
   const isMediumScreen = width > 768 && width <= 1024
   const isSmallScreen = width <= 768
+  const isMobile = isMobileDevice()
 
+  const dynamicWidth = isMobile ? width : width - sideMenuWidth
   const maxWidth = isLargeScreen ? '960px' : isMediumScreen ? '768px' : '100%'
   const cpl = isLargeScreen ? 75 : isMediumScreen ? 60 : 50
-  const basePaddingHorizontal = isSmallScreen ? 20 : (width - (isLargeScreen ? 960 : 768)) / 2
-  const paddingHorizontal = Math.max(basePaddingHorizontal, 20)
-  const actualPaddingHorizontal = getAppContentPadding(width, paddingHorizontal)
-  const contentWidth = width - actualPaddingHorizontal * 2
-  // Assuming an average character width (ACW) for the Roboto font at the desired font size
+  const basePaddingHorizontal = isSmallScreen ? 16 : (dynamicWidth - (isLargeScreen ? 960 : 768)) / 2
+  const paddingHorizontal = Math.max(basePaddingHorizontal, 16)
+  const actualPaddingHorizontal = getAppContentPadding(dynamicWidth, paddingHorizontal)
+  const contentWidth = dynamicWidth > 920 ? 920 : dynamicWidth < width ? dynamicWidth : dynamicWidth - 32 // dynamicWidth - actualPaddingHorizontal * 2
+  const sideMenuDrawer = dynamicWidth * 0.8
+  // Assuming an average character width (ACW) for the Inter font at the desired font size
   const averageCharWidthPx = 9 // Example value in pixels
   const desiredWidth = cpl * averageCharWidthPx
 
   return {
-    width,
+    width: dynamicWidth,
+    sideMenuDrawer,
     height,
     maxWidth,
     cpl,
@@ -102,6 +106,6 @@ export const useScreenInfo = (): ScreenInfo => {
     isLargeScreen,
     isMediumScreen,
     isSmallScreen,
-    isMobile: isMobileDevice(),
+    isMobile,
   }
 }

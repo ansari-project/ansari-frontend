@@ -1,5 +1,7 @@
+import { RootState } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { Animated, Platform, StyleSheet, Text } from 'react-native'
+import { useSelector } from 'react-redux'
 
 interface ToastProps {
   message: string
@@ -9,6 +11,8 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
   const [fadeAnim] = useState(new Animated.Value(0)) // Initial value for opacity: 0
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
   useEffect(() => {
     // Fade in
     Animated.timing(fadeAnim, {
@@ -29,30 +33,30 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
     return () => clearTimeout(timer)
   }, [fadeAnim, duration, onDismiss])
 
+  const styles = StyleSheet.create({
+    toast: {
+      position: 'absolute',
+      top: 30,
+      left: '20%',
+      right: '20%',
+      backgroundColor: 'red',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      zIndex: 1000,
+    },
+    text: {
+      color: theme.textColor,
+      fontSize: 20,
+      fontWeight: 500,
+    },
+  })
+
   return (
     <Animated.View style={[styles.toast, { opacity: fadeAnim }]}>
       <Text style={styles.text}>{message}</Text>
     </Animated.View>
   )
 }
-
-const styles = StyleSheet.create({
-  toast: {
-    position: 'absolute',
-    top: 30,
-    left: '20%',
-    right: '20%',
-    backgroundColor: 'red',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    zIndex: 1000,
-  },
-  text: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 500,
-  },
-})
 
 export default Toast

@@ -99,6 +99,13 @@ const chatSlice = createSlice({
     setError(state, action: PayloadAction<string | null>) {
       state.error = action.payload
     },
+
+    /**
+     * Resets the chat state to its initial state.
+     */
+    resetChatState: () => {
+      return initialState
+    },
   },
 })
 
@@ -108,12 +115,13 @@ const chatSlice = createSlice({
  * This module contains actions for managing chat state.
  */
 export const {
-  setThreads,
-  setActiveThread,
   addMessageToActiveThread,
   addStreamMessageToActiveThread,
-  setLoading,
+  resetChatState,
+  setActiveThread,
   setError,
+  setLoading,
+  setThreads,
 } = chatSlice.actions
 
 /**

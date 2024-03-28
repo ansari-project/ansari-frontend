@@ -4,6 +4,7 @@ export type RegisterRequest = {
   password: string
   first_name: string
   last_name: string
+  register_to_mail_list: boolean
 }
 
 // Type for Register response data
@@ -18,6 +19,7 @@ export type RegisterResponse = {
 export type LoginRequest = {
   email: string
   password: string
+  guest?: boolean
 }
 
 // Type for Login response data

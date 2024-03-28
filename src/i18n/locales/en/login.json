@@ -1,5 +1,5 @@
 {
-  "title": "Login",
+  "title": "Welcome Back",
   "email": "Email",
   "password": "Password",
   "submit": "Submit",
@@ -15,5 +15,13 @@
   "passwordLength": "Password must be at least 8 characters long.",
   "unexpectedError": "An unexpected error occurred. Please try again later.",
   "forgetPassword": "Forgot your password?",
-  "guestLogin": "Login as Guest"
+  "guestLogin": "Login as Guest",
+  "forgotYourPassword": "Forgot Your Password",
+  "yourEmail": "Your email address",
+  "forgotMessage": "Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+  "forgotSuccessMessage": "An email will be sent to the provided email address to reset the account if it exists within the system.",
+  "continue": "Continue",
+  "back": "Back",
+  "emailValidationMessage": "Please enter a valid email address",
+  "emailRequired": "Email is required"
 }

@@ -1,12 +1,14 @@
 import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, deleteThread, RootState, setThreadName, Thread, ThreadNameRequest } from '@endeavorpal/store'
+import { AppDispatch, RootState, Thread, ThreadNameRequest, deleteThread, setThreadName } from '@endeavorpal/store'
 import { Helpers } from '@endeavorpal/utils'
 import React, { useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import ConfirmationDialog from '../ConfirmationDialog'
-import ThreadCard from './ThreadCard'
+import { ThreadCard } from './'
+import i18next from 'i18next'
 
 /**
  * Type definition for grouped threads based on their creation date.
@@ -84,7 +86,9 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(threadId || null)
   const { isRTL } = useDirection()
   const textAlignStyle = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
-  const { width } = useScreenInfo()
+  const { width, isSmallScreen } = useScreenInfo()
+  const { t } = useTranslation()
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   /**
    * Handles the selection of a thread.
@@ -105,12 +109,30 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
     // Set state for dialog visibility and message
     setDialogVisible(true)
     setThreadToDeleteId(aboutToDeleteThread.id)
-    setDialogMessage(aboutToDeleteThread.name || '')
+    setDialogMessage(aboutToDeleteThread.name || t('newChat'))
   }
 
   const [dialogVisible, setDialogVisible] = useState(false)
   const [dialogMessage, setDialogMessage] = useState('')
   const [threadToDeleteId, setThreadToDeleteId] = useState<string | null>(null)
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      width: '100%',
+    },
+    list: {
+      flex: 1,
+    },
+    dateHeader: {
+      fontWeight: 300,
+      fontSize: 14,
+      lineHeight: 17,
+      marginVertical: 10,
+      color: theme.linkColor,
+      fontFamily: 'Inter',
+    },
+  })
 
   const handleConfirmDelete = async () => {
     if (threadToDeleteId) {
@@ -159,7 +181,9 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
             ))
           ) : (
             <View>
-              <Text style={[styles.dateHeader, textAlignStyle]}>{dateHeader(dateCategory, threads[0].date)}</Text>
+              <Text style={[styles.dateHeader, textAlignStyle]}>
+                {Helpers.createLocalizedDateHeader(dateCategory, threads[0].date, t)}
+              </Text>
               {threads.map((thread: Thread) => (
                 <ThreadCard
                   key={thread.id}
@@ -182,68 +206,27 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
       <ConfirmationDialog
         stacked={width < 448}
         isRTL={isRTL}
+        isSmallScreen={isSmallScreen}
         visible={dialogVisible}
         onConfirm={handleConfirmDelete}
         onCancel={() => setDialogVisible(false)}
-        title='Delete thread?'
+        title={t('deleteThread')}
         message={
           <Text>
-            This will delete <Text style={{ fontWeight: 'bold' }}>{dialogMessage}</Text>.{' '}
+            <Trans
+              i18n={i18next}
+              parent={Text}
+              i18nKey='deleteThreadMessage'
+              components={{
+                1: <Text style={{ fontWeight: 'bold' }}></Text>,
+              }}
+              values={{ threadName: dialogMessage }}
+            />
           </Text>
         }
       />
     </View>
   )
 }
-
-/**
- * Generates a human-readable string representing a date range or a specific date
- * for displaying as a header in the threads list.
- *
- * The function takes a predefined date key ('today', 'yesterday', 'lastWeek', 'lastMonth')
- * and optionally a specific date (used for 'older' threads) to generate a descriptive
- * header indicating the time period of the threads being listed.
- *
- * @param {string} dateCategory - A predefined key representing a date range or category.
- * @param {Date} threadDate - The date of the thread, used for 'older' threads to generate a month and year string.
- * @returns {string} A descriptive header based on the input. This can be 'Today', 'Yesterday',
- * 'Previous 7 Days', 'Previous 30 Days', or a formatted string representing the month and year
- * for 'older' threads.
- */
-const dateHeader = (dateCategory: string, threadDate: Date): string => {
-  switch (dateCategory) {
-    case 'today':
-      return 'Today'
-    case 'yesterday':
-      return 'Yesterday'
-    case 'lastWeek':
-      return 'Previous 7 Days'
-    case 'lastMonth':
-      return 'Previous 30 Days'
-    default:
-      // For 'older', returns a formatted string representing the month and year.
-      return threadDate.toLocaleString('default', {
-        month: 'long',
-        year: 'numeric',
-      })
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    minWidth: '255px',
-  },
-  list: {
-    flex: 1,
-  },
-  dateHeader: {
-    fontWeight: 400,
-    fontSize: 16,
-    lineHeight: 15,
-    marginVertical: 10,
-    color: '#176359',
-  },
-})
 
 export default ThreadsList

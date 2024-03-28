@@ -7,7 +7,7 @@
     },
     {
       "id": "good2",
-      "label": "آسان لو کرنا",
+      "label": "سمجھنے میں آسان",
       "value": "understandable"
     },
     {
@@ -19,12 +19,12 @@
   "bad": [
     {
       "id": "bad1",
-      "label": "مضر یا نا امن",
+      "label": "توہین آمیز / نا محفوظ",
       "value": "offensive"
     },
     {
       "id": "bad2",
-      "label": "کاملاً صحیح نہیں",
+      "label": "حقائقی طور پر غلط",
       "value": "incorrect"
     },
     {

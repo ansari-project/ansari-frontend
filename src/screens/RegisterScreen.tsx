@@ -1,8 +1,8 @@
-import { EyeIcon } from '@endeavorpal/assets'
-import { BackgroundImage } from '@endeavorpal/components'
-import { useDirection, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, register } from '@endeavorpal/store'
+import { EyeIcon, LogoIcon } from '@endeavorpal/assets'
+import { useDirection, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, register } from '@endeavorpal/store'
 import { RegisterRequest } from '@endeavorpal/types'
+import { createGeneralThemedStyles } from '@endeavorpal/utils'
 import { useRegisterSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
@@ -16,8 +16,9 @@ import {
   Text,
   TextInput,
   View,
+  CheckBox,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 interface RegisterFormValues {
@@ -26,6 +27,7 @@ interface RegisterFormValues {
   confirmPassword: string
   firstName: string
   lastName: string
+  registerToMailList: boolean
 }
 
 const RegisterScreen: React.FC = () => {
@@ -35,6 +37,8 @@ const RegisterScreen: React.FC = () => {
   const { isRTL } = useDirection()
   const navigate = useNavigate()
   const registerSchema = useRegisterSchema()
+  const { isSmallScreen, width } = useScreenInfo()
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -46,6 +50,7 @@ const RegisterScreen: React.FC = () => {
     confirmPassword: '',
     firstName: '',
     lastName: '',
+    registerToMailList: true,
   }
 
   const handleSubmit = (values: RegisterFormValues, formikHelpers: FormikHelpers<RegisterFormValues>) => {
@@ -58,6 +63,8 @@ const RegisterScreen: React.FC = () => {
       first_name: values.firstName,
       // eslint-disable-next-line camelcase
       last_name: values.lastName,
+      // eslint-disable-next-line camelcase
+      register_to_mail_list: values.registerToMailList,
     }
     dispatch(register(registerRequest))
       .unwrap()
@@ -85,17 +92,71 @@ const RegisterScreen: React.FC = () => {
     }
   }
 
+  // Styles
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
+  const styles = StyleSheet.create({
+    title: {
+      ...Platform.select({
+        web: {
+          textAlign: 'center',
+          marginBottom: 24,
+          fontSize: 24,
+          fontWeight: 500,
+          color: theme.primaryColor,
+          fontFamily: 'Inter',
+        },
+        default: {
+          fontSize: 24,
+          fontWeight: 500,
+          marginBottom: 24,
+          textAlign: 'center',
+          color: theme.primaryColor,
+        },
+      }),
+    },
+    passwordInputContainer: {
+      position: 'relative',
+      justifyContent: 'center',
+    },
+    checkboxContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 8,
+    },
+    checkbox: {
+      marginRight: isRTL ? 'inherit' : 8,
+      marginLeft: isRTL ? 8 : 'inherit',
+    },
+    label: {
+      fontSize: 14,
+      lineHeight: 16,
+      fontWeight: 300,
+      color: theme.textColor,
+      fontFamily: 'Inter',
+    },
+  })
+
   return (
-    <>
-      <BackgroundImage />
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <View style={generalStyle.form}>
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
           initialValues={initialValues}
           validationSchema={Yup.object(registerSchema)}
           onSubmit={(values, formikHelpers) => handleSubmit(values, formikHelpers)}
         >
-          {({ handleChange, handleBlur, handleSubmit, submitForm, touched, values, isSubmitting, errors }) => (
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            submitForm,
+            touched,
+            values,
+            isSubmitting,
+            errors,
+            setFieldValue,
+          }) => (
             <View>
               <TextInput
                 onChangeText={handleChange('email')}
@@ -103,10 +164,11 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.email}
                 placeholder={t('email')}
-                style={[styles.input, isRTL && styles.textAlignRight]}
+                autoCompleteType='username'
+                style={generalStyle.input}
                 autocomplete='off'
               />
-              {touched.email && errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+              {touched.email && errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
 
               <TextInput
                 onChangeText={handleChange('firstName')}
@@ -114,10 +176,10 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.firstName}
                 placeholder={t('firstName')}
-                style={[styles.input, isRTL && styles.textAlignRight]}
+                style={generalStyle.input}
                 autocomplete='off'
               />
-              {touched.firstName && errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
+              {touched.firstName && errors.firstName && <Text style={generalStyle.errorText}>{errors.firstName}</Text>}
 
               <TextInput
                 onChangeText={handleChange('lastName')}
@@ -125,10 +187,10 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.lastName}
                 placeholder={t('lastName')}
-                style={[styles.input, isRTL && styles.textAlignRight]}
+                style={generalStyle.input}
                 autocomplete='off'
               />
-              {touched.lastName && errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
+              {touched.lastName && errors.lastName && <Text style={generalStyle.errorText}>{errors.lastName}</Text>}
 
               <View style={styles.passwordInputContainer}>
                 <TextInput
@@ -138,13 +200,13 @@ const RegisterScreen: React.FC = () => {
                   value={values.password}
                   placeholder={t('password')}
                   secureTextEntry={!passwordVisible}
-                  style={[styles.input, isRTL && styles.textAlignRight]}
+                  style={generalStyle.input}
                 />
-                <Pressable style={styles.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
+                <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
                   <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
                 </Pressable>
               </View>
-              {touched.password && errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+              {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 
               <View style={styles.passwordInputContainer}>
                 <TextInput
@@ -154,36 +216,41 @@ const RegisterScreen: React.FC = () => {
                   value={values.confirmPassword}
                   placeholder={t('confirmPassword')}
                   secureTextEntry={!passwordVisible}
-                  style={[styles.input, isRTL && styles.textAlignRight]}
+                  style={generalStyle.input}
                 />
-                <Pressable style={styles.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
+                <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
                   <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
                 </Pressable>
               </View>
               {touched.confirmPassword && errors.confirmPassword && (
-                <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+                <Text style={generalStyle.errorText}>{errors.confirmPassword}</Text>
               )}
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  value={values.registerToMailList}
+                  onValueChange={(value: boolean) => setFieldValue('registerToMailList', value)}
+                  style={styles.checkbox}
+                />
+                <Text style={styles.label}>{t('mailListText')}</Text>
+              </View>
+              {errors.registerToMailList && <Text style={generalStyle.errorText}>{errors.registerToMailList}</Text>}
 
-              {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+              {errorMessage && <Text style={generalStyle.errorText}>{errorMessage}</Text>}
 
               <Pressable
-                style={[styles.button, isSubmitting && styles.buttonDisabled]}
+                style={[generalStyle.buttonPrimary, isSubmitting && generalStyle.buttonDisabled]}
                 onPress={handleSubmit}
                 disabled={isSubmitting}
               >
-                <Text style={styles.buttonText}>{isSubmitting ? t('registering') : t('register')}</Text>
+                <Text style={generalStyle.buttonPrimaryText}>{isSubmitting ? t('registering') : t('register')}</Text>
               </Pressable>
 
               <Text
-                style={[
-                  styles.loginPrompt,
-                  isRTL ? styles.textAlignLeft : styles.textAlignRight,
-                  Platform.OS === 'web' && hovered ? styles.boldText : null,
-                ]}
+                style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               >
                 {t('alreadyHaveAccount')}
                 <Text
-                  style={[styles.loginLink, isRTL && { marginRight: 10 }]}
+                  style={generalStyle.link}
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                   onPress={() => navigate('/login')}
@@ -194,123 +261,9 @@ const RegisterScreen: React.FC = () => {
             </View>
           )}
         </Formik>
-      </KeyboardAvoidingView>
-    </>
+      </View>
+    </KeyboardAvoidingView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...Platform.select({
-      web: {
-        flex: 1,
-        height: '100vh',
-        position: 'relative',
-        zIndex: 1,
-        color: '#ffffff',
-        backgroundColor: 'rgba(8, 37, 33, 0.8)', // #082521
-        width: '100%',
-        minWidth: 420,
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        borderRadius: 3,
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
-      default: {
-        flex: 1,
-        justifyContent: 'center',
-        addingHorizontal: 16,
-        paddingVertical: 12,
-        backgroundColor: '#F2F2F2',
-      },
-    }),
-  },
-  title: {
-    ...Platform.select({
-      web: {
-        textAlign: 'center',
-        marginBottom: 24,
-        fontSize: 24,
-        fontWeight: 500,
-        color: '#ffffff',
-      },
-      default: {
-        fontSize: 24,
-        fontWeight: 500,
-        marginBottom: 24,
-        textAlign: 'center',
-        color: '#ffffff',
-      },
-    }),
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: 'gray',
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 4,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
-  passwordInputContainer: {
-    position: 'relative',
-  },
-  eyeIcon: {
-    position: 'absolute',
-    right: 10,
-    top: 24,
-  },
-  button: {
-    backgroundColor: '#08786b',
-    padding: 10,
-    borderRadius: 4,
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  buttonDisabled: {
-    backgroundColor: '#dddddd',
-  },
-  errorText: {
-    color: 'darkorange',
-    marginBottom: 10,
-    textWrap: 'balance',
-  },
-  loginPrompt: {
-    textAlign: 'right',
-    marginTop: 10,
-    color: 'white',
-  },
-  loginLink: {
-    color: 'darkorange',
-    textDecorationLine: 'none',
-    marginLeft: 10,
-    ...Platform.select({
-      web: {
-        ':hover': {
-          color: 'darkorange',
-          fontWeight: 'bold',
-        },
-      },
-    }),
-  },
-  textAlignRight: {
-    textAlign: 'right',
-  },
-  textAlignLeft: {
-    textAlign: 'left',
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
-  // ... other styles as needed
-})
 
 export default RegisterScreen

@@ -19,5 +19,16 @@
   "lastNameRequired": "Last name is required.",
   "registerSuccess": "Registration successful.",
   "registerFailure": "Registration failed.",
-  "loginHere": "Log in"
+  "loginHere": "Login",
+  "passwordReset": "Reset password",
+  "passwordResetSuccess": "Password reset successful",
+  "passwordResetSuccessMessage": "Your password has been reset.",
+  "continue": "Continue",
+  "back": "Back",
+  "passwordSchema": "Password must contain",
+  "minLengthMessage": "at least {{min}} characters long",
+  "minUppercaseMessage": "at least {{min}} uppercase letter(s)",
+  "minNumberMessage": "at least {{min}} number(s)",
+  "minSymbolsMessage": "at least {{min}} special character(s)",
+  "mailListText": "Subscribe to our mailing list for updates!"
 }

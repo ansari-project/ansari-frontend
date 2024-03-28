@@ -1,3 +1,5 @@
+import { TFunction } from 'i18next'
+
 /**
  * Determines if a given value is considered "blank".
  *
@@ -120,13 +122,50 @@ const generateGuestCredentials = (): { email: string; password: string } => {
   const email = `guest_${generateUniqueId(10)}@endeavorpal.com`
 
   // Generate a secure password with a specified length, including special characters for added security
-  const password = generateUniqueId(12, true, 3)
+  const password = generateUniqueId(12, true)
 
   return { email, password }
+}
+
+/**
+ * Generates a localized, human-readable string representing a date range or a specific date,
+ * suitable for displaying as a header in lists such as threads, grouped by date categories.
+ * It supports internationalization by utilizing the `t` function from `i18next` for translating
+ * predefined date categories into localized strings.
+ *
+ * @param {string} dateCategory - A predefined key representing a specific date range or category.
+ *    Acceptable values include 'today', 'yesterday', 'lastWeek', 'lastMonth', or other custom
+ *    keys as defined in your localization files.
+ * @param {Date} threadDate - An optional Date object, used for categories like 'older' to generate
+ *    a more specific month and year string. It's ignored for predefined categories such as 'today'.
+ * @param {TFunction} t - The translation function provided by `i18next`, used to convert date
+ *    category keys into localized strings. It enables the support for multiple languages in the UI.
+ * @returns {string} A descriptive and localized header string that indicates the time period of
+ *    the threads being listed. This could be 'Today', 'Yesterday', 'Previous 7 Days', 'Previous 30 Days',
+ *    or a custom formatted string representing the month and year for 'older' threads.
+ */
+const createLocalizedDateHeader = (dateCategory: string, threadDate: Date, t: TFunction): string => {
+  switch (dateCategory) {
+    case 'today':
+      return t('today')
+    case 'yesterday':
+      return t('yesterday')
+    case 'lastWeek':
+      return t('previous7Days')
+    case 'lastMonth':
+      return t('previous30Days')
+    default:
+      // For 'older', returns a formatted string representing the month and year.
+      return threadDate.toLocaleString('default', {
+        month: 'long',
+        year: 'numeric',
+      })
+  }
 }
 
 export default {
   isBlank,
   generateUniqueId,
   generateGuestCredentials,
+  createLocalizedDateHeader,
 }

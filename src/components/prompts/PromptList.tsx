@@ -54,14 +54,14 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
       contentContainerStyle={[styles.container, isSmallScreen ? styles.stackedContainer : styles.rowContainer]}
     >
       <View style={isSmallScreen ? styles.promptCardStacked : styles.promptCardRow}>
-        {prompts.map((prompt) => (
+        {prompts.map((prompt, index) => (
           <PromptCard
             key={prompt.id}
+            isMiddle={index == 1}
             title={prompt.title}
             subtitle={prompt.subtitle}
             Icon={prompt.Icon as typeof EndeavorFancySVG}
             onPress={() => handleSelectPrompt(prompt.description)}
-            stacked={isSmallScreen}
           />
         ))}
       </View>
@@ -72,7 +72,6 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingVertical: 16, // Adjust padding as needed
   },
   rowContainer: {
     flexDirection: 'row',
@@ -87,12 +86,13 @@ const styles = StyleSheet.create({
   promptCardRow: {
     flexDirection: 'row',
     marginVertical: 8,
-    gap: 16,
     width: '100%',
+    marginBottom: 16, // Provide some space between stacked cards
   },
   promptCardStacked: {
     width: '100%', // Cards expand to fill the container on smaller screens
     marginBottom: 16, // Provide some space between stacked cards
+    display: 'flex',
   },
 })
 

@@ -1,7 +1,9 @@
-import { useDirection } from '@endeavorpal/hooks'
-import { Thread } from '@endeavorpal/store'
+import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { RootState, Thread } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import IconContainer from './IconContainer'
 
@@ -26,15 +28,17 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   onThreadDelete,
   onThreadRename,
 }) => {
+  const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
   const navigate = useNavigate()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
-  const lengthThreshold = 20
+  const lengthThreshold = 30
+  const { t } = useTranslation()
   const threadNameLength = thread?.name?.length || 0
   const threadName = threadNameLength < lengthThreshold ? thread.name : `${thread?.name?.slice(0, lengthThreshold)}...`
   const [editing, setEditing] = useState(false)
-  const [editedName, setEditedName] = useState(thread.name || '')
-
+  const [editedName, setEditedName] = useState(thread.name || t('newChat'))
+  const theme = useSelector((state: RootState) => state.theme.theme)
   const [inputRef] = useState(React.createRef<TextInput>())
 
   useEffect(() => {
@@ -64,19 +68,58 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
       if (editedName !== thread.name) {
         onThreadRename({ ...thread, name: editedName })
       } else {
-        setEditedName(thread.name)
+        const name = thread.name || t('newChat')
+        setEditedName(name)
       }
     }
     setEditing(false)
   }
 
+  const styles = StyleSheet.create({
+    container: {
+      display: 'flex',
+      flexDirection: 'row',
+      paddingHorizontal: 16,
+      paddingVertical: 6,
+      alignItems: 'center',
+    },
+    containerMobile: {
+      padding: 8,
+    },
+    titleContainer: {
+      flex: 1,
+    },
+    selectedContainer: {
+      backgroundColor: theme.inputBackgroundColor,
+      borderRadius: 8,
+    },
+    hoveredContainer: {
+      backgroundColor: theme.inputBackgroundColor,
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.8)',
+      borderRadius: 8,
+    },
+    title: {
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      fontSize: 12,
+      lineHeight: 15,
+      fontWeight: '500',
+      fontFamily: 'Inter',
+      color: theme.textColor,
+      textAlign: isRTL ? 'right' : 'left',
+    },
+    snippet: {
+      fontSize: 14,
+      color: theme.textColor,
+    },
+  })
+
   const containerStyles = [
     styles.container,
+    isSmallScreen && styles.containerMobile,
     isSelected && styles.selectedContainer,
     isThreadHovered && styles.hoveredContainer,
   ]
-
-  const textAlignStyle = { textAlign: isRTL ? 'right' : 'left' }
 
   return (
     <Pressable
@@ -89,15 +132,15 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
         {editing ? (
           <TextInput
             ref={inputRef}
-            style={[styles.title, textAlignStyle]}
+            style={styles.title}
             value={editedName}
             onChangeText={setEditedName}
             onBlur={handleThreadRename}
             onFocus={() => setEditing(true)}
           />
         ) : (
-          <Text style={[styles.title, textAlignStyle]} onPress={handleThreadCardPress}>
-            {threadName}
+          <Text style={styles.title} onPress={handleThreadCardPress}>
+            {threadName ?? t('newChat')}
           </Text>
         )}
         {isThreadHovered && threadNameLength > lengthThreshold && <Text style={styles.snippet}>{thread.name}</Text>}
@@ -114,39 +157,5 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
     </Pressable>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-  },
-  titleContainer: {
-    flex: 1,
-  },
-  selectedContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-  },
-  hoveredContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.8)',
-    borderRadius: 8,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 24,
-    marginBottom: 8,
-    color: 'white',
-  },
-  snippet: {
-    fontSize: 14,
-    color: 'white',
-  },
-})
 
 export default ThreadCard

@@ -1,24 +1,168 @@
-import { AppDispatch, RootState } from '@/store/store'
-import { CloseIcon, FlagIcon, InfoIcon, LanguageIcon } from '@endeavorpal/assets'
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { toggleInformationPopup } from '@endeavorpal/store'
+import { CloseIcon, InfoIcon } from '@endeavorpal/assets'
+import { useAuth, useDirection, useLogout, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, toggleInformationPopup } from '@endeavorpal/store'
 import { GetEnv } from '@endeavorpal/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
   const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
-  const textDirection = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
-  const modalTextStyle = [styles.modalText, textDirection]
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
+  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isAuthenticated, isGuest } = useAuth()
+
   const dispatch = useDispatch<AppDispatch>()
   const togglePopup = () => {
     dispatch(toggleInformationPopup(!isInfoPopupOpen))
+  }
+
+  const navigate = useNavigate()
+  const doLogout = useLogout()
+
+  const register = async () => {
+    if (isGuest) {
+      // kill the current guest session
+      await doLogout()
+      // Direct to the registration screen
+      navigate('/register')
+    }
+  }
+
+  const styles = StyleSheet.create({
+    button: {
+      padding: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      elevation: 2,
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      backgroundColor: theme.splashBackgroundColor,
+      fontFamily: 'Inter',
+    },
+    modalView: {
+      height: '100%',
+      position: 'relative',
+      width: '100%',
+      maxWidth: 420,
+      backgroundColor: theme.popupBackgroundColor,
+      borderRadius: 0,
+      paddingHorizontal: 5,
+      alignItems: 'center',
+      elevation: 5,
+    },
+    modalContent: {
+      marginVertical: 20,
+      marginHorizontal: 10,
+      borderRadius: 0,
+      padding: 10,
+      alignItems: 'flex-start',
+      elevation: 5,
+      gap: 16,
+      flexGrow: 1, // make the modalContent view expand and fill the available space
+    },
+    rowGap16: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      gap: 16,
+    },
+    text: {
+      width: '100%',
+      color: theme.textColor,
+      fontSize: 16,
+      lineHeight: 24,
+      textAlign: isRTL ? 'right' : 'left',
+      marginBottom: 15,
+      fontFamily: 'Inter',
+    },
+    titleText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: theme.textColor,
+      fontFamily: 'Inter',
+    },
+    infoContainer: {
+      flexDirection: 'row',
+      width: '100%',
+      padding: 24,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: 8,
+      display: 'inline-flex',
+    },
+    bottomContainer: {
+      alignItems: 'center',
+      marginTop: 'auto', // push the bottomContent to the bottom of the modalContent view
+    },
+  })
+
+  const guestMessage = () => {
+    return (
+      <Text style={styles.text}>
+        <Trans
+          i18n={i18n}
+          i18nKey='guestWelcomeMessage'
+          values={{ email: GetEnv('FEEDBACK_EMAIL') }}
+          components={{
+            1: (
+              <Text
+                style={{ textDecorationLine: 'none', color: theme.linkColor }}
+                onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))}
+              />
+            ),
+            2: (
+              <Text
+                style={{ textDecorationLine: 'none', color: theme.linkColor }}
+                onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}
+              />
+            ),
+            3: <Text style={{ textDecorationLine: 'none', color: theme.linkColor }} onPress={() => register()} />,
+            4: (
+              <Text
+                style={{ textDecorationLine: 'none', color: theme.linkColor }}
+                onPress={() => Linking.openURL(GetEnv('SUBSCRIBE_URL'))}
+              />
+            ),
+          }}
+        />
+      </Text>
+    )
+  }
+
+  const authenticatedMessage = () => {
+    return (
+      <Text style={[styles.text, { marginBottom: 30 }]}>
+        <Trans
+          i18n={i18n}
+          i18nKey='welcomeMessage'
+          values={{ email: GetEnv('FEEDBACK_EMAIL') }}
+          components={{
+            1: (
+              <Text
+                style={{ textDecorationLine: 'none', color: theme.linkColor }}
+                onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))}
+              />
+            ),
+            2: (
+              <Text
+                style={{ textDecorationLine: 'none', color: theme.linkColor }}
+                onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}
+              />
+            ),
+          }}
+        />
+      </Text>
+    )
   }
 
   return (
@@ -29,59 +173,21 @@ const InfoPopup: React.FC = () => {
         }}
         style={styles.button}
       >
-        <InfoIcon stroke='#08786b' />
+        <InfoIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
 
-      <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen} onRequestClose={togglePopup}>
-        <View style={styles.container} onClick={togglePopup}>
+      <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen}>
+        <View style={styles.container}>
           <View style={styles.modalView}>
-            <Pressable onPress={togglePopup} style={styles.infoContainer}>
-              {/* Replace CloseIcon with an icon from react-native-vector-icons */}
-              <Text style={styles.titleText}>{t('information')}</Text>
-              <CloseIcon />
-            </Pressable>
+            <View style={styles.infoContainer}>
+              <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
+              <Pressable onPress={togglePopup}>
+                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} />
+              </Pressable>
+            </View>
             <View style={styles.modalContent}>
-              <Text style={modalTextStyle}>{t('gettingWrongSometimes')}</Text>
-              <View style={styles.rowGap16}>
-                <FlagIcon />
-                <Pressable style={modalTextStyle} onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}>
-                  <Text style={modalTextStyle}>
-                    <Trans
-                      i18n={i18n}
-                      parent={Text}
-                      i18nKey='flaggingInstructions.desktop'
-                      components={{
-                        1: <Text style={{ textDecorationLine: 'underline', color: '#08786B' }} />,
-                      }}
-                      values={{ email: GetEnv('FEEDBACK_EMAIL') }}
-                    />
-                  </Text>
-                </Pressable>
-              </View>
-              <View style={styles.rowGap16}>
-                <LanguageIcon />
-                <Text style={modalTextStyle}>{t('multilingualMessage.desktop')}</Text>
-              </View>
-              <View style={styles.rowGap16}>
-                <Pressable style={modalTextStyle}>
-                  <Text style={modalTextStyle}>
-                    <Trans
-                      i18nKey='comprehensiveGuide'
-                      components={{
-                        1: (
-                          <a
-                            target='_blank'
-                            rel='noreferrer'
-                            style={{ textDecorationLine: 'underline', color: '#08786B' }}
-                            href={process.env.REACT_APP_COMPREHENSIVE_GUIDE_URL}
-                          />
-                        ),
-                      }}
-                      i18n={i18n}
-                    />
-                  </Text>
-                </Pressable>
-              </View>
+              {isAuthenticated && isGuest && guestMessage()}
+              {isAuthenticated && !isGuest && authenticatedMessage()}
 
               <View style={styles.bottomContainer}>{isSmallScreen && <Subscription />}</View>
             </View>
@@ -91,95 +197,5 @@ const InfoPopup: React.FC = () => {
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    elevation: 2,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    fontFamily: 'Roboto',
-  },
-  modalView: {
-    height: '100%',
-    position: 'relative',
-    width: '100%',
-    maxWidth: '420px',
-    backgroundColor: 'white',
-    borderRadius: 0,
-    paddingHorizontal: 5,
-    alignItems: 'center',
-    boxShadowColor: '#000',
-    boxShadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    boxShadowOpacity: 0.25,
-    boxShadowRadius: 0,
-    elevation: 5,
-  },
-  modalContent: {
-    marginVertical: 20,
-    marginHorizontal: 10,
-    backgroundColor: 'white',
-    borderRadius: 0,
-    padding: 10,
-    alignItems: 'flex-start',
-    boxShadowColor: '#000',
-    boxShadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    boxShadowOpacity: 0.25,
-    boxShadowRadius: 0,
-    elevation: 5,
-    gap: 16,
-    flexGrow: 1, // make the modalContent view expand and fill the available space
-  },
-  rowGap16: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    gap: 16,
-  },
-  modalText: {
-    fontSize: 16,
-    textAlign: 'left',
-    color: '#343434',
-    fontFamily: 'Roboto', // Make sure you have this font loaded on native
-    lineHeight: 24,
-    flexShrink: 1,
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#161616',
-  },
-  infoContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 72,
-    padding: 24,
-    borderBottomColor: '#E0E0E0',
-    borderBottomWidth: 1,
-    borderBottomStyle: 'solid',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 8,
-    display: 'inline-flex',
-  },
-  bottomContainer: {
-    alignItems: 'center',
-    marginTop: 'auto', // push the bottomContent to the bottom of the modalContent view
-  },
-  // Define any other styles for icons or additional elements here
-})
 
 export default InfoPopup

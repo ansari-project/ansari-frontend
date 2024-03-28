@@ -46,15 +46,19 @@ class UserService {
   // Method to update the password
   async updatePassword(token: string, password: string): Promise<void> {
     // Constructing the URL
-    const url = `${this.baseURL}/update_password`
+    const url = `${this.baseURL}/reset_password`
 
     try {
       // Using Fetch API to make the POST request
-      const headers = { ...this.createHeaders(), Authorization: `Bearer ${token}` }
       const response = await fetch(url, {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify({ token, password }),
+        headers: this.createHeaders(),
+        body: JSON.stringify({
+          // eslint-disable-next-line camelcase
+          reset_token: token,
+          // eslint-disable-next-line camelcase
+          new_password: password,
+        }),
       })
 
       // Checking if the response is OK (status code in the range 200-299)
@@ -66,7 +70,7 @@ class UserService {
       return await response.json()
     } catch (error) {
       console.error('Error updating password:', error)
-      throw error
+      throw new ApplicationError('Failed to update password: ' + (error instanceof Error && error.message))
     }
   }
 }

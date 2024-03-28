@@ -1,9 +1,10 @@
-import { CloseIcon, DislikeFilledIcon, DislikeIcon, LikeFilledIcon, LikeIcon } from '@endeavorpal/assets'
+import { CheckIcon, CloseIcon, CopyIcon, DislikeIcon, LikeIcon } from '@endeavorpal/assets'
 import { useDirection, useFeedbackHandler, useFeedbackService, useScreenInfo } from '@endeavorpal/hooks'
-import { FeedbackClass, ReactionButtonsState } from '@endeavorpal/store'
-import React from 'react'
+import { FeedbackClass, Message, ReactionButtonsState, RootState } from '@endeavorpal/store'
+import { createGeneralThemedStyles } from '@endeavorpal/utils'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Clipboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 export type FeedbackOption = {
@@ -14,26 +15,44 @@ export type FeedbackOption = {
 export type ReactionButtonsProps = {
   threadId: string
   messageId: string
+  message: Message
   // eslint-disable-next-line no-unused-vars
   onSendFeedback: (threadId: string, messageId: string, feedbackClass: FeedbackClass, comment: string) => void
 }
 
-const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, onSendFeedback }) => {
-  const { actualPaddingHorizontal } = useScreenInfo()
+const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, message, onSendFeedback }) => {
   const {
     selectedFeedbackClass,
     modalVisible,
     selectedFeedbackOptions,
     additionalFeedback,
     setAdditionalFeedback,
-    handleFeedbackSelection,
     handleFeedbackAction, // Unified function for submission and cancellation.
+    handleFeedbackSubmit,
     toggleFeedbackOption,
+    handleFeedbackCancel,
   } = useFeedbackHandler(threadId, messageId, onSendFeedback)
   const { t, i18n } = useTranslation()
   const feedbacks = useFeedbackService(i18n.language)
   const { isRTL } = useDirection()
-  const iconMargin = isRTL ? styles.iconMarginRight : styles.iconMarginLeft
+  const [copySuccess, setCopySuccess] = useState<boolean>(false)
+  const theme = useSelector((state: RootState) => state.theme.theme)
+  const [isHover, setIsHover] = useState<number>(0)
+  const { isSmallScreen, width } = useScreenInfo()
+
+  const copyMessage = useCallback(() => {
+    Clipboard.setString(message.content)
+    setCopySuccess(true)
+  }, [message.content])
+
+  useEffect(() => {
+    if (copySuccess) {
+      const timeoutId = setTimeout(() => {
+        setCopySuccess(false)
+      }, 1000) // Hide the CheckIcon after 1 second
+      return () => clearTimeout(timeoutId)
+    }
+  }, [copySuccess])
 
   // Retrieve the currently selected icon for this message
   const selectedIcon = useSelector((state: { reactionButtons: ReactionButtonsState[] }) => {
@@ -41,6 +60,69 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
       (state) => state.threadId === threadId && state.messageId === messageId,
     )
     return reactionState?.selectedIcon || null
+  })
+
+  // Add your styles here
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
+
+  const styles = StyleSheet.create({
+    mainContainer: {
+      width: '100%',
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+    },
+    reactionForm: {
+      width: '100%',
+      height: 0,
+      marginTop: 24,
+      visibility: 'hidden',
+      transition: 'height 0.1s ease, visibility 0.1s ease',
+    },
+    input: {
+      backgroundColor: theme.backgroundColorSecondary,
+      width: '100%',
+      outlineWidth: 0,
+    },
+    icon: {
+      width: 20,
+      height: 20,
+      marginRight: isRTL ? 8 : 0,
+      marginLeft: isRTL ? 0 : 8,
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalView: {
+      width: '100%',
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      alignItems: 'flex-start',
+      backgroundColor: theme.inputBackgroundColor,
+      borderRadius: 4,
+      color: theme.textColor,
+    },
+    modalTitle: {
+      flexDirection: 'row',
+      width: '100%',
+      alignItems: 'center',
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      width: '100%',
+    },
+    titleText: {
+      fontWeight: '500',
+      textAlign: 'center',
+      color: theme.primaryColor,
+      fontFamily: 'Inter',
+    },
+    // ... any additional styles you need ...
   })
 
   // Render a button for each feedback option
@@ -55,15 +137,24 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     }
 
     return (
-      <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-        {feedbackOptions.map((option) => (
+      <View style={{ flexDirection: 'row', marginVertical: 10, flexWrap: 'wrap', gap: 10 }}>
+        {feedbackOptions.map((option, index) => (
           <Pressable
             key={option.value}
-            style={[styles.optionButton, selectedFeedbackOptions.includes(option.value) && styles.optionButtonSelected]}
+            style={[
+              generalStyle.buttonSecondary,
+              (selectedFeedbackOptions.includes(option.value) || isHover == index) && generalStyle.buttonPrimary,
+              generalStyle.smallButton,
+            ]}
             onPress={() => toggleFeedbackOption(option.value)}
+            onMouseEnter={() => setIsHover(index)}
+            onMouseLeave={() => setIsHover(-1)}
           >
             <Text
-              style={selectedFeedbackOptions.includes(option.value) ? styles.optionTextSelected : styles.optionText}
+              style={[
+                generalStyle.buttonSecondaryText,
+                (selectedFeedbackOptions.includes(option.value) || isHover == index) && generalStyle.buttonPrimaryText,
+              ]}
             >
               {option.label}
             </Text>
@@ -76,47 +167,43 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
   const feedbackSubmitDisabled = !additionalFeedback.length && !selectedFeedbackOptions.length
 
   return (
-    <View style={styles.container}>
-      <Pressable onPress={() => handleFeedbackSelection(FeedbackClass.ThumbsUp)} style={[styles.icon, iconMargin]}>
-        {selectedIcon === FeedbackClass.ThumbsUp ? (
-          <LikeFilledIcon width={24} height={24} />
-        ) : (
-          <LikeIcon width={24} height={24} />
-        )}
-      </Pressable>
-      <Pressable onPress={() => handleFeedbackSelection(FeedbackClass.ThumbsDown)} style={[styles.icon, iconMargin]}>
-        {selectedIcon === FeedbackClass.ThumbsDown ? (
-          <DislikeFilledIcon width={24} height={24} />
-        ) : (
-          <DislikeIcon width={24} height={24} />
-        )}
-      </Pressable>
-      <Modal
-        animationType='fade'
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => handleFeedbackAction(false)}
-      >
-        <View style={styles.centeredView}>
-          <View style={[styles.modalView, { paddingHorizontal: actualPaddingHorizontal }]}>
-            <View style={{ flexDirection: 'row', width: '70%', height: 72, paddingVertical: 24, alignItems: 'center' }}>
+    <View style={styles.mainContainer}>
+      <View style={styles.container}>
+        <Pressable onPress={copyMessage} style={styles.icon}>
+          {copySuccess ? (
+            <CheckIcon fill={theme.iconFill} hoverFill={theme.hoverColor} />
+          ) : (
+            <CopyIcon fill={theme.iconFill} hoverFill={theme.hoverColor} />
+          )}
+        </Pressable>
+        <Pressable onPress={() => handleFeedbackAction(FeedbackClass.ThumbsUp)} style={styles.icon}>
+          <LikeIcon
+            fill={selectedIcon === FeedbackClass.ThumbsUp ? theme.hoverColor : theme.iconFill}
+            hoverFill={theme.hoverColor}
+          />
+        </Pressable>
+        <Pressable onPress={() => handleFeedbackAction(FeedbackClass.ThumbsDown)} style={styles.icon}>
+          <DislikeIcon
+            fill={selectedIcon === FeedbackClass.ThumbsDown ? theme.hoverColor : theme.iconFill}
+            hoverFill={theme.hoverColor}
+          />
+        </Pressable>
+      </View>
+      {modalVisible && (
+        <View style={[styles.reactionForm, modalVisible && { height: 'auto', visibility: 'visible' }]}>
+          <View style={styles.modalView}>
+            <View style={styles.modalTitle}>
               <View style={{ flex: 2, flexDirection: 'row', gap: 10 }}>
                 <Text style={styles.titleText}>{t('whyDidYouChooseThisRating')}</Text>
-                <Text>{t('optional')}</Text>
+                <Text style={{ color: theme.inputColor }}>{t('optional')}</Text>
               </View>
-              <Pressable
-                style={{ flex: 1, alignItems: 'flex-end', borderBlockWidth: 0 }}
-                onPress={() => handleFeedbackAction(false)}
-              >
+              <Pressable style={{ alignItems: 'flex-end', borderWidth: 0 }} onPress={() => handleFeedbackCancel()}>
                 <CloseIcon />
               </Pressable>
             </View>
             {renderFeedbackOptions()}
             <TextInput
-              style={[
-                styles.input,
-                isRTL ? { marginLeft: 10, textAlign: 'right' } : { marginRight: 10, textAlign: 'left' },
-              ]}
+              style={[generalStyle.input, styles.input]}
               onChangeText={setAdditionalFeedback}
               value={additionalFeedback}
               placeholder={t('additionalFeedbackPlaceholder')}
@@ -124,121 +211,26 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             />
             <View style={styles.buttonContainer}>
               <Pressable
-                style={[styles.button, feedbackSubmitDisabled && styles.buttonDisabled]}
-                onPress={() => handleFeedbackAction(true)}
+                style={[
+                  generalStyle.buttonSecondary,
+                  isHover === 10 && generalStyle.buttonPrimary,
+                  generalStyle.smallButton,
+                ]}
+                onPress={() => handleFeedbackSubmit(true)}
                 disabled={feedbackSubmitDisabled}
+                onMouseEnter={() => setIsHover(10)}
+                onMouseLeave={() => setIsHover(-1)}
               >
-                <Text style={styles.buttonText}>{t('submit')}</Text>
+                <Text style={[generalStyle.buttonSecondaryText, isHover === 10 && generalStyle.buttonPrimaryText]}>
+                  {t('submit')}
+                </Text>
               </Pressable>
             </View>
           </View>
         </View>
-      </Modal>
+      )}
     </View>
   )
 }
-
-// Add your styles here
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  iconMarginLeft: {
-    marginLeft: 8,
-  },
-  iconMarginRight: {
-    marginRight: 8,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    width: '100%',
-    // maxWidth: '420px',
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 4,
-    padding: 35,
-    alignItems: 'flex-start',
-    boxShadowColor: '#000',
-    boxShadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    boxShadowOpacity: 0.25,
-    boxShadowRadius: 4,
-    elevation: 5,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: '#d1d1d1',
-    borderRadius: 4,
-    padding: 10,
-    paddingHorizontal: 15,
-    marginVertical: 4,
-    elevation: 2,
-    backgroundColor: '#09786b',
-  },
-  buttonDisabled: {
-    backgroundColor: '#ccc',
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  input: {
-    width: '70%',
-    minHeight: 100,
-    borderColor: 'gray',
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 4,
-  },
-  optionButton: {
-    borderWidth: 1,
-    borderColor: '#d1d1d1',
-    borderRadius: 4,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    marginRight: 8,
-    marginVertical: 4,
-    backgroundColor: 'white',
-    alignSelf: 'flex-start', // Ensure buttons align to content start
-  },
-  optionButtonSelected: {
-    borderColor: '#09786b', // Or any color that indicates selection
-    backgroundColor: '#e8f4f8', // Light blue background to indicate selection
-  },
-  optionText: {
-    textAlign: 'center',
-    fontSize: 14,
-    color: '#333', // Dark color for text
-  },
-  optionTextSelected: {
-    color: '#09786b', // Color that indicates selection
-    fontWeight: 'bold',
-  },
-  titleText: {
-    fontWeight: 500,
-    textAlign: 'center',
-    color: '#161616',
-  },
-  // ... any additional styles you need ...
-})
 
 export default ReactionButtons

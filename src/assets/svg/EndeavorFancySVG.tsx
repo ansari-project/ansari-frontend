@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 
 /**
@@ -30,13 +30,17 @@ export type Props = {
   height?: string | number
   viewBox?: string
   fill?: string
+  hoverFill?: string
   stroke?: string
+  hoverStroke?: string
   strokeWidth?: string | number
   x?: string
   y?: string
   style?: object
 } & SVGProps
 const EndeavorFancySVG = (props: Props) => {
+  const [isHover, setIsHover] = useState<number>(0)
+
   // Convert percentage-based width and height values to absolute values for React Native.
   if (typeof props.width === 'string' && props.width.includes('%')) {
     delete props.width
@@ -46,15 +50,20 @@ const EndeavorFancySVG = (props: Props) => {
     delete props.height
   }
 
+  let { hoverFill, hoverStroke, ...svgProps } = props
+
+  hoverFill = hoverFill || props.fill
+  hoverStroke = hoverStroke || props.stroke
+
   // Create an object with all the SVG attributes.
-  const svgProps = {
+  svgProps = {
     xmlns: props.xmlns || 'http://www.w3.org/2000/svg',
     width: props.width || '100%',
     height: props.height || '100%',
     viewBox: props.viewBox || '0 0 24 24',
-    x: props.x || 0,
-    y: props.y || 0,
-    ...props,
+    ...svgProps,
+    fill: isHover === 1 ? hoverFill : props.fill,
+    stroke: isHover === 1 ? hoverStroke : props.stroke,
   }
 
   return (
@@ -67,6 +76,8 @@ const EndeavorFancySVG = (props: Props) => {
         },
         props.style,
       ]}
+      onMouseEnter={() => setIsHover(1)}
+      onMouseLeave={() => setIsHover(0)}
     >
       <View style={{ userSelect: 'none' }}>
         <svg {...svgProps}>{props.children}</svg>

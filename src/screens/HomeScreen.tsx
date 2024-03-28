@@ -1,21 +1,31 @@
-import { BackgroundImage, ChatContainer, Toast } from '@endeavorpal/components'
-import { useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, setActiveThread } from '@endeavorpal/store'
+import { ChatContainer, Toast } from '@endeavorpal/components'
+import { useAuth, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, setActiveThread, toggleSideMenu } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 const HomeScreen: React.FC = () => {
-  useRedirect('/', '/login')
+  useRedirect('/', '/welcome')
 
   const dispatch = useDispatch<AppDispatch>()
+  const { isAuthenticated, isGuest } = useAuth()
   const [toastVisible, setToastVisible] = useState<boolean>(false)
   const location = useLocation()
   const errorMessage = location.state?.errorMsg || null
-  // Initialize activeThread to an empty object when the component mounts
+  const { isMobile } = useScreenInfo()
+
+  // Initialize activeThread to null when the component mounts
   useEffect(() => {
-    dispatch(setActiveThread(null))
+    // If the user is authenticated and not a guest, set the active thread to null.
+    // Guest users will have the active thread set to the last thread they were in.
+    if (isAuthenticated && !isGuest) {
+      dispatch(setActiveThread(null))
+    }
+    if (!isMobile) {
+      dispatch(toggleSideMenu(true))
+    }
   }, [])
 
   useEffect(() => {
@@ -27,7 +37,6 @@ const HomeScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <BackgroundImage />
       <ChatContainer isHome={true} />
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
     </SafeAreaView>
@@ -37,7 +46,6 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#F2F2F2',
     alignItems: 'center', // Ensure content is centered
     justifyContent: 'space-between', // Distributes children evenly
   },

@@ -2,157 +2,234 @@
   "dua": [
     {
       "id": "dua1",
-      "title": "Hidayet İçin Dua",
-      "description": "Allah'ım, kararlarımda bana rehberlik et ve onları benim için bir bereket kaynağı yap."
+      "title": "Rehberlik İçin Dua",
+      "description": "Günlük hayatıma entegre edebileceğim güçlü rehberlik duaları nelerdir?"
     },
     {
       "id": "dua2",
       "title": "Şifa İçin Dua",
-      "description": "Allah'ım, bana sağlık ver ve hastalığımdan beni iyileştir, çünkü Sen en büyük şifacısın."
+      "description": "Fiziksel veya duygusal acı için etkili dualar önerebilir misiniz?"
     },
     {
       "id": "dua3",
       "title": "Korunma İçin Dua",
-      "description": "Allah'ım, beni ve ailemi her türlü zarardan koru ve bizi emniyetinle muhafaza et."
+      "description": "Ben ve ailem için Allah'ın korumasını dua aracılığıyla nasıl isteyebilirim?"
     },
     {
       "id": "dua4",
-      "title": "İlim İçin Dua",
-      "description": "Allah'ım, ilmimi ve hikmetimi artır, ve onu benim ve başkaları için faydalı kıl."
+      "title": "Bilgi İçin Dua",
+      "description": "Bilgimi artırıp faydalı kılacak dualar nelerdir?"
     },
     {
       "id": "dua5",
       "title": "Refah İçin Dua",
-      "description": "Allah'ım, rızkımı bereketli kıl, bana refah ver ve bana verdiklerinle beni memnun et."
+      "description": "Hayatta refah ve memnuniyet sağlamak için en iyi dualar nelerdir?"
     },
     {
       "id": "dua6",
       "title": "Barış İçin Dua",
-      "description": "Allah'ım, kalbimde ve hayatımda bana barış ve huzur ver."
+      "description": "Kalbimde ve hayatımda barış ve huzuru bulmak için duayı nasıl kullanabilirim?"
     },
     {
       "id": "dua7",
       "title": "Affetme İçin Dua",
-      "description": "Allah'ım, beni, ebeveynimi ve kıyamet gününde tüm müminleri affet."
+      "description": "Kendim ve ebeveynlerim için af dilemek üzere hangi duaları okuyabilirim?"
     },
     {
       "id": "dua8",
       "title": "Tövbe İçin Dua",
-      "description": "Allah'ım, Sana samimi bir tövbe ile dönüyorum, lütfen tövbemi kabul et."
+      "description": "Samimi tövbe ve Allah'a dönüş için bazı dualar sağlayabilir misiniz?"
     },
     {
       "id": "dua9",
-      "title": "Doğru Yola İletilme İçin Dua",
-      "description": "Allah'ım, beni doğru yola, üzerine nimet yağdırdıklarının yoluna ilet, gazaba uğrayanların ya da sapkınların yoluna değil."
+      "title": "Doğru Yola Rehberlik İçin Dua",
+      "description": "Doğru yola rehberlik için en güçlü dualar nelerdir?"
     },
     {
       "id": "dua10",
       "title": "Kötülükten Korunma İçin Dua",
-      "description": "Allah'ım, işlediğim, işlemekte olduğum ve bana yüklenen kötülüklerden Sana sığınırım."
+      "description": "Kötü işlerden ve düşüncelerden Allah'a sığınmak için duayı nasıl kullanabilirim?"
+    },
+    {
+      "id": "dua11",
+      "title": "Ramazan Orucu İçin Dua",
+      "description": "Ramazan'da sahur ve iftar sırasında okuyabileceğim orucumu iyileştirecek dua nedir?"
+    },
+    {
+      "id": "dua12",
+      "title": "Kadir Gecesi İçin Dua",
+      "description": "Kadir Gecesi'nde okunacak ve bu gecenin bereketlerini en üst düzeye çıkaracak en iyi dua nedir?"
+    },
+    {
+      "id": "dua13",
+      "title": "Ramazan'da Hayır İşleri İçin Dua",
+      "description": "Ramazan'da hayır işlerini daha anlamlı kılmak için bazı dualar önerebilir misiniz?"
+    },
+    {
+      "id": "dua14",
+      "title": "Teravih Namazı İçin Dua",
+      "description": "Allah'a yakınlık aramak için teravih namazından önce veya sonra okunacak dualar nelerdir?"
+    },
+    {
+      "id": "dua15",
+      "title": "Bayram Kutlamaları İçin Dua",
+      "description": "Ramazan sona erdiğinde, şükranlarımı ifade etmek ve bayramı kutlamak için hangi duayı okumalıyım?"
     }
   ],
+
   "perspectives": [
     {
       "id": "perspective1",
       "title": "Sabır Üzerine",
-      "description": "Sabır sadece bekleyebilme yeteneği değil, aynı zamanda beklerken nasıl davrandığımızdır. İslam bize sabrın iman ve güç belirtisi olduğunu öğretir."
+      "description": "İslam bize sadece beklerken değil, beklerkenki davranışlarımızda da sabrı nasıl benimsememizi öğretir?"
     },
     {
       "id": "perspective2",
-      "title": "Sadaka Üzerine",
-      "description": "İslam'da sadaka sadece verme eylemi değil, aynı zamanda topluma ve ahirete yapılan bir yatırımdır. Bu, hem malı hem de kalpleri temizler."
+      "title": "Hayırseverlik Üzerine",
+      "description": "Hayırseverliğin sadece bir verme eylemi değil, aynı zamanda İslam'da önemli bir yatırım olarak neden kabul edildiği nedir?"
     },
     {
       "id": "perspective3",
-      "title": "Affetmek Üzerine",
-      "description": "Affetmek, kalpten yükleri kaldıran bir erdemdir. İslam, başkalarını affetmemizi teşvik eder, böylece Allah'tan da af dileyebiliriz."
+      "title": "Affetme Üzerine",
+      "description": "İslam affetmeyi nasıl teşvik eder ve neden bu, kalbi hafifleten bir erdem olarak kabul edilir?"
     },
     {
       "id": "perspective4",
-      "title": "Şükretmek Üzerine",
-      "description": "İslam'da şükretmek, imanın temel taşıdır. Bu, günlük yaşamı bereketlere dönüştürür ve bireyin memnuniyetini ve huzurunu artırır."
+      "title": "Şükran Üzerine",
+      "description": "Şükranın İslam'da imanın bir temeli olarak neden önemli olduğu ve günlük yaşamımızı nasıl dönüştürdüğü nedir?"
     },
     {
       "id": "perspective5",
-      "title": "Allah'a Güvenmek Üzerine",
-      "description": "İslam'da Allah'a güvenmek temeldir. Her şeyin kontrolünün O'nda olduğuna ve O'nun planının her zaman en iyisi olduğuna inanmak demektir, henüz anlamasak bile."
+      "title": "Allah'a Güven Üzerine",
+      "description": "İslam'da Allah'a güvenmek ne anlama gelir ve bu, hayatın zorluklarına karşı anlayışımızı nasıl etkileyebilir?"
     },
     {
       "id": "perspective6",
-      "title": "Kendini Muhasara Etmek Üzerine",
-      "description": "Kendini muhasebe etmek, İslam'da kişisel büyümenin önemli bir parçasıdır. Düşüncelerimizi, sözlerimizi ve davranışlarımızı inceleyerek iyileştirme alanlarını belirler ve olumlu değişiklikler yapmak için Allah'ın rehberliğini ararız."
+      "title": "Kendini Yansıtma Üzerine",
+      "description": "Kendini yansıtmanın İslam'daki önemi nedir ve kişisel gelişimde nasıl yardımcı olabilir?"
     },
     {
       "id": "perspective7",
-      "title": "Özdisiplin Üzerine",
-      "description": "Özdisiplin, İslam'da başarının anahtarıdır. Arzularımızı ve dürtülerimizi kontrol altına almayı ve İslami değerler ve prensiplerle uyumlu alışkanlıklar geliştirmeyi içerir."
+      "title": "Öz Disiplin Üzerine",
+      "description": "Öz disiplin İslam'daki başarıya nasıl katkıda bulunur ve İslami değerlerle uyum sağlamada hangi rolü oynar?"
     },
     {
       "id": "perspective8",
-      "title": "Kendini Geliştirmek Üzerine",
-      "description": "Kendini geliştirme, İslam'da ömür boyu süren bir yolculuktur. Kendimizin en iyi versiyonu olmaya çalışmayı, bilgi aramayı ve kendimize ve başkalarına fayda sağlayacak beceriler geliştirmeyi içerir."
+      "title": "Kendini Geliştirme Üzerine",
+      "description": "İslam'da kendini geliştirme için hangi adımlar atılabilir ve bu neden ömür boyu süren bir yolculuk olarak kabul edilir?"
     },
     {
       "id": "perspective9",
       "title": "Empati Üzerine",
-      "description": "Empati, İslami değerlerin temel bir yönüdür. Başkalarının duygularını anlamayı ve onlara karşı nazik, merhametli ve saygılı olmayı içerir."
+      "description": "Empatinin İslami değerlerdeki temel yeri nedir ve bu, başkalarıyla etkileşimlerimizi nasıl etkiler?"
     },
     {
       "id": "perspective10",
       "title": "Alçakgönüllülük Üzerine",
-      "description": "Alçakgönüllülük, İslam'da yüksek değer verilen bir erdemdir. Kendi sınırlarımızı tanımayı, davranışlarımızda mütevazı olmayı ve kibir ve gururdan kaçınmayı içerir."
+      "description": "Alçakgönüllülüğün İslam'da neden yüksek bir değere sahip olduğu ve günlük hayatımızda bunu nasıl uygulayabileceğimiz nedir?"
+    },
+    {
+      "id": "perspective11",
+      "title": "Ramazan'da Yansıma Üzerine",
+      "description": "Ramazan bizi eylemlerimizi ve niyetlerimizi değerlendirmeye ve üzerine düşünmeye nasıl teşvik eder?"
+    },
+    {
+      "id": "perspective12",
+      "title": "Ruhani Yenilenme Üzerine",
+      "description": "Ramazan sırasında hangi pratikler imanımızın ruhani yenilenmesine yardımcı olabilir?"
+    },
+    {
+      "id": "perspective13",
+      "title": "Ramazan'da Topluluk Üzerine",
+      "description": "Ramazan'da güçlenen topluluk duygusu imanımızı ve ilişkilerimizi nasıl güçlendirir?"
+    },
+    {
+      "id": "perspective14",
+      "title": "Cömertlik ve Verme Üzerine",
+      "description": "Ramazan sırasında cömertliği nasıl uygulayabilir ve etkisini sadece maddi katkıların ötesine nasıl genişletebiliriz?"
+    },
+    {
+      "id": "perspective15",
+      "title": "Ramazan'da Kur'an Üzerine Yansıma",
+      "description": "Ramazan ayı boyunca Kur'an ile bağımızı ve üzerine düşünmemizi nasıl derinleştirebiliriz?"
     }
   ],
+
   "remedies": [
     {
       "id": "remedy1",
       "title": "Anksiyete İçin",
-      "description": "Namaza, Kur'an okumaya ve dua etmeye yönelmek, kalbe huzur getirebilir ve anksiyeteyi azaltabilir."
+      "description": "Dua, Kur'an okuma ve dua etme anksiyeteyi nasıl hafifletebilir ve kalbe huzur getirebilir?"
     },
     {
       "id": "remedy2",
-      "title": "Mali Sıkıntılar İçin",
-      "description": "Sabır göstermek, kişisel ihtiyaçlara rağmen sadaka vermek ve Allah'ın rızkına güvenmek mali zorlukları hafifletebilir."
+      "title": "Finansal Zorluklar İçin",
+      "description": "Finansal zorluk zamanlarında sabır, hayırseverlik ve Allah'ın rızkına güvenmek zorlukları nasıl hafifletebilir?"
     },
     {
       "id": "remedy3",
       "title": "Sağlık Sorunları İçin",
-      "description": "Tıbbi tedavi ararken dua etmek ve Allah'ın şifasına güvenmek sağlık sorunlarına çözüm olabilir."
+      "description": "Tıbbi tedaviyi dua ve Allah'a güvenle birleştirmek sağlık sorunlarının üstesinden gelmede nasıl bir katkı sağlar?"
     },
     {
       "id": "remedy4",
       "title": "Kayıp ve Yas İçin",
-      "description": "Ahirette sevdiklerimizle tekrar birleşme inancı, kayıp acısını hafifletebilir."
+      "description": "Hangi İslami inançlar kayıp ve yasın acısını hafifletebilir ve teselli sağlayabilir?"
     },
     {
       "id": "remedy5",
-      "title": "Ruhani Şüpheler İçin",
-      "description": "Bilgi aramak, toplulukla etkileşimde bulunmak ve rehberlik için dua etmek ruhani şüphelerin üstesinden gelmeye yardımcı olabilir."
+      "title": "Ruhsal Şüpheler İçin",
+      "description": "Bilgi arayışı, toplulukla etkileşim ve yönlendirme için dua etmek ruhsal şüphelerin üstesinden gelmede nasıl yardımcı olabilir?"
     },
     {
       "id": "remedy6",
-      "title": "Düşük Özsaygı İçin",
-      "description": "Allah'ın sevgisini ve merhametini hatırlamak, bilgi aramak ve ibadetle meşgul olmak özgüven ve özsaygıyı artırabilir."
+      "title": "Düşük Benlik Saygısı İçin",
+      "description": "Allah'ın sevgisini ve merhametini hatırlamak, bilgi arayışı ve ibadet kendine güven ve öz değer inşasında nasıl bir rol oynar?"
     },
     {
       "id": "remedy7",
       "title": "Yalnızlık İçin",
-      "description": "Toplulukla bağlantı kurmak, gönüllü çalışmalar yapmak ve sosyal etkinliklere katılmak yalnızlık ve izolasyon hissini hafifletebilir."
+      "description": "Toplulukla bağlantı kurmak ve sosyal aktivitelere katılmak yalnızlık hislerini nasıl hafifletebilir?"
     },
     {
       "id": "remedy8",
       "title": "Erteleme İçin",
-      "description": "Net hedefler belirlemek, görevleri daha küçük adımlara bölmek ve sorumluluk aramak erteleme alışkanlığını yenmeye ve üretkenliği artırmaya yardımcı olabilir."
+      "description": "Erteleme alışkanlığının üstesinden gelmede ve üretkenliği artırmada hangi stratejiler yardımcı olabilir?"
     },
     {
       "id": "remedy9",
       "title": "Negatif Düşünce İçin",
-      "description": "Negatif düşünceleri yeniden çerçevelemek, şükran pratiği yapmak ve pozitif kendini konuşma yapmak, bakış açımızı değiştirmemize ve hayata olan görüşümüzü iyileştirmemize yardımcı olabilir."
+      "description": "Düşünce tarzını değiştirmek ve şükran pratikleri yapmak zihniyetimizi ve hayata bakışımızı nasıl iyileştirebilir?"
     },
     {
       "id": "remedy10",
       "title": "Tükenmişlik İçin",
-      "description": "Mola vermek, kendine iyi bakmak ve sevdiklerden ve profesyonellerden destek almak tükenmişliği önlemeye ve hafifletmeye yardımcı olabilir."
+      "description": "Tükenmişliği önlemeye ve hafifletmeye yardımcı olabilecek yaklaşımlar nelerdir?"
+    },
+    {
+      "id": "remedy11",
+      "title": "Ramazan'da İbadeti Maksimize Etmek İçin",
+      "description": "Bir kişi Ramazan'daki ibadetini ve manevi pratiklerini nasıl en üst düzeye çıkarabilir?"
+    },
+    {
+      "id": "remedy12",
+      "title": "Oruç Tutarken Enerjiyi Koruma",
+      "description": "Ramazan'ın oruç saatlerinde enerjiyi ve odaklanmayı nasıl koruyabiliriz?"
+    },
+    {
+      "id": "remedy13",
+      "title": "Ramazan'da Sosyal Yükümlülüklerle Başa Çıkmak",
+      "description": "Kişisel ve manevi hedeflerimizle sosyal yükümlülüklerimizi Ramazan boyunca nasıl dengeleyebiliriz?"
+    },
+    {
+      "id": "remedy14",
+      "title": "Ramazan'da Hayırseverliği Artırmak İçin",
+      "description": "Ramazan sırasında hayırseverliği ve nezaket eylemlerini artırmak için hangi stratejiler uygulanabilir?"
+    },
+    {
+      "id": "remedy15",
+      "title": "Ramazan'da Kur'an Üzerine Tefekkür",
+      "description": "Ramazan ayında Kur'an ile olan bağımızı ve üzerinde düşünmemizi nasıl derinleştirebiliriz?"
     }
   ]
 }

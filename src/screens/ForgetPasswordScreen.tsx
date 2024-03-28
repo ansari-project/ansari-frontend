@@ -1,8 +1,10 @@
-import { DoubleCheckIcon } from '@endeavorpal/assets'
-import { BackgroundImage } from '@endeavorpal/components'
-import { useDirection } from '@endeavorpal/hooks'
+import { DoubleCheckIcon, LogoIcon } from '@endeavorpal/assets'
+import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
 import { UserService } from '@endeavorpal/services'
+import { RootState } from '@endeavorpal/store'
+import { createGeneralThemedStyles } from '@endeavorpal/utils'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   KeyboardAvoidingView,
   NativeSyntheticEvent,
@@ -13,6 +15,7 @@ import {
   TextInput,
   View,
 } from 'react-native'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
@@ -24,17 +27,20 @@ interface EmailState {
 
 const ForgetPasswordScreen: React.FC = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation('login')
   const { isRTL } = useDirection()
+  const { isSmallScreen, width } = useScreenInfo()
   const [emailState, setEmailState] = useState<EmailState>({ email: '', submitted: false })
   const [hovered, setHovered] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ email?: string }>({})
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   const handleEmailChange = (email: string) => {
     setEmailState({ ...emailState, email })
   }
 
   const emailValidationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter a valid email address').required('Email is required'),
+    email: Yup.string().email(t('emailValidationMessage')).required(t('emailRequired')),
   })
 
   const handleSubmit = async () => {
@@ -78,181 +84,103 @@ const ForgetPasswordScreen: React.FC = () => {
     navigate('/login')
   }
 
+  // Styles
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
+  const styles = StyleSheet.create({
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      color: theme.primaryColor,
+      textAlign: isRTL ? 'right' : 'left',
+      fontFamily: 'Inter',
+    },
+    description: {
+      fontSize: 16,
+      marginBottom: 20,
+      color: theme.primaryColor,
+      fontFamily: 'Inter',
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+  })
+
   if (emailState.submitted) {
     return (
-      <View style={styles.container}>
-        <BackgroundImage />
-        <Text style={[styles.title, { alignItems: 'center', width: '100%' }]}>Forgot your password</Text>
-        <View style={{ alignItems: 'center', width: '100%' }}>
-          <DoubleCheckIcon width='50' />
-        </View>
-        <Text style={styles.description}>
-          An email will be sent to the provided email address to reset the account if it exists within the system.
-        </Text>
-        <View style={styles.buttonContainer}>
-          <Text
-            style={[
-              styles.prompt,
-              { alignItems: 'flex-start' },
-              isRTL && styles.textAlignRight,
-              Platform.OS === 'web' && hovered ? styles.boldText : null,
-            ]}
-            onPress={handleBack}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <Text style={styles.backLink}>Login</Text>
-          </Text>
+      <View style={generalStyle.formContainer}>
+        <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        <View style={generalStyle.form}>
+          <Text style={[styles.title, { textAlign: 'center', width: '100%' }]}>{t('forgotYourPassword')}</Text>
+          <View style={{ alignItems: 'center', width: '100%' }}>
+            <DoubleCheckIcon width='50' />
+          </View>
+
+          <Text style={styles.description}>{t('forgotSuccessMessage')}</Text>
+          <View style={styles.buttonContainer}>
+            <Text
+              style={[
+                generalStyle.prompt,
+                { alignItems: 'flex-start' },
+                Platform.OS === 'web' && hovered ? styles.boldUnderlineText : null,
+              ]}
+              onPress={handleBack}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <Text style={generalStyle.link}>{t('login')}</Text>
+            </Text>
+          </View>
         </View>
       </View>
     )
   }
 
   return (
-    <>
-      <BackgroundImage />
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Text style={styles.title}>Forgot your password</Text>
-        <Text style={styles.description}>
-          Just let us know your email address and we will email you a password reset link that will allow you to choose
-          a new one.
-        </Text>
+    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <View style={generalStyle.form}>
+        <Text style={styles.title}>{t('forgotYourPassword')}</Text>
+        <Text style={styles.description}>{t('forgotMessage')}</Text>
         <TextInput
           id='email'
           name='email'
-          style={styles.input}
+          style={generalStyle.input}
           onChangeText={handleEmailChange}
           onBlur={async (event: NativeSyntheticEvent<TextInput>) => await validateEmail(event.target.value)}
           onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, handleSubmit)}
           value={emailState.email}
-          placeholder='Your email address'
+          placeholder={t('yourEmail')}
           autoCapitalize='none'
           autoCompleteType='email'
           autoCorrect={false}
           inputMode='email'
           textContentType='emailAddress'
         />
-        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-        <Pressable style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Continue</Text>
+        {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
+        <Pressable style={generalStyle.buttonPrimary} onPress={handleSubmit}>
+          <Text style={generalStyle.buttonPrimaryText}>{t('continue')}</Text>
         </Pressable>
 
         <View style={styles.buttonContainer}>
           <Text
             style={[
-              styles.prompt,
+              generalStyle.prompt,
               { alignItems: 'flex-start' },
-              isRTL && styles.textAlignRight,
-              Platform.OS === 'web' && hovered ? styles.boldText : null,
+              Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
             ]}
             onPress={handleBack}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <Text style={styles.backLink}>Back</Text>
+            <Text style={generalStyle.link}>{t('back')}</Text>
           </Text>
         </View>
-      </KeyboardAvoidingView>
-    </>
+      </View>
+    </KeyboardAvoidingView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 40,
-    color: '#ffffff',
-    backgroundColor: 'rgba(8, 37, 33, 0.8)', // #082521
-    width: '100%',
-    maxWidth: 420,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#ffffff',
-    textAlign: 'center',
-  },
-  description: {
-    fontSize: 16,
-    marginBottom: 20,
-    color: '#ffffff',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: '100%',
-    paddingHorizontal: 10,
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 4,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-    ...Platform.select({
-      web: {
-        ':focus': {
-          borderColor: 'darkorange',
-        },
-        ':focus-within': {
-          borderColor: 'darkorange',
-        },
-        ':invalid': {
-          borderColor: 'red',
-        },
-      },
-    }),
-  },
-  errorText: {
-    color: 'darkorange',
-    marginBottom: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#08786b',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#ffffff',
-  },
-  prompt: {
-    textAlign: 'left',
-    marginTop: 10,
-    color: 'white',
-    width: '100%',
-  },
-  backLink: {
-    color: 'darkorange',
-    textDecorationLine: 'none',
-    marginLeft: 10,
-    ...Platform.select({
-      web: {
-        ':hover': {
-          color: 'darkorange',
-          fontWeight: 'bold',
-        },
-      },
-    }),
-  },
-  textAlignRight: {
-    textAlign: 'right',
-  },
-  textAlignLeft: {
-    textAlign: 'left',
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
-})
 
 export default ForgetPasswordScreen

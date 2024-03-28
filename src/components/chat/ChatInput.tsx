@@ -1,5 +1,6 @@
 import { SendIcon, StopIcon } from '@endeavorpal/assets'
 import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { RootState } from '@endeavorpal/store'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,6 +13,7 @@ import {
   TextInputContentSizeChangeEvent,
   View,
 } from 'react-native'
+import { useSelector } from 'react-redux'
 
 interface ChatInputProps {
   value: string
@@ -24,19 +26,18 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange, isSending, onCancelSend }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
-  const inputHeightRef = useRef<number>(45)
+  const inputHeightRef = useRef<number>(20)
   const inputLengthRef = useRef<number>(0)
   const chatInputRef = useRef<TextInput>(null)
   const [forceUpdate, setForceUpdate] = useState<number>(0) // Used to force update
   const { t } = useTranslation()
   const { isRTL } = useDirection()
   const { isMobile } = useScreenInfo()
-
-  const sendButtonOpacityValue = value.length === 0 ? '0.3' : '1.0'
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   const handleContentSizeChange = (event: TextInputContentSizeChangeEvent) => {
     if (value.length === 0) {
-      inputHeightRef.current = 45
+      inputHeightRef.current = 20
     } else if (Platform.OS === 'web') {
       inputHeightRef.current = event.nativeEvent.contentSize.height
     } else {
@@ -54,10 +55,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   const handleChange = (text: string) => {
     if (text.length === 0) {
       inputLengthRef.current = 0
-      inputHeightRef.current = 45 // Set a minimum height for the input
+      inputHeightRef.current = 20 // Set a minimum height for the input
     } else if (text.length > inputLengthRef.current) {
       inputLengthRef.current = text.length
-      inputHeightRef.current = Math.max(inputHeightRef.current, 45) // Set a minimum height for the input
+      inputHeightRef.current = Math.max(inputHeightRef.current, 20) // Set a minimum height for the input
     }
 
     if (chatInputRef.current) {
@@ -90,75 +91,91 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
     }
   }
 
+  const focusInput = () => {
+    if (chatInputRef.current) {
+      chatInputRef.current.focus()
+    }
+  }
+
+  const styles = StyleSheet.create({
+    inputContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      width: '100%',
+      backgroundColor: theme.inputBackgroundColor,
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: isSending || isFocused ? theme.hoverColor : theme.inputBackgroundColor,
+    },
+    input: {
+      flex: 1,
+      overflowY: 'hidden',
+      borderRadius: 4,
+      color: theme.textColor,
+      fontSize: 14,
+      lineHeight: 22,
+    },
+    buttonContainer: {
+      height: '100%',
+      justifyContent: 'end',
+    },
+    button: {
+      justifyContent: 'center',
+      padding: 4,
+      borderRadius: 4,
+      cursor: 'pointer',
+      backgroundColor: isSending || (isFocused && value.length > 0) ? theme.hoverColor : theme.sendIconColor,
+    },
+  })
+
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        ref={chatInputRef}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
-        onChangeText={handleChange}
-        onContentSizeChange={handleContentSizeChange}
-        style={[
-          styles.input,
-          {
-            ...(isRTL ? { marginLeft: 10, textAlign: 'right' } : { marginRight: 10, textAlign: 'left' }),
-            maxHeight: '50vh',
-            height: 'auto',
-            borderColor: isFocused ? '#000' : '#ccc',
-            outline: isFocused ? '#000' : '#ccc',
-          },
-        ]}
-        value={value}
-        placeholder={t('promptPlaceholder')}
-        placeholderTextColor='#999'
-        multiline={true}
-        textAlignVertical='top'
-        rows={3}
-      />
-      {isSending ? (
-        <Pressable onPress={onCancelSend} style={[styles.button]} type='submit'>
-          <View style={{ justifyContent: 'center' }}>
-            <StopIcon fill='#fff' />
-          </View>
-        </Pressable>
-      ) : (
-        <Pressable onPress={onSendPress} style={[styles.button, { opacity: sendButtonOpacityValue }]} type='submit'>
-          <View style={{ justifyContent: 'center' }}>
-            <SendIcon fill='#fff' />
-          </View>
-        </Pressable>
-      )}
-    </View>
+    <Pressable onPress={focusInput}>
+      <View
+        style={styles.inputContainer}
+        onMouseEnter={() => setIsFocused(true)}
+        onMouseLeave={() => setIsFocused(false)}
+      >
+        <TextInput
+          ref={chatInputRef}
+          onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
+          onChangeText={handleChange}
+          onContentSizeChange={handleContentSizeChange}
+          style={[
+            styles.input,
+            {
+              ...(isRTL ? { marginLeft: 10, textAlign: 'right' } : { marginRight: 10, textAlign: 'left' }),
+              maxHeight: '50vh',
+              outlineWidth: 0,
+            },
+          ]}
+          value={value}
+          placeholder={t('promptPlaceholder')}
+          placeholderTextColor={theme.primaryColor}
+          multiline={true}
+          textAlignVertical='top'
+          rows={3}
+        />
+        <View style={styles.buttonContainer}>
+          {isSending ? (
+            <Pressable onPress={onCancelSend} style={[styles.button]} type='submit'>
+              <View style={{ justifyContent: 'center' }}>
+                <StopIcon fill={theme.iconFill} width={20} height={20} />
+              </View>
+            </Pressable>
+          ) : (
+            <Pressable onPress={onSendPress} style={[styles.button]} type='submit'>
+              <View style={{ justifyContent: 'center' }}>
+                <SendIcon fill={theme.iconFill} />
+              </View>
+            </Pressable>
+          )}
+        </View>
+      </View>
+    </Pressable>
   )
 }
-const styles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: 'row',
-    paddingTop: 10,
-    alignItems: 'end',
-    width: '100%',
-  },
-  input: {
-    flex: 1,
-    scrollbarWidth: 0.01,
-    borderWidth: 1,
-    borderColor: 'lightgrey',
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: '#fff',
-    minHeight: 45, // Provide a minimum height
-  },
-  button: {
-    justifyContent: 'center',
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 4,
-    cursor: 'pointer',
-    height: 45,
-    backgroundColor: '#09786b',
-  },
-})
 
 export default ChatInput

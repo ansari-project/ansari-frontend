@@ -1,11 +1,12 @@
-import { CheckIcon, CopyIcon, LogoIcon, UserIcon } from '@endeavorpal/assets'
-import { useDirection } from '@endeavorpal/hooks'
-import { AppDispatch, FeedbackClass, FeedbackRequest, Message, sendFeedback } from '@endeavorpal/store'
-import React, { useCallback, useEffect, useState } from 'react'
+import { LogoRoundIcon } from '@endeavorpal/assets'
+import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFeedback } from '@endeavorpal/store'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import Markdown from 'react-markdown' // import rehypeRaw from 'rehype-raw'
-import { Clipboard, Pressable, StyleSheet, Text, View } from 'react-native'
-import { useDispatch } from 'react-redux'
-
+import { StyleSheet, Text, View } from 'react-native'
+import UserAvatar from 'react-native-user-avatar'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
 
 export type MessageBubbleProps = {
@@ -18,26 +19,10 @@ export type MessageBubbleProps = {
 const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOutgoing, message }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()
-  const [copySuccess, setCopySuccess] = useState<boolean>(false)
-
-  const messageStyle = isOutgoing ? styles.outgoingMessage : styles.incomingMessage
-  const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
-  const textAlign = isRTL ? 'right' : 'left'
-  const iconMargin = isRTL ? styles.iconMarginRight : styles.iconMarginLeft
-
-  const copyMessage = useCallback(() => {
-    Clipboard.setString(message.content)
-    setCopySuccess(true)
-  }, [message.content])
-
-  useEffect(() => {
-    if (copySuccess) {
-      const timeoutId = setTimeout(() => {
-        setCopySuccess(false)
-      }, 1000) // Hide the CheckIcon after 1 second
-      return () => clearTimeout(timeoutId)
-    }
-  }, [copySuccess])
+  const { isSmallScreen } = useScreenInfo()
+  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { t } = useTranslation()
+  const { user } = useAuth()
 
   const handelOnSendFeedback = useCallback(
     (threadId: string, messageId: string, feedbackClass: FeedbackClass, comment: string) => {
@@ -52,23 +37,85 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOu
     [],
   )
 
+  const styles = StyleSheet.create({
+    messageBubble: {
+      width: '100%',
+      padding: isSmallScreen ? 8 : 10,
+      marginVertical: 4,
+      borderRadius: 4,
+      gap: isSmallScreen ? 8 : 16,
+      display: 'flex',
+      flexDirection: 'row',
+      flexGrow: 1,
+      alignSelf: 'flex-start',
+    },
+    senderName: {
+      fontWeight: 600,
+      fontSize: 16,
+      lineHeight: 20,
+      marginBottom: 16,
+      marginTop: 6,
+      color: theme.primaryColor,
+    },
+    contentWrapper: {
+      flex: 1,
+      color: theme.primaryColor,
+    },
+    iconsWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    avatar: {
+      borderRadius: 4,
+      padding: 16,
+      width: 32,
+      height: 32,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    messageText: {
+      fontFamily: 'Inter',
+      lineHeight: 21,
+      textAlign: isRTL ? 'right' : 'left',
+    },
+    outgoingText: {
+      color: theme.primaryColor,
+      fontWeight: 600,
+    },
+    incomingText: {
+      color: theme.primaryColor,
+      fontWeight: 500,
+      paddingBottom: 16,
+      alignSelf: 'flex-start',
+    },
+  })
+
+  const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
+
   return (
-    <View style={[styles.messageBubble, messageStyle]}>
+    <View style={styles.messageBubble}>
       {/* <Markdown components={{ p: Text }} rehypePlugins={[rehypeRaw]}> */}
       {isOutgoing ? (
-        <View style={[styles.avatar, styles.outgoingAvatar]}>
-          <UserIcon />
+        <View style={styles.avatar}>
+          <UserAvatar
+            size={34}
+            name={`${user?.firstName} ${user?.lastName}`}
+            textColor={theme.textColor}
+            bgColor={theme.yellowColor}
+            textStyle={{ fontWeight: 'bold', fontSize: 14 }}
+          />
         </View>
       ) : (
-        <View style={[styles.avatar, styles.incomingAvatar]}>
-          <LogoIcon width='32' height='32' />
+        <View style={styles.avatar}>
+          <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
         </View>
       )}
-      <View style={{ flexShrink: 1 }}>
+      <View style={{ flexShrink: 1, width: '100%' }}>
+        <Text style={styles.senderName}>{isOutgoing ? t('you') : t('ansariChat')}</Text>
         <View style={styles.contentWrapper}>
           <Markdown
             components={{
-              p: (props) => <Text style={[styles.messageText, textStyle, { textAlign }]}>{props.children}</Text>,
+              p: (props) => <Text style={[styles.messageText, textStyle]}>{props.children}</Text>,
             }}
           >
             {message.content}
@@ -76,83 +123,17 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOu
         </View>
         {!isOutgoing && !isSending && (
           <View style={[styles.iconsWrapper]} key={message.id}>
-            <Pressable onPress={copyMessage} style={(styles.icon, iconMargin)}>
-              {copySuccess ? <CheckIcon width={20} height={20} /> : <CopyIcon width={20} height={20} />}
-            </Pressable>
-            <ReactionButtons threadId={threadId} messageId={message.id} onSendFeedback={handelOnSendFeedback} />
+            <ReactionButtons
+              threadId={threadId}
+              messageId={message.id}
+              message={message}
+              onSendFeedback={handelOnSendFeedback}
+            />
           </View>
         )}
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  messageBubble: {
-    width: '100%',
-    padding: 10,
-    marginVertical: 4,
-    borderRadius: 4,
-    gap: 16,
-  },
-  contentWrapper: {
-    flex: 1,
-  },
-  iconsWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  iconMarginLeft: {
-    marginLeft: 8,
-  },
-  iconMarginRight: {
-    marginRight: 8,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-  },
-  outgoingMessage: {
-    backgroundColor: '#f2f9ff', // A light green background for outgoing messages
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    display: 'flex',
-    flexDirection: 'row',
-    flexGrow: 1,
-  },
-  incomingMessage: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexGrow: 1,
-    backgroundColor: '#fff', // White background for incoming messages
-    alignSelf: 'flex-start',
-  },
-  avatar: {
-    borderRadius: 4,
-    padding: 16,
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  outgoingAvatar: {
-    backgroundColor: '#f29b02',
-  },
-  incomingAvatar: {
-    backgroundColor: '#fff',
-  },
-  messageText: {
-    fontFamily: 'Roboto',
-  },
-  outgoingText: {
-    color: '#09786b',
-    fontWeight: 'bold',
-  },
-  incomingText: {
-    fontWeight: 500,
-    paddingBottom: 16,
-    alignSelf: 'flex-start',
-  },
-})
 
 export default MessageBubble

@@ -54,7 +54,7 @@ class AuthService {
       // Handle HTTP errors
       console.error(`HTTP error! status: ${response.status}`)
     } else {
-      console.log(`Response is ${response}`)
+      // console.log(`Response is ${response}`)
     }
   }
 }

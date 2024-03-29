@@ -1,29 +1,69 @@
+import { useAuth, useScreenInfo } from '@endeavorpal/hooks'
+import { RootState } from '@endeavorpal/store'
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { useTranslation } from 'react-i18next'
+import { StyleSheet, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import ActionButtons from './ActionButtons'
 import Subscription from './Subscription'
+import TermsAndPrivacy from './TermsAndPrivacy'
+import { NameContainer } from './menu'
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation()
+  const { isMobile, isSmallScreen } = useScreenInfo()
+  const { isAuthenticated, isGuest } = useAuth()
+  const displayName = !(isAuthenticated && isGuest && (isMobile || isSmallScreen))
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
+  const styles = StyleSheet.create({
+    container: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      zIndex: 10,
+      paddingHorizontal: isSmallScreen ? 16 : 24,
+    },
+    footerTextContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 6,
+    },
+    footerText: {
+      fontSize: 12,
+      lineHeight: 21,
+      fontWight: 300,
+      fontFamily: 'Inter',
+      color: theme.textColor,
+    },
+  })
+
   return (
-    <View styles={styles.container}>
-      <Subscription />
+    <View style={styles.container}>
+      {isAuthenticated && isGuest && (
+        <View style={{ marginHorizontal: 10 }}>
+          <NameContainer name={t('welcomeGuest') as string} nameColor={theme.textColor} displayName={displayName} />
+        </View>
+      )}
+      {(!isAuthenticated || isGuest) && !isMobile && <ActionButtons isTop={false} />}
+      {isAuthenticated && (
+        <View style={{ flex: 1 }}>
+          <View style={styles.footerTextContainer}>
+            <Text style={styles.footerText}>{t('authorizedFooterText')}</Text>
+            {isGuest && (
+              <View style={styles.footerTextContainer}>
+                <Text style={styles.footerText}>|</Text>
+                <Subscription />
+              </View>
+            )}
+          </View>
+        </View>
+      )}
+      {!isAuthenticated && <TermsAndPrivacy />}
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 300,
-    backgroundColor: '#fff', // Assuming you want a white background
-    paddingVertical: 20, // Example padding, adjust as needed
-    borderTopWidth: 1, // Optional, for a top border
-    borderColor: '#ccc', // Border color, if border is desired
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10,
-  },
-})
 
 export default Footer

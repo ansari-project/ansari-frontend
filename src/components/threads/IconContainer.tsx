@@ -1,7 +1,8 @@
 import { DeleteIcon, RenameIcon } from '@endeavorpal/assets'
-import { Thread } from '@endeavorpal/store'
+import { RootState, Thread } from '@endeavorpal/store'
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 type IconContainerProps = {
   thread: Thread
@@ -13,19 +14,21 @@ type IconContainerProps = {
 }
 
 const IconContainer: React.FC<IconContainerProps> = ({ thread, isRTL, onThreadDelete, onThreadRename }) => {
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
   return (
     <View style={[styles.iconContainer, isRTL ? { left: 0 } : { right: 0 }]}>
       {onThreadRename && (
         <Pressable onPress={() => onThreadRename(thread)} style={styles.icon}>
-          <RenameIcon width='24' height='24' fill='#fff' />
+          <RenameIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
       )}
       {onThreadDelete && (
         <Pressable
           onPress={() => onThreadDelete(thread)}
-          style={[styles.icon, isRTL && onThreadRename ? { marginLeft: 20 } : { marginRight: 20 }]}
+          style={[styles.icon, isRTL && onThreadRename ? { marginLeft: 8 } : { marginRight: 8 }]}
         >
-          <DeleteIcon width='24' height='24' fill='red' />
+          <DeleteIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
       )}
       {/* Additional icons can be added here */}
@@ -35,11 +38,8 @@ const IconContainer: React.FC<IconContainerProps> = ({ thread, isRTL, onThreadDe
 
 const styles = StyleSheet.create({
   iconContainer: {
-    position: 'absolute',
-    top: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 4,
   },
   icon: {
     padding: 4,

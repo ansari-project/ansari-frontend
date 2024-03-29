@@ -1,66 +1,55 @@
-import { useAuth, useDirection } from '@endeavorpal/hooks'
+import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
+import { RootState } from '@endeavorpal/store'
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { useNavigate } from 'react-router-dom'
-import InfoPopup from './InfoPopup'
-import LanguageSelector from './LanguageSelector'
-import ThreadsDrawer from './threads/ThreadsDrawer'
+import { StyleSheet, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import ActionButtons from './ActionButtons'
+import { MenuDrawer } from './menu'
 
 const Header: React.FC = () => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isGuest } = useAuth()
   const { isRTL } = useDirection()
-  const navigate = useNavigate()
-  // Function to handle press on ANSARI text
-  const handlePress = () => {
-    // Navigate to the home page here
-    navigate('/')
+  const { isSmallScreen, isMobile } = useScreenInfo()
+  const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
+  const displayMenuDrawer = isAuthenticated && !isGuest && (!isSideMenuOpened || isSmallScreen)
+
+  if (!isSmallScreen && !isAuthenticated) {
+    return null
   }
-  const flexDirection = { flexDirection: isRTL ? 'row-reverse' : 'row' }
+
+  const styles = StyleSheet.create({
+    container: {
+      zIndex: 10,
+      paddingTop: 24,
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: displayMenuDrawer ? 'space-between' : 'flex-end',
+      alignItems: 'center',
+    },
+    contentWarper: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      alignItems: 'center',
+    },
+    leftContent: {
+      flexDirection: isRTL ? 'row-reverse' : 'row',
+      alignItems: 'center',
+      marginRight: 10,
+    },
+    rightContent: {
+      flexDirection: isRTL ? 'row-reverse' : 'row',
+    },
+  })
 
   return (
-    <View style={[styles.container]}>
-      <View style={[styles.contentWarper]}>
-        <View style={[styles.leftContent, flexDirection]}>{isAuthenticated && <ThreadsDrawer />}</View>
-        <Pressable onPress={handlePress}>
-          <Text style={{ fontWeight: '500', fontSize: 24 }}>{'ANSARI'}</Text>
-        </Pressable>
-        <View style={[styles.rightContent, flexDirection]}>
-          <InfoPopup />
-          <LanguageSelector />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.contentWarper}>
+        <View style={styles.leftContent}>{displayMenuDrawer && <MenuDrawer />}</View>
+        <View style={styles.rightContent}>{isMobile && <ActionButtons isTop={true} />}</View>
       </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    height: 56,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    backgroundColor: '#fff', // f2f2f2
-  },
-  contentWarper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  leftContent: {
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  rightContent: {
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-})
 export default Header

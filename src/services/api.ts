@@ -11,8 +11,8 @@ interface CustomFetchOptions extends RequestInit {
 async function refreshToken(): Promise<string> {
   const API_URL = process.env.REACT_APP_API_V2_URL
   const refreshTokenURL = `${API_URL}/users/refresh_token`
-  const authState = loadAuthState()
-  const expiredToken = authState.token
+  const authState = await loadAuthState()
+  const expiredToken = authState.auth?.token
 
   const response = await fetch(refreshTokenURL, {
     method: 'GET',

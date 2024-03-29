@@ -1,3 +1,4 @@
+import { CryptoService } from '@endeavorpal/services'
 import { User } from '@endeavorpal/types'
 import { createSlice } from '@reduxjs/toolkit'
 import { guestLogin, login } from '../actions/authActions'
@@ -13,7 +14,7 @@ export interface AuthState {
   error: string | null
 }
 
-const initialState: AuthState = {
+const initialAuthState: AuthState = {
   loading: false,
   isAuthenticated: false, // Flag to indicate if the user is authenticated
   isGuest: false, // Flag to indicate if the current session is a guest session
@@ -26,121 +27,143 @@ const initialState: AuthState = {
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialAuthState,
   reducers: {
+    setAuthState: (state, action) => {
+      const newState = {
+        ...state,
+        isAuthenticated: action.payload.isAuthenticated,
+        token: action.payload.token,
+        user: action.payload.user,
+        message: action.payload.message,
+        status: action.payload.status,
+        error: action.payload.error,
+      }
+      return newState
+    },
     // ... other reducers ...
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.loading = true
-        state.error = null
+        const newState = {
+          ...state,
+          loading: true,
+          error: null,
+        }
+        return newState
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isAuthenticated = true
-        state.isGuest = false // Ensure isGuest is set to false on regular login
-        state.token = action.payload.token
-        state.user = action.payload.user
-        state.message = action.payload.message
-        state.status = action.payload.status
-        state.loading = false
-        saveAuthState({ ...state })
+        const newState = {
+          ...state,
+          isAuthenticated: true,
+          isGuest: action.payload.guest || false, // Ensure isGuest is set to false on regular login
+          token: action.payload.token,
+          user: action.payload.user,
+          message: action.payload.message,
+          status: action.payload.status,
+        }
+        saveAuthState({ ...newState }, newState.isGuest)
+        return newState
       })
       .addCase(login.rejected, (state, action) => {
-        state.isAuthenticated = false
-        state.isGuest = false // Ensure isGuest is reset even on failed login attempt
-        state.user = null
-        state.token = null
-        state.message = null
-        state.status = null
-        state.loading = false
-        // state.error = (action.payload as Error).message
-        state.error = action.payload ? action.payload.message : 'Login failed'
-        saveAuthState({ ...state })
+        const newState = {
+          ...initialAuthState,
+          error: action.payload ? action.payload.message : 'Login failed',
+        }
+        saveAuthState({ ...newState }, false)
+        return newState
       })
       .addCase(guestLogin.pending, (state) => {
         state.loading = true
         state.error = null
       })
       .addCase(guestLogin.fulfilled, (state, action) => {
-        state.isAuthenticated = true
-        state.isGuest = true // Set isGuest to true on successful guest login
-        state.token = action.payload.token
-        state.user = action.payload.user
-        state.message = action.payload.message
-        state.status = action.payload.status
-        state.loading = false
-        saveAuthState({ ...state })
+        const newState = {
+          ...state,
+          isAuthenticated: true,
+          isGuest: true, // Set isGuest to true on successful guest login
+          token: action.payload.token,
+          user: action.payload.user,
+          message: action.payload.message,
+          status: action.payload.status,
+        }
+        saveAuthState({ ...newState }, true)
+        return newState
       })
       .addCase(guestLogin.rejected, (state, action) => {
-        state.isAuthenticated = false
-        state.isGuest = false // Ensure isGuest is reset on failed guest login attempt
-        state.loading = false
-        state.error = action.payload ? action.payload.message : 'Guest login failed'
-        saveAuthState({ ...state })
+        const newState = {
+          ...initialAuthState,
+          error: action.payload ? action.payload.message : 'Guest login failed',
+        }
+        saveAuthState({ ...newState }, true)
+        return newState
       })
       .addMatcher(
         (action) => action.type.startsWith('auth/logout'),
         (state) => {
-          state.isAuthenticated = false
-          state.user = null
-          state.token = null
-          state.message = null
-          state.status = null
-          state.loading = false
-          state.error = null
-          saveAuthState({ ...state })
+          saveAuthState({ ...initialAuthState }, state.isGuest)
+          return initialAuthState
         },
       )
   },
 })
 
-// Function to encode the authState data using Base64
-function encodeBase64(authState: AuthState) {
-  const jsonData = JSON.stringify(authState)
-  const base64Data = btoa(jsonData)
-  return base64Data
+// Function to save the current state to local storage securely
+function saveAuthState(state: AuthState, isGuest: boolean = false) {
+  const stateAsString = JSON.stringify(state)
+
+  CryptoService.encryptData(stateAsString)
+    .then((encryptedData) => {
+      const encryptedDataArray = Array.from(new Uint8Array(encryptedData)) // Convert Uint8Array to array
+      const encryptedDataString = String.fromCharCode.apply(null, encryptedDataArray) // Convert array to string
+
+      if (isGuest) {
+        sessionStorage.setItem('auG', encryptedDataString)
+      } else {
+        localStorage.setItem('au', encryptedDataString)
+      }
+    })
+    .catch((error) => {
+      console.error('Error encrypting data:', error)
+    })
 }
 
-// Function to decode the Base64 encoded authState data
-function decodeBase64(base64Data: string) {
-  const jsonData = atob(base64Data)
-  const authState = JSON.parse(jsonData)
-  return authState
-}
+// Function to load the state from local storage securely
+export async function loadAuthState() {
+  const loadedAuthState = new Promise<AuthState>((resolve) => {
+    // eslint-disable-next-line no-extra-semi
+    ;(async () => {
+      let encryptedData = sessionStorage.getItem('auG')
+      if (!encryptedData) {
+        encryptedData = localStorage.getItem('au')
+      }
+      if (!encryptedData) {
+        resolve(initialAuthState)
+      } else {
+        try {
+          const encryptedDataArray = Array.from(encryptedData).map((char) => char.charCodeAt(0)) // Convert string to array of char codes
+          const encryptedDataBuffer = new Uint8Array(encryptedDataArray).buffer // Convert array to ArrayBuffer
+          const authState = await CryptoService.decryptData(encryptedDataBuffer) // Wait for the Promise to resolve
 
-// Function to save the current state to the appropriate storage
-function saveAuthState(state: AuthState) {
-  const base64Data = encodeBase64(state)
-  if (state.isGuest) {
-    // For guest users, save the state to session storage
-    sessionStorage.setItem('authStateG', base64Data)
-  } else {
-    // For regular users, save the state to local storage
-    localStorage.setItem('authState', base64Data)
-  }
-}
+          resolve(authState as AuthState) // Explicitly cast the resolved value as AuthState
+        } catch (error) {
+          console.error('Error decrypting data:', error)
+          resolve(initialAuthState)
+        }
+      }
+    })()
+  })
 
-// Function to load the state from storage
-export function loadAuthState() {
-  // Try to load from session storage first
-  let base64Data = sessionStorage.getItem('authStateG')
-
-  // If not found in session storage, try local storage
-  if (!base64Data) {
-    base64Data = localStorage.getItem('authState')
-  }
-
-  if (base64Data) {
-    return decodeBase64(base64Data)
-  }
-  return initialState
+  return { auth: await loadedAuthState } as Partial<{
+    auth: AuthState
+  }>
 }
 
 // Helper to clear state from both storages
 export const clearAuthState = () => {
-  localStorage.removeItem('authState')
-  sessionStorage.removeItem('authStateG')
+  localStorage.removeItem('au')
+  sessionStorage.removeItem('auG')
 }
 
 export default authSlice.reducer

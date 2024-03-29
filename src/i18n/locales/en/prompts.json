@@ -3,156 +3,233 @@
     {
       "id": "dua1",
       "title": "Dua for Guidance",
-      "description": "O Allah, guide me in my decisions and make them a source of blessings for me."
+      "description": "What are some powerful duas for guidance that I can incorporate into my daily life?"
     },
     {
       "id": "dua2",
       "title": "Dua for Healing",
-      "description": "O Allah, grant me health and heal me from my illness, for You are the ultimate healer."
+      "description": "Can you suggest effective duas for healing physical or emotional pain?"
     },
     {
       "id": "dua3",
       "title": "Dua for Protection",
-      "description": "O Allah, protect me and my family from all harm and keep us safe under Your care."
+      "description": "How can I seek Allah's protection for me and my family through dua?"
     },
     {
       "id": "dua4",
       "title": "Dua for Knowledge",
-      "description": "O Allah, increase my knowledge and wisdom, and make it beneficial for me and others."
+      "description": "What duas can help increase my knowledge and make it beneficial?"
     },
     {
       "id": "dua5",
       "title": "Dua for Prosperity",
-      "description": "O Allah, bless my livelihood, grant me prosperity, and make me content with what You have provided."
+      "description": "What are the best duas for achieving prosperity and contentment in life?"
     },
     {
       "id": "dua6",
       "title": "Dua for Peace",
-      "description": "O Allah, grant me peace and tranquility in my heart and in my life."
+      "description": "How can I use dua to find peace and tranquility in my heart and life?"
     },
     {
       "id": "dua7",
       "title": "Dua for Forgiveness",
-      "description": "O Allah, forgive me and my parents and all the believers on the Day of Judgment."
+      "description": "What duas can I recite to seek forgiveness for myself and my parents?"
     },
     {
       "id": "dua8",
       "title": "Dua for Repentance",
-      "description": "O Allah, I repent to You and turn to You in sincere repentance, so accept my repentance."
+      "description": "Can you provide some duas for sincere repentance and turning back to Allah?"
     },
     {
       "id": "dua9",
       "title": "Dua for Guidance to the Right Path",
-      "description": "O Allah, guide me to the straight path, the path of those upon whom You have bestowed favor, not of those who have evoked Your anger or of those who are astray."
+      "description": "What are the most powerful duas for guidance to the straight path?"
     },
     {
       "id": "dua10",
       "title": "Dua for Protection from Evil",
-      "description": "O Allah, I seek refuge in You from the evil that I have done, that I am about to do, and that I have been caused to do."
+      "description": "How can I seek refuge in Allah from evil deeds and thoughts through dua?"
+    },
+    {
+      "id": "dua11",
+      "title": "Dua for Ramadan Fasting",
+      "description": "What dua can I recite during Suhoor and Iftar to enhance my fasting experience in Ramadan?"
+    },
+    {
+      "id": "dua12",
+      "title": "Dua for Laylat al-Qadr",
+      "description": "What is the best dua to recite during Laylat al-Qadr for maximizing the blessings of this night?"
+    },
+    {
+      "id": "dua13",
+      "title": "Dua for Charity in Ramadan",
+      "description": "Can you suggest some duas for making charitable acts during Ramadan more meaningful?"
+    },
+    {
+      "id": "dua14",
+      "title": "Dua for Taraweeh Prayers",
+      "description": "What are some duas to recite before or after Taraweeh prayers to seek closeness to Allah?"
+    },
+    {
+      "id": "dua15",
+      "title": "Dua for Eid Celebrations",
+      "description": "As Ramadan concludes, what dua should I recite to express gratitude and celebrate Eid?"
     }
   ],
+
   "perspectives": [
     {
       "id": "perspective1",
       "title": "On Patience",
-      "description": "Patience is not just the ability to wait, but how we behave while waiting. Islam teaches us that patience is a sign of faith and strength."
+      "description": "How does Islam teach us to embody patience not just in waiting, but in our behavior while we wait?"
     },
     {
       "id": "perspective2",
       "title": "On Charity",
-      "description": "Charity in Islam is not just an act of giving but an investment in society and the hereafter. It purifies wealth and hearts alike."
+      "description": "Why is charity considered not just an act of giving but a significant investment in Islam?"
     },
     {
       "id": "perspective3",
       "title": "On Forgiveness",
-      "description": "Forgiveness is a virtue that lifts burdens off the heart. Islam encourages us to forgive others, so we may also seek forgiveness from Allah."
+      "description": "How does Islam encourage forgiveness and why is it considered a virtue that lightens the heart?"
     },
     {
       "id": "perspective4",
       "title": "On Gratitude",
-      "description": "Gratitude in Islam is a cornerstone of faith. It transforms everyday life into blessings and increases one's contentment and peace."
+      "description": "Why is gratitude a cornerstone of faith in Islam and how does it transform our daily lives?"
     },
     {
       "id": "perspective5",
       "title": "On Trust in Allah",
-      "description": "Placing trust in Allah is fundamental in Islam. It means believing that He is in control and that His plan is always for the best, even if we do not yet understand it."
+      "description": "What does placing trust in Allah signify in Islam and how can it affect our understanding of life's challenges?"
     },
     {
       "id": "perspective6",
       "title": "On Self-Reflection",
-      "description": "Self-reflection is an essential part of personal growth in Islam. It involves examining our thoughts, words, and actions to identify areas for improvement and to seek Allah's guidance in making positive changes."
+      "description": "Why is self-reflection crucial in Islam and how can it assist in personal growth?"
     },
     {
       "id": "perspective7",
       "title": "On Self-Discipline",
-      "description": "Self-discipline is a key component of success in Islam. It involves controlling our desires and impulses, and developing habits that align with Islamic values and principles."
+      "description": "How does self-discipline contribute to success in Islam and what role does it play in aligning with Islamic values?"
     },
     {
       "id": "perspective8",
       "title": "On Self-Improvement",
-      "description": "Self-improvement is a lifelong journey in Islam. It involves striving to become the best version of ourselves, seeking knowledge, and developing skills that benefit ourselves and others."
+      "description": "What steps can one take towards self-improvement in Islam and why is it considered a lifelong journey?"
     },
     {
       "id": "perspective9",
       "title": "On Empathy",
-      "description": "Empathy is a fundamental aspect of Islamic values. It involves understanding and sharing the feelings of others, and treating them with kindness, compassion, and respect."
+      "description": "How is empathy a fundamental aspect of Islamic values and how does it affect our interactions with others?"
     },
     {
       "id": "perspective10",
       "title": "On Humility",
-      "description": "Humility is a virtue that is highly valued in Islam. It involves recognizing our limitations, being modest in our behavior, and avoiding arrogance and pride."
+      "description": "Why is humility highly valued in Islam and how can we practice it in our daily lives?"
+    },
+    {
+      "id": "perspective11",
+      "title": "On Ramadan Reflection",
+      "description": "How does Ramadan encourage us to evaluate and reflect on our deeds and intentions?"
+    },
+    {
+      "id": "perspective12",
+      "title": "On Spiritual Renewal",
+      "description": "What practices during Ramadan can aid in the spiritual renewal of our faith?"
+    },
+    {
+      "id": "perspective13",
+      "title": "On Community in Ramadan",
+      "description": "How does the heightened sense of community in Ramadan strengthen our faith and relationships?"
+    },
+    {
+      "id": "perspective14",
+      "title": "On Generosity and Giving",
+      "description": "In what ways can we practice generosity during Ramadan to extend its impact beyond monetary contributions?"
+    },
+    {
+      "id": "perspective15",
+      "title": "On Gratitude and Contentment",
+      "description": "How can the lessons of gratitude and contentment learned during fasting be applied beyond Ramadan?"
     }
   ],
+
   "remedies": [
     {
       "id": "remedy1",
       "title": "For Anxiety",
-      "description": "Turning to prayer, recitation of Qur'an, and making dua can bring peace to the heart and alleviate anxiety."
+      "description": "How can prayer, recitation of Qur'an, and making dua help alleviate anxiety and bring peace to the heart?"
     },
     {
       "id": "remedy2",
       "title": "For Financial Hardship",
-      "description": "Practicing patience, giving in charity despite personal need, and trusting in Allah's provision can ease financial difficulties."
+      "description": "In times of financial hardship, how can patience, charity, and trust in Allah's provision ease difficulties?"
     },
     {
       "id": "remedy3",
       "title": "For Health Issues",
-      "description": "Seeking medical treatment while also engaging in dua and relying on Allah's healing can address health challenges."
+      "description": "How does combining medical treatment with dua and reliance on Allah contribute to overcoming health challenges?"
     },
     {
       "id": "remedy4",
       "title": "For Loss and Grief",
-      "description": "Finding solace in the belief of life after death and the reunion with loved ones in the hereafter can ease the pain of loss."
+      "description": "What Islamic beliefs can offer solace and ease the pain of loss and grief?"
     },
     {
       "id": "remedy5",
       "title": "For Spiritual Doubts",
-      "description": "Seeking knowledge, engaging with the community, and making dua for guidance can help overcome spiritual doubts."
+      "description": "How can seeking knowledge, community engagement, and dua for guidance help overcome spiritual doubts?"
     },
     {
       "id": "remedy6",
       "title": "For Low Self-Esteem",
-      "description": "Remembering Allah's love and mercy, seeking knowledge, and engaging in acts of worship can help build self-confidence and self-worth."
+      "description": "What role does remembering Allah's love, seeking knowledge, and worship play in building self-confidence and self-worth?"
     },
     {
       "id": "remedy7",
       "title": "For Loneliness",
-      "description": "Connecting with the community, volunteering, and engaging in social activities can help alleviate feelings of loneliness and isolation."
+      "description": "How can connecting with the community and engaging in social activities alleviate feelings of loneliness?"
     },
     {
       "id": "remedy8",
       "title": "For Procrastination",
-      "description": "Setting clear goals, breaking tasks into smaller steps, and seeking accountability can help overcome procrastination and increase productivity."
+      "description": "What strategies can help overcome procrastination and enhance productivity?"
     },
     {
       "id": "remedy9",
       "title": "For Negative Thinking",
-      "description": "Reframing negative thoughts, practicing gratitude, and engaging in positive self-talk can help shift our mindset and improve our outlook on life."
+      "description": "How can reframing thoughts and practicing gratitude improve our mindset and life outlook?"
     },
     {
       "id": "remedy10",
       "title": "For Burnout",
-      "description": "Taking breaks, practicing self-care, and seeking support from loved ones and professionals can help prevent and alleviate burnout."
+      "description": "What approaches can help prevent and alleviate burnout?"
+    },
+    {
+      "id": "remedy11",
+      "title": "For Maximizing Ramadan Worship",
+      "description": "How can one optimize their worship and spiritual practices during Ramadan to gain maximum benefits?"
+    },
+    {
+      "id": "remedy12",
+      "title": "For Maintaining Energy While Fasting",
+      "description": "What are effective ways to maintain energy and focus during the fasting hours of Ramadan?"
+    },
+    {
+      "id": "remedy13",
+      "title": "For Navigating Social Obligations in Ramadan",
+      "description": "How can we balance our social obligations with our personal and spiritual goals during Ramadan?"
+    },
+    {
+      "id": "remedy14",
+      "title": "For Enhancing Charity in Ramadan",
+      "description": "What strategies can be employed to enhance charitable giving and acts of kindness during Ramadan?"
+    },
+    {
+      "id": "remedy15",
+      "title": "For Reflecting on the Qur'an in Ramadan",
+      "description": "How can we deepen our engagement and reflection on the Qur'an during the month of Ramadan?"
     }
   ]
 }

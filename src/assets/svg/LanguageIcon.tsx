@@ -4,16 +4,17 @@ import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 const LanguageIcon: React.FC<Props> = (props: Props) => {
   return (
     <EndeavorFancySVG
+      {...props}
       width={props.width || '24'}
       height={props.height || '24'}
-      fill={props.fill || 'none'}
+      fill={props.fill || '#ffffff'}
       stroke={props.stroke || '#08786b'}
       strokeWidth={props.strokeWidth || '2'}
     >
       <path
-        fill={props.fill}
-        strokeWidth={props.strokeWidth}
-        d='M12,23 C18.0751322,23 23,18.0751322 23,12 C23,5.92486775 18.0751322,1 12,1 C5.92486775,1 1,5.92486775 1,12 C1,18.0751322 5.92486775,23 12,23 Z M12,23 C15,23 16,18 16,12 C16,6 15,1 12,1 C9,1 8,6 8,12 C8,18 9,23 12,23 Z M2,16 L22,16 M2,8 L22,8'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802'
       ></path>
     </EndeavorFancySVG>
   )

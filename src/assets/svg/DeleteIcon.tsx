@@ -4,7 +4,8 @@ import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 const DeleteIcon: React.FC<Props> = (props: Props) => {
   return (
     <EndeavorFancySVG
-      fill='red'
+      {...props}
+      fill={props.fill || 'red'}
       stroke='red'
       strokeWidth='0'
       viewBox={props.viewBox || '0 0 24 24'}

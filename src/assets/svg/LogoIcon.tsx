@@ -4,6 +4,7 @@ import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 const LogoIcon: React.FC<Props> = (props: Props) => {
   return (
     <EndeavorFancySVG
+      {...props}
       width={props.width || '100'}
       height={props.height || '100'}
       viewBox={props.viewBox || '0 0 100 100'}

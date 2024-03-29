@@ -21,11 +21,11 @@ class CryptoService {
   }
 
   private static saveKeyToStorage(keyString: string): void {
-    localStorage.setItem('encryptionKey', keyString)
+    localStorage.setItem('ek', keyString)
   }
 
   private static loadKeyFromStorage(): string | null {
-    return localStorage.getItem('encryptionKey')
+    return localStorage.getItem('ek')
   }
 
   private static async ensureKeyInitialization(): Promise<CryptoKey> {
@@ -36,14 +36,13 @@ class CryptoService {
       this.saveKeyToStorage(exportedKey)
       keyString = exportedKey
     }
+
     return this.importKey(keyString)
   }
 
-  public static async encryptData<T>(data: T): Promise<ArrayBuffer> {
+  public static async encryptData(data: string): Promise<ArrayBuffer> {
     const key = await this.ensureKeyInitialization()
-
-    const clonedData = JSON.parse(JSON.stringify(data)) // Clone the data object
-    const encoded = new TextEncoder().encode(JSON.stringify(clonedData))
+    const encoded = new TextEncoder().encode(data)
     const iv = window.crypto.getRandomValues(new Uint8Array(12)) // Initialization vector
     const encrypted = await window.crypto.subtle.encrypt(
       {

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const informationPopupSlice = createSlice({
   name: 'informationPopup',
   initialState: {
-    isOpen: false,
+    isOpen: true,
   },
   reducers: {
     toggleInformationPopup: (state, action: PayloadAction<boolean>) => {

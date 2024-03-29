@@ -4,6 +4,7 @@ import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
 const RenameIcon: React.FC<Props> = (props: Props) => {
   return (
     <EndeavorFancySVG
+      {...props}
       fill={props.fill || 'currentColor'}
       stroke={props.stroke || 'currentColor'}
       strokeWidth='0'

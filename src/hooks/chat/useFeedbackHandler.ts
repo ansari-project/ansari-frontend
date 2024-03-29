@@ -22,21 +22,77 @@ export const useFeedbackHandler = (
     setModalVisible(true)
   }, [])
 
-  // Handles both the submission and cancellation of feedback.
-  // When a comment is not required, it can be invoked with an empty string.
-  const handleFeedbackAction = useCallback(
+  /**
+   * Handles both the submission and cancellation of feedback.
+   * When a comment is not required, it can be invoked with an empty string.
+   *
+   * @param sendFeedback - Indicates whether to send the feedback or not.
+   * @returns {void}
+   */
+  const handleFeedbackSubmit = useCallback(
     (sendFeedback: boolean) => {
-      const feedbackComment = sendFeedback
-        ? selectedFeedbackOptions.join(', ') + (additionalFeedback ? ` - ${additionalFeedback}` : '')
-        : ''
+      // Initialize feedbackComment as an empty string
+      let feedbackComment = ''
+      if (sendFeedback) {
+        // If there is no selected feedback option
+        if (selectedFeedbackOptions.length === 0) {
+          // Use trimmed additionalFeedback as feedbackComment
+          feedbackComment = additionalFeedback.trim()
+        } else {
+          // Use joined selectedFeedbackOptions as feedbackComment
+          feedbackComment = selectedFeedbackOptions.join(', ')
+
+          // If there is additional feedback, append it to feedbackComment with a ' - ' separator
+          if (additionalFeedback) {
+            feedbackComment += ` - ${additionalFeedback}`
+          }
+        }
+      }
+      // Call onSendFeedback with threadId, messageId, selectedFeedbackClass, and feedbackComment
       onSendFeedback(threadId, messageId, selectedFeedbackClass as FeedbackClass, feedbackComment)
+
+      // Dispatch setReactionButton action
       dispatch(setReactionButton({ threadId, messageId, selectedIcon: selectedFeedbackClass }))
+
+      // Update state variables
       setModalVisible(false)
       setSelectedFeedbackOptions([])
       setAdditionalFeedback('')
     },
     [threadId, messageId, selectedFeedbackClass, selectedFeedbackOptions, additionalFeedback, onSendFeedback, dispatch],
   )
+
+  /**
+   * Handles both the submission and cancellation of feedback.
+   * When a comment is not required, it can be invoked with an empty string.
+   *
+   * @param feedbackClass: FeedbackClass - FeedbackClass Icon.
+   * @returns {void}
+   */
+  const handleFeedbackAction = useCallback(
+    (feedbackClass: FeedbackClass) => {
+      // Call onSendFeedback with threadId, messageId, feedbackClass
+      onSendFeedback(threadId, messageId, feedbackClass, '')
+      // Dispatch setReactionButton action
+      dispatch(setReactionButton({ threadId, messageId, selectedIcon: feedbackClass }))
+      handleFeedbackSelection(feedbackClass)
+    },
+    [threadId, messageId, dispatch],
+  )
+
+  /**
+   * Handles both the submission and cancellation of feedback.
+   * When a comment is not required, it can be invoked with an empty string.
+   *
+   * @param feedbackClass: FeedbackClass - FeedbackClass Icon.
+   * @returns {void}
+   */
+  const handleFeedbackCancel = useCallback(() => {
+    // Update state variables
+    setModalVisible(false)
+    setSelectedFeedbackOptions([])
+    setAdditionalFeedback('')
+  }, [])
 
   // Toggles the selection of a feedback option, adding or removing it from the list.
   const toggleFeedbackOption = useCallback((option: string) => {
@@ -52,8 +108,9 @@ export const useFeedbackHandler = (
     selectedFeedbackOptions,
     additionalFeedback,
     setAdditionalFeedback,
-    handleFeedbackSelection,
     handleFeedbackAction, // Unified function for submission and cancellation.
+    handleFeedbackSubmit,
+    handleFeedbackCancel,
     toggleFeedbackOption,
   }
 }

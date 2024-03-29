@@ -1,9 +1,11 @@
-import { BackgroundImage, ChatContainer } from '@endeavorpal/components'
-import { useChat, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, fetchThread } from '@endeavorpal/store'
+import { ShareIcon } from '@endeavorpal/assets'
+import { ChatContainer } from '@endeavorpal/components'
+import { useChat, useDirection, useRedirect } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, fetchThread } from '@endeavorpal/store'
+import getEnv from '@endeavorpal/utils/getEnv'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 /**
@@ -15,6 +17,8 @@ const ChatScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
   const navigate = useNavigate()
+  const { isRTL } = useDirection()
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   useRedirect(`/chat/${threadId}`, '/login')
 
@@ -39,24 +43,33 @@ const ChatScreen: React.FC = () => {
     }
   }, [])
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center', // Ensure content is centered
+      justifyContent: 'space-between', // Distributes children evenly
+      width: '100%',
+    },
+    shareIcon: {
+      position: 'absolute',
+      left: isRTL ? 24 : 'auto',
+      right: isRTL ? 'auto' : 24,
+      padding: 8,
+      borderRadius: 4,
+      backgroundColor: theme.popupBackgroundColor,
+    },
+  })
+
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-      <BackgroundImage />
       <ChatContainer isHome={false} />
+      {getEnv('ENABLE_SHARE') && (
+        <View style={styles.shareIcon}>
+          <ShareIcon />
+        </View>
+      )}
     </KeyboardAvoidingView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#F2F2F2',
-    alignItems: 'center', // Ensure content is centered
-    justifyContent: 'space-between', // Distributes children evenly
-    marginTop: 5,
-  },
-
-  // Define additional styles if needed
-})
 
 export default ChatScreen

@@ -1,7 +1,8 @@
-import { BackgroundImage } from '@endeavorpal/components'
-import { useDirection, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, guestLogin, login } from '@endeavorpal/store'
+import { LogoIcon } from '@endeavorpal/assets'
+import { useDirection, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, guestLogin, login } from '@endeavorpal/store'
 import { LoginRequest } from '@endeavorpal/types'
+import { createGeneralThemedStyles } from '@endeavorpal/utils'
 import { useLoginSchema } from '@endeavorpal/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
@@ -16,7 +17,7 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
@@ -31,10 +32,38 @@ const LoginScreen: React.FC = () => {
   const loginSchema = useLoginSchema()
   const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()
+  const { isSmallScreen, width } = useScreenInfo()
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hovered, setHovered] = useState<number>(0)
   const [guestLoading, setGuestLoading] = useState<boolean>(false)
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
+  // Styles
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
+  const styles = StyleSheet.create({
+    title: {
+      ...Platform.select({
+        web: {
+          textAlign: 'center',
+          marginBottom: 24,
+          fontSize: 24,
+          fontWeight: 500,
+          color: theme.primaryColor,
+          fontFamily: 'Inter',
+        },
+        default: {
+          fontSize: 24,
+          fontWeight: 500,
+          marginBottom: 24,
+          textAlign: 'center',
+          color: theme.primaryColor,
+        },
+      }),
+    },
+    forgetLink: { ...generalStyle.link, marginLeft: 10, fontFamily: 'Inter' },
+    successText: { color: theme.hoverColor, marginBottom: 16, alignSelf: 'center' },
+  })
 
   // Inside your LoginScreen component, add the following function for guest login
 
@@ -87,10 +116,10 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <>
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <BackgroundImage />
-        {successMessage && <Text style={{ color: 'white' }}>{successMessage}</Text>}
+    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <View style={generalStyle.form}>
+        {successMessage && <Text style={styles.successText}>{successMessage}</Text>}
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
           initialValues={initialValues}
@@ -107,11 +136,11 @@ const LoginScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.email}
                 placeholder={t('email')}
-                style={[styles.input, isRTL && styles.textAlignRight]}
+                style={[generalStyle.input]}
                 autocomplete='off'
                 inputMode='email'
               />
-              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+              {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
 
               <TextInput
                 id='password'
@@ -122,19 +151,15 @@ const LoginScreen: React.FC = () => {
                 value={values.password}
                 placeholder={t('password')}
                 secureTextEntry
-                style={[styles.input, isRTL && styles.textAlignRight]}
+                style={[generalStyle.input]}
               />
-              {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+              {errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 
-              {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+              {errorMessage && <Text style={generalStyle.errorText}>{errorMessage}</Text>}
 
-              <Text style={[styles.prompt, isRTL ? styles.textAlignLeft : styles.textAlignRight]}>
+              <Text style={generalStyle.prompt}>
                 <Text
-                  style={[
-                    styles.forgetLink,
-                    isRTL && { marginRight: 10 },
-                    Platform.OS === 'web' && hovered === 1 ? styles.boldText : null,
-                  ]}
+                  style={[generalStyle.link, Platform.OS === 'web' && hovered === 1 ? generalStyle.boldText : null]}
                   onMouseEnter={() => setHovered(1)}
                   onMouseLeave={() => setHovered(0)}
                   onPress={() => navigate('/forgot-password')}
@@ -144,35 +169,31 @@ const LoginScreen: React.FC = () => {
               </Text>
 
               <Pressable
-                style={[styles.button, isSubmitting && styles.buttonDisabled]}
+                style={[generalStyle.buttonPrimary, isSubmitting && generalStyle.buttonDisabled]}
                 onPress={handleSubmit}
                 disabled={isSubmitting}
               >
-                <Text style={[styles.buttonText, isSubmitting && styles.buttonTextDisabled]}>
+                <Text style={[generalStyle.buttonPrimaryText, isSubmitting && generalStyle.buttonTextDisabled]}>
                   {isSubmitting ? t('submitting') : t('submit')}
                 </Text>
               </Pressable>
 
               <Pressable
-                style={[styles.button, { backgroundColor: '#657786' }, guestLoading && styles.buttonDisabled]}
+                style={[generalStyle.buttonSecondary, guestLoading && generalStyle.buttonDisabled]}
                 onPress={handleGuestLogin}
                 disabled={guestLoading}
               >
-                <Text style={[styles.buttonText, guestLoading && styles.buttonTextDisabled]}>
+                <Text style={[generalStyle.buttonSecondaryText, guestLoading && generalStyle.buttonTextDisabled]}>
                   {guestLoading ? t('submitting') : t('guestLogin')}
                 </Text>
               </Pressable>
 
               <Text
-                style={[
-                  styles.prompt,
-                  isRTL ? styles.textAlignLeft : styles.textAlignRight,
-                  Platform.OS === 'web' && hovered === 2 ? styles.boldText : null,
-                ]}
+                style={[generalStyle.prompt, Platform.OS === 'web' && hovered === 2 ? generalStyle.boldText : null]}
               >
                 {t('dontHaveAccount')}
                 <Text
-                  style={[styles.registerLink, isRTL && { marginRight: 10 }]}
+                  style={generalStyle.link}
                   onMouseEnter={() => setHovered(2)}
                   onMouseLeave={() => setHovered(0)}
                   onPress={() => navigate('/register')}
@@ -183,127 +204,9 @@ const LoginScreen: React.FC = () => {
             </View>
           )}
         </Formik>
-      </KeyboardAvoidingView>
-    </>
+      </View>
+    </KeyboardAvoidingView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...Platform.select({
-      web: {
-        flex: 1,
-        position: 'relative',
-        zIndex: 1,
-        color: '#ffffff',
-        backgroundColor: 'rgba(8, 37, 33, 0.8)', // #082521
-        width: '100%',
-        minWidth: 420,
-        paddingHorizontal: 16,
-        paddingVertical: 24,
-        borderRadius: 3,
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
-      default: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-        backgroundColor: '#F2F2F2',
-      },
-    }),
-  },
-  title: {
-    ...Platform.select({
-      web: {
-        textAlign: 'center',
-        marginBottom: 24,
-        fontSize: 24,
-        fontWeight: 500,
-        color: '#ffffff',
-      },
-      default: {
-        fontSize: 24,
-        fontWeight: 500,
-        marginBottom: 24,
-        textAlign: 'center',
-        color: '#ffffff',
-      },
-    }),
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 4,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
-  button: {
-    backgroundColor: '#08786b',
-    padding: 10,
-    borderRadius: 4,
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontWeight: 'bold',
-  },
-  buttonTextDisabled: {
-    color: 'darkorange',
-  },
-  buttonDisabled: {
-    backgroundColor: '#dddddd',
-  },
-  errorText: {
-    color: 'darkorange',
-    marginBottom: 10,
-  },
-  prompt: {
-    textAlign: 'right',
-    marginTop: 10,
-    color: 'white',
-  },
-  registerLink: {
-    color: 'darkorange',
-    textDecorationLine: 'none',
-    marginLeft: 10,
-    ...Platform.select({
-      web: {
-        ':hover': {
-          color: 'darkorange',
-          fontWeight: 'bold',
-        },
-      },
-    }),
-  },
-  forgetLink: {
-    color: '#fff',
-    textDecorationLine: 'none',
-    marginLeft: 10,
-    ...Platform.select({
-      web: {
-        ':hover': {
-          color: '#fff',
-          fontWeight: 'bold',
-        },
-      },
-    }),
-  },
-  textAlignRight: {
-    textAlign: 'right',
-  },
-  textAlignLeft: {
-    textAlign: 'left',
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
-  // ... other styles as needed
-})
 
 export default LoginScreen

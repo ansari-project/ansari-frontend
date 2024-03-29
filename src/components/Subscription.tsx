@@ -1,7 +1,9 @@
-import { useScreenInfo } from '@endeavorpal/hooks'
+import { useAuth } from '@endeavorpal/hooks'
+import { RootState } from '@endeavorpal/store'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Pressable, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 /**
  * Subscription Component
@@ -15,9 +17,13 @@ const Subscription: React.FC = () => {
   // The i18n instance provides the current language information and translation functionality.
   // When the language changes, the useTranslation hook in the component will force this component to re-render itself.
   const { i18n } = useTranslation()
+  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isAuthenticated, isGuest } = useAuth()
 
-  // Get the window dimensions to adjust the text size based on the screen size
-  const { width } = useScreenInfo()
+  // Allow the component to render only when the user is not authenticated or is a guest
+  if (isAuthenticated && !isGuest) {
+    return null
+  }
 
   return (
     // Wrap the Pressable component in a View component to allow styling the container
@@ -27,7 +33,6 @@ const Subscription: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 6,
-        // backgroundColor: '#fff',
       }}
     >
       <Pressable
@@ -43,8 +48,9 @@ const Subscription: React.FC = () => {
       >
         <Text
           style={{
-            fontSize: width > 375 ? 16 : 14, // Adjust the text size based on the screen size
-            color: 'black',
+            fontSize: 12,
+            color: theme.textColor,
+            fontFamily: 'Inter',
           }}
         >
           {/* The `Trans` component from `react-i18next` is used to render translated text.
@@ -52,7 +58,7 @@ const Subscription: React.FC = () => {
               - In this case, a span element with green color and underline is used for part of the text.
               - `i18nKey` is the key in the translation files that holds the text to be translated. */}
           <Trans
-            components={{ 1: <Text style={{ color: '#09786b', textDecorationLine: 'underline' }} /> }}
+            components={{ 1: <Text style={{ color: theme.linkColor, textDecorationLine: 'underline' }} /> }}
             i18nKey='subscribe'
             i18n={i18n}
           />

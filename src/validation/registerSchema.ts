@@ -12,29 +12,29 @@ const useRegisterSchema = () => {
         const errors = []
         // Check for minimum length
         if (value.length < minLength) {
-          errors.push(`at least ${minLength} characters long`)
+          errors.push(t('minLengthMessage', { min: minLength }))
         }
 
         // Check for uppercase letters
         const uppercaseMatches = value.match(/[A-Z]/g) || []
         if (uppercaseMatches.length < minUppercase) {
-          errors.push(`at least ${minUppercase} uppercase letter(s)`)
+          errors.push(t('minUppercaseMessage', { min: minUppercase }))
         }
 
         // Check for numbers
         const numberMatches = value.match(/[0-9]/g) || []
         if (numberMatches.length < minNumbers) {
-          errors.push(`at least ${minNumbers} number(s)`)
+          errors.push(t('minNumberMessage', { min: minNumbers }))
         }
 
         // Check for symbols
         const symbolMatches = value.match(/[!@#$%^&*(),.?":{}|<>]/g) || []
         if (symbolMatches.length < minSymbols) {
-          errors.push(`at least ${minSymbols} special character(s)`)
+          errors.push(t('minSymbolsMessage', { min: minSymbols }))
         }
 
         if (errors.length > 0) {
-          return new Yup.ValidationError(`Password must contain \n${errors.join('\n')}.`, null, 'password')
+          return new Yup.ValidationError(t('passwordSchema') + ` \n${errors.join('\n')}.`, null, 'password')
         }
 
         // If no errors, return true
@@ -50,6 +50,7 @@ const useRegisterSchema = () => {
       .required(t('confirmPasswordRequired')),
     firstName: Yup.string().required(t('firstNameRequired')),
     lastName: Yup.string().required(t('lastNameRequired')),
+    registerToMailList: Yup.boolean().oneOf([true, false], 'mainListRequired'),
   }
 }
 

@@ -38,7 +38,7 @@ class ChatService {
     // No messages are returned in the creation response, so initializing with an empty array
     const thread: Thread = {
       id: String(data.thread_id), // Convert thread_id to a string to match the Thread interface
-      name: 'New chat', // Initialize with 'New chat' since the API response doesn't include name
+      name: null, // API response doesn't include name
       messages: [], // Initialize with an empty array since the API response doesn't include messages
       date: new Date(),
     }
@@ -76,7 +76,7 @@ class ChatService {
       // No messages are returned in the creation response, so initializing with an empty array
       const thread: Thread = {
         id: String(threadId), // Convert thread_id to a string to match the Thread interface
-        name: data.thread_name ?? 'New chat', // Initialize with 'New chat' since the API response doesn't include name
+        name: data.thread_name ?? null, // API response doesn't include name
         messages: data.messages, // Initialize with an empty array since the API response doesn't include messages
       }
       return thread
@@ -102,7 +102,7 @@ class ChatService {
     const threads: Thread[] = rawThreads.map((rawThread: RawThread) => {
       return {
         id: String(rawThread.thread_id),
-        name: rawThread.thread_name || 'New chat',
+        name: rawThread.thread_name || null,
         messages: rawThread.messages || [],
         date: rawThread.updated_at ? new Date(rawThread.updated_at).toISOString() : undefined,
       }

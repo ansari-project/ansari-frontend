@@ -17,5 +17,6 @@
   "vs-code-prettier-eslint.prettierLast": true,
   "editor.columnSelection": false,
   "todo-tree.tree.showBadges": false,
-  "todo-tree.tree.disableCompactFolders": true
+  "todo-tree.tree.disableCompactFolders": true,
+  "cSpell.words": ["endeavorpal", "Pressable", "reduxjs"]
 }

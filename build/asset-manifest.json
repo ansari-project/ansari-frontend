@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "https://beta.ansari.chat/static/css/main.ea53d6ac.css",
-    "main.js": "https://beta.ansari.chat/static/js/main.4533d428.js",
+    "main.css": "https://beta.ansari.chat/static/css/main.efa98565.css",
+    "main.js": "https://beta.ansari.chat/static/js/main.866ea71c.js",
+    "static/media/background.png": "https://beta.ansari.chat/static/media/background.d37d7a83a8753e0ebbb7.png",
     "static/media/compositeLogo.svg": "https://beta.ansari.chat/static/media/compositeLogo.316705e3d9f51e155685d95c54b5978c.svg",
     "static/media/compositeLogoMobile.svg": "https://beta.ansari.chat/static/media/compositeLogoMobile.c09866db7bf2b56d6239af9cd6d83e10.svg",
-    "static/media/backgroundImage.svg": "https://beta.ansari.chat/static/media/backgroundImage.ac292b47ed305023b9ac2d428f480149.svg",
     "static/media/ansariWordMobile.svg": "https://beta.ansari.chat/static/media/ansariWordMobile.5cf58a2558b421d9a7efa7bdc0146a76.svg",
     "static/media/ansariWordDesktop.svg": "https://beta.ansari.chat/static/media/ansariWordDesktop.63102f795f5cdd4cfa1507c0e1dc29cc.svg",
     "static/media/loading.svg": "https://beta.ansari.chat/static/media/loading.d0f5c7e6f03330f1e6c74bdb3be06fa3.svg",
@@ -17,16 +17,16 @@
     "static/media/warningCircle.svg": "https://beta.ansari.chat/static/media/warningCircle.13bdef0766f4b31b03c20eff816b0439.svg",
     "static/media/stopResponse.svg": "https://beta.ansari.chat/static/media/stopResponse.977ebfc4ab64e9fb9f42775722f38cf9.svg",
     "static/media/messageLoader.svg": "https://beta.ansari.chat/static/media/messageLoader.829e7dc0c1aadbd86f67988cb85d2769.svg",
+    "index.html": "https://beta.ansari.chat/index.html",
     "static/media/fullScreen.svg": "https://beta.ansari.chat/static/media/fullScreen.ed30dbf8d68a7eeabe10f134bcfe2382.svg",
     "static/media/information.svg": "https://beta.ansari.chat/static/media/information.57276f59a016eab0e6ea703416008442.svg",
-    "index.html": "https://beta.ansari.chat/index.html",
     "static/media/chatDeleteLine.svg": "https://beta.ansari.chat/static/media/chatDeleteLine.97f4ddfc3441ea5a6af1e55f0804eff0.svg",
     "static/media/informationGreen.svg": "https://beta.ansari.chat/static/media/informationGreen.184e83d6d39aa7c53bac1697e460e0e9.svg",
-    "main.ea53d6ac.css.map": "https://beta.ansari.chat/static/css/main.ea53d6ac.css.map",
-    "main.4533d428.js.map": "https://beta.ansari.chat/static/js/main.4533d428.js.map"
+    "main.efa98565.css.map": "https://beta.ansari.chat/static/css/main.efa98565.css.map",
+    "main.866ea71c.js.map": "https://beta.ansari.chat/static/js/main.866ea71c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea53d6ac.css",
-    "static/js/main.4533d428.js"
+    "static/css/main.efa98565.css",
+    "static/js/main.866ea71c.js"
   ]
 }

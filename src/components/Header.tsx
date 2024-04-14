@@ -12,6 +12,7 @@ const Header: React.FC = () => {
   const { isSmallScreen, isMobile } = useScreenInfo()
   const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
   const displayMenuDrawer = isAuthenticated && !isGuest && (!isSideMenuOpened || isSmallScreen)
+  const theme = useSelector((state: RootState) => state.theme.theme)
 
   if (!isSmallScreen && !isAuthenticated) {
     return null
@@ -20,7 +21,6 @@ const Header: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       zIndex: 10,
-      paddingTop: 24,
       width: '100%',
       flexDirection: 'row',
       justifyContent: displayMenuDrawer ? 'space-between' : 'flex-end',
@@ -31,6 +31,8 @@ const Header: React.FC = () => {
       justifyContent: 'space-between',
       width: '100%',
       alignItems: 'center',
+      padding: isSmallScreen ? 8 : 16,
+      backgroundColor: isSmallScreen ? theme.popupBackgroundColor : null,
     },
     leftContent: {
       flexDirection: isRTL ? 'row-reverse' : 'row',

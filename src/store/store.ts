@@ -7,6 +7,7 @@ import {
   reactionButtonsReducer,
   sideMenuReducer,
   themeReducer,
+  shareReducer,
 } from './slices'
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   sideMenu: sideMenuReducer,
   reactionButtons: reactionButtonsReducer,
   theme: themeReducer,
+  share: shareReducer,
   // Add other reducers here...
 })
 

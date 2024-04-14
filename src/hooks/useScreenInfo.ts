@@ -87,7 +87,8 @@ export const useScreenInfo = (sideMenuWidth: number = 0): ScreenInfo => {
   const basePaddingHorizontal = isSmallScreen ? 16 : (dynamicWidth - (isLargeScreen ? 960 : 768)) / 2
   const paddingHorizontal = Math.max(basePaddingHorizontal, 16)
   const actualPaddingHorizontal = getAppContentPadding(dynamicWidth, paddingHorizontal)
-  const contentWidth = dynamicWidth > 920 ? 920 : dynamicWidth < width ? dynamicWidth : dynamicWidth - 32 // dynamicWidth - actualPaddingHorizontal * 2
+  const contentWidth =
+    dynamicWidth > 920 ? 920 : dynamicWidth < width ? dynamicWidth : dynamicWidth - (isSmallScreen ? 16 : 32) // dynamicWidth - actualPaddingHorizontal * 2
   const sideMenuDrawer = dynamicWidth * 0.8
   // Assuming an average character width (ACW) for the Inter font at the desired font size
   const averageCharWidthPx = 9 // Example value in pixels

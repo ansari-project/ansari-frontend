@@ -1,13 +1,4 @@
 {
-  "gettingWrongSometimes": "Assalamu alaikum! Nama saya Ansari. Saya dapat membantu Anda dengan pertanyaan Anda tentang Islam.\nSaya kadang-kadang membuat kesalahan. Selalu lebih baik berkonsultasi dengan seorang Ulama Islam sejati.",
-  "flaggingInstructions": {
-    "desktop": "Jika saya mengatakan sesuatu yang salah, membingungkan, bagus, lucu, atau menarik, silakan email <1>{{email}}</1>.",
-    "mobile": "Umpan balik? Silakan email kami! <1>lebih lanjut</1>"
-  },
-  "multilingualMessage": {
-    "desktop": "Saya multibahasa. Saya dapat memahami Bahasa Arab (termasuk transliterasi), Bahasa, Bosnia, Perancis, Turki, Urdu, dan banyak bahasa lainnya.",
-    "mobile": "Saya multibahasa. <1>lebih lanjut</1>"
-  },
   "promptPlaceholder": "Salam, Pesan Ansari...",
   "duaToMake": "Doa untuk membuat",
   "inParticularSituation": "dalam situasi tertentu",
@@ -34,7 +25,7 @@
   "optional": "opsional",
   "submit": "Kirim",
   "additionalFeedbackPlaceholder": "Berikan umpan balik tambahan",
-  "welcomeGuest": "Selamat datang Tamu",
+  "welcomeGuest": "Keluar dari Mode Tamu",
   "welcomeMessageTitle": "Selamat datang di Ansari.Chat!",
   "guestWelcomeMessage": "Halo dan Salam! Selamat datang di Ansari. Ansari adalah asisten kecerdasan buatan Islam yang membantu non-Muslim memahami Islam dan membantu Muslim dalam mempraktikkan keyakinan mereka dengan lebih efektif. Jika Anda ingin panduan lebih komprehensif tentang apa yang dapat dilakukan Ansari, lihat bagian <1>dokumentasi</1> ini.\n\nAnsari masih dalam tahap eksperimental dan mungkin tidak selalu memberikan hasil yang benar. Jika Anda memiliki umpan balik - positif atau negatif - jangan ragu untuk menggunakan tombol suka atau tidak suka, atau jika itu lebih kompleks dan Anda ingin respons, kirimkan kami email di <2>{{email}}</2>.\n\nAnda saat ini masuk sebagai tamu. Anda dapat menggunakan mode tamu selama yang Anda inginkan, tetapi beberapa fitur Ansari (misalnya, percakapan yang disimpan) hanya tersedia jika Anda masuk. Anda dapat mendaftar untuk <3>akun baru</3>.\n\nBerlangganan untuk pembaruan <4>di sini</4>!",
   "welcomeMessage": "Halo dan Salam! Selamat datang di Ansari. Ansari adalah asisten kecerdasan buatan Islam yang membantu non-Muslim memahami Islam dan membantu Muslim dalam mempraktikkan keyakinan mereka dengan lebih efektif. Jika Anda ingin panduan lebih komprehensif tentang apa yang dapat dilakukan Ansari, lihat bagian <1>dokumentasi</1> ini.\n\nAnsari masih dalam tahap eksperimental dan mungkin tidak selalu memberikan hasil yang benar. Jika Anda memiliki umpan balik - positif atau negatif - jangan ragu untuk menggunakan tombol suka atau tidak suka, atau jika itu lebih kompleks dan Anda ingin respons, kirimkan kami email di <2>{{email}}</2>.",
@@ -51,7 +42,7 @@
   "deleteThread": "Hapus utas?",
   "deleteThreadMessage": "Ini akan menghapus <1>{{threadName}}</1>",
   "delete": "Hapus",
-  "authorizedFooterText": "ANSARI bisa melakukan kesalahan. Pertimbangkan untuk berkonsultasi dengan seorang cendekiawan Islam yang sesungguhnya.",
+  "authorizedFooterText": "ANSARI bisa membuat kesalahan. Pertimbangkan untuk berkonsultasi dengan seorang Sarjana Islam yang berkualitas.",
   "termOfUse": "Syarat Penggunaan",
   "privacyPolicy": "Kebijakan Privasi",
   "you": "Anda",
@@ -59,5 +50,17 @@
   "getStarted": "Mulai",
   "greeting": "Assalamu alaikum!",
   "login": "Masuk",
-  "register": "Daftar"
+  "register": "Daftar",
+  "anonymous": "Anonim",
+  "share": {
+    "title": "Bagikan tautan ke Obrolan",
+    "message": "Pesan yang Anda kirim setelah membuat tautan Anda tidak akan dibagikan. Siapa pun dengan URL akan dapat melihat obrolan yang dibagikan.",
+    "copyingLink": "Menyalin",
+    "copied": "Disalin",
+    "copyLink": "Salin Tautan",
+    "getStart": "Mulai perjalanan Anda dengan Ansari",
+    "successCopy": "Tautan percakapan yang dibagikan telah disalin ke papan klip!"
+  },
+  "pageNotFound": "Halaman Tidak Ditemukan",
+  "notfoundMessage": "Halaman tidak dapat ditemukan."
 }

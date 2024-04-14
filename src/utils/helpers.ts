@@ -163,8 +163,21 @@ const createLocalizedDateHeader = (dateCategory: string, threadDate: Date, t: TF
   }
 }
 
+/**
+ * Validates a UUID string.
+ * @param uuid The UUID string to validate.
+ * @returns true if the UUID string is valid, otherwise false.
+ */
+function isValidateUUID(uuid: string): boolean {
+  // Regular expression to match UUID format
+  const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
+  // Test if the UUID string matches the regex pattern
+  return uuidRegex.test(uuid)
+}
+
 export default {
   isBlank,
+  isValidateUUID,
   generateUniqueId,
   generateGuestCredentials,
   createLocalizedDateHeader,

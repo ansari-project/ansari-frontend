@@ -7,4 +7,6 @@ export {
   fetchThreads,
   sendFeedback,
   setThreadName,
+  fetchSharedThread,
+  getShareThreadUUID,
 } from './chatActions'

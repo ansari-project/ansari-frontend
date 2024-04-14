@@ -1,13 +1,4 @@
 {
-  "gettingWrongSometimes": "Selam alejkum! Moje ime je Ansari. Mogu vam pomoći s pitanjima o islamu.\nPonekad griješim. Uvijek je najbolje konzultirati pravog islamskog učenjaka.",
-  "flaggingInstructions": {
-    "desktop": "Ako kažem nešto pogrešno, zbunjujuće, sjajno, smiješno ili zanimljivo, molim vas pošaljite e-mail na <1>{{email}}</1>.",
-    "mobile": "Povratne informacije? Molimo vas da nam pošaljete e-mail! <1>više</1>"
-  },
-  "multilingualMessage": {
-    "desktop": "Govorim više jezika. Razumijem arapski (uključujući transliteraciju), bahasa, bosanski, francuski, turski, urdu i mnoge druge jezike.",
-    "mobile": "Govorim više jezika. <1>više</1>"
-  },
   "promptPlaceholder": "Selam, Poruka Ansari...",
   "duaToMake": "Dua za izgovaranje",
   "inParticularSituation": "u određenoj situaciji",
@@ -34,7 +25,7 @@
   "optional": "opcionalno",
   "submit": "Pošalji",
   "additionalFeedbackPlaceholder": "Priložite dodatne povratne informacije",
-  "welcomeGuest": "Dobrodošli Gost",
+  "welcomeGuest": "Izađi iz Gost režima",
   "welcomeMessageTitle": "Dobrodošli na Ansari.Chat!",
   "guestWelcomeMessage": "Zdravo i Selam! Dobrodošli na Ansari. Ansari je islamski AI pomoćnik - alat koji pomaže nemuslimanima razumjeti islam i muslimanima da efikasnije prakticiraju svoju vjeru. Ako želite sveobuhvatan vodič o tome što može raditi, pogledajte ovaj <1>dio dokumentacije</1>.\n\nAnsari je još uvijek eksperimentalan i ponekad ne daje točne rezultate. Ako imate povratne informacije - pozitivne ili negativne - slobodno koristite gumbe za palac gore ili palac dolje, ili ako je složeno i želite odgovor, pošaljite nam e-mail na <2>{{email}}</2>.\n\nTrenutno ste prijavljeni kao gost. Gost režim možete koristiti koliko god želite, ali neke od značajki Ansarija (npr. spremljeni razgovori) dostupne su samo ako ste prijavljeni. Možete se registrirati za <3>novi račun</3>.\n\nPretplatite se na ažuriranja <4>ovdje</4>!",
   "welcomeMessage": "Zdravo i Selam! Dobrodošli na Ansari. Ansari je islamski AI pomoćnik - alat koji pomaže nemuslimanima razumjeti islam i muslimanima da efikasnije prakticiraju svoju vjeru. Ako želite sveobuhvatan vodič o tome što može raditi, pogledajte ovaj <1>dio dokumentacije</1>.\n\nAnsari je još uvijek eksperimentalan i ponekad ne daje točne rezultate. Ako imate povratne informacije - pozitivne ili negativne - slobodno koristite gumbe za palac gore ili palac dolje, ili ako je složeno i želite odgovor, pošaljite nam e-mail na <2>{{email}}</2>.",
@@ -49,7 +40,7 @@
   "deleteThread": "Izbrisati nit?",
   "deleteThreadMessage": "Ovo će izbrisati <1>{{threadName}}</1>",
   "delete": "Izbriši",
-  "authorizedFooterText": "ANSARI može napraviti greške. Razmotrite konsultaciju sa pravim islamskim učenjakom.",
+  "authorizedFooterText": "ANSARI može napraviti greške. Razmotrite konsultaciju s kvalificiranim islamskim učenjakom.",
   "termOfUse": "Uslovi korištenja",
   "privacyPolicy": "Pravila privatnosti",
   "you": "Ti",
@@ -57,5 +48,17 @@
   "getStarted": "Počni",
   "greeting": "Selam!",
   "login": "Prijava",
-  "register": "Registracija"
+  "register": "Registracija",
+  "anonymous": "Anonimno",
+  "share": {
+    "title": "Podijeli link za Četovanje",
+    "message": "Poruke koje pošaljete nakon što kreirate svoj link neće biti podijeljene. Bilo ko sa URL-om će moći pregledati podijeljeni čet.",
+    "copyingLink": "Kopiranje",
+    "copied": "Kopirano",
+    "copyLink": "Kopiraj Link",
+    "getStart": "Započnite svoje putovanje s Ansarijem",
+    "successCopy": "Kopiran URL dijaloga u međuspremnik!"
+  },
+  "pageNotFound": "Stranica nije pronađena",
+  "notfoundMessage": "Stranica nije pronađena."
 }

@@ -1,9 +1,9 @@
 import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { RootState, Thread } from '@endeavorpal/store'
+import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import IconContainer from './IconContainer'
 
@@ -28,9 +28,10 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   onThreadDelete,
   onThreadRename,
 }) => {
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
   const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
-  const navigate = useNavigate()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
   const lengthThreshold = 30
   const { t } = useTranslation()
@@ -39,6 +40,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   const [editing, setEditing] = useState(false)
   const [editedName, setEditedName] = useState(thread.name || t('newChat'))
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const isSharePopupVisible = useSelector((state: RootState) => state.share.isOpen)
+  const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
+
   const [inputRef] = useState(React.createRef<TextInput>())
 
   useEffect(() => {
@@ -49,6 +53,10 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
 
   const handleEditIconPress = () => {
     setEditing(true)
+  }
+  const handleShareIconPress = () => {
+    dispatch(toggleSideMenu(!isSideMenuOpened))
+    dispatch(toggleSharePopup(!isSharePopupVisible))
   }
 
   const handleThreadCardPress = () => {
@@ -152,6 +160,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
           isRTL={isRTL}
           onThreadDelete={onThreadDelete}
           onThreadRename={handleEditIconPress}
+          onThreadShare={handleShareIconPress}
         />
       )}
     </Pressable>

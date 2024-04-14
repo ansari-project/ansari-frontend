@@ -1,13 +1,4 @@
 {
-  "gettingWrongSometimes": "Salam alaikum ! Mon nom est Ansari. Je peux vous aider avec vos questions sur l'islam.\nIl m'arrive parfois de me tromper. Il est toujours préférable de consulter un véritable érudit islamique.",
-  "flaggingInstructions": {
-    "desktop": "Si je dis quelque chose de faux, de confus, de génial, de drôle ou d'intéressant, veuillez envoyer un e-mail à <1>{{email}}</1>.",
-    "mobile": "Retour d'information ? Veuillez nous envoyer un e-mail ! <1>plus</1>"
-  },
-  "multilingualMessage": {
-    "desktop": "Je suis multilingue. Je peux comprendre l'arabe (y compris la translittération), le bahasa, le bosniaque, le français, le turc, l'ourdou et de nombreuses autres langues.",
-    "mobile": "Je suis multilingue. <1>plus</1>"
-  },
   "promptPlaceholder": "Salam, Message Ansari...",
   "duaToMake": "Dua à faire",
   "inParticularSituation": "dans une situation particulière",
@@ -34,7 +25,7 @@
   "optional": "optionnel",
   "submit": "Envoyer",
   "additionalFeedbackPlaceholder": "Fournir des commentaires supplémentaires",
-  "welcomeGuest": "Bienvenue Invité",
+  "welcomeGuest": "Quitter le mode invité",
   "welcomeMessageTitle": "Bienvenue sur Ansari.Chat !",
   "guestWelcomeMessage": "Bonjour et Salam ! Bienvenue sur Ansari. Ansari est un assistant IA islamique - un outil pour aider les non-musulmans à comprendre l'islam et les musulmans à pratiquer leur foi de manière plus efficace. Si vous souhaitez un guide plus complet sur ce qu'il peut faire, consultez cette <1>partie de la documentation</1>.\n\nAnsari est encore expérimental et peut ne pas toujours donner des résultats corrects. Si vous avez des commentaires - positifs ou négatifs - n'hésitez pas à utiliser les pouces vers le haut ou vers le bas, ou si c'est plus complexe et que vous voulez une réponse, envoyez-nous un e-mail à l'adresse <2>{{email}}</2>.\n\nVous êtes actuellement connecté en tant qu'invité. Vous pouvez utiliser le mode invité aussi longtemps que vous le souhaitez, mais certaines fonctionnalités d'Ansari (par exemple, les conversations enregistrées) ne sont disponibles que si vous êtes connecté. Vous pouvez vous inscrire pour un <3>nouveau compte</3>.\n\nAbonnez-vous aux mises à jour <4>ici</4>!",
   "welcomeMessage": "Bonjour et Salam ! Bienvenue sur Ansari. Ansari est un assistant IA islamique - un outil pour aider les non-musulmans à comprendre l'islam et les musulmans à pratiquer leur foi de manière plus efficace. Si vous souhaitez un guide plus complet sur ce qu'il peut faire, consultez cette <1>partie de la documentation</1>.\n\nAnsari est encore expérimental et peut ne pas toujours donner des résultats corrects. Si vous avez des commentaires - positifs ou négatifs - n'hésitez pas à utiliser les pouces vers le haut ou vers le bas, ou si c'est plus complexe et que vous voulez une réponse, envoyez-nous un e-mail à l'adresse <2>{{email}}</2>.",
@@ -49,7 +40,7 @@
   "deleteThread": "Supprimer le fil de discussion ?",
   "deleteThreadMessage": "Cela supprimera <1>{{threadName}}</1>",
   "delete": "Supprimer",
-  "authorizedFooterText": "ANSARI peut faire des erreurs. Considérez consulter un véritable savant islamique.",
+  "authorizedFooterText": "ANSARI peut commettre des erreurs. Envisagez de consulter un savant islamique qualifié.",
   "termOfUse": "Conditions d'utilisation",
   "privacyPolicy": "Politique de confidentialité",
   "you": "Vous",
@@ -57,5 +48,17 @@
   "getStarted": "Commencer",
   "greeting": "Bonjour!",
   "login": "Connexion",
-  "register": "S'inscrire"
+  "register": "S'inscrire",
+  "anonymous": "Anonyme",
+  "share": {
+    "title": "Partager le lien vers la discussion",
+    "message": "Les messages que vous envoyez après avoir créé votre lien ne seront pas partagés. Toute personne disposant de l'URL pourra voir la discussion partagée.",
+    "copyingLink": "Copie en cours",
+    "copied": "Copié",
+    "copyLink": "Copier le lien",
+    "getStart": "Commencez votre voyage avec Ansari",
+    "successCopy": "URL de la conversation partagée copié dans le presse-papiers !"
+  },
+  "pageNotFound": "Page non trouvée",
+  "notfoundMessage": "La page demandée est introuvable."
 }

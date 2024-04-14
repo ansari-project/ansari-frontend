@@ -61,19 +61,14 @@ const InfoPopup: React.FC = () => {
       elevation: 5,
     },
     modalContent: {
-      marginVertical: 20,
-      marginHorizontal: 10,
+      marginVertical: isSmallScreen ? 12 : 20,
+      marginHorizontal: isSmallScreen ? 8 : 12,
       borderRadius: 0,
       padding: 10,
       alignItems: 'flex-start',
       elevation: 5,
-      gap: 16,
+      gap: isSmallScreen ? 8 : 16,
       flexGrow: 1, // make the modalContent view expand and fill the available space
-    },
-    rowGap16: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      gap: 16,
     },
     text: {
       width: '100%',
@@ -181,15 +176,15 @@ const InfoPopup: React.FC = () => {
           <View style={styles.modalView}>
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
-              <Pressable onPress={togglePopup}>
-                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} />
+              <Pressable onPress={togglePopup} style={{ borderWidth: 0 }}>
+                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={{ borderWidth: 0 }} />
               </Pressable>
             </View>
             <View style={styles.modalContent}>
               {isAuthenticated && isGuest && guestMessage()}
               {isAuthenticated && !isGuest && authenticatedMessage()}
 
-              <View style={styles.bottomContainer}>{isSmallScreen && <Subscription />}</View>
+              <View style={styles.bottomContainer}>{isSmallScreen && !isGuest && <Subscription />}</View>
             </View>
           </View>
         </View>

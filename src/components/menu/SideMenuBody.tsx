@@ -1,4 +1,4 @@
-import { EditIcon, LogoRoundIcon, MenuIcon } from '@endeavorpal/assets'
+import { AddIcon, LogoRoundIcon, MenuIcon } from '@endeavorpal/assets'
 import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
@@ -38,6 +38,9 @@ const SideMenuBody: React.FC = () => {
   // Function to handle press on ANSARI text
   const handlePress = () => {
     // Navigate to the home page here
+    if (isMobile) {
+      dispatch(toggleSideMenu(!isSideMenuOpened))
+    }
     navigate('/')
   }
 
@@ -67,11 +70,12 @@ const SideMenuBody: React.FC = () => {
       width: '100%',
       borderRadius: 0,
       padding: 16,
+      paddingVertical: 8,
       alignItems: 'flex-start',
       elevation: 5,
       gap: 16,
       flexGrow: 1, // make the content view expand and fill the available space
-      maxHeight: '80vh',
+      maxHeight: 'calc(100vh - 120px)',
     },
     scrollbar: {
       scrollbarColor: theme.scrollColor + ' transparent', // Change scrollbar color
@@ -81,10 +85,9 @@ const SideMenuBody: React.FC = () => {
       zIndex: 1,
       flexDirection: 'row',
       width: '100%',
-      paddingTop: 24,
-      paddingBottom: 8,
-      paddingRight: isRTL ? 24 : 8,
-      paddingLeft: isRTL ? 8 : 24,
+      paddingVertical: 16,
+      paddingRight: isRTL ? 16 : 8,
+      paddingLeft: isRTL ? 8 : 16,
       justifyContent: 'space-between',
       alignItems: 'center',
       gap: 8,
@@ -108,12 +111,11 @@ const SideMenuBody: React.FC = () => {
       zIndex: 1,
       alignItems: 'center',
       justifyContent: 'start',
-      marginTop: 'auto', // push the bottomContent to the bottom of the content view
       flexDirection: 'row',
       paddingHorizontal: 16,
+      position: 'fixed',
     },
     nameWrapper: {
-      flex: 1,
       flexDirection: 'row',
     },
   })
@@ -132,7 +134,7 @@ const SideMenuBody: React.FC = () => {
               <LogoRoundIcon width={24} height={24} />
             </Pressable>
             <Pressable onPress={handlePress}>
-              <EditIcon width={24} height={24} fill={theme.iconFill} hoverFill={theme.hoverColor} />
+              <AddIcon width={24} height={24} fill={theme.iconFill} hoverFill={theme.hoverColor} />
             </Pressable>
           </View>
         </View>

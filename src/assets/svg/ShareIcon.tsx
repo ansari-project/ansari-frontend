@@ -7,8 +7,8 @@ const EditIcon: React.FC<Props> = (props: Props) => {
 
   return (
     <EndeavorFancySVG
-      width={props.width || '24'}
-      height={props.height || '24'}
+      width={props.width || '18'}
+      height={props.height || '18'}
       viewBox={props.viewBox || '0 0 18 18'}
       fill={props.fill || 'white'}
       transform={props.transform || isRTL ? 'scale(-1, 1)' : 'scale(1, 1)'}

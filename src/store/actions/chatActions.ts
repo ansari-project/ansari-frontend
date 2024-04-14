@@ -12,6 +12,7 @@ import {
 } from '../slices/chatSlice'
 import { RootState } from '../store'
 import { Message, Thread, ThreadNameRequest, UserRole, FeedbackRequest } from '../types/chatTypes'
+import { ShareThreadResponse } from '@endeavorpal/types'
 
 /**
  * Adds a message to the chat.
@@ -210,6 +211,71 @@ export const setThreadName = createAsyncThunk(
       dispatch(fetchThreads()) // refresh the list of threads after deletion
     } catch (error) {
       dispatch(setError(error.toString()))
+    } finally {
+      dispatch(setLoading(false))
+    }
+  },
+)
+
+/**
+ * Get Share uuid for a thread asynchronously.
+ *
+ * @param threadId - The ID of the thread.
+ * @returns A Promise that resolves when the share thread uuid generated successfully.
+ */
+export const getShareThreadUUID = createAsyncThunk(
+  'chat/getShareThreadUUID',
+  async ({ threadId }: { threadId: string }, { dispatch, getState }) => {
+    try {
+      const { isAuthenticated, token } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, token)
+      dispatch(setLoading(true))
+      const response = await chatService.getShareThreadUUID(threadId)
+      if (response.status === 'success') {
+        return response as ShareThreadResponse
+      }
+    } catch (error: unknown) {
+      dispatch(setError(error.toString()))
+    } finally {
+      dispatch(setLoading(false))
+    }
+  },
+)
+
+/**
+ * Fetches a shared thread from the chat service.
+ *
+ * @param sharedThreadUUID - The uuid of the shared thread to fetch.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param getState - The getState function from the Redux store.
+ * @returns A Promise that resolves to the fetched thread.
+ * @throws {NotFoundError} If the thread is not found.
+ * @throws {ApplicationError} If an application error occurs.
+ */
+export const fetchSharedThread = createAsyncThunk(
+  'chat/fetchSharedThread',
+  async (sharedThreadUUID: string, { dispatch, getState }) => {
+    try {
+      const { isAuthenticated, token } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, token)
+      dispatch(setLoading(true))
+      const thread = await chatService.getSharedThread(sharedThreadUUID)
+      if (!thread.messages) {
+        throw NotFoundError
+      }
+      dispatch(setActiveThread(thread))
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        dispatch(setError(error.toString()))
+        throw error // Re-throw so it can be caught by the parent Catch block
+      } else if (error instanceof ApplicationError) {
+        dispatch(setError(error.toString()))
+        throw error // Re-throw so it can be caught by the parent Catch block
+      } else {
+        // Handle unexpected errors here
+        dispatch(setError('An unexpected error occurred'))
+        throw error
+      }
     } finally {
       dispatch(setLoading(false))
     }

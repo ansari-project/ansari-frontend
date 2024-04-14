@@ -78,6 +78,7 @@ const EndeavorFancySVG = (props: Props) => {
       ]}
       onMouseEnter={() => setIsHover(1)}
       onMouseLeave={() => setIsHover(0)}
+      autoFocus={false}
     >
       <View style={{ userSelect: 'none' }}>
         <svg {...svgProps}>{props.children}</svg>

@@ -69,7 +69,6 @@ const RegisterScreen: React.FC = () => {
     dispatch(register(registerRequest))
       .unwrap()
       .then((response) => {
-        console.log(response)
         if (response.status === 'error') {
           setErrorMessage(response.message || t('registerFailure'))
         } else {

@@ -1,7 +1,7 @@
 import { LogoIcon, LogoTextIcon } from '@endeavorpal/assets'
 import ActionButtons from '@endeavorpal/components/ActionButtons'
 import TermsAndPrivacy from '@endeavorpal/components/TermsAndPrivacy'
-import { useDirection, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { useDirection, useGuest, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
 import { RootState } from '@endeavorpal/store'
 import { createGeneralThemedStyles } from '@endeavorpal/utils'
 import React from 'react'
@@ -17,6 +17,7 @@ const Welcome: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
+  const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
   const { isSmallScreen, width, height } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -101,7 +102,7 @@ const Welcome: React.FC = () => {
             <LogoTextIcon fill={theme.logoColor} width={81} style={styles.logoText} />
           </View>
           <View style={styles.content}>
-            <Text style={styles.leftGreeting}>{t('greeting')}</Text>{' '}
+            <Text style={styles.leftGreeting}>{t('greeting')}</Text>
             <Text style={styles.leftTitle}>{t('ansariChat')}</Text>
           </View>
           <View>{!isSmallScreen && <ActionButtons isTop={false} />}</View>
@@ -117,6 +118,19 @@ const Welcome: React.FC = () => {
               onPress={() => navigate('/register')}
             >
               <Text style={generalStyle.buttonSecondaryText}>{t('register')}</Text>
+            </Pressable>
+            <Pressable
+              style={[
+                generalStyle.buttonSecondary,
+                generalStyle.fullWidth,
+                guestLoading && generalStyle.buttonDisabled,
+              ]}
+              onPress={handleGuestLogin}
+              disabled={guestLoading}
+            >
+              <Text style={[generalStyle.buttonSecondaryText, guestLoading && generalStyle.buttonTextDisabled]}>
+                {guestLoading ? t('login:submitting') : t('login:guestLogin')}
+              </Text>
             </Pressable>
           </View>
           <View style={styles.rightFooter}>

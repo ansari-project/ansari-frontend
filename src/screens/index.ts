@@ -5,5 +5,6 @@ export { default as LoginScreen } from './LoginScreen'
 export { default as RegisterScreen } from './RegisterScreen'
 export { default as ResetPasswordScreen } from './ResetPasswordScreen'
 export { default as WelcomeScreen } from './WelcomeScreen'
+export { default as NotFoundScreen } from './NotFoundScreen'
 
 // export { default as SettingsScreen } from './SettingsScreen'

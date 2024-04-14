@@ -1,6 +1,7 @@
 export * from './chat'
 export { useAuth } from './useAuth'
 export { useDirection } from './useDirection'
+export { useGuest } from './useGuest'
 export { useLogout } from './useLogout'
 export { useRedirect } from './useRedirect'
 export { useScreenInfo } from './useScreenInfo'

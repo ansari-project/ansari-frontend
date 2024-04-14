@@ -118,7 +118,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
       marginRight: isRTL ? 8 : null,
     },
     chatBox: {
-      maxWidth: '100%',
+      width: '100%',
       borderWist: 1,
       boarderColor: theme.primaryColor,
       backgroundColor: theme.backgroundColorSecondary,

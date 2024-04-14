@@ -1,3 +1,4 @@
+import { useScreenInfo } from '@endeavorpal/hooks'
 import { RootState } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { Animated, Platform, StyleSheet, Text } from 'react-native'
@@ -13,6 +14,7 @@ interface ToastProps {
 const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss, backgroundColor }) => {
   const [fadeAnim] = useState(new Animated.Value(0)) // Initial value for opacity: 0
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isSmallScreen } = useScreenInfo()
 
   const color = backgroundColor ?? 'red'
 
@@ -40,8 +42,8 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss, backgroundC
     toast: {
       position: 'fixed',
       top: 8,
-      left: '20%',
-      right: '20%',
+      left: isSmallScreen ? '5%' : '20%',
+      right: isSmallScreen ? '5%' : '20%',
       backgroundColor: color,
       padding: 10,
       borderRadius: 5,

@@ -57,6 +57,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   const handleShareIconPress = () => {
     dispatch(toggleSideMenu(!isSideMenuOpened))
     dispatch(toggleSharePopup(!isSharePopupVisible))
+    navigate(`/chat/${thread.id}`)
   }
 
   const handleThreadCardPress = () => {

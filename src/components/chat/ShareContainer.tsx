@@ -66,7 +66,7 @@ const ShareContainer: React.FC = () => {
       marginBottom: 16,
     },
     button: {
-      maxWidth: 250,
+      maxWidth: 320,
       marginHorizontal: 'auto',
     },
   })

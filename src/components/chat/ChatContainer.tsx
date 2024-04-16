@@ -71,6 +71,10 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
       justifyContent: 'center', // Center content vertically
       flex: 1,
     },
+    innerContainer: {
+      width: contentWidth,
+      marginHorizontal: 'auto',
+    },
     promptContent: {
       width: '100%', // Ensure it uses the full width of its container
       alignItems: 'flex-start', // Center items for consistency
@@ -80,17 +84,18 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
     },
     logoContainer: {
       alignItems: 'center', // Center content horizontally
+      paddingTop: '5vh',
       paddingBottom: '20vh',
     },
   })
 
   return (
-    <View style={[styles.chatContainer, { maxWidth: contentWidth }]}>
+    <View style={styles.chatContainer}>
       {isHome ? (
         isLoading || activeThread?.messages ? (
           <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} />
         ) : (
-          <View style={{ width: contentWidth }}>
+          <View style={styles.innerContainer}>
             <View style={styles.contentWrapper}>
               <View style={styles.logoContainer}>
                 {!isSmallScreen && (
@@ -109,7 +114,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
       ) : (
         <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} />
       )}
-      <View style={{ width: contentWidth }}>
+      <View style={styles.innerContainer}>
         <ChatInput
           value={inputText}
           onInputChange={setInputText}

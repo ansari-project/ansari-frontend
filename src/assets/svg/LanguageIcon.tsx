@@ -8,7 +8,7 @@ const LanguageIcon: React.FC<Props> = (props: Props) => {
       width={props.width || '24'}
       height={props.height || '24'}
       fill={props.fill || '#ffffff'}
-      stroke={props.stroke || '#08786b'}
+      stroke={props.stroke || 'currentColor'}
       strokeWidth={props.strokeWidth || '2'}
     >
       <path

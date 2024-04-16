@@ -1,6 +1,6 @@
 import { LogoIcon } from '@endeavorpal/assets'
-import { useDirection, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, guestLogin, login } from '@endeavorpal/store'
+import { useDirection, useGuest, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, login } from '@endeavorpal/store'
 import { LoginRequest } from '@endeavorpal/types'
 import { createGeneralThemedStyles } from '@endeavorpal/utils'
 import { useLoginSchema } from '@endeavorpal/validation'
@@ -31,12 +31,12 @@ const LoginScreen: React.FC = () => {
   const { t } = useTranslation('login')
   const loginSchema = useLoginSchema()
   const dispatch = useDispatch<AppDispatch>()
+  const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hovered, setHovered] = useState<number>(0)
-  const [guestLoading, setGuestLoading] = useState<boolean>(false)
   const theme = useSelector((state: RootState) => state.theme.theme)
 
   // Styles
@@ -64,23 +64,6 @@ const LoginScreen: React.FC = () => {
     forgetLink: { ...generalStyle.link, marginLeft: 10, fontFamily: 'Inter' },
     successText: { color: theme.hoverColor, marginBottom: 16, alignSelf: 'center' },
   })
-
-  // Inside your LoginScreen component, add the following function for guest login
-
-  const handleGuestLogin = () => {
-    setGuestLoading(true)
-    dispatch(guestLogin())
-      .unwrap()
-      .then(() => {
-        navigate('/') // Navigate to the home page or dashboard
-        setGuestLoading(false)
-      })
-      .catch((error) => {
-        console.error('Error logging in as guest:', error)
-        setGuestLoading(false)
-        // Handle error (e.g., show an error message)
-      })
-  }
 
   const handleSubmit = (values: LoginRequest, formikHelpers: FormikHelpers<LoginRequest>) => {
     formikHelpers.setSubmitting(true)

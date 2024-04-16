@@ -41,9 +41,9 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
-            window.open(getEnv('COMPREHENSIVE_GUIDE_URL'), '_blank')
+            window.open(getEnv('TERMS_URL'), '_blank')
           } else {
-            Linking.openURL(getEnv('COMPREHENSIVE_GUIDE_URL'))
+            Linking.openURL(getEnv('TERMS_URL'))
           }
         }}
       >
@@ -55,9 +55,9 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
-            window.open(getEnv('COMPREHENSIVE_GUIDE_URL'), '_blank')
+            window.open(getEnv('PRIVACY_URL'), '_blank')
           } else {
-            Linking.openURL(getEnv('COMPREHENSIVE_GUIDE_URL'))
+            Linking.openURL(getEnv('PRIVACY_URL'))
           }
         }}
       >

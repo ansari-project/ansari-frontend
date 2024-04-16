@@ -14,12 +14,23 @@ export type MessageBubbleProps = {
   isSending: boolean
   isOutgoing: boolean
   message: Message
+  reactionsEnabled?: boolean
+  width?: string | number
+  isShare?: boolean
 }
 
-const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOutgoing, message }) => {
+const MessageBubble: React.FC<MessageBubbleProps> = ({
+  threadId,
+  isSending,
+  isOutgoing,
+  message,
+  reactionsEnabled,
+  width,
+  isShare,
+}) => {
   const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()
-  const { isSmallScreen } = useScreenInfo()
+  const { isSmallScreen, contentWidth } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { t } = useTranslation()
   const { user } = useAuth()
@@ -39,9 +50,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOu
 
   const styles = StyleSheet.create({
     messageBubble: {
-      width: '100%',
+      width: width || contentWidth,
       padding: isSmallScreen ? 8 : 10,
       marginVertical: 4,
+      marginHorizontal: 'auto',
       borderRadius: 4,
       gap: isSmallScreen ? 8 : 16,
       display: 'flex',
@@ -111,7 +123,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOu
         </View>
       )}
       <View style={{ flexShrink: 1, width: '100%' }}>
-        <Text style={styles.senderName}>{isOutgoing ? t('you') : t('ansariChat')}</Text>
+        <Text style={styles.senderName}>{isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}</Text>
         <View style={styles.contentWrapper}>
           <Markdown
             components={{
@@ -121,7 +133,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ threadId, isSending, isOu
             {message.content}
           </Markdown>
         </View>
-        {!isOutgoing && !isSending && (
+        {!isOutgoing && !isSending && reactionsEnabled && (
           <View style={[styles.iconsWrapper]} key={message.id}>
             <ReactionButtons
               threadId={threadId}

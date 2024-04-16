@@ -1,23 +1,28 @@
+import { useScreenInfo } from '@endeavorpal/hooks'
 import { RootState } from '@endeavorpal/store'
 import React, { useEffect, useState } from 'react'
 import { Animated, Platform, StyleSheet, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 
 interface ToastProps {
-  message: string
+  message: string | React.ReactNode
   duration: number
+  backgroundColor?: string
   onDismiss: () => void
 }
 
-const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
+const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss, backgroundColor }) => {
   const [fadeAnim] = useState(new Animated.Value(0)) // Initial value for opacity: 0
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isSmallScreen } = useScreenInfo()
+
+  const color = backgroundColor ?? 'red'
 
   useEffect(() => {
     // Fade in
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200,
+      duration: 400,
       useNativeDriver: Platform.OS !== 'web',
     }).start()
 
@@ -25,7 +30,7 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
     const timer = setTimeout(() => {
       Animated.timing(fadeAnim, {
         toValue: 0,
-        duration: 200,
+        duration: 400,
         useNativeDriver: Platform.OS !== 'web',
       }).start(onDismiss)
     }, duration)
@@ -35,11 +40,11 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
 
   const styles = StyleSheet.create({
     toast: {
-      position: 'absolute',
-      top: 30,
-      left: '20%',
-      right: '20%',
-      backgroundColor: 'red',
+      position: 'fixed',
+      top: 8,
+      left: isSmallScreen ? '5%' : '20%',
+      right: isSmallScreen ? '5%' : '20%',
+      backgroundColor: color,
       padding: 10,
       borderRadius: 5,
       alignItems: 'center',
@@ -54,7 +59,7 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss }) => {
 
   return (
     <Animated.View style={[styles.toast, { opacity: fadeAnim }]}>
-      <Text style={styles.text}>{message}</Text>
+      {typeof message === 'string' ? <Text style={styles.text}>{message}</Text> : message}
     </Animated.View>
   )
 }

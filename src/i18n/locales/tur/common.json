@@ -1,13 +1,4 @@
 {
-  "gettingWrongSometimes": "Selamünaleyküm! Benim adım Ansari. İslam ile ilgili sorularınız konusunda size yardımcı olabilirim.\nBazen hatalı bilgiler verebilirim. Her zaman gerçek bir İslam alimi ile görüşmek en iyisidir.",
-  "flaggingInstructions": {
-    "desktop": "Eğer yanlış, kafa karıştırıcı, harika, komik ya da ilginç bir şey söylersem lütfen e-posta gönderin <1>{{email}}</1>.",
-    "mobile": "Geri bildirim mi? Lütfen bize e-posta gönderin! <1>daha fazla</1>"
-  },
-  "multilingualMessage": {
-    "desktop": "Çok dilliyim. Arapça (transliterasyon dahil), Bahasa, Bosna, Fransızca, Türkçe, Urdu ve birçok diğer dilde anlayabiliyorum.",
-    "mobile": "Çok dilliyim. <1>daha fazla</1>"
-  },
   "promptPlaceholder": "Selam, Mesaj Ansari...",
   "duaToMake": "Yapılacak dua",
   "inParticularSituation": "özel durumda",
@@ -34,7 +25,7 @@
   "optional": "isteğe bağlı",
   "submit": "Gönder",
   "additionalFeedbackPlaceholder": "Ek geri bildirim sağlayın",
-  "welcomeGuest": "Hoş geldiniz Misafir",
+  "welcomeGuest": "Misafir Modundan Çık",
   "welcomeMessageTitle": "Ansari.Chat'e Hoş Geldiniz!",
   "guestWelcomeMessage": "Merhaba ve Selam! Ansari'ye hoş geldiniz. Ansari, İslam'ı anlamak isteyen gayrı Müslimlere yardımcı olan bir İslami yapay zeka asistanıdır. Ne yapabileceği hakkında daha kapsamlı bir rehber istiyorsanız, bu <1>dökümantasyonun</1> bölümüne göz atın.\n\nAnsari hala deneysel bir aşamada ve her zaman doğru sonuçlar veremeyebilir. Olumlu veya olumsuz herhangi bir geri bildiriminiz varsa, başparmak yukarı veya aşağı düğmelerini kullanmaktan çekinmeyin veya karmaşık bir konuda yanıt almak istiyorsanız bize e-posta gönderin <2>{{email}}</2>.\n\nŞu anda bir misafir olarak giriş yaptınız. Misafir modunu istediğiniz kadar kullanabilirsiniz, ancak Ansari'nin bazı özellikleri (örneğin, kaydedilmiş konuşmalar) yalnızca oturum açmış kullanıcılara özeldir. Bir <3>yeni hesap</3> için kayıt olabilirsiniz.\n\nGüncellemeler için buradan <4>abone olun</4>!",
   "welcomeMessage": "Merhaba ve Selam! Ansari'ye hoş geldiniz. Ansari, İslam'ı anlamak isteyen gayrı Müslimlere yardımcı olan bir İslami yapay zeka asistanıdır. Ne yapabileceği hakkında daha kapsamlı bir rehber istiyorsanız, bu <1>dökümantasyonun</1> bölümüne göz atın.\n\nAnsari hala deneysel bir aşamada ve her zaman doğru sonuçlar veremeyebilir. Olumlu veya olumsuz herhangi bir geri bildiriminiz varsa, başparmak yukarı veya aşağı düğmelerini kullanmaktan çekinmeyin veya karmaşık bir konuda yanıt almak istiyorsanız bize e-posta gönderin <2>{{email}}</2>.",
@@ -49,7 +40,7 @@
   "deleteThread": "Konuyu silmek istiyor musunuz?",
   "deleteThreadMessage": "Bu, <1>{{threadName}}</1>'ı silecek",
   "delete": "Sil",
-  "authorizedFooterText": "ANSARI hatalar yapabilir. Gerçek bir İslam alimiyle danışmayı düşünün.",
+  "authorizedFooterText": "ANSARI hatalar yapabilir. Nitelikli bir İslam Alimi ile danışmayı düşünün.",
   "termOfUse": "Kullanım Koşulları",
   "privacyPolicy": "Gizlilik Politikası",
   "you": "Sen",
@@ -57,5 +48,17 @@
   "getStarted": "Başla",
   "greeting": "Merhaba!",
   "login": "Giriş",
-  "register": "Kayıt Ol"
+  "register": "Kayıt Ol",
+  "anonymous": "Anonim",
+  "share": {
+    "title": "Sohbet Bağlantısını Paylaş",
+    "message": "Bağlantınızı oluşturduktan sonra gönderdiğiniz mesajlar paylaşılmaz. URL'ye sahip herkes paylaşılan sohbeti görebilir.",
+    "copyingLink": "Kopyalanıyor",
+    "copied": "Kopyalandı",
+    "copyLink": "Bağlantıyı Kopyala",
+    "getStart": "Ansari ile yolculuğunuza başlayın",
+    "successCopy": "Paylaşılan konuşma URL'si panoya kopyalandı!"
+  },
+  "pageNotFound": "Sayfa Bulunamadı",
+  "notfoundMessage": "Sayfa bulunamadı."
 }

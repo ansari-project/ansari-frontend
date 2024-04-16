@@ -1,10 +1,11 @@
 import { ShareIcon } from '@endeavorpal/assets'
 import { ChatContainer } from '@endeavorpal/components'
-import { useChat, useDirection, useRedirect } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, fetchThread } from '@endeavorpal/store'
+import SharePopup from '@endeavorpal/components/share/SharePopup'
+import { useChat, useDirection, useRedirect, useScreenInfo } from '@endeavorpal/hooks'
+import { AppDispatch, RootState, fetchThread, toggleSharePopup } from '@endeavorpal/store'
 import getEnv from '@endeavorpal/utils/getEnv'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -19,6 +20,8 @@ const ChatScreen: React.FC = () => {
   const navigate = useNavigate()
   const { isRTL } = useDirection()
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const isSharePopupVisible = useSelector((state: RootState) => state.share.isOpen)
+  const { isSmallScreen } = useScreenInfo()
 
   useRedirect(`/chat/${threadId}`, '/login')
 
@@ -63,11 +66,18 @@ const ChatScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <ChatContainer isHome={false} />
-      {getEnv('ENABLE_SHARE') && (
+      {getEnv('ENABLE_SHARE') && !isSmallScreen && (
         <View style={styles.shareIcon}>
-          <ShareIcon />
+          <Pressable
+            onPress={() => {
+              dispatch(toggleSharePopup(!isSharePopupVisible))
+            }}
+          >
+            <ShareIcon />
+          </Pressable>
         </View>
       )}
+      <SharePopup visible={isSharePopupVisible} onClose={() => dispatch(toggleSharePopup(!isSharePopupVisible))} />
     </KeyboardAvoidingView>
   )
 }

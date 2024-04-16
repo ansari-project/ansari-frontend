@@ -6,7 +6,9 @@ type ThemedStyles = {
   input: ViewStyle
   smallButton: ViewStyle
   buttonPrimary: ViewStyle
+  buttonPrimaryHover: ViewStyle
   buttonPrimaryText: TextStyle
+  buttonPrimaryTextHover: TextStyle
   buttonSecondary: ViewStyle
   buttonSecondaryText: TextStyle
   buttonTextDisabled: TextStyle
@@ -80,6 +82,7 @@ const createThemedStyles = (
       paddingVertical: isSmallScreen ? 4 : 6,
       paddingHorizontal: 15,
     },
+    buttonPrimaryHover: {},
     buttonPrimary: {
       cursor: 'pointer',
       backgroundColor: theme.buttonPrimaryBackground,
@@ -87,8 +90,9 @@ const createThemedStyles = (
       paddingHorizontal: 24,
       borderRadius: 4,
       alignItems: 'center',
-      marginVertical: 10,
+      margin: isSmallScreen ? 6 : 12,
     },
+    buttonPrimaryTextHover: {},
     buttonPrimaryText: {
       color: theme.buttonPrimaryColor,
       fontWeight: 'bold',
@@ -103,7 +107,8 @@ const createThemedStyles = (
       paddingHorizontal: 24,
       borderRadius: 4,
       alignItems: 'center',
-      marginVertical: 10,
+      marginVertical: isSmallScreen ? 6 : 12,
+      marginHorizontal: 6,
     },
     buttonSecondaryText: {
       color: theme.buttonSecondaryColor,

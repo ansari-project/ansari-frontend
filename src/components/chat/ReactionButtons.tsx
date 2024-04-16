@@ -39,6 +39,15 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
   const theme = useSelector((state: RootState) => state.theme.theme)
   const [isHover, setIsHover] = useState<number>(0)
   const { isSmallScreen, width } = useScreenInfo()
+  const [editing, setEditing] = useState(false)
+
+  useEffect(() => {
+    if (editing) {
+      inputRef.current?.focus()
+    }
+  }, [editing])
+
+  const [inputRef] = useState(React.createRef<TextInput>())
 
   const copyMessage = useCallback(() => {
     Clipboard.setString(message.content)
@@ -99,7 +108,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     },
     modalView: {
       width: '100%',
-      paddingHorizontal: 20,
+      paddingHorizontal: isSmallScreen ? 8 : 20,
       paddingVertical: 16,
       alignItems: 'flex-start',
       backgroundColor: theme.inputBackgroundColor,
@@ -118,9 +127,14 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     },
     titleText: {
       fontWeight: '500',
-      textAlign: 'center',
       color: theme.primaryColor,
       fontFamily: 'Inter',
+    },
+    closeButton: {
+      borderWidth: 0,
+      alignSelf: 'flex-start',
+      marginLeft: isRTL ? null : 6,
+      marginRight: isRTL ? 6 : null,
     },
     // ... any additional styles you need ...
   })
@@ -137,23 +151,21 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     }
 
     return (
-      <View style={{ flexDirection: 'row', marginVertical: 10, flexWrap: 'wrap', gap: 10 }}>
-        {feedbackOptions.map((option, index) => (
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        {feedbackOptions.map((option) => (
           <Pressable
             key={option.value}
             style={[
               generalStyle.buttonSecondary,
-              (selectedFeedbackOptions.includes(option.value) || isHover == index) && generalStyle.buttonPrimary,
+              selectedFeedbackOptions.includes(option.value) && generalStyle.buttonPrimary,
               generalStyle.smallButton,
             ]}
             onPress={() => toggleFeedbackOption(option.value)}
-            onMouseEnter={() => setIsHover(index)}
-            onMouseLeave={() => setIsHover(-1)}
           >
             <Text
               style={[
                 generalStyle.buttonSecondaryText,
-                (selectedFeedbackOptions.includes(option.value) || isHover == index) && generalStyle.buttonPrimaryText,
+                selectedFeedbackOptions.includes(option.value) && generalStyle.buttonPrimaryText,
               ]}
             >
               {option.label}
@@ -171,18 +183,30 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
       <View style={styles.container}>
         <Pressable onPress={copyMessage} style={styles.icon}>
           {copySuccess ? (
-            <CheckIcon fill={theme.iconFill} hoverFill={theme.hoverColor} />
+            <CheckIcon fill={theme.hoverColor} />
           ) : (
             <CopyIcon fill={theme.iconFill} hoverFill={theme.hoverColor} />
           )}
         </Pressable>
-        <Pressable onPress={() => handleFeedbackAction(FeedbackClass.ThumbsUp)} style={styles.icon}>
+        <Pressable
+          onPress={() => {
+            handleFeedbackAction(FeedbackClass.ThumbsUp)
+            setEditing(true)
+          }}
+          style={styles.icon}
+        >
           <LikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsUp ? theme.hoverColor : theme.iconFill}
             hoverFill={theme.hoverColor}
           />
         </Pressable>
-        <Pressable onPress={() => handleFeedbackAction(FeedbackClass.ThumbsDown)} style={styles.icon}>
+        <Pressable
+          onPress={() => {
+            handleFeedbackAction(FeedbackClass.ThumbsDown)
+            setEditing(true)
+          }}
+          style={styles.icon}
+        >
           <DislikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsDown ? theme.hoverColor : theme.iconFill}
             hoverFill={theme.hoverColor}
@@ -197,7 +221,13 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
                 <Text style={styles.titleText}>{t('whyDidYouChooseThisRating')}</Text>
                 <Text style={{ color: theme.inputColor }}>{t('optional')}</Text>
               </View>
-              <Pressable style={{ alignItems: 'flex-end', borderWidth: 0 }} onPress={() => handleFeedbackCancel()}>
+              <Pressable
+                style={styles.closeButton}
+                onPress={() => {
+                  handleFeedbackCancel()
+                  setEditing(false)
+                }}
+              >
                 <CloseIcon />
               </Pressable>
             </View>
@@ -208,6 +238,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
               value={additionalFeedback}
               placeholder={t('additionalFeedbackPlaceholder')}
               multiline
+              ref={inputRef}
             />
             <View style={styles.buttonContainer}>
               <Pressable

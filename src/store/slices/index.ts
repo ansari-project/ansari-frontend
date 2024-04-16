@@ -14,4 +14,5 @@ export { default as informationPopupReducer, toggleInformationPopup } from './in
 export { default as sideMenuReducer, toggleSideMenu } from './sideMenuSlice'
 export { default as reactionButtonsReducer, resetReactionButtons, setReactionButton } from './reactionButtonsSlice'
 export { default as themeReducer, setTheme } from './themeSlice'
+export { default as shareReducer, toggleSharePopup } from './shareSlice'
 export type { ReactionButtonsState } from './reactionButtonsSlice'

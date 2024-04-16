@@ -6,7 +6,9 @@ import {
   RegisterScreen,
   ResetPasswordScreen,
   WelcomeScreen,
+  NotFoundScreen,
 } from '@endeavorpal/screens'
+import ShareScreen from '@endeavorpal/screens/ShareScreen'
 import { RouteObject } from 'react-router'
 
 /**
@@ -18,12 +20,14 @@ import { RouteObject } from 'react-router'
 const sharedRoutes: RouteObject[] = [
   { path: '/', element: <HomeScreen /> },
   { path: '/welcome', element: <WelcomeScreen /> },
+  { path: '/share/:threadUuid', element: <ShareScreen /> },
   { path: '/login', element: <LoginScreen /> },
   { path: '/forgot-password', element: <ForgetPasswordScreen /> },
   { path: '/reset-password', element: <ResetPasswordScreen /> },
   { path: '/register', element: <RegisterScreen /> },
   { path: '/chat/:threadId', element: <ChatScreen /> },
   { path: '*', element: <HomeScreen /> },
+  { path: '/404', element: <NotFoundScreen /> },
   // Add more routes here
 ]
 

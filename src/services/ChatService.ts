@@ -2,6 +2,7 @@ import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
 import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
 import { Helpers } from '@endeavorpal/utils'
 import { fetchWithAuthRetry } from './api'
+import { ShareThreadResponse } from '@endeavorpal/types'
 
 class ChatService {
   token: string | null
@@ -128,6 +129,42 @@ class ChatService {
     })
     if (!response.ok) {
       throw new Error('Error setting thread name')
+    }
+  }
+
+  async getShareThreadUUID(threadId: string): Promise<ShareThreadResponse> {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/share/${threadId}`, {
+      method: 'POST',
+      headers: this.createHeaders(),
+    })
+
+    if (!response.ok) {
+      throw new Error('Error getting share uuid for a thread')
+    }
+
+    return await response.json()
+  }
+
+  async getSharedThread(sharedThreadUUID: string): Promise<Thread> {
+    const response = await fetchWithAuthRetry(`${this.baseURL}/share/${sharedThreadUUID}`, {
+      headers: this.createHeaders(),
+    })
+    if (!response.ok) {
+      throw new ApplicationError('Error fetching shared thread ' + sharedThreadUUID)
+    }
+    const data = await response.json()
+
+    if (Helpers.isBlank(data)) {
+      throw new NotFoundError('Unable to load shared thread ' + sharedThreadUUID)
+    } else {
+      // The API returns { thread_id: 1 } and we need to convert it to the Thread type
+      // No messages are returned in the creation response, so initializing with an empty array
+      const thread: Thread = {
+        id: String(sharedThreadUUID), // Convert thread_id to a string to match the Thread interface
+        name: data.content.thread_name ?? null, // API response doesn't include name
+        messages: data.content.messages, // Initialize with an empty array since the API response doesn't include messages
+      }
+      return thread
     }
   }
 

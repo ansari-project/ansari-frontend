@@ -1,5 +1,6 @@
 export * from './layout/AppLayout'
 export * from './layout/PublicLayout'
+export * from './layout/WelcomeLayout'
 export { default as ConfirmationDialog } from './ConfirmationDialog'
 export { default as Footer } from './Footer'
 export { default as Header } from './Header'

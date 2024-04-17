@@ -15,6 +15,7 @@ const Footer: React.FC = () => {
   const { isAuthenticated, isGuest } = useAuth()
   const displayName = !(isAuthenticated && isGuest && (isMobile || isSmallScreen))
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
 
   const styles = StyleSheet.create({
     container: {
@@ -24,6 +25,7 @@ const Footer: React.FC = () => {
       alignItems: 'center',
       zIndex: 10,
       paddingHorizontal: isSmallScreen ? 16 : 24,
+      paddingVertical: isAuthenticated ? null : 16,
     },
     footerTextContainer: {
       flexDirection: 'row',
@@ -40,11 +42,20 @@ const Footer: React.FC = () => {
     },
   })
 
+  if (isInputFullMode) {
+    return null
+  }
+
   return (
     <View style={styles.container}>
       {isAuthenticated && isGuest && (
         <View style={{ marginHorizontal: 10 }}>
-          <NameContainer name={t('welcomeGuest') as string} nameColor={theme.textColor} displayName={displayName} />
+          <NameContainer
+            name={t('welcomeGuestText') as string}
+            initial={t('welcomeGuest') as string}
+            nameColor={theme.textColor}
+            displayName={displayName}
+          />
         </View>
       )}
       {(!isAuthenticated || isGuest) && !isMobile && <ActionButtons isTop={false} />}
@@ -52,12 +63,7 @@ const Footer: React.FC = () => {
         <View style={{ flex: 1 }}>
           <View style={styles.footerTextContainer}>
             <Text style={styles.footerText}>{t('authorizedFooterText')}</Text>
-            {isGuest && (
-              <View style={styles.footerTextContainer}>
-                <Text style={styles.footerText}>|</Text>
-                <Subscription />
-              </View>
-            )}
+            <Subscription />
           </View>
         </View>
       )}

@@ -18,10 +18,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   const { isLoading, activeThread, inputText, setInputText, isSending, sendNewMessage, abortRequest } = useChat()
   const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
 
   // State to track the last known content height
   const messageListRef = React.useRef<MessageListRef>(null)
-  const { contentWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
+  const { width, contentWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
 
   const handleSendPress = useCallback(
     async (prompt?: string) => {
@@ -72,8 +73,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
       flex: 1,
     },
     innerContainer: {
-      width: contentWidth,
-      marginHorizontal: 'auto',
+      width: isInputFullMode ? width : contentWidth,
+      marginHorizontal: isInputFullMode ? null : 'auto',
     },
     promptContent: {
       width: '100%', // Ensure it uses the full width of its container

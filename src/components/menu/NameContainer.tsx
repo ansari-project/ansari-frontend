@@ -11,11 +11,12 @@ import { useSelector } from 'react-redux'
 
 type NameContainerProps = {
   name: string
+  initial?: string
   nameColor?: string
   displayName?: boolean
 }
 
-const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayName = true }) => {
+const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayName = true, initial }) => {
   const { t } = useTranslation()
   const { isGuest } = useAuth()
   const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -73,7 +74,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
         <View style={styles.nameContainer}>
           <UserAvatar
             size={34}
-            name={name}
+            name={initial || name}
             textColor={theme.textColor}
             bgColor={theme.linkColor}
             textStyle={{ fontWeight: 'bold', fontSize: 14 }}

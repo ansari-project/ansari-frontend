@@ -1,4 +1,4 @@
-import { AppLayout, PublicLayout } from '@endeavorpal/components'
+import { AppLayout, PublicLayout, WelcomeLayout } from '@endeavorpal/components'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { RouteObject, createMemoryRouter } from 'react-router'
@@ -9,11 +9,14 @@ const webHistory = createBrowserHistory()
 
 const renderLayoutForRoute = (route: RouteObject) => {
   switch (route.path) {
-    case '/share/:threadUuid':
-    case '/404':
-      return <PublicLayout>{route.element}</PublicLayout>
+    case '/chat/:threadId':
+    case '/':
+    case '*':
+      return <AppLayout>{route.element}</AppLayout>
+    case '/welcome':
+      return <WelcomeLayout>{route.element}</WelcomeLayout>
     default:
-      return <AppLayout>{route.element}</AppLayout> // Render nothing if route path doesn't match
+      return <PublicLayout>{route.element}</PublicLayout> // Render nothing if route path doesn't match
   }
 }
 

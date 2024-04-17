@@ -79,7 +79,7 @@ const createThemedStyles = (
       fontFamily: 'Inter',
     },
     smallButton: {
-      paddingVertical: isSmallScreen ? 4 : 6,
+      paddingVertical: isSmallScreen ? 6 : 8,
       paddingHorizontal: 15,
     },
     buttonPrimaryHover: {},
@@ -90,7 +90,8 @@ const createThemedStyles = (
       paddingHorizontal: 24,
       borderRadius: 4,
       alignItems: 'center',
-      margin: isSmallScreen ? 6 : 12,
+      marginVertical: isSmallScreen ? 6 : 12,
+      marginHorizontal: 6,
     },
     buttonPrimaryTextHover: {},
     buttonPrimaryText: {
@@ -151,7 +152,7 @@ const createThemedStyles = (
     },
     prompt: {
       textAlign: isRTL ? 'left' : 'right',
-      marginTop: 10,
+      marginVertical: 10,
       color: theme.primaryColor,
       fontFamily: 'Inter',
     },

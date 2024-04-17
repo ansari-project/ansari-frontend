@@ -51,7 +51,8 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const { isScrolledUp, handleScroll, scrollToBottom } = useScrollManagement(50)
     // State to track the last known content height to determine when to auto-scroll
     const [lastContentHeight, setLastContentHeight] = useState<number>(0)
-    const { contentWidth, isSmallScreen } = useScreenInfo()
+    const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
+    const { width: dynamicWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
 
     // Expose scrollToBottom method to parent components
@@ -98,10 +99,11 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
       [lastContentHeight, isScrolledUp, scrollToBottom, isShare, scrollToBottomEnabled],
     )
 
+    const scrollToBottomPosition = dynamicWidth / 2 - 22 // 22 is the half of the width of the button
     // Scroll to Bottom Button component
     const ScrollToBottomButton = () => (
       <Pressable
-        style={[styles.scrollToBottomButton, { right: contentWidth / 2 }]}
+        style={[styles.scrollToBottomButton, { right: scrollToBottomPosition }]}
         onPress={() => {
           flatListRef.current?.scrollToEnd({ animated: false })
           scrollToBottom()

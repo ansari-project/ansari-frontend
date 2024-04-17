@@ -102,7 +102,7 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
   return (
     <View>
       <Pressable ref={touchableRef} style={styles.button} onPress={() => setIsVisible(!isVisible)}>
-        <LanguageIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} fill={theme.backgroundColor} />
+        <LanguageIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
       {/* This ensures that the Popover is only attempted to be rendered when touchableRef.current is not null,
       indicating that the Pressable has been mounted and the ref has been attached. */}

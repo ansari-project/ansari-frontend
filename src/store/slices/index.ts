@@ -11,6 +11,7 @@ export {
   setThreads,
 } from './chatSlice'
 export { default as informationPopupReducer, toggleInformationPopup } from './informationPopupSlice'
+export { default as inputFullModeReducer, tootleInputFullMode } from './inputFullModeSlice'
 export { default as sideMenuReducer, toggleSideMenu } from './sideMenuSlice'
 export { default as reactionButtonsReducer, resetReactionButtons, setReactionButton } from './reactionButtonsSlice'
 export { default as themeReducer, setTheme } from './themeSlice'

@@ -12,9 +12,9 @@ const Header: React.FC = () => {
   const { isSmallScreen, isMobile } = useScreenInfo()
   const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
   const displayMenuDrawer = isAuthenticated && !isGuest && (!isSideMenuOpened || isSmallScreen)
-  const theme = useSelector((state: RootState) => state.theme.theme)
+  const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
 
-  if (!isSmallScreen && !isAuthenticated) {
+  if (isInputFullMode || (!isSmallScreen && !isAuthenticated)) {
     return null
   }
 
@@ -32,7 +32,6 @@ const Header: React.FC = () => {
       width: '100%',
       alignItems: 'center',
       padding: isSmallScreen ? 8 : 16,
-      backgroundColor: isSmallScreen ? theme.popupBackgroundColor : null,
     },
     leftContent: {
       flexDirection: isRTL ? 'row-reverse' : 'row',

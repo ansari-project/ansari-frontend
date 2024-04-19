@@ -1,11 +1,11 @@
 import { CloseIcon, InfoIcon } from '@endeavorpal/assets'
-import { useAuth, useDirection, useLogout, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, toggleInformationPopup } from '@endeavorpal/store'
+import { useAuth, useDirection, useLogout, useScreenInfo, useToggleInfoPopup } from '@endeavorpal/hooks'
+import { RootState } from '@endeavorpal/store'
 import { GetEnv } from '@endeavorpal/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import Subscription from './Subscription'
 
@@ -16,10 +16,16 @@ const InfoPopup: React.FC = () => {
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { isAuthenticated, isGuest } = useAuth()
+  const toggleInfoPopup = useToggleInfoPopup()
 
-  const dispatch = useDispatch<AppDispatch>()
   const togglePopup = () => {
-    dispatch(toggleInformationPopup(!isInfoPopupOpen))
+    toggleInfoPopup(!isInfoPopupOpen)
+  }
+
+  if (isInfoPopupOpen === undefined) {
+    setTimeout(() => {
+      toggleInfoPopup(true)
+    }, 1000) // Show the Pop after 1 second
   }
 
   const navigate = useNavigate()
@@ -162,12 +168,7 @@ const InfoPopup: React.FC = () => {
 
   return (
     <>
-      <Pressable
-        onPress={() => {
-          togglePopup()
-        }}
-        style={styles.button}
-      >
+      <Pressable onPress={() => togglePopup()} style={styles.button}>
         <InfoIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
 
@@ -176,7 +177,7 @@ const InfoPopup: React.FC = () => {
           <View style={styles.modalView}>
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
-              <Pressable onPress={togglePopup} style={{ borderWidth: 0 }}>
+              <Pressable onPress={() => togglePopup()} style={{ borderWidth: 0 }}>
                 <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={{ borderWidth: 0 }} />
               </Pressable>
             </View>

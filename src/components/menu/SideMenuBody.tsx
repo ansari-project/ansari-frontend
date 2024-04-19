@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router'
 import ActionButtons from '../ActionButtons'
 import { ThreadsList } from '../threads'
 import { NameContainer } from './'
+import { Helpers } from '@endeavorpal/utils'
 
 const SideMenuBody: React.FC = () => {
   const { user } = useAuth()
@@ -75,7 +76,7 @@ const SideMenuBody: React.FC = () => {
       elevation: 5,
       gap: 16,
       flexGrow: 1, // make the content view expand and fill the available space
-      maxHeight: 'calc(100vh - 120px)',
+      maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
     },
     scrollbar: {
       scrollbarColor: theme.scrollColor + ' transparent', // Change scrollbar color
@@ -127,7 +128,7 @@ const SideMenuBody: React.FC = () => {
           {/* Drawer Header */}
 
           <View style={styles.headerMenu}>
-            <Pressable onPress={togglePopup}>
+            <Pressable onPress={() => togglePopup()}>
               <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
             </Pressable>
             <Pressable onPress={handlePress}>
@@ -149,7 +150,7 @@ const SideMenuBody: React.FC = () => {
         <View style={styles.bottomContainer}>
           <View style={styles.nameWrapper}>
             <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
-            {!isMobile && <ActionButtons isTop={false} margin={8} />}
+            {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
           </View>
         </View>
       </View>

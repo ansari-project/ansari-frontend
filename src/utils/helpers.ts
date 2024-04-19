@@ -175,10 +175,16 @@ function isValidateUUID(uuid: string): boolean {
   return uuidRegex.test(uuid)
 }
 
+function isMobileWithAddressBar(): boolean {
+  const isAddressBarVisible = window.innerHeight < window.screen.height
+  return isAddressBarVisible
+}
+
 export default {
   isBlank,
   isValidateUUID,
   generateUniqueId,
   generateGuestCredentials,
   createLocalizedDateHeader,
+  isMobileWithAddressBar,
 }

@@ -8,6 +8,7 @@ import {
   sideMenuReducer,
   themeReducer,
   shareReducer,
+  inputFullModeReducer,
 } from './slices'
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   reactionButtons: reactionButtonsReducer,
   theme: themeReducer,
   share: shareReducer,
+  input: inputFullModeReducer,
   // Add other reducers here...
 })
 

@@ -1,8 +1,9 @@
 import { useScreenInfo } from '@endeavorpal/hooks'
 import { RootState } from '@endeavorpal/store'
 import React, { PropsWithChildren } from 'react'
-import { Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
+import ActionButtons from '../ActionButtons'
 import Footer from '../Footer'
 
 // Define the type of props that the PublicLayout component accepts
@@ -17,11 +18,9 @@ type Props = PropsWithChildren<{ children?: React.ReactNode }>
  */
 export const PublicLayout: React.FC<Props> = ({ children }) => {
   // Hook to get screen information
-  const { isSmallScreen } = useScreenInfo()
+  const { isSmallScreen, isMobile, height } = useScreenInfo()
   // Redux hook to get theme data
   const theme = useSelector((state: RootState) => state.theme.theme)
-  // Get the height of the window
-  const { height } = Dimensions.get('window')
 
   // Styles for the component
   const styles = StyleSheet.create({
@@ -31,7 +30,7 @@ export const PublicLayout: React.FC<Props> = ({ children }) => {
       backgroundImage: `url(${theme.backgroundImage})`, // Set background image
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
-      padding: 24,
+      width: '100%',
     },
     container: {
       flexGrow: 1,
@@ -43,11 +42,12 @@ export const PublicLayout: React.FC<Props> = ({ children }) => {
     bodyContainer: {
       flex: 1,
       width: '100%',
-      flexDirection: 'row',
-      fontFamily: 'Inter',
     },
-    main: { flex: 1, flexGrow: 1 },
-    mainBody: { width: '100%', flex: 1 },
+    pageContainer: {
+      flex: 1,
+      width: '100%',
+    },
+    main: { flex: 1, flexGrow: 1, width: '100%' },
     appContent: {
       flexGrow: 1,
       justifyContent: 'center',
@@ -57,21 +57,32 @@ export const PublicLayout: React.FC<Props> = ({ children }) => {
       fontFamily: 'Inter',
       paddingBottom: isSmallScreen ? 4 : null,
     },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'end',
+      width: '100%',
+      alignItems: 'center',
+      padding: isSmallScreen ? 8 : 16,
+    },
   })
 
   // Render the component
   return (
     <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
       <View style={[styles.container]}>
-        <View style={styles.bodyContainer}>
-          <View style={styles.main}>
-            <View style={styles.mainBody}>
-              <View style={[styles.bodyContainer, { flexDirection: 'row' }]}>
-                <ScrollView contentContainerStyle={styles.appContent}>{children}</ScrollView>
-              </View>
-              <Footer />
+        <View style={styles.pageContainer}>
+          {isMobile && (
+            <View style={styles.header}>
+              <ActionButtons isTop={true} />
             </View>
-          </View>
+          )}
+
+          <ScrollView contentContainerStyle={styles.main}>
+            <View style={styles.bodyContainer}>
+              <View contentContainerStyle={styles.appContent}>{children}</View>
+            </View>
+            <Footer />
+          </ScrollView>
         </View>
       </View>
     </KeyboardAvoidingView>

@@ -59,6 +59,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       backgroundImage: `url(${theme.backgroundImage})`, // Set background image
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
+      overflowY: 'auto',
     },
     container: {
       flexGrow: 1,

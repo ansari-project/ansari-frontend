@@ -30,14 +30,14 @@ const MenuDrawer: React.FC = () => {
 
   return (
     <>
-      <Pressable onPress={togglePopup} style={styles.button}>
+      <Pressable onPress={() => togglePopup()} style={styles.button}>
         <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
       </Pressable>
       <Modal
         animationType='fade'
         transparent={true}
         visible={isSideMenuOpened && isMobile}
-        onRequestClose={togglePopup}
+        onRequestClose={() => togglePopup()}
       >
         <View style={{ width: sideMenuDrawer, flex: 1 }}>
           <SideMenuBody />

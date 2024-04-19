@@ -42,8 +42,8 @@ const ENButton: React.FC<Props> = ({
       ]}
       onPress={onClick}
       disabled={isSubmitting}
-      onMouseEnter={() => setIsHover(false)}
-      onMouseLeave={() => setIsHover(true)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       <Text
         style={[

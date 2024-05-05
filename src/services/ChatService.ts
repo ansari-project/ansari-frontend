@@ -6,21 +6,21 @@ import { Dispatch, UnknownAction } from 'redux'
 import { fetchWithAuthRetry } from './api'
 
 class ChatService {
-  token: string | null
+  accessToken: string | null
   isAuthenticated: boolean
   baseURL: string | undefined
 
-  constructor(isAuthenticated: boolean, token: string | null) {
+  constructor(isAuthenticated: boolean, accessToken: string | null) {
     this.isAuthenticated = isAuthenticated
-    this.token = token
+    this.accessToken = accessToken
     this.baseURL = process.env.REACT_APP_API_V2_URL
   }
 
   private createHeaders = () => {
-    if (!this.isAuthenticated || !this.token) throw new ApplicationError('Authentication token not found')
+    if (!this.isAuthenticated || !this.accessToken) throw new ApplicationError('Authentication token not found')
     return {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.token}`,
+      Authorization: `Bearer ${this.accessToken}`,
       'X-Mobile-Ansari': 'ANSARI',
     }
   }

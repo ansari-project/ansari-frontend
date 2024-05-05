@@ -7,7 +7,7 @@ export interface AuthState {
   loading: boolean
   isAuthenticated: boolean
   isGuest: boolean
-  token: string | null
+  accessToken: string | null
   refreshToken?: string | null
   user: User | null
   message: string | null
@@ -19,7 +19,7 @@ const initialAuthState: AuthState = {
   loading: false,
   isAuthenticated: false, // Flag to indicate if the user is authenticated
   isGuest: false, // Flag to indicate if the current session is a guest session
-  token: null, // Token for authentication, null when not authenticated
+  accessToken: null, // Token for authentication, null when not authenticated
   refreshToken: null, // RefreshToken for authentication, null when not authenticated
   user: null, // User information, null when not authenticated
   message: null,
@@ -35,7 +35,7 @@ const authSlice = createSlice({
       const newState = {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
-        token: action.payload.token,
+        accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
         user: action.payload.user,
         message: action.payload.message,
@@ -50,7 +50,7 @@ const authSlice = createSlice({
      * @param action - The Redux action containing the payload of type refreshTokenResponse.
      */
     refreshTokens(state, action: PayloadAction<RefreshTokenResponse>) {
-      state.token = action.payload.access_token
+      state.accessToken = action.payload.access_token
       state.refreshToken = action.payload.refresh_token
       saveAuthState({ ...state })
 
@@ -77,7 +77,7 @@ const authSlice = createSlice({
           ...state,
           isAuthenticated: true,
           isGuest: action.payload.guest || false, // Ensure isGuest is set to false on regular login
-          token: action.payload.token,
+          accessToken: action.payload.accessToken,
           refreshToken: action.payload.refreshToken,
           user: action.payload.user,
           message: action.payload.message,
@@ -103,7 +103,7 @@ const authSlice = createSlice({
           ...state,
           isAuthenticated: true,
           isGuest: true, // Set isGuest to true on successful guest login
-          token: action.payload.token,
+          accessToken: action.payload.accessToken,
           refreshToken: action.payload.refreshToken,
           user: action.payload.user,
           message: action.payload.message,

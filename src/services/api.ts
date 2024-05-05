@@ -10,7 +10,7 @@ interface CustomFetchOptions extends RequestInit {
   skipRefresh?: boolean // Custom option to skip refresh logic
 }
 
-// Updated function to refresh token based on the provided API endpoint
+// Updated function to refresh token based on the provided API endpoint, and return new access token
 async function refreshToken(dispatch: Dispatch<UnknownAction>): Promise<string> {
   const API_URL = process.env.REACT_APP_API_V2_URL
   const refreshTokenURL = `${API_URL}/users/refresh_token`
@@ -57,7 +57,7 @@ export async function fetchWithAuthRetry(
 
   try {
     // Attempt to refresh the token
-    const newToken = await refreshToken(dispatch)
+    const newAccessToken = await refreshToken(dispatch)
     // Store the new token as needed, e.g., in localStorage or state management
 
     // Retry the original request with the new token
@@ -65,7 +65,7 @@ export async function fetchWithAuthRetry(
       ...options,
       headers: {
         ...options.headers,
-        Authorization: `Bearer ${newToken}`, // Update with how your API expects the token
+        Authorization: `Bearer ${newAccessToken}`, // Update with how your API expects the token
       },
       skipRefresh: true, // Prevent further refresh attempts
     }

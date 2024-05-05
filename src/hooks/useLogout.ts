@@ -5,11 +5,11 @@ import { resetChatState, resetReactionButtons } from '../store/slices'
 
 export const useLogout = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { token } = useAuth()
+  const { accessToken } = useAuth()
 
   const doLogout = async () => {
     try {
-      await dispatch(logout(String(token)))
+      await dispatch(logout(String(accessToken)))
     } catch (error) {
       console.error('Error logging out:', error)
     } finally {

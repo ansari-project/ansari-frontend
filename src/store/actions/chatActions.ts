@@ -29,8 +29,8 @@ export const addMessage = createAsyncThunk(
     { dispatch, getState },
   ) => {
     try {
-      const { isAuthenticated, token } = (getState() as RootState).auth
-      const chatService = new ChatService(isAuthenticated, token)
+      const { isAuthenticated, accessToken } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, accessToken)
       const requestMessageId = Helpers.generateUniqueId()
       dispatch(addMessageToActiveThread({ id: requestMessageId, content, role: UserRole.User }))
       const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal, dispatch)
@@ -94,8 +94,8 @@ export const addMessage = createAsyncThunk(
 export const createThread = createAsyncThunk('chat/createThread', async (_, { dispatch, getState }) => {
   try {
     // Get the current user and their role from the state
-    const { isAuthenticated, token } = (getState() as RootState).auth
-    const chatService = new ChatService(isAuthenticated, token)
+    const { isAuthenticated, accessToken } = (getState() as RootState).auth
+    const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
     const newThread = await chatService.createThread(dispatch)
     // Convert the created Date to a serializable format (timestamp)
@@ -123,8 +123,8 @@ export const createThread = createAsyncThunk('chat/createThread', async (_, { di
  */
 export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadId: string, { dispatch, getState }) => {
   try {
-    const { isAuthenticated, token } = (getState() as RootState).auth
-    const chatService = new ChatService(isAuthenticated, token)
+    const { isAuthenticated, accessToken } = (getState() as RootState).auth
+    const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
     await chatService.deleteThread(threadId, dispatch)
     dispatch(fetchThreads()) // refresh the list of threads after deletion
@@ -147,8 +147,8 @@ export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadI
  */
 export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId: string, { dispatch, getState }) => {
   try {
-    const { isAuthenticated, token } = (getState() as RootState).auth
-    const chatService = new ChatService(isAuthenticated, token)
+    const { isAuthenticated, accessToken } = (getState() as RootState).auth
+    const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
     const thread = await chatService.getThread(threadId, dispatch)
     dispatch(setActiveThread(thread))
@@ -180,8 +180,8 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
  */
 export const fetchThreads = createAsyncThunk('chat/fetchThreads', async (_, { dispatch, getState }) => {
   try {
-    const { isAuthenticated, token } = (getState() as RootState).auth
-    const chatService = new ChatService(isAuthenticated, token)
+    const { isAuthenticated, accessToken } = (getState() as RootState).auth
+    const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
     const threads = await chatService.getAllThreads(dispatch)
     dispatch(setThreads(threads))
@@ -204,8 +204,8 @@ export const setThreadName = createAsyncThunk(
   'chat/setThreadName',
   async ({ threadId, name }: { threadId: string; name: ThreadNameRequest }, { dispatch, getState }) => {
     try {
-      const { isAuthenticated, token } = (getState() as RootState).auth
-      const chatService = new ChatService(isAuthenticated, token)
+      const { isAuthenticated, accessToken } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
       await chatService.setThreadName(threadId, name, dispatch)
       dispatch(fetchThreads()) // refresh the list of threads after deletion
@@ -227,8 +227,8 @@ export const getShareThreadUUID = createAsyncThunk(
   'chat/getShareThreadUUID',
   async ({ threadId }: { threadId: string }, { dispatch, getState }) => {
     try {
-      const { isAuthenticated, token } = (getState() as RootState).auth
-      const chatService = new ChatService(isAuthenticated, token)
+      const { isAuthenticated, accessToken } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
       const response = await chatService.getShareThreadUUID(threadId, dispatch)
       if (response.status === 'success') {
@@ -256,8 +256,8 @@ export const fetchSharedThread = createAsyncThunk(
   'chat/fetchSharedThread',
   async (sharedThreadUUID: string, { dispatch, getState }) => {
     try {
-      const { isAuthenticated, token } = (getState() as RootState).auth
-      const chatService = new ChatService(isAuthenticated, token)
+      const { isAuthenticated, accessToken } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
       const thread = await chatService.getSharedThread(sharedThreadUUID, dispatch)
       if (!thread.messages) {
@@ -292,8 +292,8 @@ export const sendFeedback = createAsyncThunk(
   'chat/sendFeedback',
   async ({ feedbackRequest }: { feedbackRequest: FeedbackRequest }, { dispatch, getState }) => {
     try {
-      const { isAuthenticated, token } = (getState() as RootState).auth
-      const chatService = new ChatService(isAuthenticated, token)
+      const { isAuthenticated, accessToken } = (getState() as RootState).auth
+      const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
       await chatService.sendFeedback(
         feedbackRequest.threadId,

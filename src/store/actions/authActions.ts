@@ -9,7 +9,7 @@ interface LoginSuccessPayload {
   guest: boolean
   status: string
   message: string
-  token: string
+  accessToken: string
   refreshToken?: string
   user: User
 }
@@ -18,7 +18,7 @@ interface LoginSuccessPayload {
 interface GuestLoginSuccessPayload {
   status: string
   message: string
-  token: string
+  accessToken: string
   refreshToken?: string
   user: User
 }
@@ -65,7 +65,7 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
           guest: loginData.guest || false,
           status: response.status || '',
           message: response.message || '',
-          token: response.access_token,
+          accessToken: response.access_token,
           refreshToken: response.refresh_token,
           user,
         }
@@ -82,10 +82,10 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
 
 export const logout = createAsyncThunk<void, string, { rejectValue: FailurePayload }>(
   'auth/logout',
-  async (token: string, { rejectWithValue }) => {
+  async (accessToken: string, { rejectWithValue }) => {
     try {
       const authService = new AuthService()
-      await authService.logout(token)
+      await authService.logout(accessToken)
     } catch (error) {
       const message = (error instanceof Error && error.message) || 'Logout failed'
       return rejectWithValue({ message: message })

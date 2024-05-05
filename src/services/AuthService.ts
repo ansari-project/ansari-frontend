@@ -41,11 +41,11 @@ class AuthService {
     return await response.json()
   }
 
-  async logout(token: string): Promise<void> {
+  async logout(accessToken: string): Promise<void> {
     const response = await fetch(`${this.baseURL}/users/logout`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
         'x-mobile-ansari': 'ANSARI',
       },
     })

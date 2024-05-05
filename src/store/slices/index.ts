@@ -1,4 +1,4 @@
-export { default as authReducer, clearAuthState, loadAuthState } from './authSlice'
+export { default as authReducer, clearAuthState, loadAuthState, refreshTokens } from './authSlice'
 export type { AuthState } from './authSlice'
 export {
   addMessageToActiveThread,

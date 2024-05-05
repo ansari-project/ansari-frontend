@@ -20,6 +20,7 @@ export const useAuth = () => {
     isAuthenticated: authState.isAuthenticated, // Indicates if the user is currently authenticated
     isGuest: authState.isGuest, // Indicates if the user is currently guest login
     token: authState.token, // The JWT token for authenticated requests
+    accessToken: authState.token, // The JWT token for authenticated requests
     user: authState.user, // The user's details
   }
 }

@@ -1,5 +1,8 @@
 import { TokenRefreshError } from '@endeavorpal/errors'
-import { loadAuthState } from '@endeavorpal/store'
+import { loadAuthState, refreshTokens } from '@endeavorpal/store'
+import { resetAuth } from '@endeavorpal/store/slices/authSlice'
+import { RefreshTokenResponse } from '@endeavorpal/types'
+import { Dispatch, UnknownAction } from 'redux'
 
 // TypeScript types for better code understanding and safety
 // eslint-disable-next-line no-undef
@@ -8,42 +11,53 @@ interface CustomFetchOptions extends RequestInit {
 }
 
 // Updated function to refresh token based on the provided API endpoint
-async function refreshToken(): Promise<string> {
+async function refreshToken(dispatch: Dispatch<UnknownAction>): Promise<string> {
   const API_URL = process.env.REACT_APP_API_V2_URL
   const refreshTokenURL = `${API_URL}/users/refresh_token`
   const authState = await loadAuthState()
-  const expiredToken = authState.auth?.token
+  const refreshToken = authState.auth?.refreshToken
 
   const response = await fetch(refreshTokenURL, {
-    method: 'GET',
+    method: 'POST',
     headers: {
-      Authorization: `Bearer ${expiredToken}`, // Uncomment if your API requires the expired token
+      'Content-Type': 'application/json',
+      'X-Mobile-Ansari': 'ANSARI',
+      Authorization: `Bearer ${refreshToken}`, // Uncomment if your API requires the expired token
     },
   })
 
   if (!response.ok) {
+    dispatch(resetAuth())
     throw new TokenRefreshError()
   }
 
-  const data = await response.json()
-  if (data.status !== 'success') {
-    throw new TokenRefreshError('Token refresh failed: ' + data.detail)
+  const data = (await response.json()) as RefreshTokenResponse
+  if (dispatch) {
+    dispatch(refreshTokens(data))
   }
-  return data.token // The API returns the token in a 'token' field
+  if (data.status !== 'success') {
+    dispatch(resetAuth())
+    throw new TokenRefreshError('Token refresh failed: ' + data.status)
+  }
+  return data.access_token
 }
 
 // The Fetch API Interceptor remains largely the same
-export async function fetchWithAuthRetry(url: string, options: CustomFetchOptions = {}): Promise<Response> {
+export async function fetchWithAuthRetry(
+  url: string,
+  options: CustomFetchOptions = {},
+  dispatch: Dispatch<UnknownAction>,
+): Promise<Response> {
   const response = await fetch(url, options)
 
-  // If not 403 or we've already tried refreshing the token, return the original response
-  if (response.status !== 403 || options.skipRefresh) {
+  // If not 401 or we've already tried refreshing the token, return the original response
+  if (response.status !== 401 || options.skipRefresh) {
     return response
   }
 
   try {
     // Attempt to refresh the token
-    const newToken = await refreshToken()
+    const newToken = await refreshToken(dispatch)
     // Store the new token as needed, e.g., in localStorage or state management
 
     // Retry the original request with the new token

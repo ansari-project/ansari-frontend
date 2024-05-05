@@ -1,8 +1,9 @@
 import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
 import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
-import { Helpers } from '@endeavorpal/utils'
-import { fetchWithAuthRetry } from './api'
 import { ShareThreadResponse } from '@endeavorpal/types'
+import { Helpers } from '@endeavorpal/utils'
+import { Dispatch, UnknownAction } from 'redux'
+import { fetchWithAuthRetry } from './api'
 
 class ChatService {
   token: string | null
@@ -24,11 +25,15 @@ class ChatService {
     }
   }
 
-  async createThread(): Promise<Thread> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads`, {
-      method: 'POST',
-      headers: this.createHeaders(),
-    })
+  async createThread(dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads`,
+      {
+        method: 'POST',
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new Error('Error creating thread')
     }
@@ -47,13 +52,22 @@ class ChatService {
     return thread
   }
 
-  async addMessage(threadId: string, message: AddMessageRequest, signal: AbortSignal) {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
-      method: 'POST',
-      headers: this.createHeaders(),
-      body: JSON.stringify(message),
-      signal: signal, // Pass the signal for cancellation
-    })
+  async addMessage(
+    threadId: string,
+    message: AddMessageRequest,
+    signal: AbortSignal,
+    dispatch: Dispatch<UnknownAction>,
+  ) {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads/${threadId}`,
+      {
+        method: 'POST',
+        headers: this.createHeaders(),
+        body: JSON.stringify(message),
+        signal: signal, // Pass the signal for cancellation
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new Error('Error adding message')
     }
@@ -61,10 +75,14 @@ class ChatService {
     return response.body
   }
 
-  async getThread(threadId: string): Promise<Thread> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
-      headers: this.createHeaders(),
-    })
+  async getThread(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads/${threadId}`,
+      {
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new ApplicationError('Error fetching thread ' + threadId)
     }
@@ -84,10 +102,14 @@ class ChatService {
     }
   }
 
-  async getAllThreads(): Promise<Thread[]> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads`, {
-      headers: this.createHeaders(),
-    })
+  async getAllThreads(dispatch: Dispatch<UnknownAction>): Promise<Thread[]> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads`,
+      {
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new Error('Error fetching all threads')
     }
@@ -111,32 +133,44 @@ class ChatService {
     return threads
   }
 
-  async deleteThread(threadId: string): Promise<void> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}`, {
-      method: 'DELETE',
-      headers: this.createHeaders(),
-    })
+  async deleteThread(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<void> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads/${threadId}`,
+      {
+        method: 'DELETE',
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new Error('Error deleting thread')
     }
   }
 
-  async setThreadName(threadId: string, name: ThreadNameRequest): Promise<void> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/threads/${threadId}/name`, {
-      method: 'POST',
-      headers: this.createHeaders(),
-      body: JSON.stringify(name),
-    })
+  async setThreadName(threadId: string, name: ThreadNameRequest, dispatch: Dispatch<UnknownAction>): Promise<void> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/threads/${threadId}/name`,
+      {
+        method: 'POST',
+        headers: this.createHeaders(),
+        body: JSON.stringify(name),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new Error('Error setting thread name')
     }
   }
 
-  async getShareThreadUUID(threadId: string): Promise<ShareThreadResponse> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/share/${threadId}`, {
-      method: 'POST',
-      headers: this.createHeaders(),
-    })
+  async getShareThreadUUID(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/share/${threadId}`,
+      {
+        method: 'POST',
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
 
     if (!response.ok) {
       throw new Error('Error getting share uuid for a thread')
@@ -145,10 +179,14 @@ class ChatService {
     return await response.json()
   }
 
-  async getSharedThread(sharedThreadUUID: string): Promise<Thread> {
-    const response = await fetchWithAuthRetry(`${this.baseURL}/share/${sharedThreadUUID}`, {
-      headers: this.createHeaders(),
-    })
+  async getSharedThread(sharedThreadUUID: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+    const response = await fetchWithAuthRetry(
+      `${this.baseURL}/share/${sharedThreadUUID}`,
+      {
+        headers: this.createHeaders(),
+      },
+      dispatch,
+    )
     if (!response.ok) {
       throw new ApplicationError('Error fetching shared thread ' + sharedThreadUUID)
     }
@@ -173,6 +211,7 @@ class ChatService {
     messageId: string,
     feedbackClass: FeedbackClass,
     comment: string,
+    dispatch: Dispatch<UnknownAction>,
   ): Promise<void> {
     /*
      * The server expects the following format for a request to /feedback:
@@ -187,11 +226,15 @@ class ChatService {
     }
 
     try {
-      const response = await fetchWithAuthRetry(`${this.baseURL}/feedback`, {
-        method: 'POST',
-        headers: this.createHeaders(),
-        body: JSON.stringify(feedbackRequest),
-      })
+      const response = await fetchWithAuthRetry(
+        `${this.baseURL}/feedback`,
+        {
+          method: 'POST',
+          headers: this.createHeaders(),
+          body: JSON.stringify(feedbackRequest),
+        },
+        dispatch,
+      )
 
       if (!response.ok) {
         throw new Error('Network response was not ok')

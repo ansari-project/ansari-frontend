@@ -1,5 +1,6 @@
 import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
 import { ChatService } from '@endeavorpal/services/'
+import { ShareThreadResponse } from '@endeavorpal/types'
 import { Helpers } from '@endeavorpal/utils'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
@@ -11,8 +12,7 @@ import {
   setThreads,
 } from '../slices/chatSlice'
 import { RootState } from '../store'
-import { Message, Thread, ThreadNameRequest, UserRole, FeedbackRequest } from '../types/chatTypes'
-import { ShareThreadResponse } from '@endeavorpal/types'
+import { FeedbackRequest, Message, Thread, ThreadNameRequest, UserRole } from '../types/chatTypes'
 
 /**
  * Adds a message to the chat.
@@ -33,7 +33,7 @@ export const addMessage = createAsyncThunk(
       const chatService = new ChatService(isAuthenticated, token)
       const requestMessageId = Helpers.generateUniqueId()
       dispatch(addMessageToActiveThread({ id: requestMessageId, content, role: UserRole.User }))
-      const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal)
+      const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal, dispatch)
 
       if (!stream || stream === null || stream === undefined) {
         dispatch(setError('Error adding message'))
@@ -97,7 +97,7 @@ export const createThread = createAsyncThunk('chat/createThread', async (_, { di
     const { isAuthenticated, token } = (getState() as RootState).auth
     const chatService = new ChatService(isAuthenticated, token)
     dispatch(setLoading(true))
-    const newThread = await chatService.createThread()
+    const newThread = await chatService.createThread(dispatch)
     // Convert the created Date to a serializable format (timestamp)
     if (newThread.date instanceof Date) {
       newThread.date = newThread.date.getTime()
@@ -126,7 +126,7 @@ export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadI
     const { isAuthenticated, token } = (getState() as RootState).auth
     const chatService = new ChatService(isAuthenticated, token)
     dispatch(setLoading(true))
-    await chatService.deleteThread(threadId)
+    await chatService.deleteThread(threadId, dispatch)
     dispatch(fetchThreads()) // refresh the list of threads after deletion
   } catch (error) {
     dispatch(setError(error.toString()))
@@ -150,7 +150,7 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
     const { isAuthenticated, token } = (getState() as RootState).auth
     const chatService = new ChatService(isAuthenticated, token)
     dispatch(setLoading(true))
-    const thread = await chatService.getThread(threadId)
+    const thread = await chatService.getThread(threadId, dispatch)
     dispatch(setActiveThread(thread))
   } catch (error) {
     if (error instanceof NotFoundError) {
@@ -183,7 +183,7 @@ export const fetchThreads = createAsyncThunk('chat/fetchThreads', async (_, { di
     const { isAuthenticated, token } = (getState() as RootState).auth
     const chatService = new ChatService(isAuthenticated, token)
     dispatch(setLoading(true))
-    const threads = await chatService.getAllThreads()
+    const threads = await chatService.getAllThreads(dispatch)
     dispatch(setThreads(threads))
     return threads
   } catch (error) {
@@ -207,7 +207,7 @@ export const setThreadName = createAsyncThunk(
       const { isAuthenticated, token } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, token)
       dispatch(setLoading(true))
-      await chatService.setThreadName(threadId, name)
+      await chatService.setThreadName(threadId, name, dispatch)
       dispatch(fetchThreads()) // refresh the list of threads after deletion
     } catch (error) {
       dispatch(setError(error.toString()))
@@ -230,11 +230,11 @@ export const getShareThreadUUID = createAsyncThunk(
       const { isAuthenticated, token } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, token)
       dispatch(setLoading(true))
-      const response = await chatService.getShareThreadUUID(threadId)
+      const response = await chatService.getShareThreadUUID(threadId, dispatch)
       if (response.status === 'success') {
         return response as ShareThreadResponse
       }
-    } catch (error: unknown) {
+    } catch (error) {
       dispatch(setError(error.toString()))
     } finally {
       dispatch(setLoading(false))
@@ -259,7 +259,7 @@ export const fetchSharedThread = createAsyncThunk(
       const { isAuthenticated, token } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, token)
       dispatch(setLoading(true))
-      const thread = await chatService.getSharedThread(sharedThreadUUID)
+      const thread = await chatService.getSharedThread(sharedThreadUUID, dispatch)
       if (!thread.messages) {
         throw NotFoundError
       }
@@ -300,6 +300,7 @@ export const sendFeedback = createAsyncThunk(
         feedbackRequest.messageId,
         feedbackRequest.feedbackClass,
         feedbackRequest.comment,
+        dispatch,
       )
       // dispatch(setFeedback) // refresh the list of threads after deletion
     } catch (error) {

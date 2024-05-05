@@ -1,14 +1,15 @@
 import { Action, combineReducers, configureStore, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit'
+
 import {
   authReducer,
   chatReducer,
   informationPopupReducer,
+  inputFullModeReducer,
   loadAuthState,
   reactionButtonsReducer,
+  shareReducer,
   sideMenuReducer,
   themeReducer,
-  shareReducer,
-  inputFullModeReducer,
 } from './slices'
 
 const rootReducer = combineReducers({

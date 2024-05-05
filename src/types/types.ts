@@ -25,11 +25,19 @@ export type LoginRequest = {
 // Type for Login response data
 export type LoginResponse = {
   status: string
-  token?: string
+  access_token?: string
+  refresh_token?: string
   message?: string
   error?: string
   first_name?: string
   last_name?: string
+}
+
+// Type for RefreshToken Response data
+export type RefreshTokenResponse = {
+  status: string
+  access_token: string
+  refresh_token: string
 }
 
 // Type for Application User

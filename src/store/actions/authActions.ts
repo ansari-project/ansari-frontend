@@ -10,6 +10,7 @@ interface LoginSuccessPayload {
   status: string
   message: string
   token: string
+  refreshToken?: string
   user: User
 }
 
@@ -18,6 +19,7 @@ interface GuestLoginSuccessPayload {
   status: string
   message: string
   token: string
+  refreshToken?: string
   user: User
 }
 
@@ -52,7 +54,7 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
     try {
       const authService = new AuthService()
       const response = await authService.login(loginData)
-      if (response.token) {
+      if (response.access_token) {
         const user: User = {
           firstName: response.first_name || '',
           lastName: response.last_name || '',
@@ -63,7 +65,8 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
           guest: loginData.guest || false,
           status: response.status || '',
           message: response.message || '',
-          token: response.token,
+          token: response.access_token,
+          refreshToken: response.refresh_token,
           user,
         }
       } else {
@@ -109,6 +112,8 @@ export const guestLogin = createAsyncThunk<GuestLoginSuccessPayload, undefined, 
         first_name: 'Welcome',
         // eslint-disable-next-line camelcase
         last_name: 'Guest',
+        // eslint-disable-next-line camelcase
+        register_to_mail_list: false,
       }
       const loginData: LoginRequest = { email, password, guest: true }
 

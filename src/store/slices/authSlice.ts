@@ -1,13 +1,14 @@
 import { CryptoService } from '@endeavorpal/services'
-import { User } from '@endeavorpal/types'
-import { createSlice } from '@reduxjs/toolkit'
+import { RefreshTokenResponse, User } from '@endeavorpal/types'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { guestLogin, login } from '../actions/authActions'
 
 export interface AuthState {
   loading: boolean
   isAuthenticated: boolean
   isGuest: boolean
-  token: string | null
+  accessToken: string | null
+  refreshToken?: string | null
   user: User | null
   message: string | null
   status: string | null
@@ -18,7 +19,8 @@ const initialAuthState: AuthState = {
   loading: false,
   isAuthenticated: false, // Flag to indicate if the user is authenticated
   isGuest: false, // Flag to indicate if the current session is a guest session
-  token: null, // Token for authentication, null when not authenticated
+  accessToken: null, // Token for authentication, null when not authenticated
+  refreshToken: null, // RefreshToken for authentication, null when not authenticated
   user: null, // User information, null when not authenticated
   message: null,
   status: null,
@@ -33,13 +35,30 @@ const authSlice = createSlice({
       const newState = {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
-        token: action.payload.token,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
         user: action.payload.user,
         message: action.payload.message,
         status: action.payload.status,
         error: action.payload.error,
       }
       return newState
+    },
+    /**
+     * Refresh user token state.
+     * @param state - The current chat state.
+     * @param action - The Redux action containing the payload of type refreshTokenResponse.
+     */
+    refreshTokens(state, action: PayloadAction<RefreshTokenResponse>) {
+      state.accessToken = action.payload.access_token
+      state.refreshToken = action.payload.refresh_token
+      saveAuthState({ ...state })
+
+      return state
+    },
+    resetAuth(state) {
+      saveAuthState({ ...initialAuthState }, state.isGuest)
+      return initialAuthState
     },
     // ... other reducers ...
   },
@@ -58,7 +77,8 @@ const authSlice = createSlice({
           ...state,
           isAuthenticated: true,
           isGuest: action.payload.guest || false, // Ensure isGuest is set to false on regular login
-          token: action.payload.token,
+          accessToken: action.payload.accessToken,
+          refreshToken: action.payload.refreshToken,
           user: action.payload.user,
           message: action.payload.message,
           status: action.payload.status,
@@ -83,7 +103,8 @@ const authSlice = createSlice({
           ...state,
           isAuthenticated: true,
           isGuest: true, // Set isGuest to true on successful guest login
-          token: action.payload.token,
+          accessToken: action.payload.accessToken,
+          refreshToken: action.payload.refreshToken,
           user: action.payload.user,
           message: action.payload.message,
           status: action.payload.status,
@@ -166,4 +187,10 @@ export const clearAuthState = () => {
   sessionStorage.removeItem('auG')
 }
 
+/**
+ * Actions for authSlice.
+ * @remarks
+ * This module contains actions for managing auth state.
+ */
+export const { refreshTokens, resetAuth } = authSlice.actions
 export default authSlice.reducer

@@ -12,7 +12,7 @@ import { useAuth } from './useAuth'
  */
 export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated: string): void => {
   // Retrieve the current authentication status
-  const { isAuthenticated, token } = useAuth()
+  const { isAuthenticated, accessToken } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated:
     // Get the current path
     const currentPath = location.pathname
     // Conditional navigation based on the authentication status of the user and the current path
-    if (isAuthenticated && token) {
+    if (isAuthenticated && accessToken) {
       if (currentPath !== pathIfAuthenticated) {
         navigate(pathIfAuthenticated)
       }
@@ -29,7 +29,7 @@ export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated:
     }
 
     // Dependencies: The effect re-runs if any of these values change.
-  }, [navigate, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, token])
+  }, [navigate, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, accessToken])
 }
 
 export default useRedirect

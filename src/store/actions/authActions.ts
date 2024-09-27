@@ -75,7 +75,7 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
       }
     } catch (error) {
       // This will be caught in the 'rejected' action
-      return rejectWithValue({ message: 'Login failed' })
+      return rejectWithValue({ message: 'Login failed ' + error })
     }
   },
 )

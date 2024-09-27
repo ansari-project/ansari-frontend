@@ -1,3 +1,12 @@
+import arPrompts from '@endeavorpal/i18n/locales/ar/prompts.json'
+import bsPrompts from '@endeavorpal/i18n/locales/bs/prompts.json'
+import enPrompts from '@endeavorpal/i18n/locales/en/prompts.json'
+import frPrompts from '@endeavorpal/i18n/locales/fr/prompts.json'
+import idPrompts from '@endeavorpal/i18n/locales/id/prompts.json'
+import tmlPrompts from '@endeavorpal/i18n/locales/tml/prompts.json'
+import turPrompts from '@endeavorpal/i18n/locales/tur/prompts.json'
+import urPrompts from '@endeavorpal/i18n/locales/ur/prompts.json'
+
 // Define a type for individual prompt entries
 export type Prompt = {
   id: string
@@ -22,13 +31,14 @@ export type PromptsByLanguage = {
 const fetchPromptsForLanguage = async (language: string): Promise<PromptsByCategory> => {
   // Mock data structure for demonstration. Replace with your actual data source.
   const data: PromptsByLanguage = {
-    ar: require('@endeavorpal/i18n/locales/ar/prompts.json'),
-    bs: require('@endeavorpal/i18n/locales/bs/prompts.json'),
-    en: require('@endeavorpal/i18n/locales/en/prompts.json'),
-    fr: require('@endeavorpal/i18n/locales/fr/prompts.json'),
-    id: require('@endeavorpal/i18n/locales/id/prompts.json'),
-    tur: require('@endeavorpal/i18n/locales/tur/prompts.json'),
-    ur: require('@endeavorpal/i18n/locales/ur/prompts.json'),
+    ar: arPrompts,
+    bs: bsPrompts,
+    en: enPrompts,
+    fr: frPrompts,
+    id: idPrompts,
+    tml: tmlPrompts,
+    tur: turPrompts,
+    ur: urPrompts,
   }
 
   const promptsByLanguage = data[language] || data.en // Default to English if language not found

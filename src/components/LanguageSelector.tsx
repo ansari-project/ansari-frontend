@@ -24,6 +24,7 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
     { code: 'en', name: 'English', isActive: false },
     { code: 'ar', name: 'العربية', isActive: false },
     { code: 'ur', name: 'اردو', isActive: false },
+    { code: 'tml', name: 'தமிழ்', isActive: false },
     { code: 'tur', name: 'Türkçe', isActive: false },
     { code: 'bs', name: 'Bosanski', isActive: false },
     { code: 'id', name: 'Bahasa Indonesia', isActive: false },

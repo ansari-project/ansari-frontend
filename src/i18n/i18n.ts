@@ -19,6 +19,7 @@ i18n
       en: loadLocaleFiles('en'),
       fr: loadLocaleFiles('fr'),
       id: loadLocaleFiles('id'),
+      tml: loadLocaleFiles('tml'),
       tur: loadLocaleFiles('tur'),
       ur: loadLocaleFiles('ur'),
     },
@@ -39,6 +40,6 @@ i18n
     },
   })
 
-i18n.languages = ['ar', 'bs', 'en', 'fr', 'id', 'tur', 'ur']
+i18n.languages = ['ar', 'bs', 'en', 'fr', 'id', 'tml', 'tur', 'ur']
 
 export default i18n

@@ -1,3 +1,12 @@
+import arFeedback from '@endeavorpal/i18n/locales/ar/feedback.json'
+import bsFeedback from '@endeavorpal/i18n/locales/bs/feedback.json'
+import enFeedback from '@endeavorpal/i18n/locales/en/feedback.json'
+import frFeedback from '@endeavorpal/i18n/locales/fr/feedback.json'
+import idFeedback from '@endeavorpal/i18n/locales/id/feedback.json'
+import tmlFeedback from '@endeavorpal/i18n/locales/tml/feedback.json'
+import turFeedback from '@endeavorpal/i18n/locales/tur/feedback.json'
+import urFeedback from '@endeavorpal/i18n/locales/ur/feedback.json'
+
 export type Feedback = {
   id: string
   label: string
@@ -20,13 +29,14 @@ export type FeedbacksByLanguage = {
 const fetchFeedbacksForLanguage = async (language: string): Promise<FeedbacksByCategory> => {
   // Mock data structure for demonstration. Replace with your actual data source.
   const data: FeedbacksByLanguage = {
-    ar: require('@endeavorpal/i18n/locales/ar/feedback.json'),
-    bs: require('@endeavorpal/i18n/locales/bs/feedback.json'),
-    en: require('@endeavorpal/i18n/locales/en/feedback.json'),
-    fr: require('@endeavorpal/i18n/locales/fr/feedback.json'),
-    id: require('@endeavorpal/i18n/locales/id/feedback.json'),
-    tur: require('@endeavorpal/i18n/locales/tur/feedback.json'),
-    ur: require('@endeavorpal/i18n/locales/ur/feedback.json'),
+    ar: arFeedback,
+    bs: bsFeedback,
+    en: enFeedback,
+    fr: frFeedback,
+    id: idFeedback,
+    tml: tmlFeedback,
+    tur: turFeedback,
+    ur: urFeedback,
   }
 
   return data[language] || data.en // Default to English if language not found

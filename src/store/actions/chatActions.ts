@@ -72,7 +72,7 @@ export const addMessage = createAsyncThunk(
         }
         return message
       } catch (error) {
-        dispatch(setError('Error adding message'))
+        dispatch(setError('Error adding message ' + error))
         return
       }
     } catch (error) {

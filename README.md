@@ -17,7 +17,7 @@ This document provides detailed instructions for initializing and deploying the 
 
 ## 2. Environment Setup
 
-- Duplicate the `.env.example` file, rename it to `.env`, and modify the `REACT_APP_API_URL` to correspond with the backend API's URL or the relative path to `REACT_APP_PROXY_HOST`.
+- Duplicate the `.env.example` file, rename it to `.env`, and modify the `REACT_APP_API_V2_URL`
 - Execute `yarn install` to procure all necessary dependencies.
 
 ## 3. Local Development Execution
@@ -26,6 +26,7 @@ This document provides detailed instructions for initializing and deploying the 
 
 ## 4. Production Deployment
 
+- Update `PUBLIC_URL` and `REACT_APP_API_V2_URL` in the `.env` file
 - Install a web server, such as [nginx](https://nginx.org/en/download.html), for hosting the production build. Reference the provided sample nginx configuration in the [nginx.conf.sample](nginx.conf.sample) file for setup guidance.
 - Generate the production build by executing `yarn build`. Locate the output in the `build` directory.
 - Transfer the contents of the `build` folder to the root directory of your web server.

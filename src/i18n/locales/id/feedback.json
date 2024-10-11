@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "Benar",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "Mudah dipahami",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "Lengkap",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "Kasar / Tidak aman",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "Tidak benar fakta",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "Lainnya",
+      "value": "other"
+    }
+  ]
+}

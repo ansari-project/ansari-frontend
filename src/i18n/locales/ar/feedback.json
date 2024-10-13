@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "صحيح",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "سهل الفهم",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "مكتمل",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "مضارب / غير آمن",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "لا يكون صحيحاً في الواقع",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "أخرى",
+      "value": "other"
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Doa untuk Petunjuk",
+      "description": "Apa saja doa kuat untuk petunjuk yang bisa saya masukkan ke dalam kehidupan sehari-hari saya?"
+    },
+    {
+      "id": "dua2",
+      "title": "Doa untuk Kesembuhan",
+      "description": "Bisakah Anda menyarankan doa efektif untuk menyembuhkan rasa sakit fisik atau emosional?"
+    },
+    {
+      "id": "dua3",
+      "title": "Doa untuk Perlindungan",
+      "description": "Bagaimana saya bisa meminta perlindungan Allah untuk saya dan keluarga saya melalui doa?"
+    },
+    {
+      "id": "dua4",
+      "title": "Doa untuk Pengetahuan",
+      "description": "Doa apa yang bisa membantu meningkatkan pengetahuan saya dan membuatnya bermanfaat?"
+    },
+    {
+      "id": "dua5",
+      "title": "Doa untuk Kemakmuran",
+      "description": "Apa doa terbaik untuk mencapai kemakmuran dan kepuasan dalam hidup?"
+    },
+    {
+      "id": "dua6",
+      "title": "Doa untuk Kedamaian",
+      "description": "Bagaimana saya bisa menggunakan doa untuk menemukan kedamaian dan ketenangan di hati dan kehidupan saya?"
+    },
+    {
+      "id": "dua7",
+      "title": "Doa untuk Pengampunan",
+      "description": "Doa apa yang bisa saya baca untuk meminta pengampunan untuk diri saya sendiri dan orang tua saya?"
+    },
+    {
+      "id": "dua8",
+      "title": "Doa untuk Pertobatan",
+      "description": "Bisakah Anda menyediakan beberapa doa untuk pertobatan yang tulus dan kembali kepada Allah?"
+    },
+    {
+      "id": "dua9",
+      "title": "Doa untuk Petunjuk ke Jalan yang Benar",
+      "description": "Apa doa paling kuat untuk petunjuk ke jalan yang lurus?"
+    },
+    {
+      "id": "dua10",
+      "title": "Doa untuk Perlindungan dari Kejahatan",
+      "description": "Bagaimana saya bisa meminta perlindungan kepada Allah dari perbuatan dan pikiran jahat melalui doa?"
+    },
+    {
+      "id": "dua11",
+      "title": "Doa untuk Puasa Ramadan",
+      "description": "Doa apa yang bisa saya baca selama Suhoor dan Iftar untuk meningkatkan pengalaman puasa saya di Ramadan?"
+    },
+    {
+      "id": "dua12",
+      "title": "Doa untuk Lailatul Qadar",
+      "description": "Doa apa yang terbaik untuk dibaca selama Lailatul Qadar untuk memaksimalkan berkah malam ini?"
+    },
+    {
+      "id": "dua13",
+      "title": "Doa untuk Amal di Ramadan",
+      "description": "Bisakah Anda menyarankan beberapa doa untuk membuat tindakan amal selama Ramadan lebih bermakna?"
+    },
+    {
+      "id": "dua14",
+      "title": "Doa untuk Sholat Tarawih",
+      "description": "Doa apa yang bisa dibaca sebelum atau setelah Sholat Tarawih untuk mencari kedekatan dengan Allah?"
+    },
+    {
+      "id": "dua15",
+      "title": "Doa untuk Perayaan Eid",
+      "description": "Saat Ramadan berakhir, doa apa yang harus saya baca untuk mengungkapkan rasa syukur dan merayakan Eid?"
+    }
+  ],
+
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "Tentang Kesabaran",
+      "description": "Bagaimana Islam mengajarkan kita untuk menjalani kesabaran tidak hanya dalam menunggu, tetapi dalam perilaku kita saat menunggu?"
+    },
+    {
+      "id": "perspective2",
+      "title": "Tentang Sedekah",
+      "description": "Mengapa sedekah dianggap bukan hanya tindakan memberi tetapi investasi penting dalam Islam?"
+    },
+    {
+      "id": "perspective3",
+      "title": "Tentang Pengampunan",
+      "description": "Bagaimana Islam mendorong pengampunan dan mengapa itu dianggap sebagai kebajikan yang meringankan hati?"
+    },
+    {
+      "id": "perspective4",
+      "title": "Tentang Rasa Syukur",
+      "description": "Mengapa rasa syukur merupakan pilar iman dalam Islam dan bagaimana itu mengubah kehidupan sehari-hari kita?"
+    },
+    {
+      "id": "perspective5",
+      "title": "Tentang Mempercayai Allah",
+      "description": "Apa arti mempercayai Allah dalam Islam dan bagaimana itu dapat mempengaruhi pemahaman kita terhadap tantangan hidup?"
+    },
+    {
+      "id": "perspective6",
+      "title": "Tentang Refleksi Diri",
+      "description": "Mengapa refleksi diri penting dalam Islam dan bagaimana itu dapat membantu dalam pertumbuhan pribadi?"
+    },
+    {
+      "id": "perspective7",
+      "title": "Tentang Disiplin Diri",
+      "description": "Bagaimana disiplin diri berkontribusi terhadap kesuksesan dalam Islam dan peran apa yang dimainkannya dalam selaras dengan nilai-nilai Islam?"
+    },
+    {
+      "id": "perspective8",
+      "title": "Tentang Pengembangan Diri",
+      "description": "Langkah apa yang dapat diambil seseorang menuju pengembangan diri dalam Islam dan mengapa itu dianggap sebagai perjalanan seumur hidup?"
+    },
+    {
+      "id": "perspective9",
+      "title": "Tentang Empati",
+      "description": "Bagaimana empati merupakan aspek fundamental dari nilai-nilai Islam dan bagaimana itu mempengaruhi interaksi kita dengan orang lain?"
+    },
+    {
+      "id": "perspective10",
+      "title": "Tentang Kerendahan Hati",
+      "description": "Mengapa kerendahan hati sangat dihargai dalam Islam dan bagaimana kita dapat mempraktikkannya dalam kehidupan sehari-hari?"
+    },
+    {
+      "id": "perspective11",
+      "title": "Tentang Refleksi di Ramadan",
+      "description": "Bagaimana Ramadan mendorong kita untuk mengevaluasi dan merenungkan tindakan dan niat kita?"
+    },
+    {
+      "id": "perspective12",
+      "title": "Tentang Pembaharuan Spiritual",
+      "description": "Praktik apa selama Ramadan yang dapat membantu dalam pembaharuan spiritual iman kita?"
+    },
+    {
+      "id": "perspective13",
+      "title": "Tentang Komunitas di Ramadan",
+      "description": "Bagaimana peningkatan rasa komunitas di Ramadan memperkuat iman dan hubungan kita?"
+    },
+    {
+      "id": "perspective14",
+      "title": "Tentang Kemurahan dan Pemberian",
+      "description": "Dengan cara apa kita dapat mempraktikkan kemurahan hati selama Ramadan untuk memperluas dampaknya melampaui kontribusi moneter?"
+    },
+    {
+      "id": "perspective15",
+      "title": "Tentang Rasa Syukur dan Kepuasan",
+      "description": "Bagaimana pelajaran rasa syukur dan kepuasan yang dipelajari selama puasa dapat diterapkan di luar Ramadan?"
+    }
+  ],
+
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Untuk Kecemasan",
+      "description": "Bagaimana doa, bacaan Qur'an, dan doa dapat membantu meredakan kecemasan dan membawa kedamaian ke hati?"
+    },
+    {
+      "id": "remedy2",
+      "title": "Untuk Kesulitan Finansial",
+      "description": "Dalam masa kesulitan finansial, bagaimana kesabaran, amal, dan kepercayaan pada rezeki Allah dapat meringankan kesulitan?"
+    },
+    {
+      "id": "remedy3",
+      "title": "Untuk Masalah Kesehatan",
+      "description": "Bagaimana menggabungkan pengobatan medis dengan doa dan ketergantungan pada penyembuhan Allah dapat membantu mengatasi tantangan kesehatan?"
+    },
+    {
+      "id": "remedy4",
+      "title": "Untuk Kehilangan dan Duka",
+      "description": "Keyakinan Islam apa yang dapat menawarkan penghiburan dan meringankan rasa sakit dari kehilangan dan duka?"
+    },
+    {
+      "id": "remedy5",
+      "title": "Untuk Keraguan Spiritual",
+      "description": "Bagaimana mencari ilmu, keterlibatan komunitas, dan doa untuk bimbingan dapat membantu mengatasi keraguan spiritual?"
+    },
+    {
+      "id": "remedy6",
+      "title": "Untuk Harga Diri Rendah",
+      "description": "Peran apa yang dimainkan oleh mengingat cinta dan kasih sayang Allah, mencari ilmu, dan ibadah dalam membangun kepercayaan diri dan harga diri?"
+    },
+    {
+      "id": "remedy7",
+      "title": "Untuk Kesepian",
+      "description": "Bagaimana terhubung dengan komunitas dan terlibat dalam aktivitas sosial dapat meringankan perasaan kesepian?"
+    },
+    {
+      "id": "remedy8",
+      "title": "Untuk Prokrastinasi",
+      "description": "Strategi apa yang dapat membantu mengatasi prokrastinasi dan meningkatkan produktivitas?"
+    },
+    {
+      "id": "remedy9",
+      "title": "Untuk Pemikiran Negatif",
+      "description": "Bagaimana mengubah pemikiran dan praktik syukur dapat meningkatkan pola pikir dan pandangan hidup kita?"
+    },
+    {
+      "id": "remedy10",
+      "title": "Untuk Burnout",
+      "description": "Pendekatan apa yang dapat membantu mencegah dan meredakan kelelahan?"
+    },
+    {
+      "id": "remedy11",
+      "title": "Untuk Maksimalisasi Ibadah di Ramadan",
+      "description": "Bagaimana seseorang dapat mengoptimalkan ibadah dan praktik spiritual selama Ramadan untuk mendapatkan manfaat maksimal?"
+    },
+    {
+      "id": "remedy12",
+      "title": "Untuk Menjaga Energi Saat Berpuasa",
+      "description": "Apa cara efektif untuk menjaga energi dan fokus selama jam berpuasa di Ramadan?"
+    },
+    {
+      "id": "remedy13",
+      "title": "Untuk Mengelola Kewajiban Sosial di Ramadan",
+      "description": "Bagaimana kita dapat menyeimbangkan kewajiban sosial dengan tujuan pribadi dan spiritual selama Ramadan?"
+    },
+    {
+      "id": "remedy14",
+      "title": "Untuk Meningkatkan Amal di Ramadan",
+      "description": "Strategi apa yang dapat digunakan untuk meningkatkan pemberian amal dan tindakan kebaikan selama Ramadan?"
+    },
+    {
+      "id": "remedy15",
+      "title": "Untuk Merenungkan Al-Qur'an di Ramadan",
+      "description": "Bagaimana kita dapat memperdalam keterlibatan dan renungan terhadap Al-Qur'an selama bulan Ramadan?"
+    }
+  ]
+}

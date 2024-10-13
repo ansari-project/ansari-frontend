@@ -1,0 +1,21 @@
+{
+  "title": "لاگ ان",
+  "email": "ای-میل",
+  "password": "پاسورڈ",
+  "submit": "جمع کریں",
+  "submitting": "لوڈ ہو رہا ہے",
+  "register": "رجسٹر",
+  "dontHaveAccount": "اکاؤنٹ نہیں ہے؟",
+  "successMessage": "لاگ ان کامیاب ہوگیا",
+  "errorMessage": "لاگ ان ناکام ہوگیا۔ براہ کرم دوبارہ کوشش کریں۔",
+  "invalidCredentials": "غلط اعتبارات",
+  "emailRequiredField": "ای-میل ضروری ہے۔",
+  "emailInvalid": "معتبر ای-میل درج کریں۔",
+  "passwordRequiredField": "پاسورڈ ضروری ہے۔",
+  "passwordLength": "پاسورڈ کم سے کم 8 حروفوں کا ہونا چاہئے۔",
+  "unexpectedError": "ایک غیر متوقع خرابی واقع ہوگئی ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔",
+  "forgetPassword": "اپنا پاسورڈ بھول گئے ہیں؟",
+  "guestLogin": "مہمان کے طور پر لاگ ان",
+  "continue": "جاری رکھیں",
+  "back": "واپس"
+}

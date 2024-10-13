@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "இது மிகச்சரியான/உண்மையான தகவல்",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "எளிதில் விளங்கக்கூடியது",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "முழுமை",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "அவமதிப்பான/மனத்தை புண்படுத்துகிற/பாதுகாப்பற்ற தகவல் ",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "உண்மையற்றது/தவறான தகவல்",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "தவறான தகவல்",
+      "value": "other"
+    }
+  ]
+}

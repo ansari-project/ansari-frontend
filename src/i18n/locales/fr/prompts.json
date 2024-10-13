@@ -1,0 +1,235 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Dua pour la Guidance",
+      "description": "Quelles sont les puissantes duas pour la guidance que je peux intégrer dans ma vie quotidienne ?"
+    },
+    {
+      "id": "dua2",
+      "title": "Dua pour la Guérison",
+      "description": "Pouvez-vous suggérer des duas efficaces pour la guérison de la douleur physique ou émotionnelle ?"
+    },
+    {
+      "id": "dua3",
+      "title": "Dua pour la Protection",
+      "description": "Comment puis-je chercher la protection d'Allah pour moi et ma famille à travers la dua ?"
+    },
+    {
+      "id": "dua4",
+      "title": "Dua pour la Connaissance",
+      "description": "Quelles duas peuvent aider à augmenter ma connaissance et la rendre bénéfique ?"
+    },
+    {
+      "id": "dua5",
+      "title": "Dua pour la Prospérité",
+      "description": "Quelles sont les meilleures duas pour atteindre la prospérité et le contentement dans la vie ?"
+    },
+    {
+      "id": "dua6",
+      "title": "Dua pour la Paix",
+      "description": "Comment puis-je utiliser la dua pour trouver la paix et la tranquillité dans mon cœur et ma vie ?"
+    },
+    {
+      "id": "dua7",
+      "title": "Dua pour le Pardon",
+      "description": "Quelles duas puis-je réciter pour demander pardon pour moi-même et mes parents ?"
+    },
+    {
+      "id": "dua8",
+      "title": "Dua pour le Repentir",
+      "description": "Pouvez-vous fournir des duas pour un repentir sincère et un retour vers Allah ?"
+    },
+    {
+      "id": "dua9",
+      "title": "Dua pour la Guidance vers le Droit Chemin",
+      "description": "Quelles sont les duas les plus puissantes pour la guidance vers le droit chemin ?"
+    },
+    {
+      "id": "dua10",
+      "title": "Dua pour la Protection contre le Mal",
+      "description": "Comment puis-je chercher refuge auprès d'Allah contre les actes et les pensées maléfiques à travers la dua ?"
+    },
+    {
+      "id": "dua11",
+      "title": "Dua pour le Jeûne de Ramadan",
+      "description": "Quelle dua puis-je réciter pendant le Suhoor et l'Iftar pour améliorer mon expérience de jeûne pendant le Ramadan ?"
+    },
+    {
+      "id": "dua12",
+      "title": "Dua pour Laylat al-Qadr",
+      "description": "Quelle est la meilleure dua à réciter pendant Laylat al-Qadr pour maximiser les bénédictions de cette nuit ?"
+    },
+    {
+      "id": "dua13",
+      "title": "Dua pour la Charité pendant le Ramadan",
+      "description": "Pouvez-vous suggérer des duas pour rendre les actes de charité pendant le Ramadan plus significatifs ?"
+    },
+    {
+      "id": "dua14",
+      "title": "Dua pour les Prières de Tarawih",
+      "description": "Quelles sont les duas à réciter avant ou après les prières de Tarawih pour chercher la proximité d'Allah ?"
+    },
+    {
+      "id": "dua15",
+      "title": "Dua pour les Célébrations de l'Aïd",
+      "description": "À la conclusion du Ramadan, quelle dua devrais-je réciter pour exprimer ma gratitude et célébrer l'Aïd ?"
+    }
+  ],
+
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "Sur la Patience",
+      "description": "Comment l'Islam nous enseigne-t-il à incarner la patience, non seulement dans l'attente, mais aussi dans notre comportement pendant que nous attendons ?"
+    },
+    {
+      "id": "perspective2",
+      "title": "Sur la Charité",
+      "description": "Pourquoi la charité est-elle considérée non seulement comme un acte de donner mais aussi comme un investissement significatif dans l'Islam ?"
+    },
+    {
+      "id": "perspective3",
+      "title": "Sur le Pardon",
+      "description": "Comment l'Islam encourage-t-il le pardon et pourquoi est-il considéré comme une vertu qui allège le cœur ?"
+    },
+    {
+      "id": "perspective4",
+      "title": "Sur la Gratitude",
+      "description": "Pourquoi la gratitude est-elle une pierre angulaire de la foi en Islam et comment transforme-t-elle notre vie quotidienne ?"
+    },
+    {
+      "id": "perspective5",
+      "title": "Sur la Confiance en Allah",
+      "description": "Que signifie placer sa confiance en Allah dans l'Islam et comment cela peut-il affecter notre compréhension des défis de la vie ?"
+    },
+    {
+      "id": "perspective6",
+      "title": "Sur l'Auto-réflexion",
+      "description": "Pourquoi l'auto-réflexion est-elle cruciale dans l'Islam et comment peut-elle aider à la croissance personnelle ?"
+    },
+    {
+      "id": "perspective7",
+      "title": "Sur l'Auto-discipline",
+      "description": "Comment l'auto-discipline contribue-t-elle au succès dans l'Islam et quel rôle joue-t-elle dans l'alignement avec les valeurs islamiques ?"
+    },
+    {
+      "id": "perspective8",
+      "title": "Sur l'Auto-amélioration",
+      "description": "Quelles étapes peut-on entreprendre pour l'auto-amélioration dans l'Islam et pourquoi est-ce considéré comme un voyage à vie ?"
+    },
+    {
+      "id": "perspective9",
+      "title": "Sur l'Empathie",
+      "description": "Comment l'empathie est-elle un aspect fondamental des valeurs islamiques et comment affecte-t-elle nos interactions avec les autres ?"
+    },
+    {
+      "id": "perspective10",
+      "title": "Sur l'Humilité",
+      "description": "Pourquoi l'humilité est-elle une vertu très valorisée dans l'Islam et comment pouvons-nous la pratiquer dans notre vie quotidienne ?"
+    },
+    {
+      "id": "perspective11",
+      "title": "Sur la Réflexion pendant le Ramadan",
+      "description": "Comment le Ramadan nous encourage-t-il à évaluer et à réfléchir sur nos actes et intentions ?"
+    },
+    {
+      "id": "perspective12",
+      "title": "Sur le Renouvellement Spirituel",
+      "description": "Quelles pratiques pendant le Ramadan peuvent aider au renouvellement spirituel de notre foi ?"
+    },
+    {
+      "id": "perspective13",
+      "title": "Sur la Communauté pendant le Ramadan",
+      "description": "Comment le sens renforcé de la communauté pendant le Ramadan renforce-t-il notre foi et nos relations ?"
+    },
+    {
+      "id": "perspective14",
+      "title": "Sur la Générosité et le Don",
+      "description": "De quelles manières pouvons-nous pratiquer la générosité pendant le Ramadan pour étendre son impact au-delà des contributions monétaires ?"
+    },
+    {
+      "id": "perspective15",
+      "title": "Sur la Gratitude et le Contentement",
+      "description": "Comment les leçons de gratitude et de contentement apprises pendant le jeûne peuvent-elles être appliquées au-delà du Ramadan ?"
+    }
+  ],
+
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Pour l'Anxiété",
+      "description": "Comment la prière, la récitation du Coran et la dua peuvent-elles aider à soulager l'anxiété et apporter la paix au cœur ?"
+    },
+    {
+      "id": "remedy2",
+      "title": "Pour les Difficultés Financières",
+      "description": "En période de difficultés financières, comment la patience, la charité et la confiance dans la provision d'Allah peuvent-elles alléger les difficultés ?"
+    },
+    {
+      "id": "remedy3",
+      "title": "Pour les Problèmes de Santé",
+      "description": "Comment combiner le traitement médical avec la dua et la dépendance à la guérison d'Allah contribue-t-il à surmonter les défis de santé ?"
+    },
+    {
+      "id": "remedy4",
+      "title": "Pour la Perte et le Deuil",
+      "description": "Quelles croyances islamiques peuvent offrir du réconfort et alléger la douleur de la perte et du deuil ?"
+    },
+    {
+      "id": "remedy5",
+      "title": "Pour les Doutes Spirituels",
+      "description": "Comment la recherche de la connaissance, l'engagement communautaire et la dua pour l'orientation peuvent-ils aider à surmonter les doutes spirituels ?"
+    },
+    {
+      "id": "remedy6",
+      "title": "Pour une Faible Estime de Soi",
+      "description": "Quel rôle le rappel de l'amour et de la miséricorde d'Allah, la recherche de la connaissance et l'adoration jouent-ils dans la construction de la confiance en soi et de l'estime de soi ?"
+    },
+    {
+      "id": "remedy7",
+      "title": "Pour la Solitude",
+      "description": "Comment se connecter avec la communauté et participer à des activités sociales peut-il atténuer les sentiments de solitude ?"
+    },
+    {
+      "id": "remedy8",
+      "title": "Pour la Procrastination",
+      "description": "Quelles stratégies peuvent aider à surmonter la procrastination et à améliorer la productivité ?"
+    },
+    {
+      "id": "remedy9",
+      "title": "Pour la Pensée Négative",
+      "description": "Comment changer de pensées et pratiquer la gratitude peut-il améliorer notre état d'esprit et notre vision de la vie ?"
+    },
+    {
+      "id": "remedy10",
+      "title": "Pour l'Épuisement",
+      "description": "Quelles approches peuvent aider à prévenir et à soulager l'épuisement ?"
+    },
+    {
+      "id": "remedy11",
+      "title": "Pour Maximiser le Culte pendant le Ramadan",
+      "description": "Comment peut-on optimiser son adoration et ses pratiques spirituelles pendant le Ramadan pour obtenir les bénéfices maximaux ?"
+    },
+    {
+      "id": "remedy12",
+      "title": "Pour Maintenir l'Énergie Pendant le Jeûne",
+      "description": "Quelles sont les manières efficaces de maintenir l'énergie et la concentration pendant les heures de jeûne du Ramadan ?"
+    },
+    {
+      "id": "remedy13",
+      "title": "Pour Naviguer les Obligations Sociales pendant le Ramadan",
+      "description": "Comment pouvons-nous équilibrer nos obligations sociales avec nos objectifs personnels et spirituels pendant le Ramadan ?"
+    },
+    {
+      "id": "remedy14",
+      "title": "Pour Améliorer la Charité pendant le Ramadan",
+      "description": "Quelles stratégies peuvent être employées pour améliorer le don de charité et les actes de gentillesse pendant le Ramadan ?"
+    },
+    {
+      "id": "remedy15",
+      "title": "Pour la Réflexion sur le Coran pendant le Ramadan",
+      "description": "Comment pouvons-nous approfondir notre engagement et notre réflexion sur le Coran pendant le mois du Ramadan ?"
+    }
+  ]
+}

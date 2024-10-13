@@ -1,0 +1,36 @@
+{
+  "good": [
+    {
+      "id": "good1",
+      "label": "صحیح",
+      "value": "correct"
+    },
+    {
+      "id": "good2",
+      "label": "سمجھنے میں آسان",
+      "value": "understandable"
+    },
+    {
+      "id": "good3",
+      "label": "مکمل",
+      "value": "complete"
+    }
+  ],
+  "bad": [
+    {
+      "id": "bad1",
+      "label": "توہین آمیز / نا محفوظ",
+      "value": "offensive"
+    },
+    {
+      "id": "bad2",
+      "label": "حقائقی طور پر غلط",
+      "value": "incorrect"
+    },
+    {
+      "id": "bad3",
+      "label": "دیگر",
+      "value": "other"
+    }
+  ]
+}

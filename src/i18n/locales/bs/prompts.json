@@ -1,0 +1,235 @@
+{
+  "dua": [
+    {
+      "id": "dua1",
+      "title": "Dova za Uputu",
+      "description": "Koje su neke moćne dove za uputu koje mogu uključiti u svoj svakodnevni život?"
+    },
+    {
+      "id": "dua2",
+      "title": "Dova za Iscjeljenje",
+      "description": "Možete li predložiti efikasne dove za iscjeljenje fizičke ili emocionalne boli?"
+    },
+    {
+      "id": "dua3",
+      "title": "Dova za Zaštitu",
+      "description": "Kako mogu tražiti Allahovu zaštitu za sebe i svoju porodicu kroz dovu?"
+    },
+    {
+      "id": "dua4",
+      "title": "Dova za Znanje",
+      "description": "Koje dove mogu pomoći da povećam svoje znanje i učinim ga korisnim?"
+    },
+    {
+      "id": "dua5",
+      "title": "Dova za Prosperitet",
+      "description": "Koje su najbolje dove za postizanje prosperiteta i zadovoljstva u životu?"
+    },
+    {
+      "id": "dua6",
+      "title": "Dova za Mir",
+      "description": "Kako mogu koristiti dovu da pronađem mir i spokoj u svom srcu i životu?"
+    },
+    {
+      "id": "dua7",
+      "title": "Dova za Oprost",
+      "description": "Koje dove mogu učiti da zatražim oprost za sebe i svoje roditelje?"
+    },
+    {
+      "id": "dua8",
+      "title": "Dova za Pokajanje",
+      "description": "Možete li pružiti neke dove za iskreno pokajanje i povratak Allahu?"
+    },
+    {
+      "id": "dua9",
+      "title": "Dova za Uputu na Pravi Put",
+      "description": "Koje su najmoćnije dove za uputu na pravi put?"
+    },
+    {
+      "id": "dua10",
+      "title": "Dova za Zaštitu od Zla",
+      "description": "Kako mogu tražiti utočište u Allahu od zlih djela i misli kroz dovu?"
+    },
+    {
+      "id": "dua11",
+      "title": "Dova za Post u Ramazanu",
+      "description": "Koju dovu mogu učiti tokom Suhoora i Iftara da poboljšam svoje iskustvo posta u Ramazanu?"
+    },
+    {
+      "id": "dua12",
+      "title": "Dova za Lejletu-l-kadr",
+      "description": "Koja je najbolja dova za učenje tokom Lejletu-l-kadra kako bi se maksimizirale blagodati ove noći?"
+    },
+    {
+      "id": "dua13",
+      "title": "Dova za Dobrotvornost u Ramazanu",
+      "description": "Možete li predložiti neke dove koje čine dobročinstvo tokom Ramazana smislenijim?"
+    },
+    {
+      "id": "dua14",
+      "title": "Dova za Taravih Namaz",
+      "description": "Koje dove mogu učiti prije ili nakon Taravih namaza kako bih tražila blizinu Allaha?"
+    },
+    {
+      "id": "dua15",
+      "title": "Dova za Proslavu Bajrama",
+      "description": "Kada se Ramazan završi, koju dovu trebam učiti da izrazim zahvalnost i proslavim Bajram?"
+    }
+  ],
+
+  "perspectives": [
+    {
+      "id": "perspective1",
+      "title": "O Strpljenju",
+      "description": "Kako Islam uči nas da u tijelu strpljenja ne samo u čekanju, već i u našem ponašanju dok čekamo?"
+    },
+    {
+      "id": "perspective2",
+      "title": "O Dobrotvornosti",
+      "description": "Zašto se dobročinstvo smatra ne samo činom davanja već značajnom investicijom u Islamu?"
+    },
+    {
+      "id": "perspective3",
+      "title": "O Oprostu",
+      "description": "Kako Islam potiče oprost i zašto se smatra vrlinom koja olakšava srce?"
+    },
+    {
+      "id": "perspective4",
+      "title": "O Zahvalnosti",
+      "description": "Zašto je zahvalnost temelj vjere u Islamu i kako transformiše naš svakodnevni život?"
+    },
+    {
+      "id": "perspective5",
+      "title": "O Povjerenju u Allaha",
+      "description": "Šta znači staviti povjerenje u Allaha u Islamu i kako to može uticati na naše razumijevanje životnih izazova?"
+    },
+    {
+      "id": "perspective6",
+      "title": "O Samopromišljanju",
+      "description": "Zašto je samopromišljanje ključno u Islamu i kako može pomoći u ličnom rastu?"
+    },
+    {
+      "id": "perspective7",
+      "title": "O Samodisciplini",
+      "description": "Kako samodisciplina doprinosi uspjehu u Islamu i koju ulogu igra u usklađivanju sa islamskim vrijednostima?"
+    },
+    {
+      "id": "perspective8",
+      "title": "O Samopoboljšanju",
+      "description": "Koji koraci se mogu poduzeti prema samopoboljšanju u Islamu i zašto se smatra doživotnim putovanjem?"
+    },
+    {
+      "id": "perspective9",
+      "title": "O Empatiji",
+      "description": "Kako je empatija temeljni aspekt islamskih vrijednosti i kako utječe na naše interakcije s drugima?"
+    },
+    {
+      "id": "perspective10",
+      "title": "O Skromnosti",
+      "description": "Zašto je skromnost visoko cijenjena vrlina u Islamu i kako je možemo praktikovati u našim svakodnevnim životima?"
+    },
+    {
+      "id": "perspective11",
+      "title": "O Razmišljanju u Ramazanu",
+      "description": "Kako Ramazan potiče nas da evaluiramo i razmišljamo o našim djelima i namjerama?"
+    },
+    {
+      "id": "perspective12",
+      "title": "O Duhovnoj Obnovi",
+      "description": "Koje prakse tokom Ramazana mogu pomoći u duhovnoj obnovi naše vjere?"
+    },
+    {
+      "id": "perspective13",
+      "title": "O Zajednici u Ramazanu",
+      "description": "Kako pojačani osjećaj zajednice u Ramazanu jača našu vjeru i odnose?"
+    },
+    {
+      "id": "perspective14",
+      "title": "O Velikodušnosti i Davanju",
+      "description": "Na koji način možemo praktikovati velikodušnost tokom Ramazana da proširimo njen utjecaj izvan monetarnih doprinosa?"
+    },
+    {
+      "id": "perspective15",
+      "title": "O Zahvalnosti i Zadovoljstvu",
+      "description": "Kako lekcije zahvalnosti i zadovoljstva naučene tokom posta mogu biti primijenjene izvan Ramazana?"
+    }
+  ],
+
+  "remedies": [
+    {
+      "id": "remedy1",
+      "title": "Za Anksioznost",
+      "description": "Kako molitva, učenje Kur'ana i dova mogu pomoći u ublažavanju anksioznosti i donošenju mira srcu?"
+    },
+    {
+      "id": "remedy2",
+      "title": "Za Finansijske Teškoće",
+      "description": "Kako strpljenje, davanje u dobrotvorne svrhe i vjera u Allahovu opskrbu mogu olakšati financijske poteškoće?"
+    },
+    {
+      "id": "remedy3",
+      "title": "Za Zdravstvene Probleme",
+      "description": "Kako kombinovanje medicinskog liječenja s dovom i oslanjanjem na Allahovo iscjeljenje doprinosi prevazilaženju zdravstvenih izazova?"
+    },
+    {
+      "id": "remedy4",
+      "title": "Za Gubitak i Tugu",
+      "description": "Koja islamska vjerovanja mogu pružiti utjehu i ublažiti bol gubitka i tuge?"
+    },
+    {
+      "id": "remedy5",
+      "title": "Za Duhovne Sumnje",
+      "description": "Kako traženje znanja, angažman u zajednici i dova za uputstvo mogu pomoći u prevazilaženju duhovnih sumnji?"
+    },
+    {
+      "id": "remedy6",
+      "title": "Za Nisko Samopoštovanje",
+      "description": "Koju ulogu igra sjećanje na Allahovu ljubav, traženje znanja i ibadet u izgradnji samopouzdanja i samovrijednosti?"
+    },
+    {
+      "id": "remedy7",
+      "title": "Za Usamljenost",
+      "description": "Kako povezivanje sa zajednicom i učešće u društvenim aktivnostima mogu ublažiti osjećaj usamljenosti?"
+    },
+    {
+      "id": "remedy8",
+      "title": "Za Odlaganje",
+      "description": "Koje strategije mogu pomoći u prevazilaženju odlaganja i povećanju produktivnosti?"
+    },
+    {
+      "id": "remedy9",
+      "title": "Za Negativno Razmišljanje",
+      "description": "Kako promjena načina razmišljanja i praktikovanje zahvalnosti mogu poboljšati našu mentalnu sliku i pogled na život?"
+    },
+    {
+      "id": "remedy10",
+      "title": "Za Izgaranje",
+      "description": "Koji pristupi mogu pomoći u sprečavanju i ublažavanju izgaranja?"
+    },
+    {
+      "id": "remedy11",
+      "title": "Za Maksimalizaciju Ibadeta u Ramazanu",
+      "description": "Kako pojedinac može optimizirati svoj ibadet i duhovne prakse tokom Ramazana kako bi postigao maksimalne koristi?"
+    },
+    {
+      "id": "remedy12",
+      "title": "Za Održavanje Energije Tokom Posta",
+      "description": "Koji su efikasni načini za održavanje energije i fokusa tokom sati posta u Ramazanu?"
+    },
+    {
+      "id": "remedy13",
+      "title": "Za Navigaciju Kroz Socijalne Obaveze u Ramazanu",
+      "description": "Kako možemo balansirati naše socijalne obaveze s ličnim i duhovnim ciljevima tokom Ramazana?"
+    },
+    {
+      "id": "remedy14",
+      "title": "Za Povećanje Dobrotvornosti u Ramazanu",
+      "description": "Koje strategije se mogu primijeniti za poboljšanje dobročinstva i djela ljubaznosti tokom Ramazana?"
+    },
+    {
+      "id": "remedy15",
+      "title": "Za Razmišljanje o Kur'anu u Ramazanu",
+      "description": "Kako možemo produbiti našu angažovanost i razmišljanje o Kur'anu tokom mjeseca Ramazana?"
+    }
+  ]
+}

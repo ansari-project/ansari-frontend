@@ -1,0 +1,210 @@
+import { DoubleCheckIcon, EyeIcon, LogoIcon } from '@endeavorpal/assets'
+import { ApplicationError } from '@endeavorpal/errors'
+import { useDirection, useScreenInfo, useTokenFromUrl } from '@endeavorpal/hooks'
+import { UserService } from '@endeavorpal/services'
+import { RootState } from '@endeavorpal/store'
+import { createGeneralThemedStyles } from '@endeavorpal/utils'
+import { useRegisterSchema } from '@endeavorpal/validation'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
+// TypeScript interface for the component's state
+interface PasswordState {
+  password: string
+  confirmPassword: string
+  submitted: boolean
+}
+
+const ResetPasswordScreen: React.FC = () => {
+  const navigate = useNavigate()
+  const { t } = useTranslation('register')
+  const { isRTL } = useDirection()
+  const { isSmallScreen, width } = useScreenInfo()
+  const token = useTokenFromUrl()
+  const { password: passwordSchema, confirmPassword: confirmPasswordSchema } = useRegisterSchema()
+  const [passwordState, setPasswordState] = useState<PasswordState>({
+    password: '',
+    confirmPassword: '',
+    submitted: false,
+  })
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+  const [errors, setErrors] = useState<{ password?: string; confirmPassword?: string; error?: string }>({})
+  const [hovered, setHovered] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
+  // Handles password and confirm password changes
+  const handlePasswordChange = (field: keyof PasswordState, value: string) => {
+    setPasswordState((prevState) => ({ ...prevState, [field]: value }))
+  }
+
+  // Submits the form after validation
+  const handleSubmit = async () => {
+    setIsSubmitting(true)
+    try {
+      await validatePassword()
+      if (!passwordState.password || Object.keys(errors).length !== 0) {
+        throw new Error('Validation failed')
+      }
+      await UserService.updatePassword(String(token), passwordState.password)
+      setPasswordState((prevState) => ({ ...prevState, submitted: true }))
+    } catch (error) {
+      const serviceErrors: { [key: string]: string } = {}
+      if (error instanceof ApplicationError) {
+        serviceErrors['error'] = error.message
+      } else {
+        serviceErrors['error'] = error instanceof Error ? error.message : 'An unexpected error occurred'
+      }
+
+      setErrors(serviceErrors)
+      console.error('Error resetting password:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Validates password and confirmPassword fields
+  const validatePassword = async () => {
+    try {
+      const validationSchema = Yup.object({ password: passwordSchema, confirmPassword: confirmPasswordSchema })
+      await validationSchema.validate(
+        { password: passwordState.password, confirmPassword: passwordState.confirmPassword },
+        { abortEarly: false },
+      )
+      setErrors({})
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {}
+        error.inner.forEach(({ path, message }) => {
+          if (path) validationErrors[path] = message
+        })
+        setErrors(validationErrors)
+      }
+    }
+  }
+
+  // Navigates back to the login screen
+  const handleBack = () => navigate('/login')
+
+  // Styles
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
+  const styles = StyleSheet.create({
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      color: theme.primaryColor,
+    },
+    description: {
+      fontSize: 16,
+      marginBottom: 20,
+      color: theme.primaryColor,
+    },
+    passwordInputContainer: {
+      position: 'relative',
+      width: '100%',
+    },
+    passwordInputField: {
+      justifyContent: 'center',
+      width: '100%',
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+  })
+
+  if (passwordState.submitted) {
+    // Display success message after password reset
+    return (
+      <View style={generalStyle.formContainer}>
+        <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        <View style={generalStyle.form}>
+          <Text style={styles.title}>{t('passwordResetSuccess')}</Text>
+          <View style={{ alignItems: 'center', width: '100%' }}>
+            <DoubleCheckIcon width='50' />
+          </View>
+          <Text style={styles.description}>{t('passwordResetSuccessMessage')}</Text>
+
+          <View style={styles.buttonContainer}>
+            <Text
+              style={[
+                generalStyle.prompt,
+                { alignItems: 'flex-start' },
+                Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
+              ]}
+              onPress={handleBack}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <Text style={generalStyle.link}>{t('loginHere')}</Text>
+            </Text>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
+  // Main reset password form
+  return (
+    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <View style={generalStyle.form}>
+        <Text style={styles.title}>{t('passwordReset')}</Text>
+        {['password', 'confirmPassword'].map((field) => (
+          <View key={field} style={styles.passwordInputContainer}>
+            <View key={field} style={styles.passwordInputField}>
+              <TextInput
+                secureTextEntry={!passwordVisible}
+                style={generalStyle.input}
+                onChangeText={(value: string) => handlePasswordChange(field as keyof PasswordState, value)}
+                onBlur={validatePassword}
+                value={passwordState[field as keyof PasswordState]}
+                placeholder={t(field)}
+                autoCapitalize='none'
+              />
+              <Pressable onPress={() => setPasswordVisible(!passwordVisible)} style={generalStyle.eyeIcon}>
+                <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
+              </Pressable>
+            </View>
+            {errors[field as keyof typeof errors] && (
+              <Text style={generalStyle.errorText}>{errors[field as keyof typeof errors]}</Text>
+            )}
+          </View>
+        ))}
+
+        {errors.error && <Text style={generalStyle.errorText}>{errors.error}</Text>}
+        <Pressable
+          style={[generalStyle.buttonPrimary, isSubmitting && generalStyle.buttonDisabled]}
+          onPress={handleSubmit}
+          disabled={isSubmitting}
+        >
+          <Text style={[generalStyle.buttonPrimaryText, isSubmitting && generalStyle.buttonTextDisabled]}>
+            {isSubmitting ? t('login:submitting') : t('continue')}
+          </Text>
+        </Pressable>
+        <View style={styles.buttonContainer}>
+          <Text
+            style={[
+              generalStyle.prompt,
+              { alignItems: 'flex-start' },
+              Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
+            ]}
+            onPress={handleBack}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <Text style={generalStyle.link}>{t('back')}</Text>
+          </Text>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  )
+}
+
+export default ResetPasswordScreen

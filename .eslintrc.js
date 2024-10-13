@@ -31,6 +31,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
+    'no-undef': 'off',
     '@typescript-eslint/no-require-imports': 'off',
     'react/react-in-jsx-scope': 'off',
     camelcase: 'error',

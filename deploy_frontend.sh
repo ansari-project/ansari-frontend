@@ -1,21 +1,35 @@
-# Create a Google Cloud Storage Bucket with custom domain name
-# There is a set of steps to do it first. 
-#  gsutil mb -l us-central1 gs://YOUR_BUCKET_NAME
-# This creates the bucket in the us-central1 region.
-# You also need to update the DNS. 
-BUCKET_NAME=ansari.chat
+#!/bin/bash
+set -e
 
-# This is required the first time only
-# gsutil mb -l us-central1 gs://YOUR_BUCKET_NAME
-# You 
+# Configurations
+BUCKET_NAME=${BUCKET_NAME:-"ansari.chat"}
+REGION=${REGION:-"us-west1"}
+BUILD_DIR=${BUILD_DIR:-"$PWD/build"}
+MAIN_PAGE=${MAIN_PAGE:-"index.html"}
+ERROR_PAGE=${ERROR_PAGE:-"404.html"}
 
-# Upload your site to the bucket
-gsutil -m rsync -r -d $PWD/build gs://$BUCKET_NAME
+# Validations
+[[ -z "$BUCKET_NAME" || ! "$BUCKET_NAME" =~ ^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$ ]] && { echo "Invalid BUCKET_NAME."; exit 1; }
+command -v gcloud &>/dev/null || { echo "gcloud not found."; exit 1; }
 
-# Make your bucket public
-gsutil iam ch allUsers:objectViewer gs://$BUCKET_NAME
+# Build React App (if applicable)
+[[ "$REBUILD_APP" == true ]] && { command -v yarn &>/dev/null && yarn build || { echo "Yarn not found."; exit 1; }; }
+[[ ! -d "$BUILD_DIR" ]] && { echo "BUILD_DIR not found."; exit 1; }
 
-# Set up a website configuration
-gsutil web set -m index.html -e 404.html gs://$BUCKET_NAME
+# Create Bucket if Not Exists
+gcloud storage buckets list --filter="name:$BUCKET_NAME" --format="value(name)" | grep -q "$BUCKET_NAME" || \
+  gcloud storage buckets create "gs://$BUCKET_NAME" --location="$REGION"
 
-echo "Your site is available at https://$BUCKET_NAME"
+# Upload Files
+gcloud storage rsync -r --delete-unmatched-destination-objects "$BUILD_DIR" "gs://$BUCKET_NAME"
+
+# Set Website Configuration
+gcloud storage buckets update "gs://$BUCKET_NAME" --web-main-page-suffix="$MAIN_PAGE" --web-error-page="$ERROR_PAGE"
+
+# Make Bucket Public (if applicable)
+[[ "$MAKE_BUCKET_PUBLIC" == true ]] && \
+  gcloud storage buckets add-iam-policy-binding "gs://$BUCKET_NAME" --member="allUsers" --role="roles/storage.objectViewer"
+
+# Output Final URL
+echo "Deployment complete. Your site: https://$BUCKET_NAME"
+

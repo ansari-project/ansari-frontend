@@ -71,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@types/lodash.debounce": "^4.0.9",
     "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",

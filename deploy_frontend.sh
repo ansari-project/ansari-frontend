@@ -6,7 +6,8 @@ BUCKET_NAME=${BUCKET_NAME:-"ansari.chat"}
 REGION=${REGION:-"us-west1"}
 BUILD_DIR=${BUILD_DIR:-"$PWD/build"}
 MAIN_PAGE=${MAIN_PAGE:-"index.html"}
-ERROR_PAGE=${ERROR_PAGE:-"404.html"}
+# Make the error page also index.html to do client-side routing
+ERROR_PAGE=${ERROR_PAGE:-"index.html"}
 
 # Validations
 [[ -z "$BUCKET_NAME" || ! "$BUCKET_NAME" =~ ^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$ ]] && { echo "Invalid BUCKET_NAME."; exit 1; }

@@ -154,10 +154,9 @@ const ForgetPasswordScreen: React.FC = () => {
           value={emailState.email}
           placeholder={t('yourEmail')}
           autoCapitalize='none'
-          autoCompleteType='email'
+          autoComplete='username'
           autoCorrect={false}
           inputMode='email'
-          textContentType='emailAddress'
         />
         {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
         <Pressable style={generalStyle.buttonPrimary} onPress={handleSubmit}>

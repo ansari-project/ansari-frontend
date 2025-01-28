@@ -163,9 +163,11 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.email}
                 placeholder={t('email')}
-                autoCompleteType='username'
                 style={generalStyle.input}
-                autocomplete='off'
+                autoCapitalize='none'
+                autoComplete='email'
+                autoCorrect={false}
+                inputMode='email'
               />
               {touched.email && errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
 

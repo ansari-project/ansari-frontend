@@ -120,7 +120,9 @@ const LoginScreen: React.FC = () => {
                 value={values.email}
                 placeholder={t('email')}
                 style={[generalStyle.input]}
-                autocomplete='off'
+                autoCapitalize='none'
+                autoComplete='username'
+                autoCorrect={false}
                 inputMode='email'
               />
               {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
@@ -135,6 +137,7 @@ const LoginScreen: React.FC = () => {
                 placeholder={t('password')}
                 secureTextEntry
                 style={[generalStyle.input]}
+                autoComplete='current-password'
               />
               {errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 

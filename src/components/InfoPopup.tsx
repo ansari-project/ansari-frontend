@@ -48,6 +48,11 @@ const InfoPopup: React.FC = () => {
       borderRadius: 4,
       elevation: 2,
     },
+    toggleButton: {
+      borderWidth: 0,
+      padding: 8,
+      elevation: 2,
+    },
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -95,7 +100,8 @@ const InfoPopup: React.FC = () => {
     infoContainer: {
       flexDirection: 'row',
       width: '100%',
-      padding: 24,
+      paddingHorizontal: 24,
+      paddingVertical: 16,
       justifyContent: 'space-between',
       alignItems: 'center',
       gap: 8,
@@ -177,7 +183,7 @@ const InfoPopup: React.FC = () => {
           <View style={styles.modalView}>
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
-              <Pressable onPress={() => togglePopup()} style={{ borderWidth: 0 }}>
+              <Pressable onPress={() => togglePopup()} style={styles.toggleButton} hitSlop={8}>
                 <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={{ borderWidth: 0 }} />
               </Pressable>
             </View>

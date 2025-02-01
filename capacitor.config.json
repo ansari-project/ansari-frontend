@@ -1,0 +1,15 @@
+{
+  "appId": "chat.ansari.app",
+  "appName": "Ansari Chat",
+  "webDir": "build",
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": false
+    },
+    "SplashScreen": {
+      "launchShowDuration": 500,
+      "launchAutoHide": true,
+      "launchFadeOutDuration": 200
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package com.orgnametbd.ansariapp;
+package chat.ansari.app;
 
 import com.getcapacitor.BridgeActivity;
 

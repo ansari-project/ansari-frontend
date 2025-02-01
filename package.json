@@ -54,6 +54,8 @@
   "scripts": {
     "depcheck": "./node_modules/.bin/depcheck",
     "start": "react-app-rewired start",
+    "open:android": "npx cap open android",
+    "open:ios": "npx cap open ios",
     "start:android": "npx cap run android",
     "start:ios": "npx cap run ios",
     "build:cap": "PUBLIC_URL=./ react-app-rewired build",

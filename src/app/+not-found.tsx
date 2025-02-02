@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 // Define the NotFoundScreen component
 const NotFoundScreen: React.FC = () => {
@@ -21,13 +21,13 @@ const NotFoundScreen: React.FC = () => {
   // Redux hooks and dispatch function
   const dispatch = useDispatch<AppDispatch>()
   // React router hooks
-  const location = useLocation()
+  const params = useLocalSearchParams()
   // Retrieve error message from location state or set to null
-  const errorMessage = location.state?.errorMsg || null
+  const errorMessage = params.errorMsg || null
   // Retrieve theme data from Redux store
   const theme = useSelector((state: RootState) => state.theme.theme)
   // Navigation hook
-  const navigate = useNavigate()
+  const router = useRouter()
 
   // Effect hook to initialize activeThread on component mount
   useEffect(() => {
@@ -82,7 +82,7 @@ const NotFoundScreen: React.FC = () => {
   return (
     <SafeAreaView style={[styles.container]}>
       {/* Pressable logo to navigate back to home screen */}
-      <Pressable style={styles.logo} onPress={() => navigate('/')}>
+      <Pressable style={styles.logo} onPress={() => router.push('/')}>
         <LogoIcon fill={theme.iconFill} />
       </Pressable>
       {/* Body text indicating 404 error */}

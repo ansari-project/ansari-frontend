@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 import ConfirmationDialog from '../ConfirmationDialog'
 import { ThreadCard } from './'
 import i18next from 'i18next'
@@ -80,9 +80,9 @@ interface ThreadsListProp {
 }
 const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
+  const router = useRouter()
   const threads = useSelector((state: RootState) => state.chat.threads)
-  const { threadId } = useParams<{ threadId: string }>()
+  const { threadId } = useLocalSearchParams<{ threadId: string }>()
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(threadId || null)
   const { isRTL } = useDirection()
   const textAlignStyle = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
@@ -141,7 +141,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
       setThreadToDeleteId(null)
       setDialogMessage('')
       if (threadId === threadToDeleteId) {
-        navigate('/')
+        router.push('/')
       }
     }
   }

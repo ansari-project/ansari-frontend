@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'expo-router'
 import ENButton from '../buttons/ENButton'
 import MessageList, { MessageListRef } from './MessageList'
 
@@ -13,13 +13,13 @@ const ShareContainer: React.FC = () => {
   const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { t } = useTranslation()
-  const navigate = useNavigate()
+  const router = useRouter()
 
   // State to track the last known content height
   const messageListRef = React.useRef<MessageListRef>(null)
   const { contentWidth } = useScreenInfo(sideMenuWidth)
   const startChat = () => {
-    navigate('/')
+    router.push('/')
   }
 
   // Clean up the abort controller on unmount or when the component is no longer active

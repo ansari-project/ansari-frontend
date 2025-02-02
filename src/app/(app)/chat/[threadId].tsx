@@ -7,17 +7,18 @@ import getEnv from '@/utils/getEnv'
 import React, { useEffect } from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 /**
  * Displays a chat interface allowing users to send and view messages within a thread.
  * Handles thread creation and message sending with real-time updates.
  */
 const ChatScreen: React.FC = () => {
-  const { threadId } = useParams<{ threadId?: string }>()
+  const router = useRouter()
+  const { threadId } = useLocalSearchParams<{ threadId?: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
-  const navigate = useNavigate()
+  const navigate = useRouter()
   const { isRTL } = useDirection()
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isSharePopupVisible = useSelector((state: RootState) => state.share.isOpen)
@@ -32,10 +33,10 @@ const ChatScreen: React.FC = () => {
         .unwrap()
         .catch((error) => {
           console.error(error)
-          navigate('/', { state: { errorMsg: error.message || 'An unknown error occurred.' } })
+          router.push({ pathname: '/', params: { errorMsg: error.message || 'An unknown error occurred.' } })
         })
     } else {
-      navigate('/', { state: { errorMsg: 'Please provide a valid threadId.' } })
+      router.push({ pathname: '/', params: { errorMsg: 'Please provide a valid threadId.' } })
     }
   }, [threadId, dispatch, navigate])
 

@@ -16,7 +16,7 @@ import {
   View,
 } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 
 // TypeScript interface for the initial state
@@ -26,7 +26,7 @@ interface EmailState {
 }
 
 const ForgetPasswordScreen: React.FC = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { t } = useTranslation('login')
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
@@ -81,7 +81,7 @@ const ForgetPasswordScreen: React.FC = () => {
   }
 
   const handleBack = () => {
-    navigate('/login')
+    router.push('/login')
   }
 
   // Styles

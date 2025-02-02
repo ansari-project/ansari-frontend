@@ -18,16 +18,15 @@ import {
   View,
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 import * as Yup from 'yup'
 
 const LoginScreen: React.FC = () => {
-  const location = useLocation()
+  const router = useRouter()
   const urlParams = new URLSearchParams(location.search)
   const successMessage = urlParams.get('s') || null
   useRedirect('/', '/login' + (urlParams.size ? `?${urlParams.toString()}` : ''))
 
-  const navigate = useNavigate()
   const { t } = useTranslation('login')
   const loginSchema = useLoginSchema()
   const dispatch = useDispatch<AppDispatch>()
@@ -74,7 +73,7 @@ const LoginScreen: React.FC = () => {
         if (response.status === 'error') {
           setErrorMessage(response.message || t('loginFailed'))
         } else {
-          navigate('/')
+          router.push('/')
         }
       })
       .catch((error) => {
@@ -148,7 +147,7 @@ const LoginScreen: React.FC = () => {
                   style={[generalStyle.link, Platform.OS === 'web' && hovered === 1 ? generalStyle.boldText : null]}
                   onMouseEnter={() => setHovered(1)}
                   onMouseLeave={() => setHovered(0)}
-                  onPress={() => navigate('/forgot-password')}
+                  onPress={() => router.push('/forgot-password')}
                 >
                   {t('forgetPassword')}
                 </Text>
@@ -182,7 +181,7 @@ const LoginScreen: React.FC = () => {
                   style={generalStyle.link}
                   onMouseEnter={() => setHovered(2)}
                   onMouseLeave={() => setHovered(0)}
-                  onPress={() => navigate('/register')}
+                  onPress={() => router.push('/register')}
                 >
                   {t('register')}
                 </Text>

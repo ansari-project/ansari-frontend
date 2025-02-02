@@ -4,7 +4,7 @@ import { AppDispatch, setActiveThread, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocalSearchParams } from 'expo-router'
 
 const HomeScreen: React.FC = () => {
   useRedirect('/', '/welcome')
@@ -12,8 +12,8 @@ const HomeScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { isAuthenticated, isGuest } = useAuth()
   const [toastVisible, setToastVisible] = useState<boolean>(false)
-  const location = useLocation()
-  const errorMessage = location.state?.errorMsg || null
+  const params = useLocalSearchParams()
+  const errorMessage = params.errorMsg || null
   const { isMobile } = useScreenInfo()
 
   // Initialize activeThread to null when the component mounts

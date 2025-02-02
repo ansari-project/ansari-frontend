@@ -4,7 +4,7 @@
 import { AppDispatch, guestLogin } from '@/store'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 
 /**
  * A custom hook for handling guest login functionality.
@@ -16,7 +16,7 @@ export const useGuest = () => {
   // Redux dispatch function for dispatching actions.
   const dispatch = useDispatch<AppDispatch>()
   // Navigation hook to programmatically navigate between routes.
-  const navigate = useNavigate()
+  const router = useRouter()
 
   // State to track whether the guest login process is loading.
   const [guestLoading, setGuestLoading] = useState<boolean>(false)
@@ -36,7 +36,7 @@ export const useGuest = () => {
       // Dispatching the guestLogin action and waiting for it to complete.
       await dispatch(guestLogin()).unwrap()
       // On success, navigate to the homepage and reset loading state.
-      navigate('/')
+      router.push('/')
     } catch (error) {
       console.error('Error logging in as guest:', error)
       // On failure, set error state and log the error.

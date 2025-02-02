@@ -8,14 +8,14 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 
 const Welcome: React.FC = () => {
-  const location = useLocation()
+  const router = useRouter()
   const urlParams = new URLSearchParams(location.search)
   useRedirect('/', '/welcome' + (urlParams.size ? `?${urlParams.toString()}` : ''))
   const { t } = useTranslation()
-  const navigate = useNavigate()
+  const navigate = useRouter()
 
   const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
@@ -115,7 +115,7 @@ const Welcome: React.FC = () => {
             </Pressable>
             <Pressable
               style={[generalStyle.buttonSecondary, generalStyle.fullWidth, styles.register]}
-              onPress={() => navigate('/register')}
+              onPress={() => router.push('/register')}
             >
               <Text style={generalStyle.buttonSecondaryText}>{t('register')}</Text>
             </Pressable>

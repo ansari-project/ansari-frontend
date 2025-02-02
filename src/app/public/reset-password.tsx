@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 
 // TypeScript interface for the component's state
@@ -20,7 +20,7 @@ interface PasswordState {
 }
 
 const ResetPasswordScreen: React.FC = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { t } = useTranslation('register')
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
@@ -88,7 +88,7 @@ const ResetPasswordScreen: React.FC = () => {
   }
 
   // Navigates back to the login screen
-  const handleBack = () => navigate('/login')
+  const handleBack = () => router.push('/login')
 
   // Styles
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)

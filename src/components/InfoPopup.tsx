@@ -6,7 +6,7 @@ import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'expo-router'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {
@@ -28,7 +28,7 @@ const InfoPopup: React.FC = () => {
     }, 1000) // Show the Pop after 1 second
   }
 
-  const navigate = useNavigate()
+  const router = useRouter()
   const doLogout = useLogout()
 
   const register = async () => {
@@ -36,7 +36,7 @@ const InfoPopup: React.FC = () => {
       // kill the current guest session
       await doLogout()
       // Direct to the registration screen
-      navigate('/register')
+      router.push('/register')
     }
   }
 

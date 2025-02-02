@@ -19,7 +19,7 @@ import {
   CheckBox,
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 interface RegisterFormValues {
   email: string
@@ -35,7 +35,7 @@ const RegisterScreen: React.FC = () => {
   const { t } = useTranslation('register')
   const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()
-  const navigate = useNavigate()
+  const router = useRouter()
   const registerSchema = useRegisterSchema()
   const { isSmallScreen, width } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -72,7 +72,7 @@ const RegisterScreen: React.FC = () => {
         if (response.status === 'error') {
           setErrorMessage(response.message || t('registerFailure'))
         } else {
-          navigate('/login?s=' + t('registerSuccess'))
+          router.push('/login?s=' + t('registerSuccess'))
         }
       })
       .catch((error) => {
@@ -254,7 +254,7 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.link}
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
-                  onPress={() => navigate('/login')}
+                  onPress={() => router.push('/login')}
                 >
                   {t('loginHere')}
                 </Text>

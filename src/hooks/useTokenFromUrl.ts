@@ -1,12 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 export const useTokenFromUrl = () => {
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const token = searchParams.get('token')
+  const router = useRouter()
+  const { token } = useLocalSearchParams()
   if (!token) {
-    const navigate = useNavigate()
-    navigate('/login')
+    router.push('/login')
   }
   return token
 }

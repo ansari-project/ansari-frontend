@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import { useAuth } from './useAuth'
 
 /**
@@ -13,8 +13,7 @@ import { useAuth } from './useAuth'
 export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated: string): void => {
   // Retrieve the current authentication status
   const { isAuthenticated, accessToken } = useAuth()
-  const location = useLocation()
-  const navigate = useNavigate()
+  const router = useRouter()
 
   useEffect(() => {
     // Get the current path
@@ -22,14 +21,14 @@ export const useRedirect = (pathIfAuthenticated: string, pathIfNotAuthenticated:
     // Conditional navigation based on the authentication status of the user and the current path
     if (isAuthenticated && accessToken) {
       if (currentPath !== pathIfAuthenticated) {
-        navigate(pathIfAuthenticated)
+        router.push(pathIfAuthenticated)
       }
     } else {
-      navigate(pathIfNotAuthenticated)
+      router.push(pathIfNotAuthenticated)
     }
 
     // Dependencies: The effect re-runs if any of these values change.
-  }, [navigate, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, accessToken])
+  }, [router, pathIfAuthenticated, pathIfNotAuthenticated, isAuthenticated, accessToken])
 }
 
 export default useRedirect

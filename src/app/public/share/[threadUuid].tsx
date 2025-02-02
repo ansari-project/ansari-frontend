@@ -6,17 +6,17 @@ import { Helpers } from '@/utils'
 import React, { useEffect } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 /**
  * Displays a chat interface allowing users to send and view messages within a thread.
  * Handles thread creation and message sending with real-time updates.
  */
 const ShareScreen: React.FC = () => {
-  const { threadUuid } = useParams<{ threadUuid?: string }>()
+  const { threadUuid } = useLocalSearchParams<{ threadUuid?: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
-  const navigate = useNavigate()
+  const router = useRouter()
   const { isRTL } = useDirection()
   const theme = useSelector((state: RootState) => state.theme.theme)
 
@@ -26,12 +26,12 @@ const ShareScreen: React.FC = () => {
       dispatch(fetchSharedThread(threadUuid))
         .unwrap()
         .catch(() => {
-          navigate('/404')
+          router.push('/404')
         })
     } else {
-      navigate('/404')
+      router.push('/404')
     }
-  }, [threadUuid, dispatch, navigate])
+  }, [threadUuid, dispatch, router])
 
   // Clean up the abort controller on unmount or when the component is no longer active
   useEffect(() => {

@@ -3,8 +3,8 @@ import { RootState } from '@/store'
 import React, { PropsWithChildren } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import ActionButtons from '../ActionButtons'
-import Footer from '../Footer'
+import ActionButtons from '@/components/ActionButtons'
+import Footer from '@/components/layout/Footer'
 
 // Define the type of props that the PublicLayout component accepts
 type Props = PropsWithChildren<{ children?: React.ReactNode }>

@@ -1,13 +1,12 @@
 import { LineIcon, RightArrowIcon } from '@/assets'
 import { useAuth, useScreenInfo } from '@/hooks'
-import { WelcomeScreen } from '@/screens'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React, { Children, PropsWithChildren, ReactElement } from 'react'
 import { Dimensions, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import Footer from '../Footer'
-import Header from '../Header'
-import { SideMenu } from '../menu'
+import Footer from '@/components/layout/Footer'
+import Header from '@/components/layout/Header'
+import { SideMenu } from '@/components/menu'
 
 // Define the type of props that the AppLayout component accepts
 type AppLayoutProps = PropsWithChildren<{ children?: React.ReactNode }>
@@ -37,11 +36,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const child = Children.only(children) as ReactElement
   // Get the type of the child element
   const childType = child?.type || undefined
-  let showFooter = true
-  // Determine whether to show footer based on the type of child component
-  if (childType === WelcomeScreen) {
-    showFooter = false
-  }
+  let showFooter = false
 
   // Get the height of the window
   const { height } = Dimensions.get('window')

@@ -1,8 +1,7 @@
-import { AppLayout, PublicLayout, WelcomeLayout } from '@endeavorpal/components'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { AppLayout, PublicLayout, WelcomeLayout } from '@/components'
 import { createBrowserHistory } from 'history'
-import { RouteObject, createMemoryRouter } from 'react-router'
-import { Route, BrowserRouter as Router, RouterProvider, Routes } from 'react-router-dom'
+import { RouteObject } from 'react-router'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import sharedRoutes from './sharedRoutes'
 
 const webHistory = createBrowserHistory()
@@ -32,11 +31,4 @@ const WebRoutes = () => {
   )
 }
 
-const nativeRouter = createMemoryRouter(sharedRoutes)
-const syncHistory = routerMiddleware(nativeRouter)
-const storeWithRouter = connectRouter(syncHistory)
-
-const NativeRoutes = () => {
-  return <RouterProvider router={storeWithRouter} history={syncHistory} />
-}
-export default { WebRoutes, NativeRoutes }
+export default { WebRoutes }

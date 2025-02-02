@@ -7,19 +7,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import { SideMenu } from '@/components/menu'
-
-// Define the type of props that the AppLayout component accepts
-type AppLayoutProps = PropsWithChildren<{ children?: React.ReactNode }>
+import { Slot } from 'expo-router'
 
 /**
  * AppLayout Component.
  * This component defines the layout for the entire application.
  * It includes a header, side menu, main content area, and a footer.
  * The side menu can be toggled open/closed by clicking a button.
- * @param children The child components to be rendered within the main content area.
  * @returns JSX element representing the AppLayout component.
  */
-export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+export const AppLayout = () => {
   // Hook to get screen information
   const { isSmallScreen, isMobile } = useScreenInfo()
   // Redux hook to get theme data
@@ -106,7 +103,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                   </View>
                 )}
                 {/* Main content area */}
-                <ScrollView contentContainerStyle={styles.appContent}>{children}</ScrollView>
+                <ScrollView contentContainerStyle={styles.appContent}>
+                  <Slot />
+                </ScrollView>
               </View>
               {/* Footer */}
               {showFooter && <Footer />}

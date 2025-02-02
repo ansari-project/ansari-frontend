@@ -1,20 +1,17 @@
 import { useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
+import { Slot } from 'expo-router'
 import React, { PropsWithChildren } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
-
-// Define the type of props that the WelcomeLayout component accepts
-type Props = PropsWithChildren<{ children?: React.ReactNode }>
 
 /**
  * WelcomeLayout Component.
  * This component defines the layout for public pages.
  * It includes a header, main content area, and a footer.
- * @param children The child components to be rendered within the main content area.
  * @returns JSX element representing the WelcomeLayout component.
  */
-export const WelcomeLayout: React.FC<Props> = ({ children }) => {
+export const WelcomeLayout = () => {
   // Hook to get screen information
   const { height } = useScreenInfo()
   // Redux hook to get theme data
@@ -47,7 +44,9 @@ export const WelcomeLayout: React.FC<Props> = ({ children }) => {
   // Render the component
   return (
     <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-      <ScrollView contentContainerStyle={styles.main}>{children}</ScrollView>
+      <ScrollView contentContainerStyle={styles.main}>
+        <Slot />
+      </ScrollView>
     </KeyboardAvoidingView>
   )
 }

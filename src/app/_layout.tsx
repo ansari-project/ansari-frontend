@@ -6,10 +6,16 @@ import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { LoadingScreen } from '@/components'
+import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 
-const App: React.FC = () => {
+import '../index.css'
+
+const AppLayout = () => {
   // Specify the type of the state to be either null or an EnhancedStore instance
   const [reduxStore, setReduxStore] = useState<EnhancedStore<RootState> | null>(null)
+  let [fontsLoaded] = useFonts({
+    Inter: Inter_400Regular,
+  })
 
   useEffect(() => {
     document.dir = i18n.dir(i18n.language)
@@ -18,7 +24,7 @@ const App: React.FC = () => {
     })
   }, [])
 
-  if (!reduxStore) {
+  if (!reduxStore || !fontsLoaded) {
     return <LoadingScreen />
   }
 
@@ -31,4 +37,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default AppLayout

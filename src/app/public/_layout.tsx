@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/layout/Footer'
+import { Slot } from 'expo-router'
 
 // Define the type of props that the PublicLayout component accepts
 type Props = PropsWithChildren<{ children?: React.ReactNode }>
@@ -16,7 +17,7 @@ type Props = PropsWithChildren<{ children?: React.ReactNode }>
  * @param children The child components to be rendered within the main content area.
  * @returns JSX element representing the PublicLayout component.
  */
-export const PublicLayout: React.FC<Props> = ({ children }) => {
+export const PublicLayout = () => {
   // Hook to get screen information
   const { isSmallScreen, isMobile, height } = useScreenInfo()
   // Redux hook to get theme data
@@ -79,7 +80,9 @@ export const PublicLayout: React.FC<Props> = ({ children }) => {
 
           <ScrollView contentContainerStyle={styles.main}>
             <View style={styles.bodyContainer}>
-              <View contentContainerStyle={styles.appContent}>{children}</View>
+              <View contentContainerStyle={styles.appContent}>
+                <Slot />
+              </View>
             </View>
             <Footer />
           </ScrollView>

@@ -1,7 +1,7 @@
-import { TokenRefreshError } from '@endeavorpal/errors'
-import { loadAuthState, refreshTokens } from '@endeavorpal/store'
-import { resetAuth } from '@endeavorpal/store/slices/authSlice'
-import { RefreshTokenResponse } from '@endeavorpal/types'
+import { TokenRefreshError } from '@/errors'
+import { loadAuthState, refreshTokens } from '@/store'
+import { resetAuth } from '@/store/slices/authSlice'
+import { RefreshTokenResponse } from '@/types'
 import { Dispatch, UnknownAction } from 'redux'
 
 // TypeScript types for better code understanding and safety

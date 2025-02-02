@@ -7,8 +7,8 @@ import {
   ResetPasswordScreen,
   WelcomeScreen,
   NotFoundScreen,
-} from '@endeavorpal/screens'
-import ShareScreen from '@endeavorpal/screens/ShareScreen'
+} from '@/screens'
+import ShareScreen from '@/screens/ShareScreen'
 import { RouteObject } from 'react-router'
 
 /**

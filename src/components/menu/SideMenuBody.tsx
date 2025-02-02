@@ -1,6 +1,6 @@
-import { AddIcon, LogoRoundIcon, MenuIcon } from '@endeavorpal/assets'
-import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@endeavorpal/store'
+import { AddIcon, LogoRoundIcon, MenuIcon } from '@/assets'
+import { useAuth, useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router'
 import ActionButtons from '../ActionButtons'
 import { ThreadsList } from '../threads'
 import { NameContainer } from './'
-import { Helpers } from '@endeavorpal/utils'
+import { Helpers } from '@/utils'
 
 const SideMenuBody: React.FC = () => {
   const { user } = useAuth()

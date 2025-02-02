@@ -1,6 +1,6 @@
 import React from 'react'
 import EndeavorFancySVG, { Props } from './EndeavorFancySVG'
-import { useDirection } from '@endeavorpal/hooks'
+import { useDirection } from '@/hooks'
 
 const ExpandIcon: React.FC<Props> = (props: Props) => {
   const { isRTL } = useDirection()

@@ -1,5 +1,5 @@
-import { useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { Animated, Platform, StyleSheet, Text } from 'react-native'
 import { useSelector } from 'react-redux'

@@ -1,4 +1,4 @@
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@endeavorpal/types'
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types'
 
 class AuthService {
   baseURL: string | undefined

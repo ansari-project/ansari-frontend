@@ -1,4 +1,4 @@
-import { darkTheme, Theme } from '@endeavorpal/utils/theme'
+import { darkTheme, Theme } from '@/utils/theme'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface ThemeState {

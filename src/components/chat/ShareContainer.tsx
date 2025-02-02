@@ -1,5 +1,5 @@
-import { useChat, useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useChat, useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View } from 'react-native'

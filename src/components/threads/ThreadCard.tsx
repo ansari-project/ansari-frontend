@@ -1,5 +1,5 @@
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@endeavorpal/store'
+import { useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'

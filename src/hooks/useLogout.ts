@@ -1,5 +1,5 @@
-import { useAuth } from '@endeavorpal/hooks'
-import { AppDispatch, clearAuthState, logout } from '@endeavorpal/store'
+import { useAuth } from '@/hooks'
+import { AppDispatch, clearAuthState, logout } from '@/store'
 import { useDispatch } from 'react-redux'
 import { resetChatState, resetReactionButtons } from '../store/slices'
 

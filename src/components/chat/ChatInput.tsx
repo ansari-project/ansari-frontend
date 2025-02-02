@@ -1,6 +1,6 @@
-import { CollapseIcon, ExpandIcon, SendIcon, StopIcon } from '@endeavorpal/assets'
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, tootleInputFullMode } from '@endeavorpal/store'
+import { CollapseIcon, ExpandIcon, SendIcon, StopIcon } from '@/assets'
+import { useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {

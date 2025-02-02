@@ -1,4 +1,4 @@
-import { addMessage, AppDispatch, createThread, RootState, setActiveThread, Thread } from '@endeavorpal/store'
+import { addMessage, AppDispatch, createThread, RootState, setActiveThread, Thread } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 

@@ -1,12 +1,12 @@
-import { useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React, { Children, PropsWithChildren, ReactElement } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import Footer from './Footer'
 import Header from './Header'
 import { SideMenu } from './menu'
-import { WelcomeScreen } from '@endeavorpal/screens'
+import { WelcomeScreen } from '@/screens'
 
 type AppLayoutProps = PropsWithChildren<{ children?: React.ReactNode }>
 

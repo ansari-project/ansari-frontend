@@ -1,5 +1,5 @@
-import { ApplicationError } from '@endeavorpal/errors'
-import { ResetPasswordResponse } from '@endeavorpal/types'
+import { ApplicationError } from '@/errors'
+import { ResetPasswordResponse } from '@/types'
 
 // UserService class definition
 class UserService {

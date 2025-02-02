@@ -1,7 +1,7 @@
 // useGuest.ts
 // Hook for handling guest user login within a React / React Native application.
 
-import { AppDispatch, guestLogin } from '@endeavorpal/store'
+import { AppDispatch, guestLogin } from '@/store'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

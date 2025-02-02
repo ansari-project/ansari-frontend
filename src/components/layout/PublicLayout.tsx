@@ -1,5 +1,5 @@
-import { useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React, { PropsWithChildren } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'

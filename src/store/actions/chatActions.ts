@@ -1,7 +1,7 @@
-import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
-import { ChatService } from '@endeavorpal/services/'
-import { ShareThreadResponse } from '@endeavorpal/types'
-import { Helpers } from '@endeavorpal/utils'
+import { ApplicationError, NotFoundError } from '@/errors'
+import { ChatService } from '@/services/'
+import { ShareThreadResponse } from '@/types'
+import { Helpers } from '@/utils'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
   addMessageToActiveThread,

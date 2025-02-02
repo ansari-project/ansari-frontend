@@ -1,5 +1,5 @@
-import { RootState } from '@endeavorpal/store'
-import { createGeneralThemedStyles } from '@endeavorpal/utils'
+import { RootState } from '@/store'
+import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'

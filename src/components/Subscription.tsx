@@ -1,5 +1,5 @@
-import { useAuth } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useAuth } from '@/hooks'
+import { RootState } from '@/store'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Pressable, Text, View } from 'react-native'

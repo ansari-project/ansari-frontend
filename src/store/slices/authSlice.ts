@@ -1,5 +1,5 @@
-import { CryptoService } from '@endeavorpal/services'
-import { RefreshTokenResponse, User } from '@endeavorpal/types'
+import { CryptoService } from '@/services'
+import { RefreshTokenResponse, User } from '@/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { guestLogin, login } from '../actions/authActions'
 

@@ -1,8 +1,8 @@
 // Import necessary modules and components
-import { LogoIcon } from '@endeavorpal/assets'
-import { Toast } from '@endeavorpal/components'
-import { useAuth, useDirection } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, setActiveThread } from '@endeavorpal/store'
+import { LogoIcon } from '@/assets'
+import { Toast } from '@/components'
+import { useAuth, useDirection } from '@/hooks'
+import { AppDispatch, RootState, setActiveThread } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'

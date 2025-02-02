@@ -1,6 +1,6 @@
 // Importing necessary types and functions from the project's dependencies.
-import { ReactionButtonsProps } from '@endeavorpal/components/chat/ReactionButtons'
-import { AppDispatch, FeedbackClass, setReactionButton } from '@endeavorpal/store'
+import { ReactionButtonsProps } from '@/components/chat/ReactionButtons'
+import { AppDispatch, FeedbackClass, setReactionButton } from '@/store'
 import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 

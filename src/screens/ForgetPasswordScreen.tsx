@@ -1,8 +1,8 @@
-import { DoubleCheckIcon, LogoIcon } from '@endeavorpal/assets'
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { UserService } from '@endeavorpal/services'
-import { RootState } from '@endeavorpal/store'
-import { createGeneralThemedStyles } from '@endeavorpal/utils'
+import { DoubleCheckIcon, LogoIcon } from '@/assets'
+import { useDirection, useScreenInfo } from '@/hooks'
+import { UserService } from '@/services'
+import { RootState } from '@/store'
+import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {

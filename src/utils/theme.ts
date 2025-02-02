@@ -1,4 +1,4 @@
-import background from '@endeavorpal/assets/png/background.png'
+import background from '@/assets/png/background.png'
 
 // Define the interface for the theme object
 export interface Theme {

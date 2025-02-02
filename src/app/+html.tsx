@@ -24,7 +24,6 @@ export default function Root({ children }: { children: React.ReactNode }) {
 
         <meta name='theme-color' content='#F2F2F2' />
         <meta name='description' content='Islamic Chat System' />
-        <link rel='manifest' href='%PUBLIC_URL%/manifest.json' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap' rel='stylesheet' />
 

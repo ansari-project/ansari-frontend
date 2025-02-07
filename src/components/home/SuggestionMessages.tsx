@@ -1,8 +1,7 @@
-import { challenge, chat, praying } from 'assets'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-import { addMessage } from 'store/message-slice'
+import { addMessage } from '@/store/message-slice'
 
 const SuggestionMessages: React.FC = () => {
   const dispatch = useDispatch()
@@ -16,17 +15,17 @@ const SuggestionMessages: React.FC = () => {
     {
       header: t('duaToMake'),
       text: t('inParticularSituation'),
-      icon: praying,
+      icon: '/icons/praying.svg',
     },
     {
       header: t('spiritualRemedies'),
       text: t('challengesFacing'),
-      icon: challenge,
+      icon: '/icons/challenge.svg',
     },
     {
       header: t('islamicPerspectives'),
       text: t('onTopics'),
-      icon: chat,
+      icon: '/icons/chat.svg',
     },
   ]
 

@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon, CopyIcon, DislikeIcon, LikeIcon } from '@/assets'
+import { CheckIcon, CloseIcon, CopyIcon, DislikeIcon, LikeIcon } from '@/components/svg'
 import { useDirection, useFeedbackHandler, useFeedbackService, useScreenInfo } from '@/hooks'
 import { FeedbackClass, Message, ReactionButtonsState, RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'

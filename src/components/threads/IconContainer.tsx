@@ -1,4 +1,4 @@
-import { DeleteIcon, RenameIcon, ShareIcon } from '@/assets'
+import { DeleteIcon, RenameIcon, ShareIcon } from '@/components/svg'
 import { RootState, Thread } from '@/store'
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'

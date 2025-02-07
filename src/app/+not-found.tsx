@@ -1,5 +1,5 @@
 // Import necessary modules and components
-import { LogoIcon } from '@/assets'
+import { LogoIcon } from '@/components/svg'
 import { Toast } from '@/components'
 import { useAuth, useDirection } from '@/hooks'
 import { AppDispatch, RootState, setActiveThread } from '@/store'

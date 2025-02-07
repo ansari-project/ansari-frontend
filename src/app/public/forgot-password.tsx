@@ -1,4 +1,4 @@
-import { DoubleCheckIcon, LogoIcon } from '@/assets'
+import { DoubleCheckIcon, LogoIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { UserService } from '@/services'
 import { RootState } from '@/store'

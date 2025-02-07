@@ -1,4 +1,4 @@
-import { LogoutIcon } from '@/assets'
+import { LogoutIcon } from '@/components/svg'
 import { useLogout } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'

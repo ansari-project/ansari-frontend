@@ -1,4 +1,4 @@
-import { LanguageIcon } from '@/assets'
+import { LanguageIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useRef, useState } from 'react'

@@ -1,4 +1,4 @@
-import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '@/assets'
+import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '@/components/svg'
 import { useScreenInfo } from '@/hooks'
 import PromptsService, { PromptsByCategory } from '@/services/PromptsService'
 import React, { useEffect, useState } from 'react'

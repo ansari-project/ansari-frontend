@@ -1,5 +1,6 @@
-import { Container, InformationPopUp, LanguageSelectorPopUp } from 'components/ui'
+import { Container, InformationPopUp, LanguageSelectorPopUp } from '@/components/ui'
 import { Trans } from 'react-i18next'
+
 const Footer = () => {
   return (
     <Container>

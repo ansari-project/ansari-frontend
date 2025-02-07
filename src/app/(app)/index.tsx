@@ -1,11 +1,10 @@
-import { backgroundImage, compositeLogo, compositeLogoMobile } from 'assets'
-import { Message, SuggestionMessages, InputMessageBox, MessageTemplate } from 'components/home'
-import { Footer, Header } from 'components/layout'
-import { Container, IntroductionText } from 'components/ui'
-import { Role } from 'constant'
+import { Message, SuggestionMessages, InputMessageBox, MessageTemplate } from '@/components/home'
+import { Footer, Header } from '@/components/layout'
+import { Container, IntroductionText } from '@/components/ui'
+import { Role } from '@/constant'
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from 'store/store'
+import { RootState } from '@/store/store'
 
 const HomePage: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
@@ -43,8 +42,12 @@ const HomePage: React.FC = () => {
           {messages.length === 0 ? (
             <div className='mx-4 lg:mb-0 md:mx-0 h-full md:px-36 xl:px-64 overflow-y-hidden'>
               <div className='flex flex-col justify-start lg:justify-center h-full'>
-                <img src={compositeLogo} alt='BackgroundImage' className='hidden md:block mx-auto md:w-[380px] xl:w-116' />
-                <img src={compositeLogoMobile} alt='BackgroundImage' className=' md:hidden mx-auto pt-8' />
+                <img
+                  src='/icons/compositeLogo.svg'
+                  alt='BackgroundImage'
+                  className='hidden md:block mx-auto md:w-[380px] xl:w-116'
+                />
+                <img src='/icons/compositeLogoMobile.svg' alt='BackgroundImage' className=' md:hidden mx-auto pt-8' />
               </div>
             </div>
           ) : (
@@ -62,7 +65,13 @@ const HomePage: React.FC = () => {
                 ))}
                 {!!streamMessage?.length && !isAssistantStopped && (
                   <MessageTemplate hasMargin>
-                    <Message error={error} loading={isAssistantReading} key={streamMessage} content={streamMessage} type='receiver' />
+                    <Message
+                      error={error}
+                      loading={isAssistantReading}
+                      key={streamMessage}
+                      content={streamMessage}
+                      type='receiver'
+                    />
                   </MessageTemplate>
                 )}
                 <div ref={messagesEndRef} className='pb-2'></div>
@@ -89,7 +98,7 @@ const HomePage: React.FC = () => {
       </div>
       {messages.length !== 0 && (
         <div className='hidden lg:block fixed w-screen -bottom-24 '>
-          <img src={backgroundImage} alt='Background Image' className='w-116 bottom-0  mx-auto' />
+          <img src='/images/backgroundImage.png' alt='Background Image' className='w-116 bottom-0  mx-auto' />
         </div>
       )}
     </div>

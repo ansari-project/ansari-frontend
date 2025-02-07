@@ -1,4 +1,4 @@
-import { LineIcon, RightArrowIcon } from '@/assets'
+import { LineIcon, RightArrowIcon } from '@/components/svg'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React, { Children, PropsWithChildren, ReactElement } from 'react'

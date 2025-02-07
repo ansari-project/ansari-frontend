@@ -1,4 +1,4 @@
-import { EyeIcon, LogoIcon } from '@/assets'
+import { EyeIcon, LogoIcon } from '@/components/svg'
 import { useDirection, useRedirect, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, register } from '@/store'
 import { RegisterRequest } from '@/types'

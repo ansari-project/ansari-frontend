@@ -1,4 +1,4 @@
-import { CollapseIcon, ExpandIcon, SendIcon, StopIcon } from '@/assets'
+import { CollapseIcon, ExpandIcon, SendIcon, StopIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'

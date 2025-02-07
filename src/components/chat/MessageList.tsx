@@ -1,4 +1,4 @@
-import { ScrollToBottomIcon } from '@/assets'
+import { ScrollToBottomIcon } from '@/components/svg'
 import { useScreenInfo, useScrollManagement } from '@/hooks'
 import { Message, RootState, Thread, UserRole } from '@/store'
 import { Helpers } from '@/utils'

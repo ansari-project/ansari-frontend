@@ -1,4 +1,4 @@
-import { LogoIcon, LogoTextIcon } from '@/assets'
+import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import { useChat, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useCallback, useEffect } from 'react'

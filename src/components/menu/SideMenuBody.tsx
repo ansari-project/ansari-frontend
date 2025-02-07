@@ -1,4 +1,4 @@
-import { AddIcon, LogoRoundIcon, MenuIcon } from '@/assets'
+import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'

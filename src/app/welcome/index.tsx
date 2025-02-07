@@ -1,4 +1,4 @@
-import { LogoIcon, LogoTextIcon } from '@/assets'
+import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import ActionButtons from '@/components/ActionButtons'
 import TermsAndPrivacy from '@/components/TermsAndPrivacy'
 import { useDirection, useGuest, useRedirect, useScreenInfo } from '@/hooks'

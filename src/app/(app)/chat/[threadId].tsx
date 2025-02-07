@@ -1,4 +1,4 @@
-import { ShareIcon } from '@/assets'
+import { ShareIcon } from '@/components/svg'
 import { ChatContainer } from '@/components'
 import SharePopup from '@/components/share/SharePopup'
 import { useChat, useDirection, useRedirect, useScreenInfo } from '@/hooks'

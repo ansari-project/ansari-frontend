@@ -1,4 +1,4 @@
-import { EndeavorFancySVG } from '@/assets' // Ensure correct import path
+import { EndeavorFancySVG } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'

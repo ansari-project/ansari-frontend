@@ -1,4 +1,4 @@
-import { SettingIcon } from '@/assets'
+import { SettingIcon } from '@/components/svg'
 import { useAuth } from '@/hooks'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,4 @@
-import { MenuIcon } from '@/assets'
+import { MenuIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'

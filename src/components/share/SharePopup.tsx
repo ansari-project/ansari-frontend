@@ -1,5 +1,5 @@
 // Import necessary modules and components
-import { CheckIcon, CloseIcon } from '@/assets'
+import { CheckIcon, CloseIcon } from '@/components/svg'
 import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState } from '@/store'
 import { getShareThreadUUID } from '@/store/actions/chatActions'

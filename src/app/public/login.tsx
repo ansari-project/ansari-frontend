@@ -1,4 +1,4 @@
-import { LogoIcon } from '@/assets'
+import { LogoIcon } from '@/components/svg'
 import { useDirection, useGuest, useRedirect, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, login } from '@/store'
 import { LoginRequest } from '@/types'

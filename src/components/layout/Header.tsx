@@ -1,6 +1,6 @@
-import { ConfirmationPopUp, Container, InformationPopUp, LanguageSelectorPopUp } from 'components/ui'
+import { ConfirmationPopUp, Container, InformationPopUp, LanguageSelectorPopUp } from '@/components/ui'
 import { useSelector } from 'react-redux'
-import { RootState } from 'store/store'
+import { RootState } from '@/store/store'
 
 const Header = () => {
   const messages = useSelector((state: RootState) => state.messagesReducer.messages)

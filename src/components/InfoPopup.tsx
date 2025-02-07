@@ -1,4 +1,4 @@
-import { CloseIcon, InfoIcon } from '@/assets'
+import { CloseIcon, InfoIcon } from '@/components/svg'
 import { useAuth, useDirection, useLogout, useScreenInfo, useToggleInfoPopup } from '@/hooks'
 import { RootState } from '@/store'
 import { GetEnv } from '@/utils'

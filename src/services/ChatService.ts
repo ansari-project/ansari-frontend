@@ -13,7 +13,7 @@ class ChatService {
   constructor(isAuthenticated: boolean, accessToken: string | null) {
     this.isAuthenticated = isAuthenticated
     this.accessToken = accessToken
-    this.baseURL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   }
 
   private createHeaders = () => {

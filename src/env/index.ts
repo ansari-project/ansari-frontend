@@ -1,6 +1,7 @@
 const envConfig = {
-  API_URL: () => process.env.REACT_APP_API_URL!,
-  LOADING_MESSAGE_RESPONSE_TIMEOUT: () => (process.env.REACT_APP_API_TIMEOUT ? Number.parseInt(process.env.REACT_APP_API_TIMEOUT) : 60000),
+  API_URL: () => process.env.EXPO_PUBLIC_API_URL!,
+  LOADING_MESSAGE_RESPONSE_TIMEOUT: () =>
+    process.env.EXPO_PUBLIC_API_TIMEOUT ? Number.parseInt(process.env.EXPO_PUBLIC_API_TIMEOUT) : 60000,
   isProduction: () => process.env.NODE_ENV === 'production',
   isDevelopment: () => process.env.NODE_ENV === 'development',
 }

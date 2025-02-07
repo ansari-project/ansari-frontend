@@ -7,7 +7,7 @@ class UserService {
   private baseURL: string | undefined
 
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   }
 
   private createHeaders = () => {

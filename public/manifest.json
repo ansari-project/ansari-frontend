@@ -3,22 +3,17 @@
   "name": "Ansari Chat App",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "icon-192x192.png",
+      "src": "logo-192_x_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icon-256x256.png",
+      "src": "logo-256_x_256.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icon-512x512.png",
+      "src": "logo-512_x_512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -28,7 +23,5 @@
   "display": "standalone",
   "theme_color": "#08786B",
   "background_color": "#ffffff",
-  "orientation": "any",
-  "background_image": "./logo-512_x_512.png"
-  
+  "orientation": "any"
 }

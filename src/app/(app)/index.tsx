@@ -1,108 +1,53 @@
-import { Message, SuggestionMessages, InputMessageBox, MessageTemplate } from '@/components/home'
-import { Footer, Header } from '@/components/layout'
-import { Container, IntroductionText } from '@/components/ui'
-import { Role } from '@/constant'
-import React, { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store/store'
+import { ChatContainer, Toast } from '@/components'
+import { useAuth, useScreenInfo } from '@/hooks'
+import { AppDispatch, setActiveThread, toggleSideMenu } from '@/store'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { useLocalSearchParams } from 'expo-router'
 
-const HomePage: React.FC = () => {
-  const messagesEndRef = useRef<HTMLDivElement | null>(null)
-  const messages = useSelector((state: RootState) => state.messagesReducer.messages)
-  const streamMessage = useSelector((state: RootState) => state.messagesReducer.streamMessage)
-  const isAssistantReading = useSelector((state: RootState) => state.messagesReducer.isAssistantReading)
-  const isAssistantStopped = useSelector((state: RootState) => state.messagesReducer.isAssistantStopped)
-  const error = useSelector((state: RootState) => state.messagesReducer.hasError)
+const HomeScreen: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { isAuthenticated, isGuest } = useAuth()
+  const [toastVisible, setToastVisible] = useState<boolean>(false)
+  const params = useLocalSearchParams()
+  const errorMessage = params.errorMsg || null
+  const { isMobile } = useScreenInfo()
 
+  // Initialize activeThread to null when the component mounts
   useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault()
-      event.returnValue = ''
+    // If the user is authenticated and not a guest, set the active thread to null.
+    // Guest users will have the active thread set to the last thread they were in.
+    if (isAuthenticated && !isGuest) {
+      dispatch(setActiveThread(null))
     }
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
+    if (!isMobile) {
+      dispatch(toggleSideMenu(true))
     }
   }, [])
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    if (errorMessage !== null && errorMessage.length > 0) {
+      setToastVisible(true)
     }
-  }, [streamMessage])
+    return () => setToastVisible(false)
+  }, [errorMessage])
 
   return (
-    <div className='bg-background overflow-y-hidden h-screen'>
-      <Header />
-      <Container>
-        <div
-          className={`h-screen flex flex-col ${messages.length === 0 ? 'pb-32 md:pb-40' : 'md:pb-20 '}font-roboto text-black justify-end`}
-        >
-          {messages.length === 0 ? (
-            <div className='mx-4 lg:mb-0 md:mx-0 h-full md:px-36 xl:px-64 overflow-y-hidden'>
-              <div className='flex flex-col justify-start lg:justify-center h-full'>
-                <img
-                  src='/icons/compositeLogo.svg'
-                  alt='BackgroundImage'
-                  className='hidden md:block mx-auto md:w-[380px] xl:w-116'
-                />
-                <img src='/icons/compositeLogoMobile.svg' alt='BackgroundImage' className=' md:hidden mx-auto pt-8' />
-              </div>
-            </div>
-          ) : (
-            <main className='w-full h-full overflow-y-auto z-10'>
-              <div className='flex flex-col px-4 mt-28 md:px-36 xl:px-64 w-full md:pb-24 pb-20 text-center rounded-sm overflow-x-hidden'>
-                {messages.map((message, index) => (
-                  <MessageTemplate key={index} hasMargin={index % 2 == 1}>
-                    <Message
-                      key={index}
-                      error={message.error}
-                      content={message.content}
-                      type={message.role === Role.ASSISTANT ? 'receiver' : 'sender'}
-                    />
-                  </MessageTemplate>
-                ))}
-                {!!streamMessage?.length && !isAssistantStopped && (
-                  <MessageTemplate hasMargin>
-                    <Message
-                      error={error}
-                      loading={isAssistantReading}
-                      key={streamMessage}
-                      content={streamMessage}
-                      type='receiver'
-                    />
-                  </MessageTemplate>
-                )}
-                <div ref={messagesEndRef} className='pb-2'></div>
-              </div>
-            </main>
-          )}
-        </div>
-      </Container>
-      <div className={'fixed w-full z-10 right-0 bottom-0'}>
-        {messages.length === 0 ? (
-          <Container>
-            <div className='flex flex-col gap-4 px-4 md:px-28 xl:px-64 overflow-y-auto landscape:pt-12 landscape:h-56 landscape:md:h-64 lg:landscape:h-auto'>
-              <IntroductionText />
-              <div className='pb-4'>
-                <SuggestionMessages />
-              </div>
-            </div>
-          </Container>
-        ) : (
-          <></>
-        )}
-        <InputMessageBox />
-        <Footer />
-      </div>
-      {messages.length !== 0 && (
-        <div className='hidden lg:block fixed w-screen -bottom-24 '>
-          <img src='/images/backgroundImage.png' alt='Background Image' className='w-116 bottom-0  mx-auto' />
-        </div>
-      )}
-    </div>
+    <SafeAreaView style={[styles.container]}>
+      <ChatContainer isHome={true} />
+      {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
+    </SafeAreaView>
   )
 }
 
-export default HomePage
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center', // Ensure content is centered
+    justifyContent: 'space-between', // Distributes children evenly
+  },
+  // Additional styles as needed
+})
+
+export default HomeScreen

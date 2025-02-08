@@ -1,13 +1,13 @@
 import { LineIcon, RightArrowIcon } from '@/components/svg'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
-import React, { Children, PropsWithChildren, ReactElement } from 'react'
+import React from 'react'
 import { Dimensions, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import Footer from '@/components/layout/Footer'
-import Header from '@/components/layout/Header'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 import { SideMenu } from '@/components/menu'
-import { Slot } from 'expo-router'
+import { Redirect, Slot } from 'expo-router'
 
 /**
  * AppLayout Component.
@@ -24,16 +24,12 @@ export const AppLayout = () => {
   // Redux hook to get side menu state
   const { isOpen: isSideMenuOpened } = useSelector((state: RootState) => state.sideMenu)
   // Hook to check authentication status
-  const { isAuthenticated, isGuest } = useAuth()
+  const { isAuthenticated, isGuest, accessToken } = useAuth()
 
   // Redux dispatcher
   const dispatch = useDispatch<AppDispatch>()
 
-  // Get the first child element
-  const child = Children.only(children) as ReactElement
-  // Get the type of the child element
-  const childType = child?.type || undefined
-  let showFooter = false
+  const showFooter = true
 
   // Get the height of the window
   const { height } = Dimensions.get('window')
@@ -41,6 +37,10 @@ export const AppLayout = () => {
   // Function to toggle the side menu
   const togglePopup = () => {
     dispatch(toggleSideMenu(!isSideMenuOpened))
+  }
+
+  if (!isAuthenticated || !accessToken) {
+    return <Redirect href='/welcome' />
   }
 
   // Styles for the component

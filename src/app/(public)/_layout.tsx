@@ -1,27 +1,28 @@
-import { useScreenInfo } from '@/hooks'
+import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
-import Footer from '@/components/layout/Footer'
-import { Slot } from 'expo-router'
-
-// Define the type of props that the PublicLayout component accepts
-type Props = PropsWithChildren<{ children?: React.ReactNode }>
+import Footer from '@/components/Footer'
+import { Redirect, Slot } from 'expo-router'
 
 /**
  * PublicLayout Component.
  * This component defines the layout for public pages.
  * It includes a header, main content area, and a footer.
- * @param children The child components to be rendered within the main content area.
  * @returns JSX element representing the PublicLayout component.
  */
 export const PublicLayout = () => {
+  const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
   const { isSmallScreen, isMobile, height } = useScreenInfo()
   // Redux hook to get theme data
   const theme = useSelector((state: RootState) => state.theme.theme)
+
+  if (isAuthenticated && accessToken) {
+    return <Redirect href='/' />
+  }
 
   // Styles for the component
   const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import { Button, CustomFlowbiteTheme, Flowbite, Tooltip } from 'flowbite-react'
-import i18n from 'i18n'
+import { i18n } from '@/i18n'
 import { useState } from 'react'
 const customTheme: CustomFlowbiteTheme = {
   tooltip: {

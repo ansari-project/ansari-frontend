@@ -1,5 +1,5 @@
 import { LogoIcon } from '@/components/svg'
-import { useDirection, useGuest, useRedirect, useScreenInfo } from '@/hooks'
+import { useDirection, useGuest, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, login } from '@/store'
 import { LoginRequest } from '@/types'
 import { createGeneralThemedStyles } from '@/utils'
@@ -23,9 +23,8 @@ import * as Yup from 'yup'
 
 const LoginScreen: React.FC = () => {
   const router = useRouter()
-  const urlParams = new URLSearchParams(location.search)
-  const successMessage = urlParams.get('s') || null
-  useRedirect('/', '/login' + (urlParams.size ? `?${urlParams.toString()}` : ''))
+  const params = useLocalSearchParams()
+  const successMessage = params.s || null
 
   const { t } = useTranslation('login')
   const loginSchema = useLoginSchema()

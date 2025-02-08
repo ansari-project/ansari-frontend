@@ -1,5 +1,5 @@
 import { EyeIcon, LogoIcon } from '@/components/svg'
-import { useDirection, useRedirect, useScreenInfo } from '@/hooks'
+import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, register } from '@/store'
 import { RegisterRequest } from '@/types'
 import { createGeneralThemedStyles } from '@/utils'
@@ -31,7 +31,6 @@ interface RegisterFormValues {
 }
 
 const RegisterScreen: React.FC = () => {
-  useRedirect('/', '/register')
   const { t } = useTranslation('register')
   const dispatch = useDispatch<AppDispatch>()
   const { isRTL } = useDirection()

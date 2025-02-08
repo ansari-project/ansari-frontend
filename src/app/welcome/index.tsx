@@ -1,7 +1,7 @@
 import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import ActionButtons from '@/components/ActionButtons'
 import TermsAndPrivacy from '@/components/TermsAndPrivacy'
-import { useDirection, useGuest, useRedirect, useScreenInfo } from '@/hooks'
+import { useDirection, useGuest, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React from 'react'
@@ -12,10 +12,7 @@ import { useRouter } from 'expo-router'
 
 const Welcome: React.FC = () => {
   const router = useRouter()
-  const urlParams = new URLSearchParams(location.search)
-  useRedirect('/', '/welcome' + (urlParams.size ? `?${urlParams.toString()}` : ''))
   const { t } = useTranslation()
-  const navigate = useRouter()
 
   const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
@@ -110,7 +107,10 @@ const Welcome: React.FC = () => {
         <View style={styles.right}>
           <View style={styles.rightBody}>
             <Text style={styles.rightTitle}>{t('getStarted')}</Text>
-            <Pressable style={[generalStyle.buttonPrimary, generalStyle.fullWidth]} onPress={() => navigate('/login')}>
+            <Pressable
+              style={[generalStyle.buttonPrimary, generalStyle.fullWidth]}
+              onPress={() => router.push('/login')}
+            >
               <Text style={generalStyle.buttonPrimaryText}>{t('login')}</Text>
             </Pressable>
             <Pressable

@@ -5,7 +5,7 @@ import { addMessage, stopAssistant } from '@/store/message-slice'
 import { RootState } from '@/store/store'
 import { Container } from '@/components/ui'
 import { controller } from '@/services/api'
-import { isBrowser } from 'react-device-detect'
+import { Platform } from 'react-native'
 
 const InputMessageBox = () => {
   const [messageText, setMessageText] = useState('')
@@ -38,7 +38,7 @@ const InputMessageBox = () => {
     const target = event.target as HTMLTextAreaElement
     target.style.height = `${target.scrollHeight}px`
 
-    if (event.key === 'Enter' && !event.shiftKey && isAssistantWriting === false && isBrowser) {
+    if (event.key === 'Enter' && !event.shiftKey && isAssistantWriting === false && Platform.OS === 'web') {
       event.preventDefault()
       handleSendMessage()
     }

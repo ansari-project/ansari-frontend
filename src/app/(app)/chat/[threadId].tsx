@@ -1,7 +1,7 @@
 import { ShareIcon } from '@/components/svg'
 import { ChatContainer } from '@/components'
 import SharePopup from '@/components/share/SharePopup'
-import { useChat, useDirection, useRedirect, useScreenInfo } from '@/hooks'
+import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThread, toggleSharePopup } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React, { useEffect } from 'react'
@@ -18,13 +18,10 @@ const ChatScreen: React.FC = () => {
   const { threadId } = useLocalSearchParams<{ threadId?: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
-  const navigate = useRouter()
   const { isRTL } = useDirection()
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isSharePopupVisible = useSelector((state: RootState) => state.share.isOpen)
   const { isSmallScreen } = useScreenInfo()
-
-  useRedirect(`/chat/${threadId}`, '/login')
 
   // Fetches thread details on threadId change
   useEffect(() => {
@@ -38,7 +35,7 @@ const ChatScreen: React.FC = () => {
     } else {
       router.push({ pathname: '/', params: { errorMsg: 'Please provide a valid threadId.' } })
     }
-  }, [threadId, dispatch, navigate])
+  }, [])
 
   // Clean up the abort controller on unmount or when the component is no longer active
   useEffect(() => {

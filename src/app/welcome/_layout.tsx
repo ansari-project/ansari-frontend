@@ -1,7 +1,7 @@
-import { useScreenInfo } from '@/hooks'
+import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
-import { Slot } from 'expo-router'
-import React, { PropsWithChildren } from 'react'
+import { Redirect, Slot } from 'expo-router'
+import React from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 
@@ -12,10 +12,15 @@ import { useSelector } from 'react-redux'
  * @returns JSX element representing the WelcomeLayout component.
  */
 export const WelcomeLayout = () => {
+  const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
   const { height } = useScreenInfo()
   // Redux hook to get theme data
   const theme = useSelector((state: RootState) => state.theme.theme)
+
+  if (isAuthenticated && accessToken) {
+    return <Redirect href='/' />
+  }
 
   // Styles for the component
   const styles = StyleSheet.create({

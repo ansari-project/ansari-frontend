@@ -1,0 +1,10 @@
+{
+  "build": {
+    "preview": {
+      "environment": "preview"
+    },
+    "production": {
+      "environment": "production"
+    }
+  }
+}

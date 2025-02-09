@@ -64,8 +64,8 @@
     "open:ios": "npx cap open ios",
     "start:android": "npx cap run android",
     "start:ios": "npx cap run ios",
-    "build:cap": "PUBLIC_URL=./ TODO",
-    "build": "TODO",
+    "build:cap": "expo export --platform web --clear && npx cap sync",
+    "build": "expo export --platform web --clear",
     "lint": "expo lint"
   },
   "browserslist": {

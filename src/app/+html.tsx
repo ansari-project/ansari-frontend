@@ -10,7 +10,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet='utf-8' />
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
-        <link rel='icon' href='./logo-512_x_512.png' />
+        <link rel='icon' href='/logo-512_x_512.png' />
 
         {/*
           This viewport disables scaling which makes the mobile website act more like a native app.

@@ -180,10 +180,14 @@ class ChatService {
   }
 
   async getSharedThread(sharedThreadUUID: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+    // This is a public sharing endpoint which doesn't require an access token
     const response = await fetchWithAuthRetry(
       `${this.baseURL}/share/${sharedThreadUUID}`,
       {
-        headers: this.createHeaders(),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Mobile-Ansari': 'ANSARI',
+        },
       },
       dispatch,
     )

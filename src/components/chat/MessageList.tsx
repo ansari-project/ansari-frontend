@@ -1,7 +1,7 @@
-import { ScrollToBottomIcon } from '@endeavorpal/assets'
-import { useScreenInfo, useScrollManagement } from '@endeavorpal/hooks'
-import { Message, RootState, Thread, UserRole } from '@endeavorpal/store'
-import { Helpers } from '@endeavorpal/utils'
+import { ScrollToBottomIcon } from '@/components/svg'
+import { useScreenInfo, useScrollManagement } from '@/hooks'
+import { Message, RootState, Thread, UserRole } from '@/store'
+import { Helpers } from '@/utils'
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import {
   ActivityIndicator,

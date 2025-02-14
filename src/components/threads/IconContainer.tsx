@@ -1,5 +1,5 @@
-import { DeleteIcon, RenameIcon, ShareIcon } from '@endeavorpal/assets'
-import { RootState, Thread } from '@endeavorpal/store'
+import { DeleteIcon, RenameIcon, ShareIcon } from '@/components/svg'
+import { RootState, Thread } from '@/store'
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'

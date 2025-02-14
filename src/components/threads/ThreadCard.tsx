@@ -1,10 +1,10 @@
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@endeavorpal/store'
+import { useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import IconContainer from './IconContainer'
 
 type ThreadCardProps = {
@@ -29,7 +29,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   onThreadRename,
 }) => {
   const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
+  const router = useRouter()
   const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
@@ -57,14 +57,14 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   const handleShareIconPress = () => {
     dispatch(toggleSideMenu(!isSideMenuOpened))
     dispatch(toggleSharePopup(!isSharePopupVisible))
-    navigate(`/chat/${thread.id}`)
+    router.push(`/chat/${thread.id}`)
   }
 
   const handleThreadCardPress = () => {
     if (!editing) {
       setIsThreadHovered(true)
       onThreadSelect(thread.id)
-      navigate(`/chat/${thread.id}`)
+      router.push(`/chat/${thread.id}`)
     }
   }
 

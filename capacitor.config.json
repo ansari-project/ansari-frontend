@@ -1,7 +1,7 @@
 {
   "appId": "chat.ansari.app",
   "appName": "Ansari Chat",
-  "webDir": "build",
+  "webDir": "dist",
   "plugins": {
     "StatusBar": {
       "overlaysWebView": false

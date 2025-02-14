@@ -1,4 +1,4 @@
-import fetchFeedbacksForLanguage, { FeedbacksByCategory } from '@endeavorpal/services/FeedbackService'
+import fetchFeedbacksForLanguage, { FeedbacksByCategory } from '@/services/FeedbackService'
 import { useEffect, useState } from 'react'
 
 export const useFeedbackService = (language: string): FeedbacksByCategory => {

@@ -1,7 +1,7 @@
 import { AnyAction, createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
-import { Role } from 'constant'
-import { MessageModel } from 'interfaces'
-import { fetchMessagesStream } from 'services/api'
+import { Role } from '@/constant'
+import { MessageModel } from '@/interfaces'
+import { fetchMessagesStream } from '@/services/api'
 import { RootState } from './store'
 
 interface MessagesSlice {
@@ -48,18 +48,21 @@ const writeStreamMessage = createAsyncThunk(
   },
 )
 
-const readMessagesAsync = createAsyncThunk('messages/fetchMessages', async (_, { rejectWithValue, getState, dispatch }) => {
-  try {
-    const messages = (getState() as RootState).messagesReducer.messages
-    const stream = await fetchMessagesStream({
-      messages: messages.filter((message) => !message.error),
-    })
-    dispatch(writeStreamMessage(stream))
-    return true
-  } catch (error) {
-    return rejectWithValue({ message: 'Error: Something went wrong.' })
-  }
-})
+const readMessagesAsync = createAsyncThunk(
+  'messages/fetchMessages',
+  async (_, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const messages = (getState() as RootState).messagesReducer.messages
+      const stream = await fetchMessagesStream({
+        messages: messages.filter((message) => !message.error),
+      })
+      dispatch(writeStreamMessage(stream))
+      return true
+    } catch (error) {
+      return rejectWithValue({ message: 'Error: Something went wrong.' })
+    }
+  },
+)
 
 export const messagesSlice = createSlice({
   name: 'messages',

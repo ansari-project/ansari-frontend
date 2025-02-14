@@ -1,7 +1,7 @@
-import { TokenRefreshError } from '@endeavorpal/errors'
-import { loadAuthState, refreshTokens } from '@endeavorpal/store'
-import { resetAuth } from '@endeavorpal/store/slices/authSlice'
-import { RefreshTokenResponse } from '@endeavorpal/types'
+import { TokenRefreshError } from '@/errors'
+import { loadAuthState, refreshTokens } from '@/store'
+import { resetAuth } from '@/store/slices/authSlice'
+import { RefreshTokenResponse } from '@/types'
 import { Dispatch, UnknownAction } from 'redux'
 
 // TypeScript types for better code understanding and safety
@@ -12,7 +12,7 @@ interface CustomFetchOptions extends RequestInit {
 
 // Updated function to refresh token based on the provided API endpoint, and return new access token
 async function refreshToken(dispatch: Dispatch<UnknownAction>): Promise<string> {
-  const API_URL = process.env.REACT_APP_API_V2_URL
+  const API_URL = process.env.EXPO_PUBLIC_API_V2_URL
   const refreshTokenURL = `${API_URL}/users/refresh_token`
   const authState = await loadAuthState()
   const refreshToken = authState.auth?.refreshToken

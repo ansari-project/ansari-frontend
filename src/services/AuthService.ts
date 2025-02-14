@@ -1,10 +1,10 @@
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@endeavorpal/types'
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types'
 
 class AuthService {
   baseURL: string | undefined
 
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   }
   async register(data: RegisterRequest): Promise<RegisterResponse> {
     const response = await fetch(`${this.baseURL}/users/register`, {

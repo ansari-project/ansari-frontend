@@ -1,11 +1,11 @@
-import arFeedback from '@endeavorpal/i18n/locales/ar/feedback.json'
-import bsFeedback from '@endeavorpal/i18n/locales/bs/feedback.json'
-import enFeedback from '@endeavorpal/i18n/locales/en/feedback.json'
-import frFeedback from '@endeavorpal/i18n/locales/fr/feedback.json'
-import idFeedback from '@endeavorpal/i18n/locales/id/feedback.json'
-import tmlFeedback from '@endeavorpal/i18n/locales/tml/feedback.json'
-import turFeedback from '@endeavorpal/i18n/locales/tur/feedback.json'
-import urFeedback from '@endeavorpal/i18n/locales/ur/feedback.json'
+import arFeedback from '@/i18n/locales/ar/feedback.json'
+import bsFeedback from '@/i18n/locales/bs/feedback.json'
+import enFeedback from '@/i18n/locales/en/feedback.json'
+import frFeedback from '@/i18n/locales/fr/feedback.json'
+import idFeedback from '@/i18n/locales/id/feedback.json'
+import tmlFeedback from '@/i18n/locales/tml/feedback.json'
+import turFeedback from '@/i18n/locales/tur/feedback.json'
+import urFeedback from '@/i18n/locales/ur/feedback.json'
 
 export type Feedback = {
   id: string

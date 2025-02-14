@@ -1,5 +1,5 @@
-import { useAuth } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { useAuth } from '@/hooks'
+import { RootState } from '@/store'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Linking, Pressable, Text, View } from 'react-native'
@@ -40,9 +40,9 @@ const Subscription: React.FC = () => {
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
-            window.open(process.env.REACT_APP_SUBSCRIBE_URL, '_blank')
+            window.open(process.env.EXPO_PUBLIC_SUBSCRIBE_URL, '_blank')
           } else {
-            Linking.openURL(process.env.REACT_APP_SUBSCRIBE_URL)
+            Linking.openURL(process.env.EXPO_PUBLIC_SUBSCRIBE_URL)
           }
         }}
       >

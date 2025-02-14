@@ -1,17 +1,16 @@
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { addMessage, stopAssistant } from 'store/message-slice'
-import { RootState } from 'store/store'
-import { paperPlaneLeft, paperPlaneRight, stopResponse } from 'assets'
-import { Container } from 'components/ui'
-import { controller } from 'services/api'
-import { isBrowser } from 'react-device-detect'
+import { addMessage, stopAssistant } from '@/store/message-slice'
+import { RootState } from '@/store/store'
+import { Container } from '@/components/ui'
+import { controller } from '@/services/api'
+import { Platform } from 'react-native'
 
 const InputMessageBox = () => {
   const [messageText, setMessageText] = useState('')
   const dispatch = useDispatch()
-  const sendMessageIcon = document.dir === 'rtl' ? paperPlaneLeft : paperPlaneRight
+  const sendMessageIcon = document.dir === 'rtl' ? '/icons/paperPlaneLeft.svg' : '/icons/paperPlaneRight.svg'
   const { t } = useTranslation()
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const isAssistantWriting = useSelector((state: RootState) => state.messagesReducer.isAssistantWriting)
@@ -39,7 +38,7 @@ const InputMessageBox = () => {
     const target = event.target as HTMLTextAreaElement
     target.style.height = `${target.scrollHeight}px`
 
-    if (event.key === 'Enter' && !event.shiftKey && isAssistantWriting === false && isBrowser) {
+    if (event.key === 'Enter' && !event.shiftKey && isAssistantWriting === false && Platform.OS === 'web') {
       event.preventDefault()
       handleSendMessage()
     }
@@ -99,7 +98,7 @@ const InputMessageBox = () => {
             <div className='flex flex-col justify-center'>
               {isAssistantWriting ? (
                 <img
-                  src={stopResponse}
+                  src='/icons/stopResponse.svg'
                   alt='Stop Response Icon'
                   className='w-8 px-1 py-2 rounded-md hover:cursor-pointer'
                   onClick={() => handleStopAssitantWriting()}

@@ -1,6 +1,6 @@
-import { EndeavorFancySVG } from '@endeavorpal/assets' // Ensure correct import path
-import { useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { EndeavorFancySVG } from '@/components/svg'
+import { useDirection, useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'

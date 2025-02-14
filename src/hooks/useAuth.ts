@@ -2,7 +2,7 @@
 // This custom hook provides a convenient way to access authentication-related data
 // (such as the current user, authentication status, and token) from the Redux store.
 
-import { RootState } from '@endeavorpal/store'
+import { RootState } from '@/store'
 import { useSelector } from 'react-redux'
 
 /**

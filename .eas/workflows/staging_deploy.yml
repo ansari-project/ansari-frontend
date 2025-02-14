@@ -1,0 +1,13 @@
+name: Staging Deployment
+
+on:
+  push:
+    branches: ['develop']
+
+jobs:
+  deploy:
+    type: deploy
+    name: Staging Deployment
+    environment: preview
+    params:
+      prod: true

@@ -1,8 +1,8 @@
-import AuthService from '@endeavorpal/services/AuthService'
-import { LoginRequest, RegisterRequest, RegisterResponse, User } from '@endeavorpal/types'
+import AuthService from '@/services/AuthService'
+import { LoginRequest, RegisterRequest, RegisterResponse, User } from '@/types'
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { AuthState } from '../slices'
-import { Helpers } from '@endeavorpal/utils'
+import { Helpers } from '@/utils'
 
 // Define the structure of the payload returned on successful login
 interface LoginSuccessPayload {

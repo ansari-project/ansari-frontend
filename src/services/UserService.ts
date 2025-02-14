@@ -1,5 +1,5 @@
-import { ApplicationError } from '@endeavorpal/errors'
-import { ResetPasswordResponse } from '@endeavorpal/types'
+import { ApplicationError } from '@/errors'
+import { ResetPasswordResponse } from '@/types'
 
 // UserService class definition
 class UserService {
@@ -7,7 +7,7 @@ class UserService {
   private baseURL: string | undefined
 
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   }
 
   private createHeaders = () => {

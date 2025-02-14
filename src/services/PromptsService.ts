@@ -1,11 +1,11 @@
-import arPrompts from '@endeavorpal/i18n/locales/ar/prompts.json'
-import bsPrompts from '@endeavorpal/i18n/locales/bs/prompts.json'
-import enPrompts from '@endeavorpal/i18n/locales/en/prompts.json'
-import frPrompts from '@endeavorpal/i18n/locales/fr/prompts.json'
-import idPrompts from '@endeavorpal/i18n/locales/id/prompts.json'
-import tmlPrompts from '@endeavorpal/i18n/locales/tml/prompts.json'
-import turPrompts from '@endeavorpal/i18n/locales/tur/prompts.json'
-import urPrompts from '@endeavorpal/i18n/locales/ur/prompts.json'
+import arPrompts from '@/i18n/locales/ar/prompts.json'
+import bsPrompts from '@/i18n/locales/bs/prompts.json'
+import enPrompts from '@/i18n/locales/en/prompts.json'
+import frPrompts from '@/i18n/locales/fr/prompts.json'
+import idPrompts from '@/i18n/locales/id/prompts.json'
+import tmlPrompts from '@/i18n/locales/tml/prompts.json'
+import turPrompts from '@/i18n/locales/tur/prompts.json'
+import urPrompts from '@/i18n/locales/ur/prompts.json'
 
 // Define a type for individual prompt entries
 export type Prompt = {

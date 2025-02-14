@@ -1,10 +1,10 @@
-import { LogoIcon, LogoTextIcon } from '@endeavorpal/assets'
-import { useChat, useScreenInfo } from '@endeavorpal/hooks'
-import { RootState } from '@endeavorpal/store'
+import { LogoIcon, LogoTextIcon } from '@/components/svg'
+import { useChat, useScreenInfo } from '@/hooks'
+import { RootState } from '@/store'
 import React, { useCallback, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'expo-router'
 import PromptList from '../prompts/PromptList'
 import ChatInput from './ChatInput'
 import MessageList, { MessageListRef } from './MessageList'
@@ -14,7 +14,7 @@ type ChatContainerProps = {
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { isLoading, activeThread, inputText, setInputText, isSending, sendNewMessage, abortRequest } = useChat()
   const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -35,10 +35,10 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
         // Handle error (e.g., show a toast notification)
       }
       if (isHome && result.threadId) {
-        navigate(`/chat/${result.threadId}`) // Navigate to the chat screen with the new thread ID
+        router.push(`/chat/${result.threadId}`) // Navigate to the chat screen with the new thread ID
       }
     },
-    [inputText, isSending, activeThread?.id, isHome, sendNewMessage, navigate],
+    [inputText, isSending, activeThread?.id, isHome, sendNewMessage, router],
   )
 
   const handleCancelSend = useCallback(() => {

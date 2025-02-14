@@ -1,7 +1,7 @@
-import { ApplicationError, NotFoundError } from '@endeavorpal/errors'
-import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@endeavorpal/store'
-import { ShareThreadResponse } from '@endeavorpal/types'
-import { Helpers } from '@endeavorpal/utils'
+import { ApplicationError, NotFoundError } from '@/errors'
+import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@/store'
+import { ShareThreadResponse } from '@/types'
+import { Helpers } from '@/utils'
 import { Dispatch, UnknownAction } from 'redux'
 import { fetchWithAuthRetry } from './api'
 
@@ -13,7 +13,7 @@ class ChatService {
   constructor(isAuthenticated: boolean, accessToken: string | null) {
     this.isAuthenticated = isAuthenticated
     this.accessToken = accessToken
-    this.baseURL = process.env.REACT_APP_API_V2_URL
+    this.baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   }
 
   private createHeaders = () => {

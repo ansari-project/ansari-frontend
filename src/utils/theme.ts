@@ -1,5 +1,4 @@
-import background from '@endeavorpal/assets/png/background.png'
-
+const background = '/images/background.png'
 // Define the interface for the theme object
 export interface Theme {
   primaryColor: string

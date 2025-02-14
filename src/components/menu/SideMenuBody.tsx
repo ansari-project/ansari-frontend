@@ -1,14 +1,14 @@
-import { AddIcon, LogoRoundIcon, MenuIcon } from '@endeavorpal/assets'
-import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@endeavorpal/store'
+import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
+import { useAuth, useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
 import { ThreadsList } from '../threads'
 import { NameContainer } from './'
-import { Helpers } from '@endeavorpal/utils'
+import { Helpers } from '@/utils'
 
 const SideMenuBody: React.FC = () => {
   const { user } = useAuth()
@@ -35,14 +35,14 @@ const SideMenuBody: React.FC = () => {
     }
   }
 
-  const navigate = useNavigate()
+  const router = useRouter()
   // Function to handle press on ANSARI text
   const handlePress = () => {
     // Navigate to the home page here
     if (isMobile) {
       dispatch(toggleSideMenu(!isSideMenuOpened))
     }
-    navigate('/')
+    router.push('/')
   }
 
   const styles = StyleSheet.create({

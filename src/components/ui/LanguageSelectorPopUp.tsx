@@ -1,6 +1,5 @@
-import { languageGreen } from 'assets'
 import { Button, CustomFlowbiteTheme, Flowbite, Tooltip } from 'flowbite-react'
-import i18n from 'i18n'
+import { i18n } from '@/i18n'
 import { useState } from 'react'
 const customTheme: CustomFlowbiteTheme = {
   tooltip: {
@@ -64,7 +63,7 @@ const LanguageSelectorPopUp: React.FC = () => {
             trigger='hover'
           >
             <Button color='primary' className='focus:ring-white' onClick={() => setIsOpen(true)}>
-              <img src={languageGreen} alt='Language Icon' className=' w-5' />
+              <img src='/icons/languageGreen.svg' alt='Language Icon' className=' w-5' />
             </Button>
           </Tooltip>
         </Flowbite>
@@ -90,7 +89,7 @@ const LanguageSelectorPopUp: React.FC = () => {
             trigger='hover'
           >
             <Button color='primary' className='focus:ring-background' onClick={() => setIsOpen(true)}>
-              <img src={languageGreen} alt='Language Icon' className=' w-5' />
+              <img src='/icons/languageGreen.svg' alt='Language Icon' className=' w-5' />
             </Button>
           </Tooltip>
         </Flowbite>

@@ -1,9 +1,9 @@
-import { LogoRoundIcon } from '@endeavorpal/assets'
-import { useAuth, useDirection, useScreenInfo } from '@endeavorpal/hooks'
-import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFeedback } from '@endeavorpal/store'
+import { LogoRoundIcon } from '@/components/svg'
+import { useAuth, useDirection, useScreenInfo } from '@/hooks'
+import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFeedback } from '@/store'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import Markdown from 'react-markdown' // import rehypeRaw from 'rehype-raw'
+import Markdown from 'react-native-markdown-display'
 import { StyleSheet, Text, View } from 'react-native'
 import UserAvatar from 'react-native-user-avatar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -126,8 +126,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         <Text style={styles.senderName}>{isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}</Text>
         <View style={styles.contentWrapper}>
           <Markdown
-            components={{
-              p: (props) => <Text style={[styles.messageText, textStyle]}>{props.children}</Text>,
+            style={{
+              body: [styles.messageText, textStyle],
             }}
           >
             {message.content}

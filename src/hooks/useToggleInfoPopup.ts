@@ -1,4 +1,4 @@
-import { toggleInformationPopup } from '@endeavorpal/store'
+import { toggleInformationPopup } from '@/store'
 import { useDispatch } from 'react-redux'
 
 export const useToggleInfoPopup = () => {

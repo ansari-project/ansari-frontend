@@ -1,11 +1,10 @@
-import { ansariWordDesktop, ansariWordMobile } from 'assets'
 import { Button, CustomFlowbiteTheme, Flowbite, Modal } from 'flowbite-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { controller } from 'services/api'
-import { clearMessages } from 'store/message-slice'
-import { RootState } from 'store/store'
+import { controller } from '@/services/api'
+import { clearMessages } from '@/store/message-slice'
+import { RootState } from '@/store/store'
 
 const customTheme: CustomFlowbiteTheme = {
   modal: {
@@ -60,7 +59,11 @@ const ConfirmationPopUp = () => {
             onClick={() => handleOpenModal(true)}
             className='hidden p-0 md:block text-center focus:z-10 focus:outline-none bg-transparent border-none border-transparent enabled:hover:bg-transparent focus:ring-transparent rounded-lg focus:ring-2'
           >
-            <img src={ansariWordDesktop} className={'align-middle w-24 h-8 my-auto hover:cursor-pointer'} alt='Ansari Word Image' />
+            <img
+              src='/icons/.ansariWordDesktop.svg'
+              className={'align-middle w-24 h-8 my-auto hover:cursor-pointer'}
+              alt='Ansari Word Image'
+            />
           </Button>
         ) : (
           <></>
@@ -69,7 +72,7 @@ const ConfirmationPopUp = () => {
           onClick={() => handleOpenModal(true)}
           className='md:hidden p-0.5 text-center focus:z-10 focus:outline-none bg-transparent border-none border-transparent enabled:hover:bg-transparent focus:ring-transparent rounded-lg focus:ring-2'
         >
-          <img src={ansariWordMobile} className={'align-middle '} alt='Ansari Word Image' />
+          <img src='/icons/ansariWordMobile.svg' className={'align-middle '} alt='Ansari Word Image' />
         </Button>
 
         <Modal className='' show={openModal} size='lg' onClose={() => handleOpenModal(false)} popup dismissible>

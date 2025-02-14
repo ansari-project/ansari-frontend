@@ -1,12 +1,12 @@
-import { SettingIcon } from '@endeavorpal/assets'
-import { useAuth } from '@endeavorpal/hooks'
+import { SettingIcon } from '@/components/svg'
+import { useAuth } from '@/hooks'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 import UserAvatar from 'react-native-user-avatar'
 import LogoutButton from '../Logout'
-import { RootState } from '@endeavorpal/store'
+import { RootState } from '@/store'
 import { useSelector } from 'react-redux'
 
 type NameContainerProps = {

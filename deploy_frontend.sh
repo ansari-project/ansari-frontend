@@ -4,7 +4,7 @@ set -e
 # Configurations
 BUCKET_NAME=${BUCKET_NAME:-"ansari.chat"}
 REGION=${REGION:-"us-west1"}
-BUILD_DIR=${BUILD_DIR:-"$PWD/build"}
+BUILD_DIR=${BUILD_DIR:-"$PWD/dist"}
 MAIN_PAGE=${MAIN_PAGE:-"index.html"}
 # Make the error page also index.html to do client-side routing
 ERROR_PAGE=${ERROR_PAGE:-"index.html"}

@@ -1,4 +1,4 @@
-import { useAuth, useDirection } from '@endeavorpal/hooks'
+import { useAuth, useDirection } from '@/hooks'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import InfoPopup from './InfoPopup'

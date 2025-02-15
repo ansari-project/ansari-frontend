@@ -82,7 +82,6 @@
     "@babel/core": "^7.25.2",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "7.0.1",
-    "@tailwindcss/postcss": "^4.0.3",
     "@types/jest": "^29.5.12",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^16.18.76",
@@ -105,7 +104,6 @@
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "react-test-renderer": "18.3.1",
-    "tailwindcss": "^4.0.3",
     "typescript": "^5.3.3"
   }
 }

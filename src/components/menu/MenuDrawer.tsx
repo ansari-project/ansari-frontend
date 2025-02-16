@@ -1,14 +1,15 @@
-import { MenuIcon } from '@/components/svg'
-import { useDirection, useScreenInfo } from '@/hooks'
+import { Drawer } from 'react-native-drawer-layout'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'
-import { Modal, Pressable, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import SideMenuBody from './SideMenuBody'
 
-const MenuDrawer: React.FC = () => {
-  const { isMobile, sideMenuDrawer } = useScreenInfo()
-  const { isRTL } = useDirection()
+export type Props = {
+  children: React.ReactNode
+}
+
+const MenuDrawer: React.FC<Props> = ({ children }) => {
   const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -18,31 +19,32 @@ const MenuDrawer: React.FC = () => {
   }
 
   const styles = StyleSheet.create({
-    button: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 4,
-      elevation: 2,
-      paddingLeft: isRTL ? 8 : isMobile ? 8 : 0,
-      paddingRight: isRTL ? (isMobile ? 8 : 0) : 8,
+    container: {
+      backgroundColor: theme.sideMenuBackgroundColor,
+      fontFamily: 'Inter',
+      color: theme.textColor,
     },
   })
 
   return (
     <>
-      <Pressable onPress={() => togglePopup()} style={styles.button}>
-        <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
-      </Pressable>
-      <Modal
-        animationType='fade'
-        transparent={true}
-        visible={isSideMenuOpened && isMobile}
-        onRequestClose={() => togglePopup()}
+      <Drawer
+        drawerType='front'
+        open={isSideMenuOpened}
+        drawerStyle={styles.container}
+        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
+        onOpen={() => togglePopup()}
+        onClose={() => togglePopup()}
+        renderDrawerContent={() => (
+          <View>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <SideMenuBody />
+            </View>
+          </View>
+        )}
       >
-        <View style={{ width: sideMenuDrawer, flex: 1 }}>
-          <SideMenuBody />
-        </View>
-      </Modal>
+        {children}
+      </Drawer>
     </>
   )
 }

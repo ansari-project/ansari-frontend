@@ -1,4 +1,5 @@
 import { i18n } from '@/i18n'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { RootState, initStore } from '@/store'
 import { Slot } from 'expo-router'
 import { EnhancedStore } from '@reduxjs/toolkit'
@@ -29,11 +30,13 @@ const AppLayout = () => {
   }
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={reduxStore}>
-        <Slot />
-      </Provider>
-    </I18nextProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <I18nextProvider i18n={i18n}>
+        <Provider store={reduxStore}>
+          <Slot />
+        </Provider>
+      </I18nextProvider>
+    </GestureHandlerRootView>
   )
 }
 

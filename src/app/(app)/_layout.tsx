@@ -6,7 +6,7 @@ import { Dimensions, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Vi
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { SideMenu } from '@/components/menu'
+import { MenuDrawer } from '@/components/menu'
 import { Redirect, Slot } from 'expo-router'
 
 /**
@@ -86,34 +86,39 @@ export const AppLayout = () => {
 
   // Render the component
   return (
-    <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-      <View style={[styles.container]}>
-        <View style={styles.bodyContainer}>
-          {/* Side menu */}
-          <SideMenu />
-          <View style={styles.main}>
-            <View style={styles.mainBody}>
-              {/* Header */}
-              <Header />
-              <View style={[styles.bodyContainer, { flexDirection: 'row' }]}>
-                {/* Toggle button for side menu */}
-                {isAuthenticated && !isGuest && !isMobile && (
-                  <View style={styles.closeButton}>
-                    <Pressable onPress={togglePopup}>{isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}</Pressable>
+    <View>
+      <MenuDrawer>
+        <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
+          <View style={[styles.container]}>
+            <View style={styles.bodyContainer}>
+              {/* Side menu */}
+              <View style={styles.main}>
+                <View style={styles.mainBody}>
+                  {/* Header */}
+                  <Header />
+                  <View style={[styles.bodyContainer, { flexDirection: 'row' }]}>
+                    {/* Toggle button for side menu */}
+                    {isAuthenticated && !isGuest && !isMobile && (
+                      <View style={styles.closeButton}>
+                        <Pressable onPress={togglePopup}>
+                          {isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}
+                        </Pressable>
+                      </View>
+                    )}
+                    {/* Main content area */}
+                    <ScrollView contentContainerStyle={styles.appContent}>
+                      <Slot />
+                    </ScrollView>
                   </View>
-                )}
-                {/* Main content area */}
-                <ScrollView contentContainerStyle={styles.appContent}>
-                  <Slot />
-                </ScrollView>
+                  {/* Footer */}
+                  {showFooter && <Footer />}
+                </View>
               </View>
-              {/* Footer */}
-              {showFooter && <Footer />}
             </View>
           </View>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </MenuDrawer>
+    </View>
   )
 }
 

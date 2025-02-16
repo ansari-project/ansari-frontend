@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@capacitor/android": "^7.0.1",
     "@capacitor/app": "7.0.0",
     "@capacitor/core": "7.0.1",

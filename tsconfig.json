@@ -6,9 +6,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "files": []
+  "include": ["**/*.ts", "**/*.tsx", "nativewind-env.d.ts"]
 }

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { LoadingScreen } from '@/components'
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 
-import '../index.css'
+import '../global.css'
 
 const AppLayout = () => {
   // Specify the type of the state to be either null or an EnhancedStore instance

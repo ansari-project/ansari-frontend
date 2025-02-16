@@ -5,7 +5,7 @@ interface InformationPopupState {
 }
 
 const initialState: InformationPopupState = {
-  isOpen: undefined,
+  isOpen: false,
 }
 
 const informationPopupSlice = createSlice({

@@ -22,12 +22,6 @@ const InfoPopup: React.FC = () => {
     toggleInfoPopup(!isInfoPopupOpen)
   }
 
-  if (isInfoPopupOpen === undefined) {
-    setTimeout(() => {
-      toggleInfoPopup(true)
-    }, 1000) // Show the Pop after 1 second
-  }
-
   const router = useRouter()
   const doLogout = useLogout()
 

@@ -82,6 +82,9 @@ export const AppLayout = () => {
       marginBottom: 'auto',
       marginHorizontal: isSideMenuOpened ? 8 : 16,
     },
+    bodyInnerContainer: {
+      flexDirection: 'row',
+    },
   })
 
   // Render the component
@@ -96,7 +99,7 @@ export const AppLayout = () => {
                 <View style={styles.mainBody}>
                   {/* Header */}
                   <Header />
-                  <View style={[styles.bodyContainer, { flexDirection: 'row' }]}>
+                  <View style={[styles.bodyContainer, styles.bodyInnerContainer]}>
                     {/* Toggle button for side menu */}
                     {isAuthenticated && !isGuest && !isMobile && (
                       <View style={styles.closeButton}>

@@ -50,7 +50,7 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
 
   return (
     <ScrollView
-      style={{ width: '100%' }}
+      style={styles.scrollView}
       contentContainerStyle={[styles.container, isSmallScreen ? styles.stackedContainer : styles.rowContainer]}
     >
       <View style={isSmallScreen ? styles.promptCardStacked : styles.promptCardRow}>
@@ -72,6 +72,9 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+  },
+  scrollView: {
+    width: '100%',
   },
   rowContainer: {
     flexDirection: 'row',

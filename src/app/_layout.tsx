@@ -8,6 +8,7 @@ import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { LoadingScreen } from '@/components'
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
+import { StyleSheet } from 'react-native'
 
 import '../global.css'
 
@@ -29,8 +30,14 @@ const AppLayout = () => {
     return <LoadingScreen />
   }
 
+  const styles = StyleSheet.create({
+    rootView: {
+      flex: 1,
+    },
+  })
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.rootView}>
       <I18nextProvider i18n={i18n}>
         <Provider store={reduxStore}>
           <Slot />

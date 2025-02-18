@@ -35,6 +35,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
       marginLeft: 40,
       marginRight: 40,
       backgroundColor: theme.popupBackgroundColor,
+      overflow: 'visible',
     },
     popupItems: {
       width: '100%',
@@ -66,6 +67,10 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
       paddingHorizontal: 10,
       fontFamily: 'Inter',
     },
+    avatarText: {
+      fontWeight: 'bold',
+      fontSize: 14,
+    },
   })
 
   return (
@@ -77,7 +82,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             name={initial || name}
             textColor={theme.textColor}
             bgColor={theme.linkColor}
-            textStyle={{ fontWeight: 'bold', fontSize: 14 }}
+            textStyle={styles.avatarText}
           />
           {displayName && <Text style={[styles.userNameText, nameColor && { color: nameColor }]}>{name}</Text>}
         </View>
@@ -89,13 +94,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
         isVisible={isVisible}
         onRequestClose={() => setIsVisible(false)}
         popoverShift={{ x: -1, y: 0.8 }}
-        popoverStyle={[
-          styles.popupContent,
-          {
-            padding: 16,
-            overflow: 'visible', // make sure the arrow is visible outside the container
-          },
-        ]}
+        popoverStyle={styles.popupContent}
       >
         <View style={styles.popupItems}>
           {!isGuest && (

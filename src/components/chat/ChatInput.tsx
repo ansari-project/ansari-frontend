@@ -175,6 +175,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
       cursor: 'pointer',
       backgroundColor: isSending || (isFocused && value.length > 0) ? theme.hoverColor : theme.sendIconColor,
     },
+    iconContainer: {
+      justifyContent: 'center',
+    },
   })
 
   return (
@@ -200,7 +203,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
         <View style={styles.buttonContainer}>
           {showExpandCollapseIcon && (
             <Pressable onPress={updateInputFullMode} type='submit'>
-              <View style={{ justifyContent: 'center' }}>
+              <View style={styles.iconContainer}>
                 {isInputFullMode ? (
                   <CollapseIcon fill={theme.iconFill} width={24} height={24} />
                 ) : (
@@ -211,13 +214,13 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           )}
           {isSending ? (
             <Pressable onPress={onCancelSend} style={[styles.button]} type='submit'>
-              <View style={{ justifyContent: 'center' }}>
+              <View style={styles.iconContainer}>
                 <StopIcon fill={theme.iconFill} width={20} height={20} />
               </View>
             </Pressable>
           ) : (
             <Pressable onPress={submit} style={[styles.button]} type='submit'>
-              <View style={{ justifyContent: 'center' }}>
+              <View style={styles.iconContainer}>
                 <SendIcon fill={theme.iconFill} />
               </View>
             </Pressable>

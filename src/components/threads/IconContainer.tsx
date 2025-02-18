@@ -24,7 +24,7 @@ const IconContainer: React.FC<IconContainerProps> = ({
   const theme = useSelector((state: RootState) => state.theme.theme)
 
   return (
-    <View style={[styles.iconContainer, isRTL ? { left: 0 } : { right: 0 }]}>
+    <View style={[styles.iconContainer, isRTL ? styles.iconContainerLeft : styles.iconContainerRight]}>
       {onThreadRename && (
         <Pressable onPress={() => onThreadRename(thread)} style={styles.icon}>
           <RenameIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
@@ -38,7 +38,7 @@ const IconContainer: React.FC<IconContainerProps> = ({
       {onThreadDelete && (
         <Pressable
           onPress={() => onThreadDelete(thread)}
-          style={[styles.icon, isRTL && onThreadRename ? { marginLeft: 8 } : { marginRight: 8 }]}
+          style={[styles.icon, isRTL && onThreadRename ? styles.iconMarginLeft : styles.iconMarginRight]}
         >
           <DeleteIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
@@ -56,6 +56,18 @@ const styles = StyleSheet.create({
   icon: {
     padding: 4,
     // Additional styling for icons can go here
+  },
+  iconContainerLeft: {
+    left: 0,
+  },
+  iconContainerRight: {
+    right: 0,
+  },
+  iconMarginLeft: {
+    marginLeft: 8,
+  },
+  iconMarginRight: {
+    marginRight: 8,
   },
 })
 

@@ -82,6 +82,12 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
       position: 'absolute',
       marginLeft: 40,
       marginRight: 40,
+      alignItems: 'flex-end',
+      paddingTop: 20,
+      paddingBottom: 20,
+      paddingLeft: 16,
+      paddingRight: 16,
+      overflow: 'visible',
     },
     popupItems: {
       width: '100%',
@@ -105,8 +111,6 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
       <Pressable ref={touchableRef} style={styles.button} onPress={() => setIsVisible(!isVisible)}>
         <LanguageIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
-      {/* This ensures that the Popover is only attempted to be rendered when touchableRef.current is not null,
-      indicating that the Pressable has been mounted and the ref has been attached. */}
       {touchableRef.current && (
         <Popover
           from={touchableRef}
@@ -120,24 +124,9 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
             width: 180,
             height: 50 * reorderedLanguages.length,
           }}
-          popoverStyle={[
-            styles.popupContent,
-            {
-              alignItems: 'flex-end',
-              paddingTop: 20, // add some space for the arrow
-              paddingBottom: 20, // adjust the padding to fit the arrow
-              paddingLeft: 16,
-              paddingRight: 16,
-              overflow: 'visible', // make sure the arrow is visible outside the container
-            },
-          ]}
+          popoverStyle={styles.popupContent}
         >
-          <View
-            style={[
-              styles.popupItems,
-              // { transform: [{ translateX: 0 }, { translateY: 0 }, { scale: 1 }] }
-            ]}
-          >
+          <View style={styles.popupItems}>
             {reorderedLanguages.map((language) => (
               <Pressable
                 key={language.code}

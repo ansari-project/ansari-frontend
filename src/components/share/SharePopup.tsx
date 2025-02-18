@@ -124,6 +124,9 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
       backgroundColor: theme.backgroundColorSecondary,
       overflow: 'visible',
     },
+    toastContainer: {
+      flexDirection: 'row',
+    },
   })
 
   // Render the component
@@ -184,7 +187,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
       {toastVisible && (
         <Toast
           message={
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.toastContainer}>
               <CheckIcon fill={theme.iconFill} />
               <Text style={styles.successMessage}>{t('share.successCopy')}</Text>
             </View>

@@ -100,6 +100,14 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       paddingBottom: 16,
       alignSelf: 'flex-start',
     },
+    avatarText: {
+      fontWeight: 'bold',
+      fontSize: 14,
+    },
+    messageContainer: {
+      flexShrink: 1,
+      width: '100%',
+    },
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
@@ -114,7 +122,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
             name={`${user?.firstName} ${user?.lastName}`}
             textColor={theme.textColor}
             bgColor={theme.yellowColor}
-            textStyle={{ fontWeight: 'bold', fontSize: 14 }}
+            textStyle={styles.avatarText}
           />
         </View>
       ) : (
@@ -122,7 +130,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
         </View>
       )}
-      <View style={{ flexShrink: 1, width: '100%' }}>
+      <View style={styles.messageContainer}>
         <Text style={styles.senderName}>{isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}</Text>
         <View style={styles.contentWrapper}>
           <Markdown

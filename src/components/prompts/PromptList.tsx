@@ -1,4 +1,4 @@
-import { ChallengeIcon, ChatIcon, EndeavorFancySVG, PrayingIcon } from '@/components/svg'
+import { ChallengeIcon, ChatIcon, ReactNativeSvg, PrayingIcon } from '@/components/svg'
 import { useScreenInfo } from '@/hooks'
 import PromptsService, { PromptsByCategory } from '@/services/PromptsService'
 import React, { useEffect, useState } from 'react'
@@ -60,7 +60,7 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
             isMiddle={index == 1}
             title={prompt.title}
             subtitle={prompt.subtitle}
-            Icon={prompt.Icon as typeof EndeavorFancySVG}
+            Icon={prompt.Icon as typeof ReactNativeSvg}
             onPress={() => handleSelectPrompt(prompt.description)}
           />
         ))}

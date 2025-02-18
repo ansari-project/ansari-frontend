@@ -36,9 +36,15 @@ const Footer: React.FC = () => {
     footerText: {
       fontSize: 12,
       lineHeight: 21,
-      fontWight: 300,
+      fontWeight: 300,
       fontFamily: 'Inter',
       color: theme.textColor,
+    },
+    nameContainerWrapper: {
+      marginHorizontal: 10,
+    },
+    subscriptionContainer: {
+      flex: 1,
     },
   })
 
@@ -49,7 +55,7 @@ const Footer: React.FC = () => {
   return (
     <View style={styles.container}>
       {isAuthenticated && isGuest && (
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={styles.nameContainerWrapper}>
           <NameContainer
             name={t('welcomeGuestText') as string}
             initial={t('welcomeGuest') as string}
@@ -60,7 +66,7 @@ const Footer: React.FC = () => {
       )}
       {(!isAuthenticated || isGuest) && !isMobile && <ActionButtons isTop={false} />}
       {isAuthenticated && (
-        <View style={{ flex: 1 }}>
+        <View style={styles.subscriptionContainer}>
           <View style={styles.footerTextContainer}>
             <Text style={styles.footerText}>{t('authorizedFooterText')}</Text>
             <Subscription />

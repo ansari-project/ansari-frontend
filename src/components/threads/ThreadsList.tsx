@@ -85,7 +85,6 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   const { threadId } = useLocalSearchParams<{ threadId: string }>()
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(threadId || null)
   const { isRTL } = useDirection()
-  const textAlignStyle = isRTL ? { textAlign: 'right' } : { textAlign: 'left' }
   const { width, isSmallScreen } = useScreenInfo()
   const { t } = useTranslation()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -132,6 +131,15 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
       color: theme.linkColor,
       fontFamily: 'Inter',
     },
+    textAlignRight: {
+      textAlign: 'right',
+    },
+    textAlignLeft: {
+      textAlign: 'left',
+    },
+    boldText: {
+      fontWeight: 'bold',
+    },
   })
 
   const handleConfirmDelete = async () => {
@@ -166,7 +174,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
           {dateCategory === 'older' ? (
             Object.entries(threads).map(([year, yearThreads]: [string, Thread[]]) => (
               <View key={year}>
-                <Text style={[styles.dateHeader, textAlignStyle]}>{year}</Text>
+                <Text style={[styles.dateHeader, isRTL ? styles.textAlignRight : styles.textAlignLeft]}>{year}</Text>
                 {yearThreads.map((thread) => (
                   <ThreadCard
                     key={thread.id}
@@ -181,7 +189,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
             ))
           ) : (
             <View>
-              <Text style={[styles.dateHeader, textAlignStyle]}>
+              <Text style={[styles.dateHeader, isRTL ? styles.textAlignRight : styles.textAlignLeft]}>
                 {Helpers.createLocalizedDateHeader(dateCategory, threads[0].date, t)}
               </Text>
               {threads.map((thread: Thread) => (
@@ -218,7 +226,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
               parent={Text}
               i18nKey='deleteThreadMessage'
               components={{
-                1: <Text style={{ fontWeight: 'bold' }}></Text>,
+                1: <Text style={styles.boldText}></Text>,
               }}
               values={{ threadName: dialogMessage }}
             />

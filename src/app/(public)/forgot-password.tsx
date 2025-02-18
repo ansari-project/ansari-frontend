@@ -92,8 +92,9 @@ const ForgetPasswordScreen: React.FC = () => {
       fontWeight: 'bold',
       marginBottom: 20,
       color: theme.primaryColor,
-      textAlign: isRTL ? 'right' : 'left',
+      textAlign: 'center',
       fontFamily: 'Inter',
+      width: '100%',
     },
     description: {
       fontSize: 16,
@@ -106,6 +107,13 @@ const ForgetPasswordScreen: React.FC = () => {
       justifyContent: 'flex-start',
       alignItems: 'center',
     },
+    iconContainer: {
+      alignItems: 'center',
+      width: '100%',
+    },
+    alignStart: {
+      alignItems: 'flex-start',
+    },
   })
 
   if (emailState.submitted) {
@@ -113,8 +121,8 @@ const ForgetPasswordScreen: React.FC = () => {
       <View style={generalStyle.formContainer}>
         <LogoIcon fill={theme.iconFill} width={52} height={52} />
         <View style={generalStyle.form}>
-          <Text style={[styles.title, { textAlign: 'center', width: '100%' }]}>{t('forgotYourPassword')}</Text>
-          <View style={{ alignItems: 'center', width: '100%' }}>
+          <Text style={styles.title}>{t('forgotYourPassword')}</Text>
+          <View style={styles.iconContainer}>
             <DoubleCheckIcon width='50' />
           </View>
 
@@ -123,8 +131,8 @@ const ForgetPasswordScreen: React.FC = () => {
             <Text
               style={[
                 generalStyle.prompt,
-                { alignItems: 'flex-start' },
-                Platform.OS === 'web' && hovered ? styles.boldUnderlineText : null,
+                styles.alignStart,
+                Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
               ]}
               onPress={handleBack}
               onMouseEnter={() => setHovered(true)}
@@ -167,7 +175,7 @@ const ForgetPasswordScreen: React.FC = () => {
           <Text
             style={[
               generalStyle.prompt,
-              { alignItems: 'flex-start' },
+              styles.alignStart,
               Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
             ]}
             onPress={handleBack}

@@ -1,4 +1,4 @@
-import { EndeavorFancySVG } from '@/components/svg'
+import { ReactNativeSvg } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 interface Props {
   title: string
   subtitle: string
-  Icon: typeof EndeavorFancySVG
+  Icon: typeof ReactNativeSvg
   onPress: () => void
   isMiddle: boolean
 }

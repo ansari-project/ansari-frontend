@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ColorValue, View } from 'react-native'
+import { ColorValue, View, StyleSheet } from 'react-native'
 import Svg, { SvgProps } from 'react-native-svg'
 
 export type Props = {
@@ -7,6 +7,7 @@ export type Props = {
   hoverStroke?: ColorValue
   style?: object
 } & SvgProps
+
 const ReactNativeSvg = (props: Props) => {
   const [isHover, setIsHover] = useState<number>(0)
 
@@ -32,16 +33,17 @@ const ReactNativeSvg = (props: Props) => {
     stroke: isHover === 1 ? hoverStroke : props.stroke,
   }
 
+  const styles = StyleSheet.create({
+    svgContainer: {
+      overflow: 'visible',
+      width: svgProps.width,
+      height: svgProps.height,
+    },
+  })
+
   return (
     <View
-      style={[
-        {
-          width: svgProps.width,
-          height: svgProps.height,
-          overflow: 'visible',
-        },
-        props.style,
-      ]}
+      style={[styles.svgContainer, props.style]}
       onMouseEnter={() => setIsHover(1)}
       onMouseLeave={() => setIsHover(0)}
     >

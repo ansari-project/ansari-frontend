@@ -77,7 +77,7 @@ const InfoPopup: React.FC = () => {
       alignItems: 'flex-start',
       elevation: 5,
       gap: isSmallScreen ? 8 : 16,
-      flexGrow: 1, // make the modalContent view expand and fill the available space
+      flexGrow: 1,
     },
     modalFooter: {
       width: '100%',
@@ -95,6 +95,9 @@ const InfoPopup: React.FC = () => {
       textAlign: isRTL ? 'right' : 'left',
       marginBottom: 15,
       fontFamily: 'Inter',
+    },
+    textWithMargin: {
+      marginBottom: 30,
     },
     titleText: {
       fontSize: 20,
@@ -115,7 +118,14 @@ const InfoPopup: React.FC = () => {
     },
     bottomContainer: {
       alignItems: 'center',
-      marginTop: 'auto', // push the bottomContent to the bottom of the modalContent view
+      marginTop: 'auto',
+    },
+    linkText: {
+      textDecorationLine: 'none',
+      color: theme.linkColor,
+    },
+    closeIcon: {
+      borderWidth: 0,
     },
   })
 
@@ -127,25 +137,10 @@ const InfoPopup: React.FC = () => {
           i18nKey='guestWelcomeMessage'
           values={{ email: GetEnv('FEEDBACK_EMAIL') }}
           components={{
-            1: (
-              <Text
-                style={{ textDecorationLine: 'none', color: theme.linkColor }}
-                onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))}
-              />
-            ),
-            2: (
-              <Text
-                style={{ textDecorationLine: 'none', color: theme.linkColor }}
-                onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}
-              />
-            ),
-            3: <Text style={{ textDecorationLine: 'none', color: theme.linkColor }} onPress={() => register()} />,
-            4: (
-              <Text
-                style={{ textDecorationLine: 'none', color: theme.linkColor }}
-                onPress={() => Linking.openURL(GetEnv('SUBSCRIBE_URL'))}
-              />
-            ),
+            1: <Text style={styles.linkText} onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))} />,
+            2: <Text style={styles.linkText} onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))} />,
+            3: <Text style={styles.linkText} onPress={() => register()} />,
+            4: <Text style={styles.linkText} onPress={() => Linking.openURL(GetEnv('SUBSCRIBE_URL'))} />,
           }}
         />
       </Text>
@@ -154,24 +149,14 @@ const InfoPopup: React.FC = () => {
 
   const authenticatedMessage = () => {
     return (
-      <Text style={[styles.text, { marginBottom: 30 }]}>
+      <Text style={[styles.text, styles.textWithMargin]}>
         <Trans
           i18n={i18n}
           i18nKey='welcomeMessage'
           values={{ email: GetEnv('FEEDBACK_EMAIL') }}
           components={{
-            1: (
-              <Text
-                style={{ textDecorationLine: 'none', color: theme.linkColor }}
-                onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))}
-              />
-            ),
-            2: (
-              <Text
-                style={{ textDecorationLine: 'none', color: theme.linkColor }}
-                onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))}
-              />
-            ),
+            1: <Text style={styles.linkText} onPress={() => Linking.openURL(GetEnv('COMPREHENSIVE_GUIDE_URL'))} />,
+            2: <Text style={styles.linkText} onPress={() => Linking.openURL(GetEnv('FEEDBACK_MAIL_TO'))} />,
           }}
         />
       </Text>
@@ -190,7 +175,7 @@ const InfoPopup: React.FC = () => {
             <View style={styles.infoContainer}>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
               <Pressable onPress={() => togglePopup()} style={styles.toggleButton} hitSlop={8}>
-                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={{ borderWidth: 0 }} />
+                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={styles.closeIcon} />
               </Pressable>
             </View>
             <View style={styles.modalContent}>

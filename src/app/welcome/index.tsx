@@ -84,12 +84,15 @@ const Welcome: React.FC = () => {
       color: theme.yellowColor,
     },
     register: { backgroundColor: theme.popupBackgroundColor },
+    containerSmallScreen: {
+      width,
+    },
   })
 
   return (
     <>
       <KeyboardAvoidingView
-        style={[styles.container, isSmallScreen && { width }]}
+        style={[styles.container, isSmallScreen && styles.containerSmallScreen]}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <View style={styles.left}>

@@ -28,16 +28,19 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
     footerText: {
       fontSize: 12,
       lineHeight: 21,
-      fontWight: 300,
+      fontWeight: 300,
       fontFamily: 'Inter',
       color: theme.textColor,
+    },
+    pressableContainer: {
+      paddingHorizontal: 8,
     },
   })
 
   return (
     <View style={styles.terms}>
       <Pressable
-        style={{ paddingHorizontal: 8 }}
+        style={styles.pressableContainer}
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
@@ -51,7 +54,7 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
       </Pressable>
       <Text style={styles.footerText}>|</Text>
       <Pressable
-        style={{ paddingHorizontal: 8 }}
+        style={styles.pressableContainer}
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {

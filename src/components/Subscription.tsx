@@ -2,7 +2,7 @@ import { useAuth } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Pressable, Text, View } from 'react-native'
+import { Linking, Pressable, Text, View, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 
 /**
@@ -20,6 +20,27 @@ const Subscription: React.FC = () => {
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { isAuthenticated, isGuest } = useAuth()
 
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 6,
+    },
+    pressableContainer: {
+      flexShrink: 1,
+    },
+    text: {
+      fontSize: 12,
+      color: theme.textColor,
+      fontFamily: 'Inter',
+    },
+    linkText: {
+      color: theme.linkColor,
+      textDecorationLine: 'underline',
+    },
+  })
+
   // Allow the component to render only when the user is not authenticated or is a guest
   if (isAuthenticated && !isGuest) {
     return null
@@ -27,16 +48,9 @@ const Subscription: React.FC = () => {
 
   return (
     // Wrap the Pressable component in a View component to allow styling the container
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 6,
-      }}
-    >
+    <View style={styles.container}>
       <Pressable
-        style={{ flexShrink: 1 }}
+        style={styles.pressableContainer}
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
@@ -46,22 +60,12 @@ const Subscription: React.FC = () => {
           }
         }}
       >
-        <Text
-          style={{
-            fontSize: 12,
-            color: theme.textColor,
-            fontFamily: 'Inter',
-          }}
-        >
+        <Text style={styles.text}>
           {/* The `Trans` component from `react-i18next` is used to render translated text.
               - `components` prop allows embedding React components within the translated text.
               - In this case, a span element with green color and underline is used for part of the text.
               - `i18nKey` is the key in the translation files that holds the text to be translated. */}
-          <Trans
-            components={{ 1: <Text style={{ color: theme.linkColor, textDecorationLine: 'underline' }} /> }}
-            i18nKey='subscribe'
-            i18n={i18n}
-          />
+          <Trans components={{ 1: <Text style={styles.linkText} /> }} i18nKey='subscribe' i18n={i18n} />
         </Text>
       </Pressable>
     </View>

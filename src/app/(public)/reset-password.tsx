@@ -117,6 +117,13 @@ const ResetPasswordScreen: React.FC = () => {
       justifyContent: 'flex-start',
       alignItems: 'center',
     },
+    iconContainer: {
+      alignItems: 'center',
+      width: '100%',
+    },
+    alignStart: {
+      alignItems: 'flex-start',
+    },
   })
 
   if (passwordState.submitted) {
@@ -126,7 +133,7 @@ const ResetPasswordScreen: React.FC = () => {
         <LogoIcon fill={theme.iconFill} width={52} height={52} />
         <View style={generalStyle.form}>
           <Text style={styles.title}>{t('passwordResetSuccess')}</Text>
-          <View style={{ alignItems: 'center', width: '100%' }}>
+          <View style={styles.iconContainer}>
             <DoubleCheckIcon width='50' />
           </View>
           <Text style={styles.description}>{t('passwordResetSuccessMessage')}</Text>
@@ -135,7 +142,7 @@ const ResetPasswordScreen: React.FC = () => {
             <Text
               style={[
                 generalStyle.prompt,
-                { alignItems: 'flex-start' },
+                styles.alignStart,
                 Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
               ]}
               onPress={handleBack}
@@ -192,7 +199,7 @@ const ResetPasswordScreen: React.FC = () => {
           <Text
             style={[
               generalStyle.prompt,
-              { alignItems: 'flex-start' },
+              styles.alignStart,
               Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
             ]}
             onPress={handleBack}

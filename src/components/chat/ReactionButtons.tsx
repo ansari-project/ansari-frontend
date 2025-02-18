@@ -136,7 +136,22 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
       marginLeft: isRTL ? null : 6,
       marginRight: isRTL ? 6 : null,
     },
-    // ... any additional styles you need ...
+    feedbackOptionsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    titleContainer: {
+      flex: 2,
+      flexDirection: 'row',
+      gap: 10,
+    },
+    optionalText: {
+      color: theme.inputColor,
+    },
+    reactionFormVisible: {
+      height: 'auto',
+      visibility: 'visible',
+    },
   })
 
   // Render a button for each feedback option
@@ -151,7 +166,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     }
 
     return (
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={styles.feedbackOptionsContainer}>
         {feedbackOptions.map((option) => (
           <Pressable
             key={option.value}
@@ -214,12 +229,12 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
         </Pressable>
       </View>
       {modalVisible && (
-        <View style={[styles.reactionForm, modalVisible && { height: 'auto', visibility: 'visible' }]}>
+        <View style={[styles.reactionForm, modalVisible && styles.reactionFormVisible]}>
           <View style={styles.modalView}>
             <View style={styles.modalTitle}>
-              <View style={{ flex: 2, flexDirection: 'row', gap: 10 }}>
+              <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>{t('whyDidYouChooseThisRating')}</Text>
-                <Text style={{ color: theme.inputColor }}>{t('optional')}</Text>
+                <Text style={styles.optionalText}>{t('optional')}</Text>
               </View>
               <Pressable
                 style={styles.closeButton}

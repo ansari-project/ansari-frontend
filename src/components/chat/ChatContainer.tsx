@@ -88,6 +88,9 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
       paddingTop: '5vh',
       paddingBottom: '20vh',
     },
+    logoIconContainer: {
+      margin: 25,
+    },
   })
 
   return (
@@ -100,7 +103,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
             <View style={styles.contentWrapper}>
               <View style={styles.logoContainer}>
                 {!isSmallScreen && (
-                  <View style={{ margin: 25 }}>
+                  <View style={styles.logoIconContainer}>
                     <LogoIcon fill={theme.iconFill} width={122} height={122} />
                   </View>
                 )}

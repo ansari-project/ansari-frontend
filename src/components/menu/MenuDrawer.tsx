@@ -24,6 +24,13 @@ const MenuDrawer: React.FC<Props> = ({ children }) => {
       fontFamily: 'Inter',
       color: theme.textColor,
     },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    },
+    drawerContentContainer: {
+      flex: 1,
+      flexDirection: 'row',
+    },
   })
 
   return (
@@ -32,12 +39,12 @@ const MenuDrawer: React.FC<Props> = ({ children }) => {
         drawerType='front'
         open={isSideMenuOpened}
         drawerStyle={styles.container}
-        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
+        overlayStyle={styles.overlay}
         onOpen={() => togglePopup()}
         onClose={() => togglePopup()}
         renderDrawerContent={() => (
           <View>
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={styles.drawerContentContainer}>
               <SideMenuBody />
             </View>
           </View>

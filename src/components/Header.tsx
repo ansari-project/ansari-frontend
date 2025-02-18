@@ -1,10 +1,10 @@
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
-import { RootState } from '@/store'
+import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { Pressable, StyleSheet, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import ActionButtons from './ActionButtons'
-import { MenuDrawer } from './menu'
+import { MenuIcon } from './svg'
 
 const Header: React.FC = () => {
   const { isAuthenticated, isGuest } = useAuth()
@@ -13,9 +13,15 @@ const Header: React.FC = () => {
   const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
   const displayMenuDrawer = isAuthenticated && !isGuest && (!isSideMenuOpened || isSmallScreen)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
+  const theme = useSelector((state: RootState) => state.theme.theme)
+  const dispatch = useDispatch<AppDispatch>()
 
   if (isInputFullMode || (!isSmallScreen && !isAuthenticated)) {
     return null
+  }
+
+  const togglePopup = () => {
+    dispatch(toggleSideMenu(!isSideMenuOpened))
   }
 
   const styles = StyleSheet.create({
@@ -41,12 +47,22 @@ const Header: React.FC = () => {
     rightContent: {
       flexDirection: isRTL ? 'row-reverse' : 'row',
     },
+    button: {
+      padding: 8,
+      borderRadius: 4,
+    },
   })
 
   return (
     <View style={styles.container}>
       <View style={styles.contentWarper}>
-        <View style={styles.leftContent}>{displayMenuDrawer && <MenuDrawer />}</View>
+        <View style={styles.leftContent}>
+          {displayMenuDrawer && (
+            <Pressable onPress={() => togglePopup()} style={styles.button}>
+              <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={28} height={28} />
+            </Pressable>
+          )}
+        </View>
         <View style={styles.rightContent}>{isMobile && <ActionButtons isTop={true} />}</View>
       </View>
     </View>

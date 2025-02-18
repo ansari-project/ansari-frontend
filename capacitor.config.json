@@ -2,6 +2,12 @@
   "appId": "chat.ansari.app",
   "appName": "Ansari Chat",
   "webDir": "dist",
+  "android": {
+    "path": "./capacitor/android"
+  },
+  "ios": {
+    "path": "./capacitor/ios"
+  },
   "plugins": {
     "StatusBar": {
       "overlaysWebView": false

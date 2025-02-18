@@ -1,17 +1,17 @@
 import { CloseIcon, InfoIcon } from '@/components/svg'
 import { useAuth, useDirection, useLogout, useScreenInfo, useToggleInfoPopup } from '@/hooks'
 import { RootState } from '@/store'
-import { GetEnv } from '@/utils'
+import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Linking, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import Subscription from './Subscription'
 
 const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
-  const { isSmallScreen } = useScreenInfo()
+  const { isSmallScreen, width } = useScreenInfo()
   const { isRTL } = useDirection()
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -20,12 +20,6 @@ const InfoPopup: React.FC = () => {
 
   const togglePopup = () => {
     toggleInfoPopup(!isInfoPopupOpen)
-  }
-
-  if (isInfoPopupOpen === undefined) {
-    setTimeout(() => {
-      toggleInfoPopup(true)
-    }, 1000) // Show the Pop after 1 second
   }
 
   const router = useRouter()
@@ -40,6 +34,7 @@ const InfoPopup: React.FC = () => {
     }
   }
 
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
   const styles = StyleSheet.create({
     button: {
       padding: 8,
@@ -52,6 +47,9 @@ const InfoPopup: React.FC = () => {
       borderWidth: 0,
       padding: 8,
       elevation: 2,
+    },
+    safeAreaContainer: {
+      flex: 1,
     },
     container: {
       flex: 1,
@@ -80,6 +78,14 @@ const InfoPopup: React.FC = () => {
       elevation: 5,
       gap: isSmallScreen ? 8 : 16,
       flexGrow: 1, // make the modalContent view expand and fill the available space
+    },
+    modalFooter: {
+      width: '100%',
+      padding: 16,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      gap: 16,
+      alignItems: 'center',
     },
     text: {
       width: '100%',
@@ -173,7 +179,7 @@ const InfoPopup: React.FC = () => {
   }
 
   return (
-    <>
+    <SafeAreaView style={styles.safeAreaContainer}>
       <Pressable onPress={() => togglePopup()} style={styles.button}>
         <InfoIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
@@ -193,10 +199,15 @@ const InfoPopup: React.FC = () => {
 
               <View style={styles.bottomContainer}>{isSmallScreen && !isGuest && <Subscription />}</View>
             </View>
+            <View style={styles.modalFooter}>
+              <Pressable style={generalStyle.buttonSecondary} onPress={() => togglePopup()}>
+                <Text style={generalStyle.buttonSecondaryText}>{t('common:close')}</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
-    </>
+    </SafeAreaView>
   )
 }
 

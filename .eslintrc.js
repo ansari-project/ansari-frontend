@@ -18,5 +18,5 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['/dist/*', '/android/*', '/ios/*'],
+  ignorePatterns: ['/dist/*', '/capacitor/*', '/android/*', '/ios/*'],
 }

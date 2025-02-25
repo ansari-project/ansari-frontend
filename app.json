@@ -1,9 +1,15 @@
 {
   "expo": {
+    "name": "Ansari Chat",
+    "owner": "ansari-project",
+    "slug": "ansari-chat",
+    "version": "1.0.0",
+    "scheme": "ansarichat",
+    "userInterfaceStyle": "automatic",
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-font", "expo-localization"],
+    "plugins": ["expo-router", "expo-font", "expo-localization", "expo-splash-screen"],
     "extra": {
       "supportsRTL": true,
       "router": {
@@ -13,7 +19,11 @@
         "projectId": "e2f465a7-8007-4e83-91ba-4a9df4c5209a"
       }
     },
-    "owner": "ansari-project",
-    "slug": "ansari-chat"
+    "android": {
+      "package": "com.ansariproject.app"
+    },
+    "ios": {
+      "bundleIdentifier": "com.ansariproject.app"
+    }
   }
 }

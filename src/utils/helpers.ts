@@ -1,4 +1,5 @@
 import { TFunction } from 'i18next'
+import { Platform } from 'react-native'
 
 /**
  * Determines if a given value is considered "blank".
@@ -176,6 +177,8 @@ function isValidateUUID(uuid: string): boolean {
 }
 
 function isMobileWithAddressBar(): boolean {
+  if (Platform.OS !== 'web') return false
+
   const isAddressBarVisible = window.innerHeight < window.screen.height
   return isAddressBarVisible
 }

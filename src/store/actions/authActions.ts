@@ -1,4 +1,4 @@
-import AuthService from '@/services/AuthService'
+import ApiService from '@/services/ApiService'
 import { LoginRequest, RegisterRequest, RegisterResponse, User } from '@/types'
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { AuthState } from '../slices'
@@ -32,8 +32,8 @@ export const register = createAsyncThunk<RegisterResponse, RegisterRequest, { re
   'auth/register',
   async (registerData: RegisterRequest, { rejectWithValue }) => {
     try {
-      const authService = new AuthService()
-      const response = await authService.register(registerData)
+      const apiService = new ApiService()
+      const response = await apiService.register(registerData)
       if (response.status === 'success') {
         return response as RegisterResponse
       } else {
@@ -52,8 +52,8 @@ export const login = createAsyncThunk<LoginSuccessPayload, LoginRequest, { rejec
   'auth/login',
   async (loginData: LoginRequest, { rejectWithValue }) => {
     try {
-      const authService = new AuthService()
-      const response = await authService.login(loginData)
+      const apiService = new ApiService()
+      const response = await apiService.login(loginData)
       if (response.access_token) {
         const user: User = {
           firstName: response.first_name || '',
@@ -84,8 +84,8 @@ export const logout = createAsyncThunk<void, string, { rejectValue: FailurePaylo
   'auth/logout',
   async (accessToken: string, { rejectWithValue }) => {
     try {
-      const authService = new AuthService()
-      await authService.logout(accessToken)
+      const apiService = new ApiService()
+      await apiService.logout(accessToken)
     } catch (error) {
       const message = (error instanceof Error && error.message) || 'Logout failed'
       return rejectWithValue({ message: message })

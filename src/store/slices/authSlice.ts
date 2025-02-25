@@ -1,7 +1,7 @@
-import { CryptoService } from '@/services'
 import { RefreshTokenResponse, User } from '@/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { guestLogin, login } from '../actions/authActions'
+import ApiService from '@/services/ApiService'
 
 export interface AuthState {
   loading: boolean
@@ -52,12 +52,10 @@ const authSlice = createSlice({
     refreshTokens(state, action: PayloadAction<RefreshTokenResponse>) {
       state.accessToken = action.payload.access_token
       state.refreshToken = action.payload.refresh_token
-      saveAuthState({ ...state })
 
       return state
     },
     resetAuth(state) {
-      saveAuthState({ ...initialAuthState }, state.isGuest)
       return initialAuthState
     },
     // ... other reducers ...
@@ -83,7 +81,6 @@ const authSlice = createSlice({
           message: action.payload.message,
           status: action.payload.status,
         }
-        saveAuthState({ ...newState }, newState.isGuest)
         return newState
       })
       .addCase(login.rejected, (state, action) => {
@@ -91,7 +88,6 @@ const authSlice = createSlice({
           ...initialAuthState,
           error: action.payload ? action.payload.message : 'Login failed',
         }
-        saveAuthState({ ...newState }, false)
         return newState
       })
       .addCase(guestLogin.pending, (state) => {
@@ -109,7 +105,6 @@ const authSlice = createSlice({
           message: action.payload.message,
           status: action.payload.status,
         }
-        saveAuthState({ ...newState }, true)
         return newState
       })
       .addCase(guestLogin.rejected, (state, action) => {
@@ -117,74 +112,62 @@ const authSlice = createSlice({
           ...initialAuthState,
           error: action.payload ? action.payload.message : 'Guest login failed',
         }
-        saveAuthState({ ...newState }, true)
         return newState
       })
       .addMatcher(
         (action) => action.type.startsWith('auth/logout'),
         (state) => {
-          saveAuthState({ ...initialAuthState }, state.isGuest)
           return initialAuthState
         },
       )
   },
 })
 
-// Function to save the current state to local storage securely
-function saveAuthState(state: AuthState, isGuest: boolean = false) {
-  const stateAsString = JSON.stringify(state)
-
-  CryptoService.encryptData(stateAsString)
-    .then((encryptedData) => {
-      const encryptedDataArray = Array.from(new Uint8Array(encryptedData)) // Convert Uint8Array to array
-      const encryptedDataString = String.fromCharCode.apply(null, encryptedDataArray) // Convert array to string
-
-      if (isGuest) {
-        sessionStorage.setItem('auG', encryptedDataString)
-      } else {
-        localStorage.setItem('au', encryptedDataString)
-      }
-    })
-    .catch((error) => {
-      console.error('Error encrypting data:', error)
-    })
-}
-
-// Function to load the state from local storage securely
 export async function loadAuthState() {
-  const loadedAuthState = new Promise<AuthState>((resolve) => {
-    // eslint-disable-next-line no-extra-semi
-    ;(async () => {
-      let encryptedData = sessionStorage.getItem('auG')
-      if (!encryptedData) {
-        encryptedData = localStorage.getItem('au')
-      }
-      if (!encryptedData) {
-        resolve(initialAuthState)
-      } else {
-        try {
-          const encryptedDataArray = Array.from(encryptedData).map((char) => char.charCodeAt(0)) // Convert string to array of char codes
-          const encryptedDataBuffer = new Uint8Array(encryptedDataArray).buffer // Convert array to ArrayBuffer
-          const authState = await CryptoService.decryptData(encryptedDataBuffer) // Wait for the Promise to resolve
+  const createAuthState = (auth: AuthState) => {
+    return { auth } as Partial<{
+      auth: AuthState
+    }>
+  }
 
-          resolve(authState as AuthState) // Explicitly cast the resolved value as AuthState
-        } catch (error) {
-          console.error('Error decrypting data:', error)
-          resolve(initialAuthState)
-        }
-      }
-    })()
+  const apiService = new ApiService()
+  const baseURL = process.env.EXPO_PUBLIC_API_V2_URL
+  const accessToken = await apiService.getAccessTokenFromStorage()
+  const refreshToken = await apiService.getRefreshTokenFromStorage()
+
+  if (!accessToken || !refreshToken) {
+    return createAuthState(initialAuthState)
+  }
+
+  const userRes = await apiService.fetchWithAuthRetry(`${baseURL}/users/me`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'X-Mobile-Ansari': 'ANSARI',
+    },
   })
 
-  return { auth: await loadedAuthState } as Partial<{
-    auth: AuthState
-  }>
-}
+  if (!userRes.ok) {
+    return createAuthState(initialAuthState)
+  }
 
-// Helper to clear state from both storages
-export const clearAuthState = () => {
-  localStorage.removeItem('au')
-  sessionStorage.removeItem('auG')
+  const userDetails = await userRes.json()
+
+  const userState = {
+    ...initialAuthState,
+    isAuthenticated: true,
+    isGuest: false,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    user: {
+      id: userDetails.user_id,
+      firstName: userDetails.first_name,
+      lastName: userDetails.last_name,
+      email: userDetails.email,
+    },
+  }
+
+  return createAuthState(userState)
 }
 
 /**

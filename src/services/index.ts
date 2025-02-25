@@ -1,7 +1,5 @@
-export { default as AuthService } from './AuthService'
+export { default as ApiService } from './ApiService'
 export { default as ChatService } from './ChatService'
-export { default as CryptoService } from './CryptoService'
 export { default as FeedbackService } from './FeedbackService'
 export { default as PromptsService } from './PromptsService'
 export { userService as UserService } from './UserService'
-export { fetchWithAuthRetry } from './api'

@@ -119,7 +119,7 @@ const generateUniqueId = (length: number = 32, special: boolean = false): string
  */
 const generateGuestCredentials = (): { email: string; password: string } => {
   // Generate a unique identifier for the email, ensuring guest email addresses are unique
-  const email = `guest_${generateUniqueId(10)}@endeavorpal.com`
+  const email = `guest_${generateUniqueId(10)}@ansari.chat`
 
   // Generate a secure password with a specified length, including special characters for added security
   const password = generateUniqueId(12, true)

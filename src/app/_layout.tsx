@@ -21,7 +21,6 @@ const AppLayout = () => {
   })
 
   useEffect(() => {
-    document.dir = i18n.dir(i18n.language)
     initStore().then((store) => {
       setReduxStore(store)
     })

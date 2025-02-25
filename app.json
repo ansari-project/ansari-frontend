@@ -3,11 +3,9 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font", "expo-localization"],
     "extra": {
+      "supportsRTL": true,
       "router": {
         "origin": false
       },

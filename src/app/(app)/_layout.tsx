@@ -2,7 +2,7 @@ import { LineIcon, RightArrowIcon } from '@/components/svg'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'
-import { Dimensions, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, View } from 'react-native'
+import { Dimensions, ImageBackground, KeyboardAvoidingView, Pressable, StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -32,7 +32,7 @@ export const AppLayout = () => {
   const showFooter = true
 
   // Get the height of the window
-  const { height } = Dimensions.get('window')
+  const { width, height } = Dimensions.get('window')
 
   // Function to toggle the side menu
   const togglePopup = () => {
@@ -48,7 +48,6 @@ export const AppLayout = () => {
     mainContainer: {
       flex: 1,
       minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
-      backgroundImage: `url(${theme.backgroundImage})`, // Set background image
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       overflowY: 'auto',
@@ -89,7 +88,7 @@ export const AppLayout = () => {
 
   // Render the component
   return (
-    <View>
+    <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
       <MenuDrawer>
         <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
           <View style={[styles.container]}>
@@ -109,9 +108,9 @@ export const AppLayout = () => {
                       </View>
                     )}
                     {/* Main content area */}
-                    <ScrollView contentContainerStyle={styles.appContent}>
+                    <View style={styles.appContent}>
                       <Slot />
-                    </ScrollView>
+                    </View>
                   </View>
                   {/* Footer */}
                   {showFooter && <Footer />}
@@ -121,7 +120,7 @@ export const AppLayout = () => {
           </View>
         </KeyboardAvoidingView>
       </MenuDrawer>
-    </View>
+    </ImageBackground>
   )
 }
 

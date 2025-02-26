@@ -3,13 +3,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   presets: [require('nativewind/preset')],
   theme: {
-    container: {
-      center: true,
-      screens: {
-        '2xl': '100%',
-        '3xl': '1920px',
-      },
-    },
     extend: {
       colors: {
         transparent: 'transparent',

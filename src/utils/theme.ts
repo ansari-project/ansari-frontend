@@ -1,9 +1,7 @@
-const background = '/images/background.png'
 // Define the interface for the theme object
 export interface Theme {
   primaryColor: string
   backgroundColor: string
-  backgroundImage: string
   textColor: string
   iconFill: string
   inputBackgroundColor: string
@@ -34,7 +32,6 @@ export interface Theme {
 export const lightTheme: Theme = {
   primaryColor: '#231414',
   backgroundColor: '#FFFFFF',
-  backgroundImage: background,
   textColor: '#231414',
   iconFill: '#08786B',
   inputBackgroundColor: 'transparent',
@@ -66,7 +63,6 @@ export const darkTheme: Theme = {
   primaryColor: '#D0D0D0',
   backgroundColor: '#0F0F0F',
   backgroundColorSecondary: '#1D1D1D66',
-  backgroundImage: background,
   textColor: '#FFFFFF',
   iconFill: '#FFFFFF',
   inputBackgroundColor: '#4B4A4A',

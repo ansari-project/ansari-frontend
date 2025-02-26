@@ -5,7 +5,9 @@ import ReactNativeSvg, { Props } from './ReactNativeSvg'
 
 const DislikeIcon: React.FC<Props> = (props: Props) => {
   const { isRTL } = useDirection()
-  const transform = isRTL ? 'rotate(0)matrix(-1, 0, 0, 1, 0, 0)' : 'rotate(0)matrix(1, 0, 0, 1, 0, 0)'
+  const transform = isRTL
+    ? [{ rotate: '0' }, { matrix: [-1, 0, 0, 1, 0, 0] }]
+    : [{ rotate: '0' }, { matrix: [1, 0, 0, 1, 0, 0] }]
 
   return (
     <ReactNativeSvg

@@ -6,10 +6,23 @@
     "version": "1.0.0",
     "scheme": "ansarichat",
     "userInterfaceStyle": "automatic",
+    "icon": "./src/assets/images/icon.png",
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-font", "expo-localization", "expo-splash-screen"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-localization",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./src/assets/images/splash-icon.png",
+          "imageWidth": 200
+        }
+      ]
+    ],
     "extra": {
       "supportsRTL": true,
       "router": {
@@ -20,10 +33,10 @@
       }
     },
     "android": {
-      "package": "com.ansariproject.app"
+      "package": "chat.ansari.app"
     },
     "ios": {
-      "bundleIdentifier": "com.ansariproject.app"
+      "bundleIdentifier": "chat.ansari.app"
     }
   }
 }

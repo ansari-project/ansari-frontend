@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
-import UserAvatar from 'react-native-user-avatar'
+import { Avatar } from '@kolking/react-native-avatar'
 import LogoutButton from '../Logout'
 import { RootState } from '@/store'
 import { useSelector } from 'react-redux'
@@ -70,6 +70,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
     avatarText: {
       fontWeight: 'bold',
       fontSize: 14,
+      color: theme.textColor,
     },
   })
 
@@ -77,13 +78,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
     <View>
       <Pressable ref={touchableRef} onPress={() => setIsVisible(!isVisible)}>
         <View style={styles.nameContainer}>
-          <UserAvatar
-            size={34}
-            name={initial || name}
-            textColor={theme.textColor}
-            bgColor={theme.linkColor}
-            textStyle={styles.avatarText}
-          />
+          <Avatar size={34} name={initial || name} color={theme.linkColor} textStyle={styles.avatarText} />
           {displayName && <Text style={[styles.userNameText, nameColor && { color: nameColor }]}>{name}</Text>}
         </View>
       </Pressable>

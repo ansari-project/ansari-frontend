@@ -49,7 +49,7 @@ export const WelcomeLayout = () => {
   return (
     <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
       <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-        <View contentContainerStyle={styles.main}>
+        <View style={styles.main}>
           <Slot />
         </View>
       </KeyboardAvoidingView>

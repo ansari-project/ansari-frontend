@@ -76,7 +76,7 @@ export const ShareLayout = () => {
 
             <View style={styles.main}>
               <View style={styles.bodyContainer}>
-                <View contentContainerStyle={styles.appContent}>
+                <View style={styles.appContent}>
                   <Slot />
                 </View>
               </View>

@@ -5,7 +5,7 @@ import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
 import { StyleSheet, Text, View } from 'react-native'
-import UserAvatar from 'react-native-user-avatar'
+import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
 
@@ -103,6 +103,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
     avatarText: {
       fontWeight: 'bold',
       fontSize: 14,
+      color: theme.textColor,
     },
     messageContainer: {
       flexShrink: 1,
@@ -117,11 +118,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       {/* <Markdown components={{ p: Text }} rehypePlugins={[rehypeRaw]}> */}
       {isOutgoing ? (
         <View style={styles.avatar}>
-          <UserAvatar
+          <Avatar
             size={34}
             name={`${user?.firstName} ${user?.lastName}`}
             textColor={theme.textColor}
-            bgColor={theme.yellowColor}
             textStyle={styles.avatarText}
           />
         </View>

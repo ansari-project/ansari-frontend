@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { LoadingScreen } from '@/components'
+// eslint-disable-next-line camelcase
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 
 import '../global.css'
@@ -15,11 +16,11 @@ const AppLayout = () => {
   // Specify the type of the state to be either null or an EnhancedStore instance
   const [reduxStore, setReduxStore] = useState<EnhancedStore<RootState> | null>(null)
   let [fontsLoaded] = useFonts({
+    // eslint-disable-next-line camelcase
     Inter: Inter_400Regular,
   })
 
   useEffect(() => {
-    document.dir = i18n.dir(i18n.language)
     initStore().then((store) => {
       setReduxStore(store)
     })

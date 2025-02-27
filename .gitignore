@@ -12,6 +12,8 @@ web-build/
 expo-env.d.ts
 
 # Native
+ios
+android
 *.orig.*
 *.jks
 *.p8
@@ -41,3 +43,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules
+
+.metro-health-check*

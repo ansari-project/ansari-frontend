@@ -16,8 +16,8 @@ import {
   Text,
   TextInput,
   View,
-  CheckBox,
 } from 'react-native'
+import Checkbox from 'expo-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
@@ -104,11 +104,12 @@ const RegisterScreen: React.FC = () => {
           fontFamily: 'Inter',
         },
         default: {
+          textAlign: 'center',
+          marginBottom: 24,
           fontSize: 24,
           fontWeight: 500,
-          marginBottom: 24,
-          textAlign: 'center',
           color: theme.primaryColor,
+          fontFamily: 'Inter',
         },
       }),
     },
@@ -226,7 +227,7 @@ const RegisterScreen: React.FC = () => {
                 <Text style={generalStyle.errorText}>{errors.confirmPassword}</Text>
               )}
               <View style={styles.checkboxContainer}>
-                <CheckBox
+                <Checkbox
                   value={values.registerToMailList}
                   onValueChange={(value: boolean) => setFieldValue('registerToMailList', value)}
                   style={styles.checkbox}

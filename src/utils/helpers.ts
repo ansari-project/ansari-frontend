@@ -1,4 +1,5 @@
 import { TFunction } from 'i18next'
+import { Platform } from 'react-native'
 
 /**
  * Determines if a given value is considered "blank".
@@ -119,7 +120,7 @@ const generateUniqueId = (length: number = 32, special: boolean = false): string
  */
 const generateGuestCredentials = (): { email: string; password: string } => {
   // Generate a unique identifier for the email, ensuring guest email addresses are unique
-  const email = `guest_${generateUniqueId(10)}@endeavorpal.com`
+  const email = `guest_${generateUniqueId(10)}@ansari.chat`
 
   // Generate a secure password with a specified length, including special characters for added security
   const password = generateUniqueId(12, true)
@@ -176,6 +177,8 @@ function isValidateUUID(uuid: string): boolean {
 }
 
 function isMobileWithAddressBar(): boolean {
+  if (Platform.OS !== 'web') return false
+
   const isAddressBarVisible = window.innerHeight < window.screen.height
   return isAddressBarVisible
 }

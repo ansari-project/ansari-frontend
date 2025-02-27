@@ -2,7 +2,7 @@ import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { Redirect, Slot } from 'expo-router'
 import React from 'react'
-import { KeyboardAvoidingView, ScrollView, StyleSheet } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 /**
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 export const WelcomeLayout = () => {
   const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
-  const { height } = useScreenInfo()
+  const { width, height } = useScreenInfo()
   // Redux hook to get theme data
   const theme = useSelector((state: RootState) => state.theme.theme)
 
@@ -27,7 +27,6 @@ export const WelcomeLayout = () => {
     mainContainer: {
       flex: 1,
       minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
-      backgroundImage: `url(${theme.backgroundImage})`, // Set background image
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       width: '100%',
@@ -48,11 +47,13 @@ export const WelcomeLayout = () => {
 
   // Render the component
   return (
-    <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-      <ScrollView contentContainerStyle={styles.main}>
-        <Slot />
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
+      <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
+        <View style={styles.main}>
+          <Slot />
+        </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   )
 }
 

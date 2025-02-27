@@ -1,7 +1,7 @@
 import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
@@ -16,7 +16,7 @@ import { Redirect, Slot } from 'expo-router'
 export const PublicLayout = () => {
   const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
-  const { isSmallScreen, isMobile, height } = useScreenInfo()
+  const { isSmallScreen, isMobile, width, height } = useScreenInfo()
   // Redux hook to get theme data
   const theme = useSelector((state: RootState) => state.theme.theme)
 
@@ -29,7 +29,6 @@ export const PublicLayout = () => {
     mainContainer: {
       flex: 1,
       minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
-      backgroundImage: `url(${theme.backgroundImage})`, // Set background image
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       width: '100%',
@@ -70,26 +69,28 @@ export const PublicLayout = () => {
 
   // Render the component
   return (
-    <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-      <View style={[styles.container]}>
-        <View style={styles.pageContainer}>
-          {isMobile && (
-            <View style={styles.header}>
-              <ActionButtons isTop={true} />
-            </View>
-          )}
-
-          <ScrollView contentContainerStyle={styles.main}>
-            <View style={styles.bodyContainer}>
-              <View contentContainerStyle={styles.appContent}>
-                <Slot />
+    <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
+      <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
+        <View style={[styles.container]}>
+          <View style={styles.pageContainer}>
+            {isMobile && (
+              <View style={styles.header}>
+                <ActionButtons isTop={true} />
               </View>
+            )}
+
+            <View style={styles.main}>
+              <View style={styles.bodyContainer}>
+                <View style={styles.appContent}>
+                  <Slot />
+                </View>
+              </View>
+              <Footer />
             </View>
-            <Footer />
-          </ScrollView>
+          </View>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   )
 }
 

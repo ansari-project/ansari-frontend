@@ -26,7 +26,7 @@ export const WelcomeLayout = () => {
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,
-      minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
+      minHeight: height > 600 ? height : height - 48, // Set minimum height based on screen height
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       width: '100%',

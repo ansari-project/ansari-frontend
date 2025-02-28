@@ -161,6 +161,7 @@ const ForgetPasswordScreen: React.FC = () => {
           onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, handleSubmit)}
           value={emailState.email}
           placeholder={t('yourEmail')}
+          placeholderTextColor={theme.inputColor}
           autoCapitalize='none'
           autoComplete='username'
           autoCorrect={false}

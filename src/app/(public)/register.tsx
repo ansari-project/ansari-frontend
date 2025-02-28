@@ -163,6 +163,7 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.email}
                 placeholder={t('email')}
+                placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autoCapitalize='none'
                 autoComplete='email'
@@ -177,6 +178,7 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.firstName}
                 placeholder={t('firstName')}
+                placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
               />
@@ -188,6 +190,7 @@ const RegisterScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.lastName}
                 placeholder={t('lastName')}
+                placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
               />
@@ -200,6 +203,7 @@ const RegisterScreen: React.FC = () => {
                   onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                   value={values.password}
                   placeholder={t('password')}
+                  placeholderTextColor={theme.inputColor}
                   secureTextEntry={!passwordVisible}
                   style={generalStyle.input}
                 />
@@ -216,6 +220,7 @@ const RegisterScreen: React.FC = () => {
                   onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                   value={values.confirmPassword}
                   placeholder={t('confirmPassword')}
+                  placeholderTextColor={theme.inputColor}
                   secureTextEntry={!passwordVisible}
                   style={generalStyle.input}
                 />
@@ -249,15 +254,19 @@ const RegisterScreen: React.FC = () => {
               <Text
                 style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               >
-                {t('alreadyHaveAccount')}
-                <Text
-                  style={generalStyle.link}
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
-                  onPress={() => router.push('/login')}
-                >
-                  {t('loginHere')}
-                </Text>
+                <View>
+                  <Text style={generalStyle.primaryColorText}> {t('alreadyHaveAccount')}</Text>
+                </View>
+                <View>
+                  <Text
+                    style={generalStyle.link}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                    onPress={() => router.push('/login')}
+                  >
+                    {t('loginHere')}
+                  </Text>
+                </View>
               </Text>
             </View>
           )}

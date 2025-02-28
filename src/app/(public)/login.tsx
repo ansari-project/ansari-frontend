@@ -99,8 +99,10 @@ const LoginScreen: React.FC = () => {
 
   return (
     <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <LogoIcon fill={theme.iconFill} width={52} height={52} />
       <View style={generalStyle.form}>
+        <View className='items-center'>
+          <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        </View>
         {successMessage && <Text style={styles.successText}>{successMessage}</Text>}
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
@@ -119,6 +121,7 @@ const LoginScreen: React.FC = () => {
                 value={values.email}
                 placeholder={t('email')}
                 style={[generalStyle.input]}
+                placeholderTextColor={theme.inputColor}
                 autoCapitalize='none'
                 autoComplete='username'
                 autoCorrect={false}
@@ -134,6 +137,7 @@ const LoginScreen: React.FC = () => {
                 onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
                 value={values.password}
                 placeholder={t('password')}
+                placeholderTextColor={theme.inputColor}
                 secureTextEntry
                 style={[generalStyle.input]}
                 autoComplete='current-password'
@@ -176,15 +180,19 @@ const LoginScreen: React.FC = () => {
               <Text
                 style={[generalStyle.prompt, Platform.OS === 'web' && hovered === 2 ? generalStyle.boldText : null]}
               >
-                {t('dontHaveAccount')}
-                <Text
-                  style={generalStyle.link}
-                  onMouseEnter={() => setHovered(2)}
-                  onMouseLeave={() => setHovered(0)}
-                  onPress={() => router.push('/register')}
-                >
-                  {t('register')}
-                </Text>
+                <View>
+                  <Text style={generalStyle.primaryColorText}>{t('dontHaveAccount')}</Text>
+                </View>
+                <View>
+                  <Text
+                    style={generalStyle.link}
+                    onMouseEnter={() => setHovered(2)}
+                    onMouseLeave={() => setHovered(0)}
+                    onPress={() => router.push('/register')}
+                  >
+                    {t('register')}
+                  </Text>
+                </View>
               </Text>
             </View>
           )}

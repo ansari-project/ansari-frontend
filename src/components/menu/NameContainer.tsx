@@ -20,7 +20,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
   const { t } = useTranslation()
   const { isGuest } = useAuth()
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  const touchableRef = useRef<Pressable>(null)
+  const touchableRef = useRef(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
   if (nameColor == undefined) {
     nameColor = theme.textColor
@@ -83,7 +83,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
         </View>
       </Pressable>
       <Popover
-        from={touchableRef.current}
+        from={touchableRef}
         mode={PopoverMode.RN_MODAL}
         placement={PopoverPlacement.FLOATING}
         isVisible={isVisible}

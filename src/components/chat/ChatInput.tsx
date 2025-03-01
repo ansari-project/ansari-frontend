@@ -1,16 +1,17 @@
 import { CollapseIcon, ExpandIcon, SendIcon, StopIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   KeyboardEvent,
+  NativeSyntheticEvent,
   PixelRatio,
   Platform,
   Pressable,
   StyleSheet,
   TextInput,
-  TextInputContentSizeChangeEvent,
+  TextInputContentSizeChangeEventData,
   View,
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,10 +27,9 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange, isSending, onCancelSend }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
-  const inputHeightRef = useRef<number>(20)
-  const inputLengthRef = useRef<number>(0)
   const chatInputRef = useRef<TextInput>(null)
-  const [forceUpdate, setForceUpdate] = useState<number>(0) // Used to force update
+  const [chatInputHeight, setChatInputHeight] = useState<number>(22)
+
   const [showExpandCollapseIcon, setShowExpandCollapseIcon] = useState<boolean>(false)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
   const { t } = useTranslation()
@@ -38,39 +38,24 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   const theme = useSelector((state: RootState) => state.theme.theme)
   const dispatch = useDispatch<AppDispatch>()
 
-  const handleContentSizeChange = (event: TextInputContentSizeChangeEvent) => {
+  const handleContentSizeChange = (event: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
     if (value.length === 0) {
-      inputHeightRef.current = 22
+      setChatInputHeight(22)
     } else if (Platform.OS === 'web') {
-      inputHeightRef.current = event.nativeEvent.contentSize.height
+      setChatInputHeight(event.nativeEvent.contentSize.height)
     } else {
-      inputHeightRef.current = event.nativeEvent.contentSize.height * PixelRatio.get()
+      setChatInputHeight(event.nativeEvent.contentSize.height * PixelRatio.get())
     }
-
-    if (chatInputRef.current) {
-      chatInputRef.current.style.height = `${inputHeightRef.current}px` // Adjust the height directly
-    }
-
-    // Force a re-render in case the height adjustment doesn't take effect immediately
-    setForceUpdate((prev) => prev + 1)
   }
 
   const handleChange = (text: string) => {
     if (text.length === 0) {
-      inputLengthRef.current = 0
-      inputHeightRef.current = 22 // Set a minimum height for the input
+      setChatInputHeight(22)
       dispatch(tootleInputFullMode(false))
-    } else if (text.length > inputLengthRef.current) {
-      inputLengthRef.current = text.length
-      inputHeightRef.current = Math.max(inputHeightRef.current, 22) // Set a minimum height for the input
-    }
-
-    if (chatInputRef.current) {
-      chatInputRef.current.style.height = `${inputHeightRef.current}px` // Adjust the height directly
     }
 
     if (isMobile || isSmallScreen) {
-      if (inputHeightRef.current > 60) {
+      if (chatInputHeight > 60) {
         setShowExpandCollapseIcon(true)
       } else {
         setShowExpandCollapseIcon(false)
@@ -81,20 +66,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
       onInputChange(text)
     }
   }
-
-  // UseLayoutEffect to apply changes immediately after DOM updates
-  useLayoutEffect(() => {
-    if (chatInputRef.current) {
-      // Initial height adjustment if necessary
-      chatInputRef.current.style.height = `${inputHeightRef.current}px`
-    }
-  }, [forceUpdate])
-
-  useEffect(() => {
-    if (value.length === 0) {
-      handleChange(value)
-    }
-  }, [value])
 
   /**
    * Handles key press events for a text input, specifically invoking the send action on pressing the Enter key in non-mobile environments.
@@ -121,11 +92,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   }
 
   const updateInputFullMode = () => {
-    if (!isInputFullMode) {
-      chatInputRef.current.style.height = '100%'
-    } else if (chatInputRef.current) {
-      chatInputRef.current.style.height = `${inputHeightRef.current}px` // Adjust the height directly
-    }
     focusInput()
     dispatch(tootleInputFullMode(!isInputFullMode))
   }
@@ -166,7 +132,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
     },
     buttonContainer: {
       height: '100%',
-      justifyContent: showExpandCollapseIcon ? 'space-between' : 'end',
+      justifyContent: showExpandCollapseIcon ? 'space-between' : 'flex-end',
     },
     button: {
       justifyContent: 'center',
@@ -192,7 +158,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
           onChangeText={handleChange}
           onContentSizeChange={handleContentSizeChange}
-          style={styles.input}
+          style={[styles.input, { height: chatInputHeight }]}
           value={value}
           placeholder={t('promptPlaceholder')}
           placeholderTextColor={theme.primaryColor}

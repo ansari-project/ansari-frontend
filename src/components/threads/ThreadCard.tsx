@@ -146,6 +146,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
             onChangeText={setEditedName}
             onBlur={handleThreadRename}
             onFocus={() => setEditing(true)}
+            placeholderTextColor={theme.inputColor}
           />
         ) : (
           <Text style={styles.title} onPress={handleThreadCardPress}>

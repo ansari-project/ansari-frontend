@@ -1,4 +1,4 @@
-import { useAuth } from '@/hooks'
+import { useAuth } from '@/hooks/useAuth'
 import { AppDispatch, logout } from '@/store'
 import { useDispatch } from 'react-redux'
 import { resetChatState, resetReactionButtons } from '../store/slices'

@@ -7,7 +7,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import ConfirmationDialog from '../ConfirmationDialog'
-import { ThreadCard } from './'
+import ThreadCard from './ThreadCard'
 import i18next from 'i18next'
 
 /**

@@ -71,6 +71,7 @@ const authSlice = createSlice({
         return newState
       })
       .addCase(login.fulfilled, (state, action) => {
+        console.log('login fulfilled', action.payload)
         const newState = {
           ...state,
           isAuthenticated: true,
@@ -95,6 +96,7 @@ const authSlice = createSlice({
         state.error = null
       })
       .addCase(guestLogin.fulfilled, (state, action) => {
+        console.log('guest login fulfilled', action.payload)
         const newState = {
           ...state,
           isAuthenticated: true,
@@ -132,20 +134,30 @@ export async function loadAuthState() {
 
   const apiService = new ApiService()
   const baseURL = process.env.EXPO_PUBLIC_API_V2_URL
-  const accessToken = await apiService.getAccessTokenFromStorage()
-  const refreshToken = await apiService.getRefreshTokenFromStorage()
+  let accessToken = await apiService.getAccessTokenFromStorage()
+  let refreshToken = await apiService.getRefreshTokenFromStorage()
 
   if (!accessToken || !refreshToken) {
     return createAuthState(initialAuthState)
   }
 
-  const userRes = await apiService.fetchWithAuthRetry(`${baseURL}/users/me`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'X-Mobile-Ansari': 'ANSARI',
+  const userRes = await apiService.fetchWithAuthRetry(
+    `${baseURL}/users/me`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'X-Mobile-Ansari': 'ANSARI',
+      },
     },
-  })
+    () => {
+      accessToken = refreshToken = null
+    },
+    (tokens: RefreshTokenResponse) => {
+      accessToken = tokens.access_token
+      refreshToken = tokens.refresh_token
+    },
+  )
 
   if (!userRes.ok) {
     return createAuthState(initialAuthState)

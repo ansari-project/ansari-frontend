@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
 import { ThreadsList } from '../threads'
-import { NameContainer } from './'
+import NameContainer from './NameContainer'
 import { Helpers } from '@/utils'
 
 const SideMenuBody: React.FC = () => {

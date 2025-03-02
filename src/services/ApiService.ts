@@ -1,9 +1,6 @@
 import { TokenRefreshError } from '@/errors'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
 import StorageService from './StorageService'
-import { refreshTokens } from '@/store'
-import { resetAuth } from '@/store/slices/authSlice'
-import { Dispatch, UnknownAction } from 'redux'
 
 interface CustomFetchOptions extends RequestInit {
   skipRefresh?: boolean // Custom option to skip refresh logic
@@ -66,7 +63,10 @@ class ApiService {
     return res
   }
 
-  async refreshAccessToken(dispatch?: Dispatch<UnknownAction>): Promise<string> {
+  async refreshAccessToken(
+    resetAuthCallback: () => void,
+    refreshTokensCallback: (tokens: RefreshTokenResponse) => void,
+  ): Promise<string> {
     const refreshToken = await this.storageService.getRefreshToken()
     const response = await fetch(`${this.baseURL}/users/refresh_token`, {
       method: 'POST',
@@ -78,17 +78,15 @@ class ApiService {
 
     if (!response.ok) {
       await this.storageService.removeTokens()
-      if (dispatch) dispatch(resetAuth())
+      resetAuthCallback()
 
       throw new TokenRefreshError()
     }
 
     const data = (await response.json()) as RefreshTokenResponse
-    if (dispatch) {
-      dispatch(refreshTokens(data))
-    }
+    refreshTokensCallback(data)
     if (data.status !== 'success') {
-      if (dispatch) dispatch(resetAuth())
+      resetAuthCallback()
       throw new TokenRefreshError('Token refresh failed: ' + data.status)
     }
 
@@ -98,7 +96,8 @@ class ApiService {
   async fetchWithAuthRetry(
     url: string,
     options: CustomFetchOptions = {},
-    dispatch?: Dispatch<UnknownAction>,
+    resetAuthCallback: () => void,
+    refreshTokensCallback: (tokens: RefreshTokenResponse) => void,
   ): Promise<Response> {
     const response = await fetch(url, options)
 
@@ -109,7 +108,7 @@ class ApiService {
 
     try {
       // Attempt to refresh the token
-      const newAccessToken = await this.refreshAccessToken(dispatch)
+      const newAccessToken = await this.refreshAccessToken(resetAuthCallback, refreshTokensCallback)
       // Store the new token as needed, e.g., in localStorage or state management
 
       // Retry the original request with the new token

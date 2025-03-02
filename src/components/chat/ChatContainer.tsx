@@ -64,7 +64,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
     chatContainer: {
       flex: 1,
       width: '100%',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
     },
     contentWrapper: {
       width: '100%', // Use full width for smaller screens

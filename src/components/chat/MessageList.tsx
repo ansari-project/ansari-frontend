@@ -135,8 +135,8 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
       flatList: {
         width: '100%',
         marginHorizontal: 'auto',
-        height: '50vh',
-        marginBottom: isSmallScreen ? '4px' : '8px',
+        height: '100%',
+        marginBottom: isSmallScreen ? 4 : 8,
       },
     })
 

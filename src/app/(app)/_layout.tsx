@@ -47,7 +47,7 @@ export const AppLayout = () => {
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,
-      minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
+      minHeight: height > 600 ? height : height - 48, // Set minimum height based on screen height
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       overflowY: 'auto',
@@ -65,13 +65,11 @@ export const AppLayout = () => {
       flexDirection: 'row',
       fontFamily: 'Inter',
     },
-    main: { flex: 1, flexGrow: 1 },
     mainBody: { width: '100%', flex: 1 },
     appContent: {
       flexGrow: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%', // Ensure it spans the full width
       alignSelf: 'center', // Center the content area within the parent container
       fontFamily: 'Inter',
       paddingBottom: isSmallScreen ? 4 : null,
@@ -91,30 +89,28 @@ export const AppLayout = () => {
     <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
       <MenuDrawer>
         <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-          <View style={[styles.container]}>
+          <View style={styles.container}>
             <View style={styles.bodyContainer}>
               {/* Side menu */}
-              <View style={styles.main}>
-                <View style={styles.mainBody}>
-                  {/* Header */}
-                  <Header />
-                  <View style={[styles.bodyContainer, styles.bodyInnerContainer]}>
-                    {/* Toggle button for side menu */}
-                    {isAuthenticated && !isGuest && !isMobile && (
-                      <View style={styles.closeButton}>
-                        <Pressable onPress={togglePopup}>
-                          {isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}
-                        </Pressable>
-                      </View>
-                    )}
-                    {/* Main content area */}
-                    <View style={styles.appContent}>
-                      <Slot />
+              <View style={styles.mainBody}>
+                {/* Header */}
+                <Header />
+                <View style={styles.bodyInnerContainer}>
+                  {/* Toggle button for side menu */}
+                  {isAuthenticated && !isGuest && !isMobile && (
+                    <View style={styles.closeButton}>
+                      <Pressable onPress={togglePopup}>
+                        {isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}
+                      </Pressable>
                     </View>
+                  )}
+                  {/* Main content area */}
+                  <View style={styles.appContent}>
+                    <Slot />
                   </View>
-                  {/* Footer */}
-                  {showFooter && <Footer />}
                 </View>
+                {/* Footer */}
+                {showFooter && <Footer />}
               </View>
             </View>
           </View>

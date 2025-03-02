@@ -5,9 +5,7 @@ import ReactNativeSvg, { Props } from './ReactNativeSvg'
 
 const LikeIcon: React.FC<Props> = (props: Props) => {
   const { isRTL } = useDirection()
-  const transform = isRTL
-    ? [{ rotate: '0' }, { matrix: [-1, 0, 0, 1, 0, 0] }]
-    : [{ rotate: '0' }, { matrix: [1, 0, 0, 1, 0, 0] }]
+  const transform = isRTL ? [{ scale: -1 }] : [{ scale: 1 }]
 
   return (
     <ReactNativeSvg

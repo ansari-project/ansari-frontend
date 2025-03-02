@@ -1,9 +1,10 @@
 import { ApplicationError, NotFoundError } from '@/errors'
 import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@/store'
-import { ShareThreadResponse } from '@/types'
+import { RefreshTokenResponse, ShareThreadResponse } from '@/types'
 import { Helpers } from '@/utils'
 import { Dispatch, UnknownAction } from 'redux'
 import ApiService from './ApiService'
+import { resetAuth, refreshTokens } from '@/store/slices/authSlice'
 
 class ChatService {
   accessToken: string | null
@@ -27,8 +28,23 @@ class ChatService {
     }
   }
 
-  async createThread(dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+  async fetchWithAuthRetry(url: string, options: RequestInit, dispatch: Dispatch<UnknownAction>) {
     const response = await this.apiService.fetchWithAuthRetry(
+      url,
+      options,
+      () => {
+        dispatch(resetAuth())
+      },
+      (tokens: RefreshTokenResponse) => {
+        dispatch(refreshTokens(tokens))
+      },
+    )
+
+    return response
+  }
+
+  async createThread(dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads`,
       {
         method: 'POST',
@@ -60,7 +76,7 @@ class ChatService {
     signal: AbortSignal,
     dispatch: Dispatch<UnknownAction>,
   ) {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads/${threadId}`,
       {
         method: 'POST',
@@ -78,7 +94,7 @@ class ChatService {
   }
 
   async getThread(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads/${threadId}`,
       {
         headers: this.createHeaders(),
@@ -105,7 +121,7 @@ class ChatService {
   }
 
   async getAllThreads(dispatch: Dispatch<UnknownAction>): Promise<Thread[]> {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads`,
       {
         headers: this.createHeaders(),
@@ -136,7 +152,7 @@ class ChatService {
   }
 
   async deleteThread(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<void> {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads/${threadId}`,
       {
         method: 'DELETE',
@@ -150,7 +166,7 @@ class ChatService {
   }
 
   async setThreadName(threadId: string, name: ThreadNameRequest, dispatch: Dispatch<UnknownAction>): Promise<void> {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads/${threadId}/name`,
       {
         method: 'POST',
@@ -165,7 +181,7 @@ class ChatService {
   }
 
   async getShareThreadUUID(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/share/${threadId}`,
       {
         method: 'POST',
@@ -183,7 +199,7 @@ class ChatService {
 
   async getSharedThread(sharedThreadUUID: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
     // This is a public sharing endpoint which doesn't require an access token
-    const response = await this.apiService.fetchWithAuthRetry(
+    const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/share/${sharedThreadUUID}`,
       {
         headers: {
@@ -232,7 +248,7 @@ class ChatService {
     }
 
     try {
-      const response = await this.apiService.fetchWithAuthRetry(
+      const response = await this.fetchWithAuthRetry(
         `${this.baseURL}/feedback`,
         {
           method: 'POST',

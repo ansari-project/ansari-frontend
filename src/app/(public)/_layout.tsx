@@ -28,7 +28,7 @@ export const PublicLayout = () => {
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,
-      minHeight: height > 600 ? height : 'calc(100vh - 48px)', // Set minimum height based on screen height
+      minHeight: height > 600 ? height : height - 48, // Set minimum height based on screen height
       backgroundRepeat: 'repeat',
       backgroundSize: 'contain',
       width: '100%',
@@ -60,7 +60,7 @@ export const PublicLayout = () => {
     },
     header: {
       flexDirection: 'row',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
       width: '100%',
       alignItems: 'center',
       padding: isSmallScreen ? 8 : 16,

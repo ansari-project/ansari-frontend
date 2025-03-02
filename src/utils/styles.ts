@@ -23,6 +23,7 @@ type ThemedStyles = {
   eyeIcon: ViewStyle
   formContainer: ViewStyle
   form: ViewStyle
+  primaryColorText: TextStyle
   fullWidth: ViewStyle
 }
 
@@ -66,8 +67,7 @@ const createThemedStyles = (
     },
     form: {
       width: 380,
-      marginVertical: 'auto',
-      paddingHorizontal: isSmallScreen ? 24 : 'initial',
+      paddingHorizontal: isSmallScreen ? 24 : 0,
     },
     input: {
       paddingVertical: 18,
@@ -167,6 +167,9 @@ const createThemedStyles = (
       position: 'absolute',
       right: isRTL ? 'auto' : 10,
       left: isRTL ? 10 : 'auto',
+    },
+    primaryColorText: {
+      color: theme.primaryColor,
     },
     fullWidth: {
       width: '100%',

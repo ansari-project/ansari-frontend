@@ -24,7 +24,7 @@ const Welcome: React.FC = () => {
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
   const styles = StyleSheet.create({
     container: {
-      flex: isSmallScreen ? null : 1,
+      flex: 1,
       color: theme.primaryColor,
       width: '100%',
       display: 'flex',
@@ -45,8 +45,8 @@ const Welcome: React.FC = () => {
       marginBottom: isSmallScreen ? 24 : null,
     },
     logoText: {
-      marginLeft: isRTL || isSmallScreen ? 'initial' : 8,
-      marginRight: isRTL && !isSmallScreen ? 8 : 'initial',
+      marginLeft: isRTL || isSmallScreen ? 0 : 8,
+      marginRight: isRTL && !isSmallScreen ? 8 : 0,
     },
     right: {
       width: isSmallScreen ? '100%' : '30%',
@@ -58,7 +58,7 @@ const Welcome: React.FC = () => {
       padding: 24,
     },
     rightBody: { width: '100%', alignItems: 'center', paddingHorizontal: '10%' },
-    rightFooter: { position: isSmallScreen ? 'fixed' : 'absolute', bottom: 24 },
+    rightFooter: { position: 'absolute', bottom: 24 },
     rightTitle: {
       fontSize: 24,
       lineHeight: 29,
@@ -101,7 +101,7 @@ const Welcome: React.FC = () => {
 
             <LogoTextIcon fill={theme.logoColor} width={81} style={styles.logoText} />
           </View>
-          <View style={styles.content}>
+          <View>
             <Text style={styles.leftGreeting}>{t('greeting')}</Text>
             <Text style={styles.leftTitle}>{t('ansariChat')}</Text>
           </View>
@@ -136,9 +136,9 @@ const Welcome: React.FC = () => {
               </Text>
             </Pressable>
           </View>
-          <View style={styles.rightFooter}>
-            <TermsAndPrivacy marginLeft={0} />
-          </View>
+        </View>
+        <View style={styles.rightFooter}>
+          <TermsAndPrivacy marginLeft={0} />
         </View>
       </KeyboardAvoidingView>
     </>

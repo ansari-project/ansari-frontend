@@ -252,6 +252,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
               onChangeText={setAdditionalFeedback}
               value={additionalFeedback}
               placeholder={t('additionalFeedbackPlaceholder')}
+              placeholderTextColor={theme.inputColor}
               multiline
               ref={inputRef}
             />

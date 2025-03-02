@@ -4,7 +4,7 @@ import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFe
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
@@ -65,7 +65,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       fontWeight: 600,
       fontSize: 16,
       lineHeight: 20,
-      marginBottom: 16,
+      marginBottom: 12,
       marginTop: 6,
       color: theme.primaryColor,
     },
@@ -87,7 +87,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
     },
     messageText: {
       fontFamily: 'Inter',
-      lineHeight: 21,
       textAlign: isRTL ? 'right' : 'left',
     },
     outgoingText: {
@@ -136,6 +135,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <Markdown
             style={{
               body: [styles.messageText, textStyle],
+              ...markdownStyles,
             }}
           >
             {message.content}
@@ -154,6 +154,203 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       </View>
     </View>
   )
+}
+
+// Source: https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/styles.js
+const markdownStyles = {
+  // Headings
+  heading1: {
+    flexDirection: 'row',
+    fontSize: 28,
+  },
+  heading2: {
+    flexDirection: 'row',
+    fontSize: 24,
+  },
+  heading3: {
+    flexDirection: 'row',
+    fontSize: 18,
+  },
+  heading4: {
+    flexDirection: 'row',
+    fontSize: 16,
+  },
+  heading5: {
+    flexDirection: 'row',
+    fontSize: 13,
+  },
+  heading6: {
+    flexDirection: 'row',
+    fontSize: 11,
+  },
+
+  // Horizontal Rule
+  hr: {
+    backgroundColor: '#000000',
+    height: 1,
+  },
+
+  // Emphasis
+  strong: {
+    fontWeight: 'bold',
+  },
+  em: {
+    fontStyle: 'italic',
+  },
+  s: {
+    textDecorationLine: 'line-through',
+  },
+
+  // Blockquotes
+  blockquote: {
+    backgroundColor: '#F5F5F5',
+    borderColor: '#CCC',
+    borderLeftWidth: 4,
+    marginLeft: 5,
+    paddingHorizontal: 5,
+  },
+
+  // Lists
+  // eslint-disable-next-line camelcase
+  bullet_list: {},
+  // eslint-disable-next-line camelcase
+  ordered_list: {},
+  // eslint-disable-next-line camelcase
+  list_item: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  // @pseudo class, does not have a unique render rule
+  // eslint-disable-next-line camelcase
+  bullet_list_icon: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  // @pseudo class, does not have a unique render rule
+  // eslint-disable-next-line camelcase
+  bullet_list_content: {
+    flex: 1,
+  },
+  // @pseudo class, does not have a unique render rule
+  // eslint-disable-next-line camelcase
+  ordered_list_icon: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  // @pseudo class, does not have a unique render rule
+  // eslint-disable-next-line camelcase
+  ordered_list_content: {
+    flex: 1,
+  },
+
+  // Code
+  // eslint-disable-next-line camelcase
+  code_inline: {
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    backgroundColor: '#f5f5f5',
+    padding: 10,
+    borderRadius: 4,
+    ...Platform.select({
+      ['ios']: {
+        fontFamily: 'Inter',
+      },
+      ['android']: {
+        fontFamily: 'Inter',
+      },
+    }),
+  },
+  // eslint-disable-next-line camelcase
+  code_block: {
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    backgroundColor: '#f5f5f5',
+    padding: 10,
+    borderRadius: 4,
+    ...Platform.select({
+      ['ios']: {
+        fontFamily: 'Inter',
+      },
+      ['android']: {
+        fontFamily: 'Inter',
+      },
+    }),
+  },
+  fence: {
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    backgroundColor: '#f5f5f5',
+    padding: 10,
+    borderRadius: 4,
+    ...Platform.select({
+      ['ios']: {
+        fontFamily: 'Inter',
+      },
+      ['android']: {
+        fontFamily: 'Inter',
+      },
+    }),
+  },
+
+  // Tables
+  table: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 3,
+  },
+  thead: {},
+  tbody: {},
+  th: {
+    flex: 1,
+    padding: 5,
+  },
+  tr: {
+    borderBottomWidth: 1,
+    borderColor: '#000000',
+    flexDirection: 'row',
+  },
+  td: {
+    flex: 1,
+    padding: 5,
+  },
+
+  // Links
+  link: {
+    textDecorationLine: 'underline',
+  },
+  blocklink: {
+    flex: 1,
+    borderColor: '#000000',
+    borderBottomWidth: 1,
+  },
+
+  // Images
+  image: {
+    flex: 1,
+  },
+
+  // Text Output
+  text: {},
+  textgroup: {},
+  paragraph: {
+    marginTop: 10,
+    marginBottom: 10,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
+  hardbreak: {
+    width: '100%',
+    height: 1,
+  },
+  softbreak: {},
+
+  // Believe these are never used but retained for completeness
+  pre: {},
+  inline: {},
+  span: {},
 }
 
 export default MessageBubble

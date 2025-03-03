@@ -3,13 +3,14 @@ import { CheckIcon, CloseIcon } from '@/components/svg'
 import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState } from '@/store'
 import { getShareThreadUUID } from '@/store/actions/chatActions'
-import { GetEnv, createGeneralThemedStyles } from '@/utils'
+import { GetEnv } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Clipboard, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Clipboard, Modal, Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Toast from '../Toast'
 import MessageList from '../chat/MessageList'
+import StyledText from '../StyledText'
 
 // Define Props interface for SharePopup component
 interface Props {
@@ -54,104 +55,40 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
     }, 1000) // 1000 milliseconds = 1 second
   }
 
-  // Create general styles
-  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen)
-  // Create component styles
-  const styles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: 24,
-      backgroundColor: theme.splashBackgroundColor,
-      fontFamily: 'Inter',
-    },
-    modalView: {
-      width: isSmallScreen ? '100%' : 600,
-      minHeight: 400,
-      backgroundColor: theme.popupBackgroundColor,
-      borderRadius: 4,
-      overflowY: isSmallScreen ? 'scroll' : null,
-    },
-    modalHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      borderBottomWidth: 1,
-      borderColor: theme.primaryColor,
-      width: '100%',
-      padding: isSmallScreen ? 8 : 16,
-    },
-    modalBody: {
-      alignContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      padding: isSmallScreen ? 8 : 16,
-    },
-    modelFooter: {
-      alignItems: isSmallScreen ? 'center' : 'flex-end',
-      padding: isSmallScreen ? 8 : 16,
-      paddingTop: 0,
-    },
-    title: {
-      color: theme.textColor,
-      fontSize: 20,
-      fontWeight: 'bold',
-      alignItems: 'center',
-      fontFamily: 'Inter',
-    },
-    textStyle: {
-      color: theme.textColor,
-      fontWeight: 'bold',
-      fontSize: 14,
-      lineHeight: 21,
-      marginBottom: 16,
-      fontFamily: 'Inter',
-    },
-    successMessage: {
-      color: theme.textColor,
-      fontFamily: 'Inter',
-      fontWeight: 'bold',
-      fontSize: 14,
-      lineHeight: 21,
-      marginLeft: isRTL ? null : 8,
-      marginRight: isRTL ? 8 : null,
-    },
-    chatBox: {
-      width: '100%',
-      borderWist: 1,
-      boarderColor: theme.primaryColor,
-      backgroundColor: theme.backgroundColorSecondary,
-      overflow: 'visible',
-    },
-    toastContainer: {
-      flexDirection: 'row',
-    },
-  })
-
-  // Render the component
   return (
     <>
-      <Modal
-        animationType='fade' // Animates the modal appearance
-        transparent={true} // Makes the modal appear over the background
-        onRequestClose={() => onClose()} // Handles the hardware back button on Android
-        visible={visible}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+      <Modal animationType='fade' transparent={true} onRequestClose={() => onClose()} visible={visible}>
+        <View
+          className='flex-1 justify-center items-center px-6'
+          style={{ backgroundColor: theme.splashBackgroundColor }}
+        >
+          <View
+            className={`${isSmallScreen ? 'w-full' : 'w-[600px]'} min-h-[400px] rounded`}
+            style={{
+              backgroundColor: theme.popupBackgroundColor,
+              overflowY: isSmallScreen ? 'scroll' : undefined,
+            }}
+          >
             {/* Modal header */}
-            <View style={styles.modalHeader}>
-              <Text style={styles.title}>{t('share.title')}</Text>
+            <View
+              className={`flex-row justify-between items-center w-full border-b ${isSmallScreen ? 'p-2' : 'p-4'}`}
+              style={{ borderColor: theme.primaryColor }}
+            >
+              <StyledText className='text-xl font-bold'>{t('share.title')}</StyledText>
               <Pressable onPress={() => onClose()}>
                 <CloseIcon hoverFill={theme.hoverColor} />
               </Pressable>
             </View>
             {/* Modal body */}
-            <View style={styles.modalBody}>
-              <Text style={styles.textStyle}>{t('share.message')}</Text>
-              <View style={styles.chatBox}>
-                {/* Message list component */}
+            <View className={`items-center w-full ${isSmallScreen ? 'p-2' : 'p-4'}`}>
+              <StyledText className='font-bold text-sm leading-[21px] mb-4'>{t('share.message')}</StyledText>
+              <View
+                className='w-full border'
+                style={{
+                  borderColor: theme.primaryColor,
+                  backgroundColor: theme.backgroundColorSecondary,
+                }}
+              >
                 <MessageList
                   activeThread={activeThread}
                   isLoading={false}
@@ -163,21 +100,22 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
               </View>
             </View>
             {/* Modal footer */}
-            <View style={styles.modelFooter}>
+            <View className={`${isSmallScreen ? 'items-center' : 'items-end'} ${isSmallScreen ? 'p-2' : 'p-4'} pt-0`}>
               <Pressable
-                style={[
-                  generalStyle.buttonPrimary,
-                  isHover === 1 && generalStyle.buttonPrimaryHover,
-                  generalStyle.smallButton,
-                  isSmallScreen ? generalStyle.fullWidth : null,
-                ]}
+                className={`py-2 px-4 rounded ${isSmallScreen ? 'w-full' : ''}`}
+                style={{
+                  backgroundColor: isHover === 1 ? theme.hoverColor : theme.primaryColor,
+                }}
                 onPress={() => copyShareURL()}
                 onMouseEnter={() => setIsHover(1)}
                 onMouseLeave={() => setIsHover(-1)}
               >
-                <Text style={[generalStyle.buttonPrimaryText, isHover === 1 && generalStyle.buttonPrimaryTextHover]}>
+                <StyledText
+                  className='text-center font-bold'
+                  style={{ color: isHover === 1 ? theme.buttonTextHoverColor : theme.buttonTextColor }}
+                >
                   {isCopying === 1 ? t('share.copyingLink') : isCopying === 2 ? t('share.copied') : t('share.copyLink')}
-                </Text>
+                </StyledText>
               </Pressable>
             </View>
           </View>
@@ -187,9 +125,11 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
       {toastVisible && (
         <Toast
           message={
-            <View style={styles.toastContainer}>
+            <View className='flex-row'>
               <CheckIcon fill={theme.iconFill} />
-              <Text style={styles.successMessage}>{t('share.successCopy')}</Text>
+              <StyledText className={`font-bold text-sm leading-[21px] ${isRTL ? 'mr-2' : 'ml-2'}`}>
+                {t('share.successCopy')}
+              </StyledText>
             </View>
           }
           duration={3000}

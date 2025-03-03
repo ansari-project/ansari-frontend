@@ -4,7 +4,7 @@ import { FeedbackClass, Message, ReactionButtonsState, RootState } from '@/store
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Clipboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Clipboard, Pressable, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 export type FeedbackOption = {
@@ -74,86 +74,6 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
   // Add your styles here
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 
-  const styles = StyleSheet.create({
-    mainContainer: {
-      width: '100%',
-    },
-    container: {
-      display: 'flex',
-      flexDirection: 'row',
-      width: '100%',
-    },
-    reactionForm: {
-      width: '100%',
-      height: 0,
-      marginTop: 24,
-      visibility: 'hidden',
-      transition: 'height 0.1s ease, visibility 0.1s ease',
-    },
-    input: {
-      backgroundColor: theme.backgroundColorSecondary,
-      width: '100%',
-      outlineWidth: 0,
-    },
-    icon: {
-      width: 20,
-      height: 20,
-      marginRight: isRTL ? 8 : 0,
-      marginLeft: isRTL ? 0 : 8,
-    },
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    modalView: {
-      width: '100%',
-      paddingHorizontal: isSmallScreen ? 8 : 20,
-      paddingVertical: 16,
-      alignItems: 'flex-start',
-      backgroundColor: theme.inputBackgroundColor,
-      borderRadius: 4,
-      color: theme.textColor,
-    },
-    modalTitle: {
-      flexDirection: 'row',
-      width: '100%',
-      alignItems: 'center',
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      width: '100%',
-    },
-    titleText: {
-      fontWeight: '500',
-      color: theme.primaryColor,
-      fontFamily: 'Inter',
-    },
-    closeButton: {
-      borderWidth: 0,
-      alignSelf: 'flex-start',
-      marginLeft: isRTL ? null : 6,
-      marginRight: isRTL ? 6 : null,
-    },
-    feedbackOptionsContainer: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-    },
-    titleContainer: {
-      flex: 2,
-      flexDirection: 'row',
-      gap: 10,
-    },
-    optionalText: {
-      color: theme.inputColor,
-    },
-    reactionFormVisible: {
-      height: 'auto',
-      visibility: 'visible',
-    },
-  })
-
   // Render a button for each feedback option
   const renderFeedbackOptions = () => {
     let feedbackOptions: FeedbackOption[] = []
@@ -166,7 +86,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     }
 
     return (
-      <View style={styles.feedbackOptionsContainer}>
+      <View className='flex-row flex-wrap'>
         {feedbackOptions.map((option) => (
           <Pressable
             key={option.value}
@@ -194,9 +114,9 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
   const feedbackSubmitDisabled = !additionalFeedback.length && !selectedFeedbackOptions.length
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.container}>
-        <Pressable onPress={copyMessage} style={styles.icon}>
+    <View className='w-full'>
+      <View className='flex flex-row w-full'>
+        <Pressable onPress={copyMessage} className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}>
           {copySuccess ? (
             <CheckIcon fill={theme.hoverColor} />
           ) : (
@@ -208,7 +128,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             handleFeedbackAction(FeedbackClass.ThumbsUp)
             setEditing(true)
           }}
-          style={styles.icon}
+          className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}
         >
           <LikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsUp ? theme.hoverColor : theme.iconFill}
@@ -220,7 +140,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             handleFeedbackAction(FeedbackClass.ThumbsDown)
             setEditing(true)
           }}
-          style={styles.icon}
+          className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}
         >
           <DislikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsDown ? theme.hoverColor : theme.iconFill}
@@ -229,15 +149,20 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
         </Pressable>
       </View>
       {modalVisible && (
-        <View style={[styles.reactionForm, modalVisible && styles.reactionFormVisible]}>
-          <View style={styles.modalView}>
-            <View style={styles.modalTitle}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>{t('whyDidYouChooseThisRating')}</Text>
-                <Text style={styles.optionalText}>{t('optional')}</Text>
+        <View className={`w-full h-0 mt-6 ${modalVisible ? 'h-auto' : ''}`}>
+          <View
+            className='w-full px-2 sm:px-5 py-4 items-start rounded'
+            style={{ backgroundColor: theme.inputBackgroundColor }}
+          >
+            <View className='flex-row w-full items-center'>
+              <View className='flex-2 flex-row gap-2.5'>
+                <Text style={[{ color: theme.primaryColor, fontFamily: 'Inter', fontWeight: '500' }]}>
+                  {t('whyDidYouChooseThisRating')}
+                </Text>
+                <Text style={{ color: theme.inputColor }}>{t('optional')}</Text>
               </View>
               <Pressable
-                style={styles.closeButton}
+                className={`border-0 self-start ${isRTL ? 'mr-1.5' : 'ml-1.5'}`}
                 onPress={() => {
                   handleFeedbackCancel()
                   setEditing(false)
@@ -248,15 +173,16 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             </View>
             {renderFeedbackOptions()}
             <TextInput
-              style={[generalStyle.input, styles.input]}
-              onChangeText={setAdditionalFeedback}
+              ref={inputRef}
+              className='w-full outline-0'
+              style={[generalStyle.input, { backgroundColor: theme.backgroundColorSecondary }]}
               value={additionalFeedback}
+              onChangeText={setAdditionalFeedback}
               placeholder={t('additionalFeedbackPlaceholder')}
               placeholderTextColor={theme.inputColor}
               multiline
-              ref={inputRef}
             />
-            <View style={styles.buttonContainer}>
+            <View className='flex-row justify-end w-full'>
               <Pressable
                 style={[
                   generalStyle.buttonSecondary,

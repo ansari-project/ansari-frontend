@@ -5,7 +5,7 @@ import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThread, toggleSharePopup } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -44,33 +44,18 @@ const ChatScreen: React.FC = () => {
     }
   }, [])
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center', // Ensure content is centered
-      justifyContent: 'space-between', // Distributes children evenly
-      width: '100%',
-    },
-    shareIcon: {
-      position: 'absolute',
-      left: isRTL ? 24 : 'auto',
-      right: isRTL ? 'auto' : 24,
-      padding: 8,
-      borderRadius: 4,
-      backgroundColor: theme.popupBackgroundColor,
-    },
-  })
-
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      className='flex-1 items-center justify-between w-full'
+    >
       <ChatContainer isHome={false} />
       {getEnv('ENABLE_SHARE') && !isSmallScreen && (
-        <View style={styles.shareIcon}>
-          <Pressable
-            onPress={() => {
-              dispatch(toggleSharePopup(!isSharePopupVisible))
-            }}
-          >
+        <View
+          className={`absolute p-2 rounded ${isRTL ? 'left-6' : 'right-6'}`}
+          style={{ backgroundColor: theme.popupBackgroundColor }}
+        >
+          <Pressable onPress={() => dispatch(toggleSharePopup(!isSharePopupVisible))}>
             <ShareIcon />
           </Pressable>
         </View>

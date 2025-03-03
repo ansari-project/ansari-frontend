@@ -1,7 +1,7 @@
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import ActionButtons from './ActionButtons'
 import { MenuIcon } from './svg'
@@ -24,46 +24,22 @@ const Header: React.FC = () => {
     dispatch(toggleSideMenu(!isSideMenuOpened))
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      zIndex: 10,
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: displayMenuDrawer ? 'space-between' : 'flex-end',
-      alignItems: 'center',
-    },
-    contentWarper: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '100%',
-      alignItems: 'center',
-      padding: isSmallScreen ? 8 : 16,
-    },
-    leftContent: {
-      flexDirection: isRTL ? 'row-reverse' : 'row',
-      alignItems: 'center',
-      marginRight: 10,
-    },
-    rightContent: {
-      flexDirection: isRTL ? 'row-reverse' : 'row',
-    },
-    button: {
-      padding: 8,
-      borderRadius: 4,
-    },
-  })
-
   return (
-    <View style={styles.container}>
-      <View style={styles.contentWarper}>
-        <View style={styles.leftContent}>
+    <View
+      className='z-10 w-full flex-row items-center'
+      style={{ justifyContent: displayMenuDrawer ? 'space-between' : 'flex-end' }}
+    >
+      <View className={`flex-row w-full items-center justify-between ${isSmallScreen ? 'p-2' : 'p-4'}`}>
+        <View className={`items-center ${isRTL ? 'flex-row-reverse' : 'flex-row'} mr-2.5`}>
           {displayMenuDrawer && (
-            <Pressable onPress={() => togglePopup()} style={styles.button}>
+            <Pressable onPress={() => togglePopup()} className='p-2 rounded'>
               <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={28} height={28} />
             </Pressable>
           )}
         </View>
-        <View style={styles.rightContent}>{isMobile && <ActionButtons isTop={true} />}</View>
+        <View className={`${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
+          {isMobile && <ActionButtons isTop={true} />}
+        </View>
       </View>
     </View>
   )

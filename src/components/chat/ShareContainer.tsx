@@ -2,11 +2,12 @@ import { useChat, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ENButton from '../buttons/ENButton'
 import MessageList, { MessageListRef } from './MessageList'
+import StyledText from '../StyledText'
 
 const ShareContainer: React.FC = () => {
   const { activeThread } = useChat()
@@ -18,6 +19,7 @@ const ShareContainer: React.FC = () => {
   // State to track the last known content height
   const messageListRef = React.useRef<MessageListRef>(null)
   const { contentWidth } = useScreenInfo(sideMenuWidth)
+
   const startChat = () => {
     router.push('/')
   }
@@ -29,61 +31,29 @@ const ShareContainer: React.FC = () => {
     }
   }, [])
 
-  const styles = StyleSheet.create({
-    shareContainer: {
-      flex: 1,
-      width: '100%',
-      justifyContent: 'end',
-    },
-    contentWrapper: {
-      width: '100%', // Use full width for smaller screens
-      alignItems: 'center', // Center content horizontally
-      justifyContent: 'center', // Center content vertically
-      flex: 1,
-    },
-    promptContent: {
-      width: '100%', // Ensure it uses the full width of its container
-      alignItems: 'flex-start', // Center items for consistency
-    },
-    promptSmallScreen: {
-      alignItems: 'stretch',
-    },
-    logoContainer: {
-      alignItems: 'center', // Center content horizontally
-      paddingTop: '5vh',
-      paddingBottom: '20vh',
-    },
-    threadTitle: {
-      fontSize: 24,
-      lineHeight: 48,
-      color: theme.textColor,
-    },
-    header: {
-      width: contentWidth,
-      marginHorizontal: 'auto',
-      borderBottomWidth: 1,
-      borderColor: theme.primaryColor,
-      marginBottom: 16,
-    },
-    button: {
-      maxWidth: 320,
-      marginHorizontal: 'auto',
-    },
-  })
-
   return (
-    <View style={[styles.shareContainer, { maxWidth: contentWidth }]}>
-      <View style={styles.header}>
-        <Text style={styles.threadTitle}>{activeThread?.name || t('newChat')}</Text>
+    <View className='flex flex-1 w-full justify-end' style={{ maxWidth: contentWidth }}>
+      <View
+        className='w-full mx-auto mb-4 border-b'
+        style={{
+          width: contentWidth,
+          borderColor: theme.primaryColor,
+        }}
+      >
+        <StyledText className='text-2xl leading-12' color='text'>
+          {activeThread?.name || t('newChat')}
+        </StyledText>
       </View>
-      <MessageList
-        activeThread={activeThread}
-        isLoading={false}
-        isSending={false}
-        reactionsEnabled={false}
-        isShare={true}
-      />
-      <View style={styles.button}>
+      <View className='flex-1 w-full items-center justify-center'>
+        <MessageList
+          activeThread={activeThread}
+          isLoading={false}
+          isSending={false}
+          reactionsEnabled={false}
+          isShare={true}
+        />
+      </View>
+      <View className='max-w-[320px] mx-auto'>
         <ENButton text={t('share.getStart')} onClick={startChat} />
       </View>
     </View>

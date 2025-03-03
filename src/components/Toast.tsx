@@ -1,8 +1,9 @@
 import { useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { Animated, Platform, StyleSheet, Text } from 'react-native'
+import { Animated, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
+import StyledText from './StyledText'
 
 interface ToastProps {
   message: string | React.ReactNode
@@ -38,28 +39,12 @@ const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss, backgroundC
     return () => clearTimeout(timer)
   }, [fadeAnim, duration, onDismiss])
 
-  const styles = StyleSheet.create({
-    toast: {
-      position: 'fixed',
-      top: 8,
-      left: isSmallScreen ? '5%' : '20%',
-      right: isSmallScreen ? '5%' : '20%',
-      backgroundColor: color,
-      padding: 10,
-      borderRadius: 5,
-      alignItems: 'center',
-      zIndex: 1000,
-    },
-    text: {
-      color: theme.textColor,
-      fontSize: 20,
-      fontWeight: 500,
-    },
-  })
-
   return (
-    <Animated.View style={[styles.toast, { opacity: fadeAnim }]}>
-      {typeof message === 'string' ? <Text style={styles.text}>{message}</Text> : message}
+    <Animated.View
+      className={`fixed top-2 ${isSmallScreen ? 'left-[5%] right-[5%]' : 'left-[20%] right-[20%]'} p-2.5 rounded items-center z-[1000]`}
+      style={[{ backgroundColor: color, opacity: fadeAnim }]}
+    >
+      {typeof message === 'string' ? <StyledText className='text-xl font-medium'>{message}</StyledText> : message}
     </Animated.View>
   )
 }

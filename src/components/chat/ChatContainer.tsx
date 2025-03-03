@@ -2,7 +2,7 @@ import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import { useChat, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useCallback, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import PromptList from '../prompts/PromptList'
@@ -60,56 +60,29 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
     // handleSendPress(description)
   }
 
-  const styles = StyleSheet.create({
-    chatContainer: {
-      flex: 1,
-      width: '100%',
-      justifyContent: 'flex-end',
-    },
-    contentWrapper: {
-      width: '100%', // Use full width for smaller screens
-      alignItems: 'center', // Center content horizontally
-      justifyContent: 'center', // Center content vertically
-      flex: 1,
-    },
-    innerContainer: {
-      width: isInputFullMode ? width : contentWidth,
-      marginHorizontal: isInputFullMode ? null : 'auto',
-    },
-    promptContent: {
-      width: '100%', // Ensure it uses the full width of its container
-      alignItems: 'flex-start', // Center items for consistency
-    },
-    promptSmallScreen: {
-      alignItems: 'stretch',
-    },
-    logoContainer: {
-      alignItems: 'center', // Center content horizontally
-      paddingTop: '5vh',
-      paddingBottom: '20vh',
-    },
-    logoIconContainer: {
-      margin: 25,
-    },
-  })
-
   return (
-    <View style={styles.chatContainer}>
+    <View className='flex-1 justify-end'>
       {isHome ? (
         isLoading || activeThread?.messages ? (
           <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} />
         ) : (
-          <View style={styles.innerContainer}>
-            <View style={styles.contentWrapper}>
-              <View style={styles.logoContainer}>
+          <View
+            className='flex-grow'
+            style={{
+              width: isInputFullMode ? width : contentWidth,
+              marginHorizontal: isInputFullMode ? undefined : 'auto',
+            }}
+          >
+            <View className='items-center justify-end flex-1'>
+              <View className='items-center pt-[40px] pb-[150px]'>
                 {!isSmallScreen && (
-                  <View style={styles.logoIconContainer}>
+                  <View className='m-6'>
                     <LogoIcon fill={theme.iconFill} width={122} height={122} />
                   </View>
                 )}
                 <LogoTextIcon fill={theme.logoColor} />
               </View>
-              <View style={[styles.promptContent, isSmallScreen && styles.promptSmallScreen]}>
+              <View className={`w-full ${isSmallScreen ? 'items-stretch' : 'items-start'}`}>
                 <PromptList onPromptSelect={handlePromptSelect} />
               </View>
             </View>
@@ -118,7 +91,12 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
       ) : (
         <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} />
       )}
-      <View style={styles.innerContainer}>
+      <View
+        style={{
+          width: isInputFullMode ? width : contentWidth,
+          marginHorizontal: isInputFullMode ? undefined : 'auto',
+        }}
+      >
         <ChatInput
           value={inputText}
           onInputChange={setInputText}

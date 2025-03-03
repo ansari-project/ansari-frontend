@@ -142,6 +142,7 @@ const RegisterScreen: React.FC = () => {
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
           initialValues={initialValues}
+          validateOnChange={false}
           validationSchema={Yup.object(registerSchema)}
           onSubmit={(values, formikHelpers) => handleSubmit(values, formikHelpers)}
         >

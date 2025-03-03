@@ -98,7 +98,7 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={generalStyle.form}>
         <View className='items-center'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />

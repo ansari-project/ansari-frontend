@@ -62,7 +62,7 @@ const ChatScreen: React.FC = () => {
   })
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
       <ChatContainer isHome={false} />
       {getEnv('ENABLE_SHARE') && !isSmallScreen && (
         <View style={styles.shareIcon}>

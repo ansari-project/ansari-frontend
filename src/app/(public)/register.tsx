@@ -136,7 +136,7 @@ const RegisterScreen: React.FC = () => {
   })
 
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <LogoIcon fill={theme.iconFill} width={52} height={52} />
       <View style={generalStyle.form}>
         <Text style={styles.title}>{t('title')}</Text>

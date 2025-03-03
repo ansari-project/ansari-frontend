@@ -58,7 +58,7 @@ const ShareScreen: React.FC = () => {
   })
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
       <ShareContainer />
     </KeyboardAvoidingView>
   )

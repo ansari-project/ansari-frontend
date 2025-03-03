@@ -1,7 +1,7 @@
 import { useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
@@ -65,7 +65,11 @@ export const ShareLayout = () => {
   // Render the component
   return (
     <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
-      <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
+      <KeyboardAvoidingView
+        style={[styles.mainContainer]}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled
+      >
         <View style={[styles.container]}>
           <View style={styles.pageContainer}>
             {isMobile && (

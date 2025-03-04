@@ -168,11 +168,13 @@ const markdownStyles = {
 
   // Blockquotes
   blockquote: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F5F533',
     borderColor: '#CCC',
     borderLeftWidth: 4,
     marginLeft: 5,
     paddingHorizontal: 5,
+    marginVertical: 5,
+    borderRadius: 10,
   },
 
   // Lists
@@ -213,7 +215,7 @@ const markdownStyles = {
   code_inline: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({
@@ -229,7 +231,7 @@ const markdownStyles = {
   code_block: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({
@@ -244,7 +246,7 @@ const markdownStyles = {
   fence: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({

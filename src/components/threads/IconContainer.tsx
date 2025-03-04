@@ -1,7 +1,7 @@
 import { DeleteIcon, RenameIcon, ShareIcon } from '@/components/svg'
 import { RootState, Thread } from '@/store'
 import React from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 type IconContainerProps = {
@@ -24,21 +24,21 @@ const IconContainer: React.FC<IconContainerProps> = ({
   const theme = useSelector((state: RootState) => state.theme.theme)
 
   return (
-    <View style={[styles.iconContainer, isRTL ? styles.iconContainerLeft : styles.iconContainerRight]}>
+    <View className={`flex-row items-center ${isRTL ? 'left-0' : 'right-0'}`}>
       {onThreadRename && (
-        <Pressable onPress={() => onThreadRename(thread)} style={styles.icon}>
+        <Pressable onPress={() => onThreadRename(thread)} className='p-1'>
           <RenameIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
       )}
       {onThreadShare && (
-        <Pressable onPress={() => onThreadShare(thread)} style={styles.icon}>
+        <Pressable onPress={() => onThreadShare(thread)} className='p-1'>
           <ShareIcon width='16' height='16' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
       )}
       {onThreadDelete && (
         <Pressable
           onPress={() => onThreadDelete(thread)}
-          style={[styles.icon, isRTL && onThreadRename ? styles.iconMarginLeft : styles.iconMarginRight]}
+          className={`p-1 ${isRTL && onThreadRename ? 'ml-2' : 'mr-2'}`}
         >
           <DeleteIcon width='18' height='18' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
@@ -47,28 +47,5 @@ const IconContainer: React.FC<IconContainerProps> = ({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    padding: 4,
-    // Additional styling for icons can go here
-  },
-  iconContainerLeft: {
-    left: 0,
-  },
-  iconContainerRight: {
-    right: 0,
-  },
-  iconMarginLeft: {
-    marginLeft: 8,
-  },
-  iconMarginRight: {
-    marginRight: 8,
-  },
-})
 
 export default IconContainer

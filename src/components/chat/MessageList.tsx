@@ -10,7 +10,6 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   Pressable,
-  StyleSheet,
 } from 'react-native'
 import { useSelector } from 'react-redux'
 import MessageBubble, { MessageBubbleProps } from './MessageBubble'
@@ -103,7 +102,13 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     // Scroll to Bottom Button component
     const ScrollToBottomButton = () => (
       <Pressable
-        style={[styles.scrollToBottomButton, { right: scrollToBottomPosition }]}
+        className='absolute p-[10px] items-center justify-center rounded-[15px]'
+        style={{
+          bottom: 70,
+          right: scrollToBottomPosition,
+          backgroundColor: theme.sendIconColor,
+          color: theme.iconFill,
+        }}
         onPress={() => {
           flatListRef.current?.scrollToEnd({ animated: false })
           scrollToBottom()
@@ -121,29 +126,10 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
       }
     }, [activeThread?.messages, isScrolledUp, isShare, scrollToBottomEnabled])
 
-    const styles = StyleSheet.create({
-      scrollToBottomButton: {
-        position: 'absolute', // Position the button over the chat
-        bottom: 70, // 50 pixels from the bottom edge of the screen
-        padding: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: theme.iconFill,
-        backgroundColor: theme.sendIconColor,
-        borderRadius: 15, // Rounded corners
-      },
-      flatList: {
-        width: '100%',
-        marginHorizontal: 'auto',
-        height: '100%',
-        marginBottom: isSmallScreen ? 4 : 8,
-      },
-    })
-
     return (
       <>
         <FlatList
-          style={styles.flatList}
+          className={`w-full mx-auto h-full mb-${isSmallScreen ? '1' : '2'}`}
           ref={flatListRef}
           data={activeThread?.messages || []}
           extraData={activeThread}

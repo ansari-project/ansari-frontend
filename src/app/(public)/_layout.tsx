@@ -1,7 +1,7 @@
 import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, Platform, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'

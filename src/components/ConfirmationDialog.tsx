@@ -2,7 +2,7 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Modal, Pressable, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 type ConfirmationDialogProps = {
@@ -35,57 +35,31 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
 
   // Add your styles here
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen)
-  const styles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.splashBackgroundColor,
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: theme.popupBackgroundColor,
-      borderRadius: 4,
-      padding: 24,
-      alignItems: 'center',
-      maxWidth: isSmallScreen ? undefined : 448,
-      width: isSmallScreen ? '90%' : '100%',
-    },
-    buttonContainer: {
-      flexDirection: stacked ? 'column' : 'row',
-      marginTop: 15,
-      width: '100%',
-      justifyContent: 'flex-end',
-      gap: 12,
-    },
-    titleStyle: {
-      color: theme.textColor,
-      fontFamily: 'Inter',
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 10,
-      paddingBottom: 25,
-      borderBottomWidth: 1,
-      borderColor: 'rgba(0,0,0,0.1)',
-      width: '100%',
-      textAlign: isRTL ? 'right' : 'left',
-    },
-    messageContainer: {
-      color: theme.textColor,
-      fontFamily: 'Inter',
-      marginBottom: 20,
-      width: '100%',
-      textAlign: isRTL ? 'right' : 'left',
-    },
-  })
 
   return (
     <Modal visible={visible} transparent={true} animationType='fade' onRequestClose={onCancel}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          {title && <Text style={styles.titleStyle}>{title}</Text>}
-          <Text style={styles.messageContainer}>{message}</Text>
-          <View style={styles.buttonContainer}>
+      <View className='flex-1 justify-center items-center' style={{ backgroundColor: theme.splashBackgroundColor }}>
+        <View
+          className={`m-5 rounded p-6 items-center ${isSmallScreen ? 'w-[90%]' : 'w-full max-w-[448px]'}`}
+          style={{ backgroundColor: theme.popupBackgroundColor }}
+        >
+          {title && (
+            <Text
+              className={`text-xl font-bold mb-[10px] pb-[25px] w-full border-b border-black/10 font-["Inter"] ${
+                isRTL ? 'text-right' : 'text-left'
+              }`}
+              style={{ color: theme.textColor }}
+            >
+              {title}
+            </Text>
+          )}
+          <Text
+            className={`mb-5 w-full font-["Inter"] ${isRTL ? 'text-right' : 'text-left'}`}
+            style={{ color: theme.textColor }}
+          >
+            {message}
+          </Text>
+          <View className={`mt-[15px] w-full justify-end gap-3 ${stacked ? 'flex-col' : 'flex-row'}`}>
             <Pressable
               style={[
                 generalStyle.buttonSecondary,

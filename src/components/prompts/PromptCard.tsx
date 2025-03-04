@@ -44,11 +44,13 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
       <View className='flex-1'>
         <StyledText
           className='text-sm leading-[21px] font-bold'
+          textAlign='left'
           style={{ color: isActive ? theme.hoverColor : theme.textColor }}
         >
           {title}
         </StyledText>
         <StyledText
+          textAlign='left'
           className='text-sm leading-[21px] font-normal'
           style={{ color: isActive ? theme.hoverColor : theme.textColor }}
         >

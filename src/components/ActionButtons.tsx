@@ -17,8 +17,8 @@ const ActionButtons: React.FC<Props> = ({ isTop, margin }: Props) => {
       flexDirection: 'row',
       alignItems: 'center',
       zIndex: 99,
-      marginLeft: isRTL && !isTop ? 'inherit' : margin || 0,
-      marginRight: isRTL && !isTop ? margin || 0 : 'inherit',
+      marginLeft: isRTL && !isTop ? undefined : margin || 0,
+      marginRight: isRTL && !isTop ? margin || 0 : undefined,
     },
   })
 

@@ -35,10 +35,8 @@ const MenuDrawer: React.FC<Props> = ({ children }) => {
       onOpen={() => togglePopup(true)}
       onClose={() => togglePopup(false)}
       renderDrawerContent={() => (
-        <View>
-          <View className='flex-1 flex-row'>
-            <SideMenuBody />
-          </View>
+        <View className='flex-1 flex-row'>
+          <SideMenuBody />
         </View>
       )}
     >

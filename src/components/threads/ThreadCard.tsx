@@ -2,7 +2,7 @@ import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, TextInput, View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import IconContainer from './IconContainer'
@@ -84,64 +84,26 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
     setEditing(false)
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      display: 'flex',
-      flexDirection: 'row',
-      paddingHorizontal: 16,
-      paddingVertical: 6,
-      alignItems: 'center',
-    },
-    containerMobile: {
-      padding: 8,
-    },
-    titleContainer: {
-      flex: 1,
-    },
-    selectedContainer: {
-      backgroundColor: theme.inputBackgroundColor,
-      borderRadius: 8,
-    },
-    hoveredContainer: {
-      backgroundColor: theme.inputBackgroundColor,
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.8)',
-      borderRadius: 8,
-    },
-    title: {
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      fontSize: 12,
-      lineHeight: 15,
-      fontWeight: '500',
-      fontFamily: 'Inter',
-      color: theme.textColor,
-      textAlign: isRTL ? 'right' : 'left',
-    },
-    snippet: {
-      fontSize: 14,
-      color: theme.textColor,
-    },
-  })
-
-  const containerStyles = [
-    styles.container,
-    isSmallScreen && styles.containerMobile,
-    isSelected && styles.selectedContainer,
-    isThreadHovered && styles.hoveredContainer,
-  ]
+  const containerClasses = `
+    flex flex-row items-center
+    ${isSmallScreen ? 'p-2' : 'px-4 py-[6px]'}
+    ${isSelected ? `bg-[${theme.inputBackgroundColor}] rounded-lg` : ''}
+    ${isThreadHovered ? `bg-[${theme.inputBackgroundColor}] shadow-lg rounded-lg` : ''}
+  `
 
   return (
     <Pressable
-      style={containerStyles}
+      className={containerClasses}
       onMouseEnter={() => handleThreadHover(true)}
       onMouseLeave={() => handleThreadHover(false)}
       onPress={handleThreadCardPress}
     >
-      <View style={styles.titleContainer}>
+      <View className='flex-1'>
         {editing ? (
           <TextInput
             ref={inputRef}
-            style={styles.title}
+            className={`px-[10px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+            style={{ color: theme.textColor }}
             value={editedName}
             onChangeText={setEditedName}
             onBlur={handleThreadRename}
@@ -149,11 +111,19 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
             placeholderTextColor={theme.inputColor}
           />
         ) : (
-          <Text style={styles.title} onPress={handleThreadCardPress}>
+          <Text
+            className={`px-[10px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+            style={{ color: theme.textColor }}
+            onPress={handleThreadCardPress}
+          >
             {threadName ?? t('newChat')}
           </Text>
         )}
-        {isThreadHovered && threadNameLength > lengthThreshold && <Text style={styles.snippet}>{thread.name}</Text>}
+        {isThreadHovered && threadNameLength > lengthThreshold && (
+          <Text className='text-sm' style={{ color: theme.textColor }}>
+            {thread.name}
+          </Text>
+        )}
       </View>
 
       {!editing && (isSelected || isThreadHovered) && (

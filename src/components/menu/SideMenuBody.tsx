@@ -2,7 +2,7 @@ import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Pressable, View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
@@ -45,89 +45,22 @@ const SideMenuBody: React.FC = () => {
     router.push('/')
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      backgroundColor: theme.sideMenuBackgroundColor,
-      fontFamily: 'Inter',
-      color: theme.textColor,
-      width: '100%',
-    },
-    mainView: {
-      height: '100%',
-      position: 'relative',
-      width: '100%',
-      backgroundColor: theme.sideMenuBackgroundColor,
-      borderRadius: 0,
-      alignItems: 'flex-start',
-      elevation: 5,
-    },
-    content: {
-      overflowY: 'auto',
-      scrollbarColor: 'transparent transparent', // Change scrollbar color
-      scrollbarWidth: 'thin',
-      width: '100%',
-      borderRadius: 0,
-      padding: 16,
-      paddingVertical: 8,
-      alignItems: 'flex-start',
-      elevation: 5,
-      gap: 16,
-      flexGrow: 1, // make the content view expand and fill the available space
-      maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
-    },
-    scrollbar: {
-      scrollbarColor: theme.scrollColor + ' transparent', // Change scrollbar color
-      scrollbarWidth: 'thin',
-    },
-    headerContainer: {
-      zIndex: 1,
-      flexDirection: 'row',
-      width: '100%',
-      paddingVertical: 16,
-      paddingRight: isRTL ? 16 : 8,
-      paddingLeft: isRTL ? 8 : 16,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      gap: 8,
-      display: 'inline-flex',
-      cursor: 'pointer',
-    },
-    headerContainerMobile: {
-      padding: 10,
-      paddingHorizontal: 16,
-      height: 'auto',
-    },
-    headerMenu: {
-      flex: 1,
-      justifyContent: 'space-between',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    bottomContainer: {
-      width: '100%',
-      bottom: 0,
-      zIndex: 1,
-      alignItems: 'center',
-      justifyContent: 'start',
-      flexDirection: 'row',
-      paddingHorizontal: 16,
-      position: 'fixed',
-    },
-    nameWrapper: {
-      flexDirection: 'row',
-    },
-  })
-
   return (
-    <View style={styles.container}>
-      <View style={styles.mainView}>
-        <View style={[styles.headerContainer, isSmallScreen && styles.headerContainerMobile]}>
+    <View
+      className={'flex-1 justify-center items-start w-full'}
+      style={{ backgroundColor: theme.sideMenuBackgroundColor }}
+    >
+      <View
+        className='h-full w-full rounded-none items-start elevation-5'
+        style={{ backgroundColor: theme.sideMenuBackgroundColor }}
+      >
+        <View
+          className={`z-[1] flex-row w-full items-center gap-2 inline-flex cursor-pointer ${
+            isSmallScreen ? 'p-[10px] px-4 h-auto' : `py-4 ${isRTL ? 'pr-4 pl-2' : 'pl-4 pr-2'}`
+          }`}
+        >
           {/* Drawer Header */}
-
-          <View style={styles.headerMenu}>
+          <View className='flex-1 justify-between flex-row items-center'>
             <Pressable onPress={() => togglePopup()}>
               <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
             </Pressable>
@@ -140,15 +73,20 @@ const SideMenuBody: React.FC = () => {
           </View>
         </View>
         <View
-          style={[styles.content, (isHovered || isMobile) && styles.scrollbar]}
+          className={`flex-1 w-full rounded-none p-4 py-2 items-start elevation-5 gap-4 flex-grow overflow-y-auto ${
+            isHovered || isMobile ? 'scrollbar-thin' : ''
+          }`}
+          style={{
+            maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
+            scrollbarColor: isHovered || isMobile ? `${theme.scrollColor} transparent` : 'transparent transparent',
+          }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Drawer Body */}
           <ThreadsList onSelectCard={onSelectCard} />
         </View>
-        <View style={styles.bottomContainer}>
-          <View style={styles.nameWrapper}>
+        <View className='w-full bottom-1 z-[1] items-center justify-start flex-row px-4'>
+          <View className='flex-row'>
             <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
             {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
           </View>

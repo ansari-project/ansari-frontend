@@ -5,7 +5,7 @@ import { useAuth, useDirection } from '@/hooks'
 import { AppDispatch, RootState, setActiveThread } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Pressable, SafeAreaView, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -47,51 +47,19 @@ const NotFoundScreen: React.FC = () => {
     return () => setToastVisible(false)
   }, [errorMessage])
 
-  // Define component styles
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center', // Ensure content is centered
-      justifyContent: 'space-between', // Distributes children evenly
-      height: '100vh',
-      width: '100%',
-    },
-    body: {
-      margin: 'auto',
-      flexDirection: isRTL ? 'row-reverse' : 'row',
-      alignItems: 'center',
-    },
-    text: {
-      color: theme.textColor,
-      fontFamily: 'Inter',
-      fontSize: 24,
-      lineHeight: 28,
-    },
-    textSmall: {
-      color: theme.textColor,
-      fontFamily: 'Inter',
-      fontSize: 16,
-      lineHeight: 21,
-    },
-    logo: {
-      cursor: 'pointer',
-    },
-    // Additional styles as needed
-  })
-
-  // Render the component
   return (
-    <SafeAreaView style={[styles.container]}>
-      {/* Pressable logo to navigate back to home screen */}
-      <Pressable style={styles.logo} onPress={() => router.push('/')}>
+    <SafeAreaView className='flex-1 items-center justify-between h-screen w-full'>
+      <Pressable className='cursor-pointer' onPress={() => router.push('/')}>
         <LogoIcon fill={theme.iconFill} />
       </Pressable>
-      {/* Body text indicating 404 error */}
-      <View style={styles.body}>
-        <Text style={styles.text}>404 | </Text>
-        <Text style={styles.textSmall}>{t('notfoundMessage')}</Text>
+      <View className={`flex ${isRTL ? 'flex-row-reverse' : 'flex-row'} items-center m-auto`}>
+        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-2xl leading-7'>
+          404 |{' '}
+        </Text>
+        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-base leading-[21px]'>
+          {t('notfoundMessage')}
+        </Text>
       </View>
-      {/* Toast component to display error message if present */}
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
     </SafeAreaView>
   )

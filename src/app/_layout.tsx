@@ -11,6 +11,7 @@ import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 
 import '../global.css'
 import RootContainer from '@/components/RootContainer'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 const AppLayout = () => {
   // Specify the type of the state to be either null or an EnhancedStore instance
@@ -31,13 +32,15 @@ const AppLayout = () => {
   }
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={reduxStore}>
-        <RootContainer>
-          <Slot />
-        </RootContainer>
-      </Provider>
-    </I18nextProvider>
+    <SafeAreaProvider>
+      <I18nextProvider i18n={i18n}>
+        <Provider store={reduxStore}>
+          <RootContainer>
+            <Slot />
+          </RootContainer>
+        </Provider>
+      </I18nextProvider>
+    </SafeAreaProvider>
   )
 }
 

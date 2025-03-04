@@ -64,6 +64,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       paddingBottom: 16,
       alignSelf: 'flex-start',
     },
+    avatarText: {
+      fontWeight: 'bold',
+      fontSize: 14,
+      color: theme.textColor,
+    },
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
@@ -78,7 +83,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <Avatar
             size={34}
             name={`${user?.firstName} ${user?.lastName}`}
-            textColor={theme.textColor}
+            color={theme.yellowColor}
             textStyle={styles.avatarText}
           />
         </View>
@@ -88,7 +93,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         </View>
       )}
       <View className='flex-shrink w-full'>
-        <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary'>
+        <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary' textAlign='left'>
           {isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}
         </StyledText>
         <View className='flex-1'>

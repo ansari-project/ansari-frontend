@@ -3,7 +3,7 @@ import { AppDispatch, RootState, Thread, ThreadNameRequest, deleteThread, setThr
 import { Helpers } from '@/utils'
 import React, { useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import ConfirmationDialog from '../ConfirmationDialog'
@@ -82,6 +82,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const threads = useSelector((state: RootState) => state.chat.threads)
+  const loading = useSelector((state: RootState) => state.chat.loading)
   const { threadId } = useLocalSearchParams<{ threadId: string }>()
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(threadId || null)
   const { isRTL } = useDirection()
@@ -115,33 +116,6 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   const [dialogMessage, setDialogMessage] = useState('')
   const [threadToDeleteId, setThreadToDeleteId] = useState<string | null>(null)
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      width: '100%',
-    },
-    list: {
-      flex: 1,
-    },
-    dateHeader: {
-      fontWeight: 300,
-      fontSize: 14,
-      lineHeight: 17,
-      marginVertical: 10,
-      color: theme.linkColor,
-      fontFamily: 'Inter',
-    },
-    textAlignRight: {
-      textAlign: 'right',
-    },
-    textAlignLeft: {
-      textAlign: 'left',
-    },
-    boldText: {
-      fontWeight: 'bold',
-    },
-  })
-
   const handleConfirmDelete = async () => {
     if (threadToDeleteId) {
       await dispatch(deleteThread(threadToDeleteId))
@@ -166,6 +140,14 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
     )
   }
 
+  if (loading) {
+    return (
+      <View className='flex-1 w-full justify-center items-center'>
+        <ActivityIndicator size='small' color={theme.hoverColor} />
+      </View>
+    )
+  }
+
   const groupedThreads = getGroupedThreads(threads)
   const mappedThreads = Object.entries(groupedThreads).map(
     ([dateCategory, threads]) =>
@@ -174,7 +156,12 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
           {dateCategory === 'older' ? (
             Object.entries(threads).map(([year, yearThreads]: [string, Thread[]]) => (
               <View key={year}>
-                <Text style={[styles.dateHeader, isRTL ? styles.textAlignRight : styles.textAlignLeft]}>{year}</Text>
+                <Text
+                  className={`font-light my-[10px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+                  style={{ color: theme.linkColor }}
+                >
+                  {year}
+                </Text>
                 {yearThreads.map((thread) => (
                   <ThreadCard
                     key={thread.id}
@@ -189,7 +176,10 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
             ))
           ) : (
             <View>
-              <Text style={[styles.dateHeader, isRTL ? styles.textAlignRight : styles.textAlignLeft]}>
+              <Text
+                className={`font-light my-[10px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+                style={{ color: theme.linkColor }}
+              >
                 {Helpers.createLocalizedDateHeader(dateCategory, threads[0].date, t)}
               </Text>
               {threads.map((thread: Thread) => (
@@ -209,8 +199,8 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   )
 
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>{mappedThreads}</View>
+    <View className='flex-1 w-full'>
+      <View className='flex-1'>{mappedThreads}</View>
       <ConfirmationDialog
         stacked={width < 448}
         isRTL={isRTL}
@@ -226,7 +216,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
               parent={Text}
               i18nKey='deleteThreadMessage'
               components={{
-                1: <Text style={styles.boldText}></Text>,
+                1: <Text className='font-bold'></Text>,
               }}
               values={{ threadName: dialogMessage }}
             />

@@ -1,3 +1,5 @@
+import '../global.css'
+
 import { i18n } from '@/i18n'
 import { RootState, initStore } from '@/store'
 import { Slot } from 'expo-router'
@@ -8,8 +10,6 @@ import { Provider } from 'react-redux'
 import { LoadingScreen } from '@/components'
 // eslint-disable-next-line camelcase
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
-
-import '../global.css'
 import RootContainer from '@/components/RootContainer'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 

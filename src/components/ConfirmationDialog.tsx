@@ -45,7 +45,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         >
           {title && (
             <Text
-              className={`text-xl font-bold mb-[10px] pb-[25px] w-full border-b border-black/10 font-["Inter"] ${
+              className={`text-xl font-bold mb-[10px] pb-[25px] w-full border-b border-black/10 font-['Inter'] ${
                 isRTL ? 'text-right' : 'text-left'
               }`}
               style={{ color: theme.textColor }}
@@ -54,7 +54,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             </Text>
           )}
           <Text
-            className={`mb-5 w-full font-["Inter"] ${isRTL ? 'text-right' : 'text-left'}`}
+            className={`mb-5 w-full font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
             style={{ color: theme.textColor }}
           >
             {message}

@@ -72,6 +72,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
+  const mdContent = message.content.replace('<thinking>', '```').replace('</thinking>', '```')
 
   return (
     <View
@@ -103,7 +104,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
               ...markdownStyles,
             }}
           >
-            {message.content}
+            {mdContent}
           </Markdown>
         </View>
         {!isOutgoing && !isSending && reactionsEnabled && (
@@ -126,11 +127,11 @@ const markdownStyles = {
   // Headings
   heading1: {
     flexDirection: 'row',
-    fontSize: 28,
+    fontSize: 20,
   },
   heading2: {
     flexDirection: 'row',
-    fontSize: 24,
+    fontSize: 18,
   },
   heading3: {
     flexDirection: 'row',

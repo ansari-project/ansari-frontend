@@ -69,7 +69,7 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
 
   const styles = StyleSheet.create({
     popupContent: {
-      top: '30px',
+      top: 30,
       width: 180,
       borderRadius: 4,
       borderColor: theme.primaryColor,

@@ -2,8 +2,9 @@ import { ReactNativeSvg } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useSelector } from 'react-redux'
+import StyledText from '@/components/StyledText'
 
 interface Props {
   title: string
@@ -20,56 +21,18 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
   const { isRTL } = useDirection()
   const theme = useSelector((state: RootState) => state.theme.theme)
 
-  const styles = StyleSheet.create({
-    card: {
-      flex: 1,
-      flexDirection: 'row',
-      padding: 16,
-      borderRadius: 4,
-      backgroundColor: theme.popupBackgroundColor,
-      borderColor: theme.popupBackgroundColor,
-      borderWidth: 1,
-      marginHorizontal: isMiddle && !isSmallScreen ? 16 : 0,
-      marginBottom: isSmallScreen ? 16 : 'initial',
-    },
-    cardPressedHovered: {
-      backgroundColor: theme.promptBackgroundHoverColor,
-      borderWidth: 1,
-      borderColor: theme.hoverColor,
-      borderRadius: 4,
-    },
-    textContent: {
-      flex: 1, // Ensure text content takes the remaining space
-    },
-    cardTitle: {
-      color: theme.textColor,
-      fontSize: 14,
-      lineHeight: 21,
-      fontWeight: 700,
-      fontFamily: 'Inter',
-    },
-    cardTitlePressedHovered: {
-      color: theme.hoverColor,
-    },
-    cardSubtitle: {
-      color: theme.textColor,
-      fontSize: 14,
-      lineHeight: 21,
-      fontWeight: 400,
-      fontFamily: 'Inter',
-    },
-    cardSubtitlePressedHovered: {
-      color: theme.hoverColor,
-    },
-    cardIcon: {
-      marginLeft: isRTL ? 16 : 'auto',
-      marginRight: isRTL ? 'auto' : 16,
-    },
-  })
+  const isActive = isPressed || isHovered
 
   return (
     <Pressable
-      style={[styles.card, (isPressed || isHovered) && styles.cardPressedHovered]}
+      className={`flex-row p-4 rounded ${isSmallScreen ? 'mb-4' : ''} ${isMiddle && !isSmallScreen ? 'mx-4' : ''}`}
+      style={[
+        {
+          backgroundColor: isActive ? theme.promptBackgroundHoverColor : theme.popupBackgroundColor,
+          borderWidth: 1,
+          borderColor: isActive ? theme.hoverColor : theme.popupBackgroundColor,
+        },
+      ]}
       onPress={() => {
         onPress()
         setIsPressed(true)
@@ -78,14 +41,24 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <View style={styles.textContent}>
-        <Text style={[styles.cardTitle, (isPressed || isHovered) && styles.cardTitlePressedHovered]}>{title}</Text>
-        <Text style={[styles.cardSubtitle, (isPressed || isHovered) && styles.cardSubtitlePressedHovered]}>
+      <View className='flex-1'>
+        <StyledText
+          className='text-sm leading-[21px] font-bold'
+          textAlign='left'
+          style={{ color: isActive ? theme.hoverColor : theme.textColor }}
+        >
+          {title}
+        </StyledText>
+        <StyledText
+          textAlign='left'
+          className='text-sm leading-[21px] font-normal'
+          style={{ color: isActive ? theme.hoverColor : theme.textColor }}
+        >
           {subtitle}
-        </Text>
+        </StyledText>
       </View>
-      <View style={styles.cardIcon}>
-        <Icon fill={isPressed || isHovered ? theme.hoverColor : undefined} />
+      <View className={`${isRTL ? 'ml-4 mr-auto' : 'ml-auto mr-4'}`}>
+        <Icon fill={isActive ? theme.hoverColor : undefined} />
       </View>
     </Pressable>
   )

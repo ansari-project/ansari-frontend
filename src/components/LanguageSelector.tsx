@@ -3,7 +3,7 @@ import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, Text, View, StyleSheet } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 import { useSelector } from 'react-redux'
 
@@ -68,12 +68,8 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
   }
 
   const styles = StyleSheet.create({
-    button: {
-      padding: 8,
-      borderRadius: 4,
-    },
     popupContent: {
-      top: '30px',
+      top: 30,
       width: 180,
       borderRadius: 4,
       borderColor: theme.primaryColor,
@@ -89,26 +85,11 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
       paddingRight: 16,
       overflow: 'visible',
     },
-    popupItems: {
-      width: '100%',
-    },
-    popupItem: {
-      padding: 8,
-      borderRadius: 4,
-      alignItems: 'center',
-    },
-    popupItemText: {
-      color: theme.textColor,
-    },
-    activeText: {
-      fontWeight: 'bold',
-      color: theme.hoverColor,
-    },
   })
 
   return (
     <View>
-      <Pressable ref={touchableRef} style={styles.button} onPress={() => setIsVisible(!isVisible)}>
+      <Pressable ref={touchableRef} className='p-2 rounded' onPress={() => setIsVisible(!isVisible)}>
         <LanguageIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
       {touchableRef.current && (
@@ -126,14 +107,19 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
           }}
           popoverStyle={styles.popupContent}
         >
-          <View style={styles.popupItems}>
+          <View className='w-full'>
             {reorderedLanguages.map((language) => (
               <Pressable
                 key={language.code}
-                style={styles.popupItem}
+                className='p-2 rounded items-center'
                 onPress={() => handleLanguageChange(language.code)}
               >
-                <Text style={[styles.popupItemText, language.isActive && styles.activeText]}>{language.name}</Text>
+                <Text
+                  className={language.isActive ? 'font-bold' : ''}
+                  style={{ color: language.isActive ? theme.hoverColor : theme.textColor }}
+                >
+                  {language.name}
+                </Text>
               </Pressable>
             ))}
           </View>

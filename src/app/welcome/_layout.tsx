@@ -2,7 +2,7 @@ import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { Redirect, Slot } from 'expo-router'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 /**
@@ -15,41 +15,19 @@ export const WelcomeLayout = () => {
   const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
   const { width, height } = useScreenInfo()
-  // Redux hook to get theme data
-  const theme = useSelector((state: RootState) => state.theme.theme)
 
   if (isAuthenticated && accessToken) {
     return <Redirect href='/' />
   }
 
-  // Styles for the component
-  const styles = StyleSheet.create({
-    mainContainer: {
-      flex: 1,
-      minHeight: height > 600 ? height : height - 48, // Set minimum height based on screen height
-      backgroundRepeat: 'repeat',
-      backgroundSize: 'contain',
-      width: '100%',
-    },
-    container: {
-      flexGrow: 1,
-      fontFamily: 'Inter',
-      alignItems: 'center', // Center children horizontally
-      justifyContent: 'space-between',
-      width: '100%',
-    },
-    pageContainer: {
-      flex: 1,
-      width: '100%',
-    },
-    main: { flex: 1, flexGrow: 1, width: '100%' },
-  })
-
-  // Render the component
   return (
-    <ImageBackground style={{ width, height }} source={require('@/assets/images/background.png')}>
-      <KeyboardAvoidingView style={[styles.mainContainer]} behavior='padding' enabled>
-        <View style={styles.main}>
+    <ImageBackground
+      style={{ width, height }}
+      className='bg-repeat bg-contain'
+      source={require('@/assets/images/background.png')}
+    >
+      <KeyboardAvoidingView className='flex-1' behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
+        <View className='flex-grow'>
           <Slot />
         </View>
       </KeyboardAvoidingView>

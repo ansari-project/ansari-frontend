@@ -5,6 +5,7 @@ import ReactNativeSvg, { Props } from './ReactNativeSvg'
 const ScrollToBottomIcon: React.FC<Props> = (props: Props) => {
   return (
     <ReactNativeSvg
+      {...props}
       color={props.color || 'currentColor'}
       fill={props.fill || 'currentColor'}
       stroke={props.stroke || 'currentColor'}

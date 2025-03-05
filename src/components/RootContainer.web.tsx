@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { i18n } from '@/i18n'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
+
 export type Props = {
   children: React.ReactNode
 }
@@ -10,13 +11,7 @@ const RootContainer: React.FC<Props> = ({ children }) => {
     document.dir = i18n.dir(i18n.language)
   }, [])
 
-  const styles = StyleSheet.create({
-    rootView: {
-      flex: 1,
-    },
-  })
-
-  return <View style={styles.rootView}>{children}</View>
+  return <View className='flex-1'>{children}</View>
 }
 
 export default RootContainer

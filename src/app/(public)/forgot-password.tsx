@@ -5,19 +5,11 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  KeyboardAvoidingView,
-  NativeSyntheticEvent,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, TextInput, View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
+import StyledText from '@/components/StyledText'
 
 // TypeScript interface for the initial state
 interface EmailState {
@@ -86,54 +78,28 @@ const ForgetPasswordScreen: React.FC = () => {
 
   // Styles
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
-  const styles = StyleSheet.create({
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 20,
-      color: theme.primaryColor,
-      textAlign: 'center',
-      fontFamily: 'Inter',
-      width: '100%',
-    },
-    description: {
-      fontSize: 16,
-      marginBottom: 20,
-      color: theme.primaryColor,
-      fontFamily: 'Inter',
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
-    iconContainer: {
-      alignItems: 'center',
-      width: '100%',
-    },
-    alignStart: {
-      alignItems: 'flex-start',
-    },
-  })
 
   if (emailState.submitted) {
     return (
-      <View style={generalStyle.formContainer}>
-        <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <KeyboardAvoidingView style={generalStyle.formContainer}>
+        <View className='items-center mb-6'>
+          <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        </View>
         <View style={generalStyle.form}>
-          <Text style={styles.title}>{t('forgotYourPassword')}</Text>
-          <View style={styles.iconContainer}>
+          <StyledText variant='h2' color='primary' textAlign='center' className='mb-5'>
+            {t('forgotYourPassword')}
+          </StyledText>
+          <View className='items-center w-full mb-5'>
             <DoubleCheckIcon width='50' />
           </View>
 
-          <Text style={styles.description}>{t('forgotSuccessMessage')}</Text>
-          <View style={styles.buttonContainer}>
+          <StyledText color='primary' className='mb-5'>
+            {t('forgotSuccessMessage')}
+          </StyledText>
+          <View className='flex-row justify-start items-center'>
             <Text
-              style={[
-                generalStyle.prompt,
-                styles.alignStart,
-                Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
-              ]}
+              className='flex-start'
+              style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               onPress={handleBack}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
@@ -142,16 +108,22 @@ const ForgetPasswordScreen: React.FC = () => {
             </Text>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <LogoIcon fill={theme.iconFill} width={52} height={52} />
+    <KeyboardAvoidingView style={generalStyle.formContainer}>
+      <View className='items-center mb-6'>
+        <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      </View>
       <View style={generalStyle.form}>
-        <Text style={styles.title}>{t('forgotYourPassword')}</Text>
-        <Text style={styles.description}>{t('forgotMessage')}</Text>
+        <StyledText variant='h2' color='primary' className='font-bold mb-5'>
+          {t('forgotYourPassword')}
+        </StyledText>
+        <StyledText color='primary' className='mb-5 text-[16px]'>
+          {t('forgotMessage')}
+        </StyledText>
         <TextInput
           id='email'
           name='email'
@@ -167,18 +139,15 @@ const ForgetPasswordScreen: React.FC = () => {
           autoCorrect={false}
           inputMode='email'
         />
-        {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
+        {errors.email && <StyledText color='yellow'>{errors.email}</StyledText>}
         <Pressable style={generalStyle.buttonPrimary} onPress={handleSubmit}>
           <Text style={generalStyle.buttonPrimaryText}>{t('continue')}</Text>
         </Pressable>
 
-        <View style={styles.buttonContainer}>
+        <View className='flex-row justify-start items-center'>
           <Text
-            style={[
-              generalStyle.prompt,
-              styles.alignStart,
-              Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null,
-            ]}
+            className='flex-start'
+            style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
             onPress={handleBack}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}

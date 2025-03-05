@@ -4,10 +4,11 @@ import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFe
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
+import StyledText from '../StyledText'
 
 export type MessageBubbleProps = {
   threadId: string
@@ -49,42 +50,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   )
 
   const styles = StyleSheet.create({
-    messageBubble: {
-      width: width || contentWidth,
-      padding: isSmallScreen ? 8 : 10,
-      marginVertical: 4,
-      marginHorizontal: 'auto',
-      borderRadius: 4,
-      gap: isSmallScreen ? 8 : 16,
-      display: 'flex',
-      flexDirection: 'row',
-      flexGrow: 1,
-      alignSelf: 'flex-start',
-    },
-    senderName: {
-      fontWeight: 600,
-      fontSize: 16,
-      lineHeight: 20,
-      marginBottom: 12,
-      marginTop: 6,
-      color: theme.primaryColor,
-    },
-    contentWrapper: {
-      flex: 1,
-      color: theme.primaryColor,
-    },
-    iconsWrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-    },
-    avatar: {
-      borderRadius: 4,
-      padding: 16,
-      width: 32,
-      height: 32,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     messageText: {
       fontFamily: 'Inter',
       textAlign: isRTL ? 'right' : 'left',
@@ -104,45 +69,46 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       fontSize: 14,
       color: theme.textColor,
     },
-    messageContainer: {
-      flexShrink: 1,
-      width: '100%',
-    },
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
+  const mdContent = message.content.replace('<thinking>', '```').replace('</thinking>', '```')
 
   return (
-    <View style={styles.messageBubble}>
-      {/* <Markdown components={{ p: Text }} rehypePlugins={[rehypeRaw]}> */}
+    <View
+      className={`mx-1 my-1 rounded flex flex-row flex-grow self-start ${isSmallScreen ? 'p-2 gap-2' : 'p-2.5 gap-4'}`}
+      style={{ width: width || contentWidth }}
+    >
       {isOutgoing ? (
-        <View style={styles.avatar}>
+        <View className='rounded p-4 w-8 h-8 items-center justify-center'>
           <Avatar
             size={34}
             name={`${user?.firstName} ${user?.lastName}`}
-            textColor={theme.textColor}
+            color={theme.yellowColor}
             textStyle={styles.avatarText}
           />
         </View>
       ) : (
-        <View style={styles.avatar}>
+        <View className='rounded p-4 w-8 h-8 items-center justify-center'>
           <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
         </View>
       )}
-      <View style={styles.messageContainer}>
-        <Text style={styles.senderName}>{isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}</Text>
-        <View style={styles.contentWrapper}>
+      <View className='flex-shrink w-full'>
+        <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary' textAlign='left'>
+          {isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}
+        </StyledText>
+        <View className='flex-1'>
           <Markdown
             style={{
               body: [styles.messageText, textStyle],
               ...markdownStyles,
             }}
           >
-            {message.content}
+            {mdContent}
           </Markdown>
         </View>
         {!isOutgoing && !isSending && reactionsEnabled && (
-          <View style={[styles.iconsWrapper]} key={message.id}>
+          <View className='flex flex-row' key={message.id}>
             <ReactionButtons
               threadId={threadId}
               messageId={message.id}
@@ -161,15 +127,18 @@ const markdownStyles = {
   // Headings
   heading1: {
     flexDirection: 'row',
-    fontSize: 28,
+    fontSize: 20,
+    marginVertical: 5,
   },
   heading2: {
     flexDirection: 'row',
-    fontSize: 24,
+    fontSize: 18,
+    lineHeight: 24,
   },
   heading3: {
     flexDirection: 'row',
     fontSize: 18,
+    lineHeight: 24,
   },
   heading4: {
     flexDirection: 'row',
@@ -203,11 +172,13 @@ const markdownStyles = {
 
   // Blockquotes
   blockquote: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F5F533',
     borderColor: '#CCC',
     borderLeftWidth: 4,
     marginLeft: 5,
     paddingHorizontal: 5,
+    marginVertical: 5,
+    borderRadius: 10,
   },
 
   // Lists
@@ -248,7 +219,7 @@ const markdownStyles = {
   code_inline: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({
@@ -264,7 +235,7 @@ const markdownStyles = {
   code_block: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({
@@ -279,7 +250,7 @@ const markdownStyles = {
   fence: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F533',
     padding: 10,
     borderRadius: 4,
     ...Platform.select({

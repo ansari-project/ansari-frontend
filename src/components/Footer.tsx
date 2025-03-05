@@ -2,12 +2,13 @@ import { useAuth, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from './ActionButtons'
 import Subscription from './Subscription'
 import TermsAndPrivacy from './TermsAndPrivacy'
 import { NameContainer } from './menu'
+import StyledText from './StyledText'
 
 const Footer: React.FC = () => {
   const { t } = useTranslation()
@@ -17,45 +18,16 @@ const Footer: React.FC = () => {
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
 
-  const styles = StyleSheet.create({
-    container: {
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      zIndex: 10,
-      paddingHorizontal: isSmallScreen ? 16 : 24,
-      paddingVertical: isAuthenticated ? null : 16,
-    },
-    footerTextContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 6,
-    },
-    footerText: {
-      fontSize: 12,
-      lineHeight: 21,
-      fontWeight: 300,
-      fontFamily: 'Inter',
-      color: theme.textColor,
-    },
-    nameContainerWrapper: {
-      marginHorizontal: 10,
-    },
-    subscriptionContainer: {
-      flex: 1,
-    },
-  })
-
   if (isInputFullMode) {
     return null
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      className={`w-full flex-row justify-start items-center z-10 ${isSmallScreen ? 'px-4' : 'px-6'} ${!isAuthenticated ? 'py-4' : ''}`}
+    >
       {isAuthenticated && isGuest && (
-        <View style={styles.nameContainerWrapper}>
+        <View className='mx-2.5'>
           <NameContainer
             name={t('welcomeGuestText') as string}
             initial={t('welcomeGuest') as string}
@@ -66,9 +38,9 @@ const Footer: React.FC = () => {
       )}
       {(!isAuthenticated || isGuest) && !isMobile && <ActionButtons isTop={false} />}
       {isAuthenticated && (
-        <View style={styles.subscriptionContainer}>
-          <View style={styles.footerTextContainer}>
-            <Text style={styles.footerText}>{t('authorizedFooterText')}</Text>
+        <View className='flex-1'>
+          <View className='flex-row items-center justify-center p-1.5'>
+            <StyledText className='text-xs leading-[21px] font-light'>{t('authorizedFooterText')}</StyledText>
             <Subscription />
           </View>
         </View>

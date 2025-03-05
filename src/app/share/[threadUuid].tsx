@@ -1,11 +1,11 @@
 import { ShareContainer } from '@/components'
-import { useChat, useDirection } from '@/hooks'
-import { AppDispatch, RootState } from '@/store'
+import { useChat } from '@/hooks'
+import { AppDispatch } from '@/store'
 import { fetchSharedThread } from '@/store/actions'
 import { Helpers } from '@/utils'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { KeyboardAvoidingView, Platform } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
 /**
@@ -17,8 +17,6 @@ const ShareScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
   const router = useRouter()
-  const { isRTL } = useDirection()
-  const theme = useSelector((state: RootState) => state.theme.theme)
 
   // Fetches thread details on threadId change
   useEffect(() => {
@@ -40,25 +38,11 @@ const ShareScreen: React.FC = () => {
     }
   }, [])
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center', // Ensure content is centered
-      justifyContent: 'space-between', // Distributes children evenly
-      width: '100%',
-    },
-    shareIcon: {
-      position: 'absolute',
-      left: isRTL ? 24 : 'auto',
-      right: isRTL ? 'auto' : 24,
-      padding: 8,
-      borderRadius: 4,
-      backgroundColor: theme.popupBackgroundColor,
-    },
-  })
-
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      className='flex-1 items-center justify-between w-full'
+    >
       <ShareContainer />
     </KeyboardAvoidingView>
   )

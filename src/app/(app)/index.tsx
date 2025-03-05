@@ -2,7 +2,7 @@ import { ChatContainer, Toast } from '@/components'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, setActiveThread, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocalSearchParams } from 'expo-router'
 
@@ -21,7 +21,7 @@ const HomeScreen: React.FC = () => {
     if (isAuthenticated && !isGuest) {
       dispatch(setActiveThread(null))
     }
-    if (!isMobile) {
+    if (!isMobile && !isGuest) {
       dispatch(toggleSideMenu(true))
     }
   }, [])
@@ -34,20 +34,11 @@ const HomeScreen: React.FC = () => {
   }, [errorMessage])
 
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView className='flex-1 items-center justify-between'>
       <ChatContainer isHome={true} />
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center', // Ensure content is centered
-    justifyContent: 'space-between', // Distributes children evenly
-  },
-  // Additional styles as needed
-})
 
 export default HomeScreen

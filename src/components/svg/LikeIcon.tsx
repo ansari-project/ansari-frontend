@@ -24,7 +24,7 @@ const LikeIcon: React.FC<Props> = (props: Props) => {
       </G>
       <ClipPath id='clip0_130_1834'>
         <Rect width='18' height='18' fill='white' />
-      </ClipPath>{' '}
+      </ClipPath>
     </ReactNativeSvg>
   )
 }

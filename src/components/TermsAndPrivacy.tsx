@@ -3,7 +3,7 @@ import { RootState } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Linking, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Linking, Pressable, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 type Props = {
@@ -16,31 +16,12 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
   const { isMobile } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
 
-  const styles = StyleSheet.create({
-    terms: {
-      flex: 1,
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      marginLeft: isMobile ? (isRTL ? marginLeft : 0) : isRTL ? 0 : marginLeft,
-    },
-    footerText: {
-      fontSize: 12,
-      lineHeight: 21,
-      fontWeight: 300,
-      fontFamily: 'Inter',
-      color: theme.textColor,
-    },
-    pressableContainer: {
-      paddingHorizontal: 8,
-    },
-  })
+  const marginLeftStyle = isMobile ? (isRTL ? marginLeft : 0) : isRTL ? 0 : marginLeft
 
   return (
-    <View style={styles.terms}>
+    <View className='flex-1 w-full items-center justify-center flex-row' style={{ marginLeft: marginLeftStyle }}>
       <Pressable
-        style={styles.pressableContainer}
+        className='px-2'
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
@@ -50,11 +31,15 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
           }
         }}
       >
-        <Text style={styles.footerText}>{t('termOfUse')}</Text>
+        <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+          {t('termOfUse')}
+        </Text>
       </Pressable>
-      <Text style={styles.footerText}>|</Text>
+      <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+        |
+      </Text>
       <Pressable
-        style={styles.pressableContainer}
+        className='px-2'
         onPress={() => {
           // Open the subscription URL in a new tab on web, and in the system browser on native
           if (typeof window !== 'undefined' && 'open' in window) {
@@ -64,7 +49,9 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
           }
         }}
       >
-        <Text style={styles.footerText}>{t('privacyPolicy')}</Text>
+        <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+          {t('privacyPolicy')}
+        </Text>
       </Pressable>
     </View>
   )

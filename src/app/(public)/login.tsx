@@ -98,7 +98,7 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={generalStyle.form}>
         <View className='items-center'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -107,10 +107,11 @@ const LoginScreen: React.FC = () => {
         <Text style={styles.title}>{t('title')}</Text>
         <Formik
           initialValues={initialValues}
+          validateOnChange={false}
           validationSchema={Yup.object(loginSchema)}
           onSubmit={(values, formikHelpers) => handleSubmit(values, formikHelpers)}
         >
-          {({ handleChange, handleBlur, handleSubmit, submitForm, values, isSubmitting, errors }) => (
+          {({ handleChange, handleBlur, handleSubmit, submitForm, touched, values, isSubmitting, errors }) => (
             <View>
               <TextInput
                 id='email'
@@ -127,7 +128,7 @@ const LoginScreen: React.FC = () => {
                 autoCorrect={false}
                 inputMode='email'
               />
-              {errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
+              {touched.email && errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
 
               <TextInput
                 id='password'
@@ -142,7 +143,7 @@ const LoginScreen: React.FC = () => {
                 style={[generalStyle.input]}
                 autoComplete='current-password'
               />
-              {errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
+              {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 
               {errorMessage && <Text style={generalStyle.errorText}>{errorMessage}</Text>}
 

@@ -3,7 +3,7 @@ import { useScreenInfo } from '@/hooks'
 import PromptsService, { PromptsByCategory } from '@/services/PromptsService'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import PromptCard from './PromptCard'
 
 type PromptListProps = {
@@ -50,10 +50,16 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
 
   return (
     <ScrollView
-      style={styles.scrollView}
-      contentContainerStyle={[styles.container, isSmallScreen ? styles.stackedContainer : styles.rowContainer]}
+      className='w-full'
+      contentContainerStyle={{
+        alignItems: 'center',
+        flexDirection: isSmallScreen ? 'column' : 'row',
+        flexWrap: isSmallScreen ? undefined : 'wrap',
+        justifyContent: isSmallScreen ? undefined : 'space-around',
+        width: '100%',
+      }}
     >
-      <View style={isSmallScreen ? styles.promptCardStacked : styles.promptCardRow}>
+      <View className={`${isSmallScreen ? 'w-full mb-4 flex' : 'flex-row my-2 w-full mb-4'}`}>
         {prompts.map((prompt, index) => (
           <PromptCard
             key={prompt.id}
@@ -68,35 +74,5 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-  scrollView: {
-    width: '100%',
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around', // Adjusted for React Native compatibility
-    width: '100%',
-  },
-  stackedContainer: {
-    flexDirection: 'column',
-    width: '100%',
-  },
-  promptCardRow: {
-    flexDirection: 'row',
-    marginVertical: 8,
-    width: '100%',
-    marginBottom: 16, // Provide some space between stacked cards
-  },
-  promptCardStacked: {
-    width: '100%', // Cards expand to fill the container on smaller screens
-    marginBottom: 16, // Provide some space between stacked cards
-    display: 'flex',
-  },
-})
 
 export default PromptList

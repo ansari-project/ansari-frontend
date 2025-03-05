@@ -4,7 +4,7 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Linking, Modal, Pressable, SafeAreaView, Text, View, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import Subscription from './Subscription'
@@ -36,57 +36,6 @@ const InfoPopup: React.FC = () => {
 
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
   const styles = StyleSheet.create({
-    button: {
-      padding: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 4,
-      elevation: 2,
-    },
-    toggleButton: {
-      borderWidth: 0,
-      padding: 8,
-      elevation: 2,
-    },
-    safeAreaContainer: {
-      flex: 1,
-    },
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-end',
-      backgroundColor: theme.splashBackgroundColor,
-      fontFamily: 'Inter',
-    },
-    modalView: {
-      height: '100%',
-      position: 'relative',
-      width: '100%',
-      maxWidth: 420,
-      backgroundColor: theme.popupBackgroundColor,
-      borderRadius: 0,
-      paddingHorizontal: 5,
-      alignItems: 'center',
-      elevation: 5,
-    },
-    modalContent: {
-      marginVertical: isSmallScreen ? 12 : 20,
-      marginHorizontal: isSmallScreen ? 8 : 12,
-      borderRadius: 0,
-      padding: 10,
-      alignItems: 'flex-start',
-      elevation: 5,
-      gap: isSmallScreen ? 8 : 16,
-      flexGrow: 1,
-    },
-    modalFooter: {
-      width: '100%',
-      padding: 16,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      gap: 16,
-      alignItems: 'center',
-    },
     text: {
       width: '100%',
       color: theme.textColor,
@@ -106,32 +55,17 @@ const InfoPopup: React.FC = () => {
       color: theme.textColor,
       fontFamily: 'Inter',
     },
-    infoContainer: {
-      flexDirection: 'row',
-      width: '100%',
-      paddingHorizontal: 24,
-      paddingVertical: 16,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      gap: 8,
-      display: 'inline-flex',
-    },
-    bottomContainer: {
-      alignItems: 'center',
-      marginTop: 'auto',
-    },
     linkText: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
       textDecorationLine: 'none',
       color: theme.linkColor,
-    },
-    closeIcon: {
-      borderWidth: 0,
     },
   })
 
   const guestMessage = () => {
     return (
-      <Text style={styles.text}>
+      <Text className='flex-wrap' style={styles.text}>
         <Trans
           i18n={i18n}
           i18nKey='guestWelcomeMessage'
@@ -149,7 +83,7 @@ const InfoPopup: React.FC = () => {
 
   const authenticatedMessage = () => {
     return (
-      <Text style={[styles.text, styles.textWithMargin]}>
+      <Text className='' style={[styles.text, styles.textWithMargin]}>
         <Trans
           i18n={i18n}
           i18nKey='welcomeMessage'
@@ -164,35 +98,40 @@ const InfoPopup: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <Pressable onPress={() => togglePopup()} style={styles.button}>
+    <View className=''>
+      <Pressable onPress={() => togglePopup()} className='p-2 justify-center items-center rounded elevation-2'>
         <InfoIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} />
       </Pressable>
 
       <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen}>
-        <View style={styles.container}>
-          <View style={styles.modalView}>
-            <View style={styles.infoContainer}>
+        <SafeAreaView className={`flex-1 justify-center items-end bg-[${theme.splashBackgroundColor}]`}>
+          <View
+            className={'h-full relative w-full max-w-[420px] rounded-none px-[5px] elevation-5'}
+            style={{ backgroundColor: theme.popupBackgroundColor }}
+          >
+            <View className='flex-row w-full px-6 py-4 justify-between items-center gap-2 inline-flex'>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
-              <Pressable onPress={() => togglePopup()} style={styles.toggleButton} hitSlop={8}>
-                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} style={styles.closeIcon} />
+              <Pressable onPress={() => togglePopup()} className='p-2 border-0' hitSlop={8}>
+                <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} className='border-0' />
               </Pressable>
             </View>
-            <View style={styles.modalContent}>
+            <View
+              className={`my-${isSmallScreen ? '3' : '5'} mx-${isSmallScreen ? '2' : '3'} rounded-none p-[10px] elevation-5 gap-${isSmallScreen ? '2' : '4'}`}
+            >
               {isAuthenticated && isGuest && guestMessage()}
               {isAuthenticated && !isGuest && authenticatedMessage()}
 
-              <View style={styles.bottomContainer}>{isSmallScreen && !isGuest && <Subscription />}</View>
+              <View className='items-center mt-auto'>{isSmallScreen && !isGuest && <Subscription />}</View>
             </View>
-            <View style={styles.modalFooter}>
+            <View className='w-full p-4 flex-row justify-center gap-4 items-center'>
               <Pressable style={generalStyle.buttonSecondary} onPress={() => togglePopup()}>
                 <Text style={generalStyle.buttonSecondaryText}>{t('common:close')}</Text>
               </Pressable>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
-    </SafeAreaView>
+    </View>
   )
 }
 

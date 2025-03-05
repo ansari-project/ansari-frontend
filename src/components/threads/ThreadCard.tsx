@@ -6,6 +6,7 @@ import { Pressable, TextInput, View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import IconContainer from './IconContainer'
+import StyledText from '../StyledText'
 
 type ThreadCardProps = {
   thread: Thread
@@ -33,7 +34,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
-  const lengthThreshold = 30
+  const lengthThreshold = 90
   const { t } = useTranslation()
   const threadNameLength = thread?.name?.length || 0
   const threadName = threadNameLength < lengthThreshold ? thread.name : `${thread?.name?.slice(0, lengthThreshold)}...`
@@ -60,7 +61,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
     router.push(`/chat/${thread.id}`)
   }
 
-  const handleThreadCardPress = () => {
+  const handleThreadSelect = () => {
     if (!editing) {
       setIsThreadHovered(true)
       onThreadSelect(thread.id)
@@ -84,58 +85,67 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
     setEditing(false)
   }
 
-  const containerClasses = `
-    flex flex-row items-center
-    ${isSmallScreen ? 'p-2' : 'px-4 py-[6px]'}
-    ${isSelected ? `bg-[${theme.inputBackgroundColor}] rounded-lg` : ''}
-    ${isThreadHovered ? `bg-[${theme.inputBackgroundColor}] shadow-lg rounded-lg` : ''}
-  `
-
   return (
-    <Pressable
-      className={containerClasses}
-      onMouseEnter={() => handleThreadHover(true)}
-      onMouseLeave={() => handleThreadHover(false)}
-      onPress={handleThreadCardPress}
+    <View
+      className={'flex flex-col items-center border-b py-1 p-2'}
+      style={{
+        borderColor: theme.textColor,
+        backgroundColor: isSelected || isThreadHovered ? theme.inputBackgroundColor : undefined,
+      }}
     >
-      <View className='flex-1'>
-        {editing ? (
-          <TextInput
-            ref={inputRef}
-            className={`px-[10px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
-            style={{ color: theme.textColor }}
-            value={editedName}
-            onChangeText={setEditedName}
-            onBlur={handleThreadRename}
-            onFocus={() => setEditing(true)}
-            placeholderTextColor={theme.inputColor}
-          />
-        ) : (
-          <Text
-            className={`px-[10px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
-            style={{ color: theme.textColor }}
-            onPress={handleThreadCardPress}
-          >
-            {threadName ?? t('newChat')}
-          </Text>
+      <Pressable
+        onMouseEnter={() => handleThreadHover(true)}
+        onMouseLeave={() => handleThreadHover(false)}
+        onPress={handleThreadSelect}
+      >
+        <View className=''>
+          {editing ? (
+            <TextInput
+              ref={inputRef}
+              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              style={{ color: theme.textColor, width: 250 }}
+              value={editedName}
+              onChangeText={setEditedName}
+              onBlur={handleThreadRename}
+              onFocus={() => setEditing(true)}
+              placeholderTextColor={theme.inputColor}
+              multiline={true}
+              numberOfLines={3}
+            />
+          ) : (
+            <Text
+              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              style={{ color: theme.textColor }}
+            >
+              {threadName ?? t('newChat')}
+            </Text>
+          )}
+        </View>
+      </Pressable>
+
+      <View className='items-center justify-center'>
+        {editing && (
+          <View className={`flex-row items-center ${isRTL ? 'left-0' : 'right-0'}`}>
+            <Pressable className={'cursor-pointer py-2 px-2 rounded items-center'} onPress={handleThreadRename}>
+              <StyledText>{t('submit')}</StyledText>
+            </Pressable>
+            <Pressable className={'cursor-pointer py-2 px-2 rounded items-center'} onPress={() => setEditing(false)}>
+              <StyledText>{t('cancel')}</StyledText>
+            </Pressable>
+          </View>
         )}
-        {isThreadHovered && threadNameLength > lengthThreshold && (
-          <Text className='text-sm' style={{ color: theme.textColor }}>
-            {thread.name}
-          </Text>
+        {!editing && (
+          <IconContainer
+            thread={thread}
+            isRTL={isRTL}
+            onThreadSelect={handleThreadSelect}
+            onThreadDelete={onThreadDelete}
+            onThreadRename={handleEditIconPress}
+            onThreadShare={handleShareIconPress}
+          />
         )}
       </View>
-
-      {!editing && (isSelected || isThreadHovered) && (
-        <IconContainer
-          thread={thread}
-          isRTL={isRTL}
-          onThreadDelete={onThreadDelete}
-          onThreadRename={handleEditIconPress}
-          onThreadShare={handleShareIconPress}
-        />
-      )}
-    </Pressable>
+    </View>
   )
 }
 

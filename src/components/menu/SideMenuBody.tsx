@@ -2,7 +2,7 @@ import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { Pressable, View, Text } from 'react-native'
+import { Pressable, View, Text, ScrollView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
@@ -51,45 +51,42 @@ const SideMenuBody: React.FC = () => {
       style={{ backgroundColor: theme.sideMenuBackgroundColor }}
     >
       <View
-        className='h-full w-full rounded-none items-start elevation-5'
-        style={{ backgroundColor: theme.sideMenuBackgroundColor }}
+        className={`z-[1] flex-row w-full items-center gap-2 inline-flex cursor-pointer ${
+          isSmallScreen ? 'p-[10px] px-4 h-auto' : `py-4 ${isRTL ? 'pr-4 pl-2' : 'pl-4 pr-2'}`
+        }`}
       >
-        <View
-          className={`z-[1] flex-row w-full items-center gap-2 inline-flex cursor-pointer ${
-            isSmallScreen ? 'p-[10px] px-4 h-auto' : `py-4 ${isRTL ? 'pr-4 pl-2' : 'pl-4 pr-2'}`
-          }`}
-        >
-          {/* Drawer Header */}
-          <View className='flex-1 justify-between flex-row items-center'>
-            <Pressable onPress={() => togglePopup()}>
-              <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
-            </Pressable>
-            <Pressable onPress={handlePress}>
-              <LogoRoundIcon width={24} height={24} />
-            </Pressable>
-            <Pressable onPress={handlePress}>
-              <AddIcon width={24} height={24} fill={theme.iconFill} hoverFill={theme.hoverColor} />
-            </Pressable>
-          </View>
+        {/* Drawer Header */}
+        <View className='flex-1 justify-between flex-row items-center'>
+          <Pressable onPress={() => togglePopup()}>
+            <MenuIcon stroke={theme.iconFill} hoverStroke={theme.hoverColor} width={24} height={24} />
+          </Pressable>
+          <Pressable onPress={handlePress}>
+            <LogoRoundIcon width={24} height={24} />
+          </Pressable>
+          <Pressable onPress={handlePress}>
+            <AddIcon width={24} height={24} fill={theme.iconFill} hoverFill={theme.hoverColor} />
+          </Pressable>
         </View>
-        <View
-          className={`flex-1 w-full rounded-none p-4 py-2 items-start elevation-5 gap-4 flex-grow overflow-y-auto ${
-            isHovered || isMobile ? 'scrollbar-thin' : ''
-          }`}
-          style={{
-            maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
-            scrollbarColor: isHovered || isMobile ? `${theme.scrollColor} transparent` : 'transparent transparent',
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+      </View>
+      <View
+        className={`flex-1 w-full rounded-none p-4 py-2 items-start elevation-5 gap-4 flex-grow overflow-y-auto ${
+          isHovered || isMobile ? 'scrollbar-thin' : ''
+        }`}
+        style={{
+          maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
+          scrollbarColor: isHovered || isMobile ? `${theme.scrollColor} transparent` : 'transparent transparent',
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <ScrollView>
           <ThreadsList onSelectCard={onSelectCard} />
-        </View>
-        <View className='w-full bottom-1 z-[1] items-center justify-start flex-row px-4'>
-          <View className='flex-row'>
-            <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
-            {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
-          </View>
+        </ScrollView>
+      </View>
+      <View className='w-full bottom-0 z-[1] items-center justify-start flex-row px-4'>
+        <View className='flex-row'>
+          <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
+          {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
         </View>
       </View>
     </View>

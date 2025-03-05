@@ -199,7 +199,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
   )
 
   return (
-    <View className='flex-1 w-full'>
+    <View className='flex-1'>
       <View className='flex-1'>{mappedThreads}</View>
       <ConfirmationDialog
         stacked={width < 448}

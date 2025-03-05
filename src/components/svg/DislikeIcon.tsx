@@ -24,7 +24,7 @@ const DislikeIcon: React.FC<Props> = (props: Props) => {
       </G>
       <ClipPath id='clip0_130_1837'>
         <Rect width='18' height='18' fill='white' transform='translate(18 18) rotate(-180)' />
-      </ClipPath>{' '}
+      </ClipPath>
     </ReactNativeSvg>
   )
 }

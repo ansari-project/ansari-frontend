@@ -1,16 +1,9 @@
 import { ScrollToBottomIcon } from '@/components/svg'
-import { useScreenInfo, useScrollManagement } from '@/hooks'
+import { useScreenInfo } from '@/hooks'
 import { Message, RootState, Thread, UserRole } from '@/store'
 import { Helpers } from '@/utils'
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  ListRenderItem,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Pressable,
-} from 'react-native'
+import React, { forwardRef, useRef, useState } from 'react'
+import { ActivityIndicator, Pressable, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import MessageBubble, { MessageBubbleProps } from './MessageBubble'
 
@@ -46,57 +39,11 @@ export interface MessageListRef {
 
 const MessageList = forwardRef<MessageListRef, MessageListProps>(
   ({ activeThread, isSending, reactionsEnabled = true, scrollToBottomEnabled = true, width, isShare }, ref) => {
-    const flatListRef = useRef<FlatList<Message>>(null)
-    const { isScrolledUp, handleScroll, scrollToBottom } = useScrollManagement(50)
-    // State to track the last known content height to determine when to auto-scroll
-    const [lastContentHeight, setLastContentHeight] = useState<number>(0)
+    const scrollViewRef = useRef<ScrollView>(null)
+    const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
     const { width: dynamicWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
-
-    // Expose scrollToBottom method to parent components
-    useImperativeHandle(ref, () => ({
-      scrollToBottom: () => flatListRef.current?.scrollToEnd({ animated: true }),
-    }))
-
-    // Render individual message item
-    const renderMessage: ListRenderItem<Message> = useCallback(
-      ({ item }: { item: Message }) => {
-        const id = item.id || Helpers.generateUniqueId() + (isSending ? '-sending' : '')
-        // Use Memoized version of MessageBubble for performance optimization
-        return (
-          <MessageBubbleMemo
-            key={id}
-            isSending={isSending}
-            isOutgoing={item.role === UserRole.User}
-            message={item}
-            threadId={String(activeThread?.id)}
-            reactionsEnabled={reactionsEnabled}
-            width={width}
-            isShare={isShare}
-          />
-        )
-      },
-      [activeThread?.id, isSending],
-    )
-
-    // Key extractor for FlatList items
-    const keyExtractor = useCallback((item: Message) => item.id?.toString() || Helpers.generateUniqueId(), [])
-
-    // Handle content size change to auto-scroll
-    const handleContentSizeChange = useCallback(
-      (contentWidth: number, contentHeight: number) => {
-        if (contentHeight !== lastContentHeight) {
-          setLastContentHeight(contentHeight)
-          if (!isScrolledUp && !isShare && scrollToBottomEnabled) {
-            scrollToBottom()
-            // Auto-scroll only if we are not marked as scrolled up
-            flatListRef.current?.scrollToEnd({ animated: false })
-          }
-        }
-      },
-      [lastContentHeight, isScrolledUp, scrollToBottom, isShare, scrollToBottomEnabled],
-    )
 
     const scrollToBottomPosition = dynamicWidth / 2 - 22 // 22 is the half of the width of the button
     // Scroll to Bottom Button component
@@ -104,49 +51,60 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
       <Pressable
         className='absolute p-[10px] items-center justify-center rounded-[15px]'
         style={{
-          bottom: 70,
+          bottom: 25,
           right: scrollToBottomPosition,
           backgroundColor: theme.sendIconColor,
-          color: theme.iconFill,
         }}
         onPress={() => {
-          flatListRef.current?.scrollToEnd({ animated: false })
-          scrollToBottom()
+          scrollViewRef.current?.scrollToEnd()
         }}
       >
-        <ScrollToBottomIcon name='Scroll to Bottom' width={24} height={24} />
+        <ScrollToBottomIcon
+          name='Scroll to Bottom'
+          width={24}
+          height={24}
+          fill={theme.iconFill}
+          hoverFill={theme.hoverColor}
+        />
       </Pressable>
     )
 
-    // Auto-scroll to bottom on certain conditions
-    useEffect(() => {
-      if (!isScrolledUp && flatListRef.current && !isShare && scrollToBottomEnabled) {
-        // Use a slight delay to ensure the list has updated
-        flatListRef.current?.scrollToEnd({ animated: false })
-      }
-    }, [activeThread?.messages, isScrolledUp, isShare, scrollToBottomEnabled])
+    const filteredMessages = (activeThread?.messages || []).filter((message) => typeof message.content === 'string')
 
     return (
-      <>
-        <FlatList
-          className={`w-full mx-auto h-full mb-${isSmallScreen ? '1' : '2'}`}
-          ref={flatListRef}
-          data={activeThread?.messages || []}
-          extraData={activeThread}
-          renderItem={renderMessage}
-          keyExtractor={keyExtractor}
-          scrollEventThrottle={16}
-          ListFooterComponent={isSending && <ActivityIndicator size='small' color={theme.hoverColor} />}
-          showsVerticalScrollIndicator={false}
-          scrollEnabled={true}
-          onScroll={(event: NativeSyntheticEvent<NativeScrollEvent>) => handleScroll(event)}
-          onContentSizeChange={handleContentSizeChange}
-          initialNumToRender={10}
-          maxToRenderPerBatch={5}
-          windowSize={5}
-        />
-        {isScrolledUp && scrollToBottomEnabled && <ScrollToBottomButton />}
-      </>
+      <View className={'flex-1 mx-auto'}>
+        {isSending && (
+          <View className='items-center justify-center'>
+            <ActivityIndicator size='small' color={theme.hoverColor} />
+          </View>
+        )}
+        <ScrollView
+          ref={scrollViewRef}
+          className={`mb-${isSmallScreen ? '1' : '2'}`}
+          scrollEventThrottle={50}
+          onScroll={(event) => {
+            setDisplayScrollButton(event.nativeEvent.contentOffset.y > 250)
+          }}
+        >
+          {filteredMessages.map((message: Message) => {
+            const id = message.id || Helpers.generateUniqueId() + (isSending ? '-sending' : '')
+
+            return (
+              <MessageBubbleMemo
+                key={id}
+                isSending={isSending}
+                isOutgoing={message.role === UserRole.User}
+                message={message}
+                threadId={String(activeThread?.id)}
+                reactionsEnabled={reactionsEnabled}
+                width={width}
+                isShare={isShare}
+              />
+            )
+          })}
+        </ScrollView>
+        {displayScrollButton && scrollToBottomEnabled && <ScrollToBottomButton />}
+      </View>
     )
   },
 )

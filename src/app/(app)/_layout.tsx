@@ -61,10 +61,10 @@ export const AppLayout = () => {
               )}
               <View className={`flex-grow justify-center items-center self-center ${isSmallScreen ? 'pb-1' : ''}`}>
                 <Slot />
+                {showFooter && <Footer />}
               </View>
             </View>
           </View>
-          {showFooter && <Footer />}
         </KeyboardAvoidingView>
       </MenuDrawer>
     </ImageBackground>

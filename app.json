@@ -15,6 +15,14 @@
       "expo-font",
       "expo-localization",
       [
+        "@sentry/react-native/expo",
+        {
+          "organization": "ansari-project-llc",
+          "project": "ansari-frontend",
+          "url": "https://sentry.io/"
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "backgroundColor": "#FFFFFF",

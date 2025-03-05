@@ -30,7 +30,7 @@ const initStore = async () => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: __DEV__,
   })
 
   return store

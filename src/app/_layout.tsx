@@ -21,7 +21,7 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
 })
 
 Sentry.init({
-  dsn: 'https://ef868c9da09de6a41d52a86417a05aa7@o4508852781973504.ingest.us.sentry.io/4508927083675648',
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: false,
   environment: process.env.EXPO_PUBLIC_ENVIRONMENT,
   // In development, capture all transactions for better debugging

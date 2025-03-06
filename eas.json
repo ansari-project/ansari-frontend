@@ -5,14 +5,28 @@
   },
   "build": {
     "development": {
+      "environment": "development",
+      "channel": "development",
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {
+      "environment": "preview",
+      "channel": "preview",
+      "distribution": "internal"
+    },
+    "production-internal": {
+      "environment": "production",
+      "channel": "production",
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true
+      "environment": "production",
+      "channel": "production",
+      "autoIncrement": true,
+      "android": {
+        "credentialsSource": "remote"
+      }
     }
   },
   "submit": {

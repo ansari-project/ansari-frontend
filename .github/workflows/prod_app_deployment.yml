@@ -1,0 +1,78 @@
+name: Production App Deployment
+
+on:
+  push:
+    branches:
+      - release/*
+
+env:
+  EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+jobs:
+  continuously-deploy:
+    runs-on: ubuntu-latest
+    concurrency: continuous-deploy-fingerprint-release
+    permissions:
+      contents: write # Allow checkout and automated version bump write
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@main
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      # Get current fingerprint info and builds to check if we need to do a version bump
+      - name: Get fingerprint info
+        id: info
+        uses: expo/expo-github-action/continuous-deploy-fingerprint-info@main
+        with:
+          profile: production
+
+      # If we do need to do a version bump, calculate the version to bump to. Note that this will vary greatly depending on your versioning preferences.
+      - name: Get current version and calculate next version
+        id: getversion
+        if: ${{ github.event.head_commit.message != 'Automated version bump commit' && (steps.info.outputs.android-build-id == '' || steps.info.outputs.ios-build-id == '') }}
+        run: |
+          echo "currentversion=$(node -p "require('./app.json').expo.version")" >> $GITHUB_OUTPUT
+          echo "nextversion=$(node -p "parseInt(require('./app.json').expo.version, 10) + 1 + '.0.0'")" >> $GITHUB_OUTPUT
+
+      # Bump the version. Note that this will vary greatly depending on your CNG and versioning preferences.
+      - name: Bump Version
+        id: bumpversion
+        if: ${{ github.event.head_commit.message != 'Automated version bump commit' && (steps.info.outputs.android-build-id == '' || steps.info.outputs.ios-build-id == '') }}
+        uses: restackio/update-json-file-action@2.1
+        with:
+          file: app.json
+          fields: '{"expo.version": "${{ steps.getversion.outputs.nextversion }}"}'
+
+      # Commit and push the version bump to main.
+      - name: Commit version bump
+        id: commitversionbump
+        if: ${{ github.event.head_commit.message != 'Automated version bump commit' && (steps.info.outputs.android-build-id == '' || steps.info.outputs.ios-build-id == '') }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Automated version bump commit'
+
+      # Always continuously deploy. When no version bump is done (already have production builds for the fingerprint), this will solely deploy OTA updates.
+      # When a version bump is done, this will kick off new production builds and auto-submit them to the app stores if configured.
+      # Important note: the above version bump commit doesn't trigger a new workflow run due to
+      # https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+      # so it is safe to always continuously deploy here, it'll use the post-commit fingerprint. If instead it did kick off a new workflow run, we'd skip
+      # this step here.
+      - name: Continuously Deploy
+        uses: expo/expo-github-action/continuous-deploy-fingerprint@main
+        with:
+          profile: production
+          branch: production
+          # auto-submit-builds: true

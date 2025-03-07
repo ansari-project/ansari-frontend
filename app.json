@@ -51,7 +51,7 @@
       }
     },
     "runtimeVersion": {
-      "policy": "appVersion"
+      "policy": "fingerprint"
     },
     "updates": {
       "url": "https://u.expo.dev/e2f465a7-8007-4e83-91ba-4a9df4c5209a"

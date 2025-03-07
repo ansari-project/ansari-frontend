@@ -2,7 +2,7 @@ import '../global.css'
 
 import { i18n } from '@/i18n'
 import { RootState, initStore } from '@/store'
-import { Slot } from 'expo-router'
+import { Slot, useNavigationContainerRef } from 'expo-router'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
@@ -12,8 +12,41 @@ import { LoadingScreen } from '@/components'
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 import RootContainer from '@/components/RootContainer'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import * as Sentry from '@sentry/react-native'
+import { captureConsoleIntegration } from '@sentry/core'
+import { isRunningInExpoGo } from 'expo'
 
-const AppLayout = () => {
+const navigationIntegration = Sentry.reactNavigationIntegration({
+  enableTimeToInitialDisplay: !isRunningInExpoGo(),
+})
+
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  debug: false,
+  environment: process.env.EXPO_PUBLIC_ENVIRONMENT,
+  // In development, capture all transactions for better debugging
+  // In production, sample 20% of transactions to balance insights with performance
+  tracesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
+  // Keep profilesSampleRate in sync with tracesSampleRate since profiles are tied to transactions
+  profilesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
+  integrations: [
+    // Pass integration
+    navigationIntegration,
+    captureConsoleIntegration({ levels: ['error'] }),
+  ],
+  enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
+})
+
+const RootLayout = () => {
+  // Capture the NavigationContainer ref and register it with the integration
+  const ref = useNavigationContainerRef()
+
+  useEffect(() => {
+    if (ref?.current) {
+      navigationIntegration.registerNavigationContainer(ref)
+    }
+  }, [ref])
+
   // Specify the type of the state to be either null or an EnhancedStore instance
   const [reduxStore, setReduxStore] = useState<EnhancedStore<RootState> | null>(null)
   let [fontsLoaded] = useFonts({
@@ -44,4 +77,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout
+export default Sentry.wrap(RootLayout)

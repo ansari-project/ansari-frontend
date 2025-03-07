@@ -1,0 +1,39 @@
+name: Staging App Deployment
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+jobs:
+  continuously-deploy:
+    runs-on: ubuntu-latest
+    concurrency: continuous-deploy-fingerprint-${{ github.run_id }}
+    permissions:
+      contents: read # Allow checkout
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@main
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Continuously Deploy
+        uses: expo/expo-github-action/continuous-deploy-fingerprint@main
+        with:
+          profile: preview
+          branch: preview

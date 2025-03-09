@@ -2,7 +2,7 @@ import '../global.css'
 
 import { i18n } from '@/i18n'
 import { RootState, initStore } from '@/store'
-import { Slot, useNavigationContainerRef } from 'expo-router'
+import { Stack, useNavigationContainerRef } from 'expo-router'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
@@ -15,6 +15,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as Sentry from '@sentry/react-native'
 import { captureConsoleIntegration } from '@sentry/core'
 import { isRunningInExpoGo } from 'expo'
+import { StatusBar, useColorScheme } from 'react-native'
+import { getThemeStyle } from '@/utils'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
@@ -24,7 +27,8 @@ Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: false,
   environment: process.env.EXPO_PUBLIC_ENVIRONMENT,
-  // In development, capture all transactions for better debugging
+  enabled: !__DEV__,
+  // In staging, capture all transactions for better debugging
   // In production, sample 20% of transactions to balance insights with performance
   tracesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
   // Keep profilesSampleRate in sync with tracesSampleRate since profiles are tied to transactions
@@ -40,6 +44,7 @@ Sentry.init({
 const RootLayout = () => {
   // Capture the NavigationContainer ref and register it with the integration
   const ref = useNavigationContainerRef()
+  const colorScheme = useColorScheme()
 
   useEffect(() => {
     if (ref?.current) {
@@ -64,15 +69,25 @@ const RootLayout = () => {
     return <LoadingScreen />
   }
 
+  let backgroundColor = getThemeStyle(colorScheme, 'backgroundColor')
+
   return (
     <SafeAreaProvider>
-      <I18nextProvider i18n={i18n}>
-        <Provider store={reduxStore}>
-          <RootContainer>
-            <Slot />
-          </RootContainer>
-        </Provider>
-      </I18nextProvider>
+      <KeyboardProvider>
+        <I18nextProvider i18n={i18n}>
+          <Provider store={reduxStore}>
+            <RootContainer>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: backgroundColor },
+                }}
+              />
+              <StatusBar backgroundColor={backgroundColor} />
+            </RootContainer>
+          </Provider>
+        </I18nextProvider>
+      </KeyboardProvider>
     </SafeAreaProvider>
   )
 }

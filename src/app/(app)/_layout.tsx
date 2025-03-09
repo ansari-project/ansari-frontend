@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { MenuDrawer } from '@/components/menu'
 import { Redirect, Slot } from 'expo-router'
+import RootImageBackground from '@/components/RootImageBackground'
 
 /**
  * AppLayout Component.
@@ -40,11 +41,7 @@ export const AppLayout = () => {
   }
 
   return (
-    <ImageBackground
-      style={{ width, height }}
-      className='bg-repeat bg-contain'
-      source={require('@/assets/images/background.png')}
-    >
+    <RootImageBackground>
       <MenuDrawer>
         <KeyboardAvoidingView
           className='flex-1 overflow-y-auto'
@@ -67,7 +64,7 @@ export const AppLayout = () => {
           </View>
         </KeyboardAvoidingView>
       </MenuDrawer>
-    </ImageBackground>
+    </RootImageBackground>
   )
 }
 

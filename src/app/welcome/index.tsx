@@ -68,7 +68,11 @@ const Welcome: React.FC = () => {
                 style={[
                   generalStyle.buttonPrimary,
                   generalStyle.fullWidth,
-                  { backgroundColor: theme.popupBackgroundColor },
+                  {
+                    backgroundColor: theme.popupBackgroundColor,
+                    borderColor: theme.buttonSecondaryBorderColor,
+                    borderWidth: 1,
+                  },
                 ]}
                 onPress={() => router.push('/register')}
               >

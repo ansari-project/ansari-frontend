@@ -98,7 +98,6 @@ const createThemedStyles = (
       borderRadius: 4,
       alignItems: 'center',
       marginVertical: isSmallScreen ? 6 : 12,
-      marginHorizontal: 6,
     },
     buttonPrimaryTextHover: {},
     buttonPrimaryText: {
@@ -116,7 +115,6 @@ const createThemedStyles = (
       borderRadius: 4,
       alignItems: 'center',
       marginVertical: isSmallScreen ? 6 : 12,
-      marginHorizontal: 6,
     },
     buttonSecondaryText: {
       color: theme.buttonSecondaryColor,

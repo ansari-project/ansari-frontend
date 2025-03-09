@@ -1,11 +1,10 @@
 import { useAuth, useScreenInfo } from '@/hooks'
-import { RootState } from '@/store'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, Platform, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { KeyboardAvoidingView, Platform, View } from 'react-native'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Redirect, Slot } from 'expo-router'
+import RootImageBackground from '@/components/RootImageBackground'
 
 /**
  * PublicLayout Component.
@@ -16,20 +15,14 @@ import { Redirect, Slot } from 'expo-router'
 export const PublicLayout = () => {
   const { isAuthenticated, accessToken } = useAuth()
   // Hook to get screen information
-  const { isSmallScreen, isMobile, width, height } = useScreenInfo()
-  // Redux hook to get theme data
-  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isSmallScreen, isMobile } = useScreenInfo()
 
   if (isAuthenticated && accessToken) {
     return <Redirect href='/' />
   }
 
   return (
-    <ImageBackground
-      style={{ width, height }}
-      className='bg-repeat bg-contain'
-      source={require('@/assets/images/background.png')}
-    >
+    <RootImageBackground>
       <KeyboardAvoidingView className='flex-1 w-full' behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
         <View className='flex-grow w-full items-center justify-between font-inter'>
           <View className='flex-1 w-full'>
@@ -52,7 +45,7 @@ export const PublicLayout = () => {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </ImageBackground>
+    </RootImageBackground>
   )
 }
 

@@ -1,11 +1,12 @@
 import { useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, Platform, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Slot } from 'expo-router'
+import RootImageBackground from '@/components/RootImageBackground'
 
 /**
  * ShareLayout Component.
@@ -15,16 +16,10 @@ import { Slot } from 'expo-router'
  */
 export const ShareLayout = () => {
   // Hook to get screen information
-  const { isSmallScreen, isMobile, width, height } = useScreenInfo()
-  // Redux hook to get theme data
-  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isSmallScreen, isMobile } = useScreenInfo()
 
   return (
-    <ImageBackground
-      style={{ width, height }}
-      className='bg-repeat bg-contain'
-      source={require('@/assets/images/background.png')}
-    >
+    <RootImageBackground>
       <KeyboardAvoidingView
         className={'flex-1 w-full'}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -53,7 +48,7 @@ export const ShareLayout = () => {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </ImageBackground>
+    </RootImageBackground>
   )
 }
 

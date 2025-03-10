@@ -13,7 +13,6 @@ class UserService {
   private createHeaders = () => {
     return {
       'Content-Type': 'application/json',
-      'X-Mobile-Ansari': 'ANSARI',
     }
   }
 

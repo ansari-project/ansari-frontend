@@ -24,7 +24,6 @@ class ChatService {
     return {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.accessToken}`,
-      'X-Mobile-Ansari': 'ANSARI',
     }
   }
 
@@ -204,7 +203,6 @@ class ChatService {
       {
         headers: {
           'Content-Type': 'application/json',
-          'X-Mobile-Ansari': 'ANSARI',
         },
       },
       dispatch,

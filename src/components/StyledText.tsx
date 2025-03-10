@@ -53,7 +53,7 @@ export const StyledText: React.FC<StyledTextProps> = ({
       case 'h1':
         return `${isSmallScreen ? 'text-[18px] leading-[21px]' : 'text-[42px] leading-[50px]'}`
       case 'h2':
-        return 'text-[24px] leading-[29px]'
+        return 'font-semibold text-[24px] leading-[29px]'
       default:
         return ''
     }

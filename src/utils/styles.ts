@@ -36,6 +36,7 @@ const createThemedStyles = (
 ): ThemedStyles => {
   return StyleSheet.create({
     formContainer: {
+      flex: 1,
       color: theme.primaryColor,
       paddingHorizontal: 24,
       paddingVertical: 32,
@@ -45,7 +46,6 @@ const createThemedStyles = (
     form: {
       width: 300,
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'stretch',
     },
     input: {

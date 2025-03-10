@@ -1,4 +1,4 @@
-import { DoubleCheckIcon, LogoIcon } from '@/components/svg'
+import { LogoIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { UserService } from '@/services'
 import { RootState } from '@/store'
@@ -81,31 +81,30 @@ const ForgetPasswordScreen: React.FC = () => {
 
   if (emailState.submitted) {
     return (
-      <KeyboardAvoidingView style={generalStyle.formContainer}>
-        <View className='items-center mb-6'>
-          <LogoIcon fill={theme.iconFill} width={52} height={52} />
-        </View>
+      <KeyboardAvoidingView
+        style={[generalStyle.formContainer]}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
         <View style={generalStyle.form}>
-          <StyledText variant='h2' color='primary' textAlign='center' className='mb-5'>
+          <View className='items-center py-2'>
+            <LogoIcon fill={theme.iconFill} width={52} height={52} />
+          </View>
+          <StyledText variant='h2' color='primary' className='mb-6'>
             {t('forgotYourPassword')}
           </StyledText>
-          <View className='items-center w-full mb-5'>
-            <DoubleCheckIcon width='50' />
-          </View>
 
           <StyledText color='primary' className='mb-5'>
             {t('forgotSuccessMessage')}
           </StyledText>
-          <View className='flex-row justify-start items-center'>
-            <Text
-              className='flex-start'
+          <View className='flex-row justify-start'>
+            <Pressable
               style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               onPress={handleBack}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
             >
-              <Text style={generalStyle.link}>{t('login')}</Text>
-            </Text>
+              <StyledText style={generalStyle.link}>{t('continue')}</StyledText>
+            </Pressable>
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -113,12 +112,12 @@ const ForgetPasswordScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer}>
-      <View className='items-center mb-6'>
-        <LogoIcon fill={theme.iconFill} width={52} height={52} />
-      </View>
+    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={generalStyle.form}>
-        <StyledText variant='h2' color='primary' className='font-bold mb-5'>
+        <View className='items-center py-2'>
+          <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        </View>
+        <StyledText variant='h2' color='primary' className='font-semibold mb-6'>
           {t('forgotYourPassword')}
         </StyledText>
         <StyledText color='primary' className='mb-5 text-[16px]'>
@@ -145,15 +144,15 @@ const ForgetPasswordScreen: React.FC = () => {
         </Pressable>
 
         <View className='flex-row justify-start items-center'>
-          <Text
+          <Pressable
             className='flex-start'
             style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
             onPress={handleBack}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <Text style={generalStyle.link}>{t('back')}</Text>
-          </Text>
+            <StyledText style={generalStyle.link}>{t('back')}</StyledText>
+          </Pressable>
         </View>
       </View>
     </KeyboardAvoidingView>

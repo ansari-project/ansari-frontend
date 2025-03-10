@@ -52,7 +52,7 @@ const Welcome: React.FC = () => {
           }}
         >
           <View className='w-full items-center px-[10%]'>
-            <StyledText variant='h2' className='font-semibold mb-4'>
+            <StyledText variant='h2' className='mb-4'>
               {t('getStarted')}
             </StyledText>
             <Pressable

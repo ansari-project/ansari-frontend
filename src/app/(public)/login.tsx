@@ -20,6 +20,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import * as Yup from 'yup'
+import StyledText from '@/components/StyledText'
 
 const LoginScreen: React.FC = () => {
   const router = useRouter()
@@ -40,26 +41,6 @@ const LoginScreen: React.FC = () => {
   // Styles
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
   const styles = StyleSheet.create({
-    title: {
-      ...Platform.select({
-        web: {
-          textAlign: 'center',
-          marginBottom: 24,
-          fontSize: 24,
-          fontWeight: 500,
-          color: theme.primaryColor,
-          fontFamily: 'Inter',
-        },
-        default: {
-          textAlign: 'center',
-          marginBottom: 24,
-          fontSize: 24,
-          fontWeight: 500,
-          color: theme.primaryColor,
-          fontFamily: 'Inter',
-        },
-      }),
-    },
     forgetLink: { ...generalStyle.link, marginLeft: 10, fontFamily: 'Inter' },
     successText: { color: theme.hoverColor, marginBottom: 16, alignSelf: 'center' },
   })
@@ -100,11 +81,13 @@ const LoginScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={generalStyle.form}>
-        <View className='items-center'>
+        <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
         </View>
         {successMessage && <Text style={styles.successText}>{successMessage}</Text>}
-        <Text style={styles.title}>{t('title')}</Text>
+        <StyledText variant='h2' color='primary' className='mb-6'>
+          {t('title')}
+        </StyledText>
         <Formik
           initialValues={initialValues}
           validateOnChange={false}
@@ -147,16 +130,19 @@ const LoginScreen: React.FC = () => {
 
               {errorMessage && <Text style={generalStyle.errorText}>{errorMessage}</Text>}
 
-              <Text style={generalStyle.prompt}>
-                <Text
-                  style={[generalStyle.link, Platform.OS === 'web' && hovered === 1 ? generalStyle.boldText : null]}
+              <View className='flex-row justify-end' style={generalStyle.prompt}>
+                <Pressable
                   onMouseEnter={() => setHovered(1)}
                   onMouseLeave={() => setHovered(0)}
                   onPress={() => router.push('/forgot-password')}
                 >
-                  {t('forgetPassword')}
-                </Text>
-              </Text>
+                  <Text
+                    style={[generalStyle.link, Platform.OS === 'web' && hovered === 1 ? generalStyle.boldText : null]}
+                  >
+                    {t('forgetPassword')}
+                  </Text>
+                </Pressable>
+              </View>
 
               <Pressable
                 style={[generalStyle.buttonPrimary, isSubmitting && generalStyle.buttonDisabled]}
@@ -178,23 +164,19 @@ const LoginScreen: React.FC = () => {
                 </Text>
               </Pressable>
 
-              <Text
+              <View
+                className='flex-row justify-end'
                 style={[generalStyle.prompt, Platform.OS === 'web' && hovered === 2 ? generalStyle.boldText : null]}
               >
-                <View>
-                  <Text style={generalStyle.primaryColorText}>{t('dontHaveAccount')}</Text>
-                </View>
-                <View>
-                  <Text
-                    style={generalStyle.link}
-                    onMouseEnter={() => setHovered(2)}
-                    onMouseLeave={() => setHovered(0)}
-                    onPress={() => router.push('/register')}
-                  >
-                    {t('register')}
-                  </Text>
-                </View>
-              </Text>
+                <StyledText style={generalStyle.primaryColorText}>{t('dontHaveAccount')}</StyledText>
+                <Pressable
+                  onMouseEnter={() => setHovered(2)}
+                  onMouseLeave={() => setHovered(0)}
+                  onPress={() => router.push('/register')}
+                >
+                  <StyledText style={generalStyle.link}>{t('register')}</StyledText>
+                </Pressable>
+              </View>
             </View>
           )}
         </Formik>

@@ -7,20 +7,13 @@ import { useRegisterSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  KeyboardAvoidingView,
-  NativeSyntheticEvent,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, Text, TextInput, View } from 'react-native'
 import Checkbox from 'expo-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
+import StyledText from '@/components/StyledText'
+
 interface RegisterFormValues {
   email: string
   password: string
@@ -90,56 +83,17 @@ const RegisterScreen: React.FC = () => {
     }
   }
 
-  // Styles
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
-  const styles = StyleSheet.create({
-    title: {
-      ...Platform.select({
-        web: {
-          textAlign: 'center',
-          marginBottom: 24,
-          fontSize: 24,
-          fontWeight: 500,
-          color: theme.primaryColor,
-          fontFamily: 'Inter',
-        },
-        default: {
-          textAlign: 'center',
-          marginBottom: 24,
-          fontSize: 24,
-          fontWeight: 500,
-          color: theme.primaryColor,
-          fontFamily: 'Inter',
-        },
-      }),
-    },
-    passwordInputContainer: {
-      position: 'relative',
-      justifyContent: 'center',
-    },
-    checkboxContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingVertical: 8,
-    },
-    checkbox: {
-      marginRight: isRTL ? 'inherit' : 8,
-      marginLeft: isRTL ? 8 : 'inherit',
-    },
-    label: {
-      fontSize: 14,
-      lineHeight: 16,
-      fontWeight: 300,
-      color: theme.textColor,
-      fontFamily: 'Inter',
-    },
-  })
 
   return (
     <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <LogoIcon fill={theme.iconFill} width={52} height={52} />
       <View style={generalStyle.form}>
-        <Text style={styles.title}>{t('title')}</Text>
+        <View className='items-center py-2'>
+          <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        </View>
+        <StyledText variant='h2' color='primary' className='mb-6'>
+          {t('title')}
+        </StyledText>
         <Formik
           initialValues={initialValues}
           validateOnChange={false}
@@ -197,7 +151,7 @@ const RegisterScreen: React.FC = () => {
               />
               {touched.lastName && errors.lastName && <Text style={generalStyle.errorText}>{errors.lastName}</Text>}
 
-              <View style={styles.passwordInputContainer}>
+              <View className='justify-center'>
                 <TextInput
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
@@ -214,7 +168,7 @@ const RegisterScreen: React.FC = () => {
               </View>
               {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 
-              <View style={styles.passwordInputContainer}>
+              <View className='justify-center'>
                 <TextInput
                   onChangeText={handleChange('confirmPassword')}
                   onBlur={handleBlur('confirmPassword')}
@@ -232,13 +186,16 @@ const RegisterScreen: React.FC = () => {
               {touched.confirmPassword && errors.confirmPassword && (
                 <Text style={generalStyle.errorText}>{errors.confirmPassword}</Text>
               )}
-              <View style={styles.checkboxContainer}>
+
+              <View className='flex-row items-center py-2'>
                 <Checkbox
                   value={values.registerToMailList}
                   onValueChange={(value: boolean) => setFieldValue('registerToMailList', value)}
-                  style={styles.checkbox}
+                  className={isRTL ? 'ml-2' : 'mr-2'}
                 />
-                <Text style={styles.label}>{t('mailListText')}</Text>
+                <StyledText className='text-sm leading-4 font-light' color='text'>
+                  {t('mailListText')}
+                </StyledText>
               </View>
               {errors.registerToMailList && <Text style={generalStyle.errorText}>{errors.registerToMailList}</Text>}
 
@@ -252,23 +209,19 @@ const RegisterScreen: React.FC = () => {
                 <Text style={generalStyle.buttonPrimaryText}>{isSubmitting ? t('registering') : t('register')}</Text>
               </Pressable>
 
-              <Text
+              <View
+                className='flex-row justify-end'
                 style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               >
-                <View>
-                  <Text style={generalStyle.primaryColorText}> {t('alreadyHaveAccount')}</Text>
-                </View>
-                <View>
-                  <Text
-                    style={generalStyle.link}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                    onPress={() => router.push('/login')}
-                  >
-                    {t('loginHere')}
-                  </Text>
-                </View>
-              </Text>
+                <StyledText style={generalStyle.primaryColorText}>{t('alreadyHaveAccount')}</StyledText>
+                <Pressable
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                  onPress={() => router.push('/login')}
+                >
+                  <StyledText style={generalStyle.link}>{t('loginHere')}</StyledText>
+                </Pressable>
+              </View>
             </View>
           )}
         </Formik>

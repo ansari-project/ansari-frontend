@@ -24,23 +24,17 @@ export const PublicLayout = () => {
   return (
     <RootImageBackground>
       <View className='flex-1'>
-        <View className='items-center'>
-          <View>
-            {isMobile && (
-              <View className={`flex-row justify-end items-center p-${isSmallScreen ? '2' : '4'}`}>
-                <ActionButtons isTop={true} />
-              </View>
-            )}
-
-            <View className='flex-1'>
-              <View className='flex-1'>
-                <View className={`flex-1 justify-center items-center ${isSmallScreen ? 'pb-1' : ''}`}>
-                  <Slot />
-                </View>
-              </View>
-              <Footer />
-            </View>
+        {isMobile && (
+          <View className={`flex-row justify-end items-center p-${isSmallScreen ? '2' : '4'}`}>
+            <ActionButtons isTop={true} />
           </View>
+        )}
+
+        <View className='flex-1'>
+          <View className={`flex-1 ${isSmallScreen ? 'pb-1' : ''}`}>
+            <Slot />
+          </View>
+          <Footer />
         </View>
       </View>
     </RootImageBackground>

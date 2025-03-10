@@ -3,7 +3,7 @@ import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, Text, View, StyleSheet } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 import { useSelector } from 'react-redux'
 
@@ -67,26 +67,6 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
     setIsVisible(false) // Close the language selector after selection.
   }
 
-  const styles = StyleSheet.create({
-    popupContent: {
-      top: 30,
-      width: 180,
-      borderRadius: 4,
-      borderColor: theme.primaryColor,
-      backgroundColor: theme.popupBackgroundColor,
-      padding: 8,
-      position: 'absolute',
-      marginLeft: 40,
-      marginRight: 40,
-      alignItems: 'flex-end',
-      paddingTop: 20,
-      paddingBottom: 20,
-      paddingLeft: 16,
-      paddingRight: 16,
-      overflow: 'visible',
-    },
-  })
-
   return (
     <View>
       <Pressable ref={touchableRef} className='p-2 rounded' onPress={() => setIsVisible(!isVisible)}>
@@ -105,7 +85,20 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
             width: 180,
             height: 50 * reorderedLanguages.length,
           }}
-          popoverStyle={styles.popupContent}
+          popoverStyle={{
+            position: 'absolute',
+            top: 30,
+            width: 180,
+            borderRadius: 4,
+            borderColor: theme.primaryColor,
+            backgroundColor: theme.popupBackgroundColor,
+            marginLeft: 40,
+            marginRight: 40,
+            alignItems: 'flex-end',
+            paddingVertical: 20,
+            paddingHorizontal: 16,
+            overflow: 'visible',
+          }}
         >
           <View className='w-full'>
             {reorderedLanguages.map((language) => (

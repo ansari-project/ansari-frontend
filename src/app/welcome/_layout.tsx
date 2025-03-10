@@ -2,7 +2,7 @@ import RootImageBackground from '@/components/RootImageBackground'
 import { useAuth } from '@/hooks'
 import { Redirect, Slot } from 'expo-router'
 import React from 'react'
-import { KeyboardAvoidingView, Platform, View } from 'react-native'
+import { View } from 'react-native'
 
 /**
  * WelcomeLayout Component.
@@ -19,11 +19,9 @@ export const WelcomeLayout = () => {
 
   return (
     <RootImageBackground>
-      <KeyboardAvoidingView className='flex-1' behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
-        <View className='flex-grow'>
-          <Slot />
-        </View>
-      </KeyboardAvoidingView>
+      <View className='flex-1'>
+        <Slot />
+      </View>
     </RootImageBackground>
   )
 }

@@ -36,38 +36,17 @@ const createThemedStyles = (
 ): ThemedStyles => {
   return StyleSheet.create({
     formContainer: {
-      ...Platform.select({
-        web: {
-          flex: 1,
-          position: 'relative',
-          zIndex: 1,
-          color: theme.primaryColor,
-          width: isSmallScreen ? width : '100%',
-          paddingHorizontal: 24,
-          paddingVertical: 32,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        },
-        default: {
-          flex: 1,
-          position: 'relative',
-          zIndex: 1,
-          color: theme.primaryColor,
-          width: isSmallScreen ? width : '100%',
-          paddingHorizontal: 24,
-          paddingVertical: 32,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        },
-      }),
+      color: theme.primaryColor,
+      paddingHorizontal: 24,
+      paddingVertical: 32,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
     },
     form: {
-      width: 380,
-      paddingHorizontal: isSmallScreen ? 24 : 0,
+      width: 300,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'stretch',
     },
     input: {
       paddingVertical: 18,

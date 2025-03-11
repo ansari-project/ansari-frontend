@@ -1,4 +1,4 @@
-import { useDirection, useScreenInfo } from '@/hooks'
+import { useDirection } from '@/hooks'
 import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -31,7 +31,6 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
-  const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
   const lengthThreshold = 90

@@ -1,8 +1,6 @@
 import { useScreenInfo } from '@/hooks'
-import { RootState } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { Animated, Platform } from 'react-native'
-import { useSelector } from 'react-redux'
 import StyledText from './StyledText'
 
 interface ToastProps {
@@ -14,7 +12,6 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ message, duration, onDismiss, backgroundColor }) => {
   const [fadeAnim] = useState(new Animated.Value(0)) // Initial value for opacity: 0
-  const theme = useSelector((state: RootState) => state.theme.theme)
   const { isSmallScreen } = useScreenInfo()
 
   const color = backgroundColor ?? 'red'

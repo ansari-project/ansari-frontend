@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, TextStyle, Platform } from 'react-native'
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
 import { Theme } from './theme'
 
 // Define a type for the styles object

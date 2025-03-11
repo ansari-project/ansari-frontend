@@ -2,7 +2,7 @@ import { LineIcon, RightArrowIcon } from '@/components/svg'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import React from 'react'
-import { Dimensions, ImageBackground, KeyboardAvoidingView, Platform, Pressable, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -28,9 +28,6 @@ export const AppLayout = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const showFooter = true
-
-  // Get the height of the window
-  const { width, height } = Dimensions.get('window')
 
   // Function to toggle the side menu
   const togglePopup = () => {

@@ -3,7 +3,7 @@ import { AppDispatch, RootState, Thread, ThreadNameRequest, deleteThread, setThr
 import { Helpers } from '@/utils'
 import React, { useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { ActivityIndicator, Text, View } from 'react-native'
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import ConfirmationDialog from '../ConfirmationDialog'
@@ -142,7 +142,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
 
   if (loading) {
     return (
-      <View className='flex-1 w-full justify-center items-center'>
+      <View className='flex-1 w-full pt-4 justify-center items-center'>
         <ActivityIndicator size='small' color={theme.hoverColor} />
       </View>
     )
@@ -200,7 +200,7 @@ const ThreadsList: React.FC<ThreadsListProp> = ({ onSelectCard }) => {
 
   return (
     <View className='flex-1'>
-      <View className='flex-1'>{mappedThreads}</View>
+      <ScrollView className='flex-1'>{mappedThreads}</ScrollView>
       <ConfirmationDialog
         stacked={width < 448}
         isRTL={isRTL}

@@ -2,7 +2,7 @@ import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { Pressable, View, Text, ScrollView, SafeAreaView } from 'react-native'
+import { Pressable, View, SafeAreaView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
@@ -73,15 +73,14 @@ const SideMenuBody: React.FC = () => {
           isHovered || isMobile ? 'scrollbar-thin' : ''
         }`}
         style={{
-          maxHeight: Helpers.isMobileWithAddressBar() ? 'calc(100vh - 180px)' : 'calc(100vh - 120px)',
           scrollbarColor: isHovered || isMobile ? `${theme.scrollColor} transparent` : 'transparent transparent',
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <ScrollView>
+        <View className='flex-1 w-full'>
           <ThreadsList onSelectCard={onSelectCard} />
-        </ScrollView>
+        </View>
       </View>
       <View className='w-full bottom-0 z-[1] items-center justify-start flex-row px-4'>
         <View className='flex-row'>

@@ -75,11 +75,14 @@ class ChatService {
     signal: AbortSignal,
     dispatch: Dispatch<UnknownAction>,
   ) {
+    const headers: any = this.createHeaders()
+    headers['Accept'] = 'text/event-stream'
+
     const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/threads/${threadId}`,
       {
         method: 'POST',
-        headers: this.createHeaders(),
+        headers,
         body: JSON.stringify(message),
         signal: signal, // Pass the signal for cancellation
       },

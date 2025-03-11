@@ -81,7 +81,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
               </Pressable>
             </View>
             {/* Modal body */}
-            <ScrollView className={`items-center w-full ${isSmallScreen ? 'p-2' : 'p-4'}`}>
+            <ScrollView className={`w-full ${isSmallScreen ? 'p-2' : 'p-4'}`} contentContainerClassName='items-center'>
               <StyledText className='font-bold text-sm leading-[21px] mb-4'>{t('share.message')}</StyledText>
               <View
                 className=''

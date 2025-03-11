@@ -1,3 +1,4 @@
+import { fetch } from 'expo/fetch'
 import { TokenRefreshError } from '@/errors'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
 import StorageService from './StorageService'

@@ -4,6 +4,7 @@ import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+  Keyboard,
   KeyboardEvent,
   NativeSyntheticEvent,
   Pressable,
@@ -56,6 +57,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   }
 
   const submit = () => {
+    Keyboard.dismiss()
     dispatch(tootleInputFullMode(false))
     onSendPress()
   }
@@ -90,7 +92,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
           onChangeText={handleChange}
           onContentSizeChange={handleContentSizeChange}
-          className={`flex-1 rounded text-sm leading-[22px] ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
+          className={`flex-1 rounded text-sm ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
           style={{
             color: theme.textColor,
             outlineWidth: 0,
@@ -105,7 +107,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           textAlignVertical='top'
           numberOfLines={3}
         />
-        <View className={`flex-col ${showExpandCollapseIcon ? 'justify-between' : 'justify-end'}`}>
+        <View className={`flex-col ${showExpandCollapseIcon ? 'justify-between' : 'justify-center'}`}>
           {showExpandCollapseIcon && (
             <Pressable onPress={updateInputFullMode} type='submit'>
               <View className='justify-center'>

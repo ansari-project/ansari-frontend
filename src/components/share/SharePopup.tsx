@@ -3,14 +3,15 @@ import { CheckIcon, CloseIcon } from '@/components/svg'
 import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState } from '@/store'
 import { getShareThreadUUID } from '@/store/actions/chatActions'
-import { GetEnv } from '@/utils'
+import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Clipboard, Modal, Pressable, View } from 'react-native'
+import { Modal, Pressable, ScrollView, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Toast from '../Toast'
 import MessageList from '../chat/MessageList'
 import StyledText from '../StyledText'
+import Clipboard from '@react-native-clipboard/clipboard'
 
 // Define Props interface for SharePopup component
 interface Props {
@@ -23,7 +24,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
   // Localization hook
   const { t } = useTranslation()
   // Screen information hook
-  const { isSmallScreen } = useScreenInfo()
+  const { isSmallScreen, width } = useScreenInfo()
   // Redux hooks
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { activeThread } = useChat()
@@ -34,6 +35,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
   const [toastVisible, setToastVisible] = useState<boolean>(false)
   // Direction hook
   const { isRTL } = useDirection()
+  const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
   // Get environment variable
   const shareURL = GetEnv('SHARE_URL')
 
@@ -63,10 +65,9 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
           style={{ backgroundColor: theme.splashBackgroundColor }}
         >
           <View
-            className={`${isSmallScreen ? 'w-full' : 'w-[600px]'} min-h-[400px] rounded`}
+            className={`${isSmallScreen ? 'w-full' : 'w-[600px]'} h-[400px] rounded`}
             style={{
               backgroundColor: theme.popupBackgroundColor,
-              overflowY: isSmallScreen ? 'scroll' : undefined,
             }}
           >
             {/* Modal header */}
@@ -80,10 +81,10 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
               </Pressable>
             </View>
             {/* Modal body */}
-            <View className={`items-center w-full ${isSmallScreen ? 'p-2' : 'p-4'}`}>
+            <ScrollView className={`items-center w-full ${isSmallScreen ? 'p-2' : 'p-4'}`}>
               <StyledText className='font-bold text-sm leading-[21px] mb-4'>{t('share.message')}</StyledText>
               <View
-                className='w-full border'
+                className=''
                 style={{
                   borderColor: theme.primaryColor,
                   backgroundColor: theme.backgroundColorSecondary,
@@ -98,22 +99,17 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
                   width='100%'
                 />
               </View>
-            </View>
+            </ScrollView>
             {/* Modal footer */}
-            <View className={`${isSmallScreen ? 'items-center' : 'items-end'} ${isSmallScreen ? 'p-2' : 'p-4'} pt-0`}>
+            <View className={`${isSmallScreen ? 'items-center' : 'items-end'} ${isSmallScreen ? 'p-2' : 'p-4'}`}>
               <Pressable
                 className={`py-2 px-4 rounded ${isSmallScreen ? 'w-full' : ''}`}
-                style={{
-                  backgroundColor: isHover === 1 ? theme.hoverColor : theme.primaryColor,
-                }}
+                style={[generalStyle.buttonPrimary]}
                 onPress={() => copyShareURL()}
                 onMouseEnter={() => setIsHover(1)}
                 onMouseLeave={() => setIsHover(-1)}
               >
-                <StyledText
-                  className='text-center font-bold'
-                  style={{ color: isHover === 1 ? theme.buttonTextHoverColor : theme.buttonTextColor }}
-                >
+                <StyledText className='text-center font-bold'>
                   {isCopying === 1 ? t('share.copyingLink') : isCopying === 2 ? t('share.copied') : t('share.copyLink')}
                 </StyledText>
               </Pressable>

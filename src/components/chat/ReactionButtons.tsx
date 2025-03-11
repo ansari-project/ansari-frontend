@@ -4,7 +4,8 @@ import { FeedbackClass, Message, ReactionButtonsState, RootState } from '@/store
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Clipboard, Pressable, Text, TextInput, View } from 'react-native'
+import { Pressable, Text, TextInput, View } from 'react-native'
+import Clipboard from '@react-native-clipboard/clipboard'
 import { useSelector } from 'react-redux'
 
 export type FeedbackOption = {

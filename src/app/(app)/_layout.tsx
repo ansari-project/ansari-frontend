@@ -9,6 +9,7 @@ import Header from '@/components/Header'
 import { MenuDrawer } from '@/components/menu'
 import { Redirect, Slot } from 'expo-router'
 import RootImageBackground from '@/components/RootImageBackground'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 /**
  * AppLayout Component.
@@ -43,26 +44,28 @@ export const AppLayout = () => {
   return (
     <RootImageBackground>
       <MenuDrawer>
-        <KeyboardAvoidingView
-          className='flex-1 overflow-y-auto'
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          enabled
-        >
-          <View className='flex-1'>
-            <Header />
+        <SafeAreaView className='flex-1'>
+          <KeyboardAvoidingView
+            className='flex-1 overflow-y-auto'
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            enabled
+          >
             <View className='flex-1'>
-              {isAuthenticated && !isGuest && !isMobile && (
-                <View className={`mt-auto mb-auto ${isSideMenuOpened ? 'mx-2' : 'mx-4'}`}>
-                  <Pressable onPress={togglePopup}>{isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}</Pressable>
+              <Header />
+              <View className='flex-1'>
+                {isAuthenticated && !isGuest && !isMobile && (
+                  <View className={`mt-auto mb-auto ${isSideMenuOpened ? 'mx-2' : 'mx-4'}`}>
+                    <Pressable onPress={togglePopup}>{isSideMenuOpened ? <LineIcon /> : <RightArrowIcon />}</Pressable>
+                  </View>
+                )}
+                <View className={`flex-grow justify-center items-center self-center ${isSmallScreen ? 'pb-1' : ''}`}>
+                  <Slot />
+                  {showFooter && <Footer />}
                 </View>
-              )}
-              <View className={`flex-grow justify-center items-center self-center ${isSmallScreen ? 'pb-1' : ''}`}>
-                <Slot />
-                {showFooter && <Footer />}
               </View>
             </View>
-          </View>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
       </MenuDrawer>
     </RootImageBackground>
   )

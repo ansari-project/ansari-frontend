@@ -102,7 +102,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
           {editing ? (
             <TextInput
               ref={inputRef}
-              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              className={`px-[6px] py-[6px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
               style={{ color: theme.textColor, width: 250 }}
               value={editedName}
               onChangeText={setEditedName}
@@ -114,7 +114,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
             />
           ) : (
             <Text
-              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              className={`px-[6px] py-[6px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
               style={{ color: theme.textColor }}
             >
               {threadName ?? t('newChat')}

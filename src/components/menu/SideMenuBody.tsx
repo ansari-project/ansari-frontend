@@ -2,7 +2,7 @@ import { AddIcon, LogoRoundIcon, MenuIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThreads, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { Pressable, View, Text, ScrollView } from 'react-native'
+import { Pressable, View, Text, ScrollView, SafeAreaView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import ActionButtons from '../ActionButtons'
@@ -46,7 +46,7 @@ const SideMenuBody: React.FC = () => {
   }
 
   return (
-    <View
+    <SafeAreaView
       className={'flex-1 justify-center items-start w-full'}
       style={{ backgroundColor: theme.sideMenuBackgroundColor }}
     >
@@ -89,7 +89,7 @@ const SideMenuBody: React.FC = () => {
           {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

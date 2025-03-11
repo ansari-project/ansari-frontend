@@ -2,7 +2,7 @@ import { ChatContainer, Toast } from '@/components'
 import { useAuth, useScreenInfo } from '@/hooks'
 import { AppDispatch, setActiveThread, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useLocalSearchParams } from 'expo-router'
 
@@ -34,10 +34,10 @@ const HomeScreen: React.FC = () => {
   }, [errorMessage])
 
   return (
-    <SafeAreaView className='flex-1 items-center justify-between'>
+    <View className='flex-1 items-center justify-between'>
       <ChatContainer isHome={true} />
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
-    </SafeAreaView>
+    </View>
   )
 }
 

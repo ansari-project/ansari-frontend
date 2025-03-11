@@ -80,7 +80,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       style={{ width: width || contentWidth }}
     >
       {isOutgoing ? (
-        <View className='rounded p-4 w-8 h-8 items-center justify-center'>
+        <View className='rounded px-5 py-2 w-8 h-8 items-center justify-center'>
           <Avatar
             size={34}
             name={`${user?.firstName} ${user?.lastName}`}
@@ -89,7 +89,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           />
         </View>
       ) : (
-        <View className='rounded p-4 w-8 h-8 items-center justify-center'>
+        <View className='rounded px-5 py-2 w-8 h-8 items-center justify-center'>
           <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
         </View>
       )}

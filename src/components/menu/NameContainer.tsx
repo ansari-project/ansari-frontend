@@ -72,7 +72,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             </Pressable>
           )} */}
 
-          <Pressable className={`flex-row items-center py-4 ${!isGuest ? 'border-t' : ''}`}>
+          <Pressable className={'flex-row items-center py-4'}>
             <LogoutButton onHandelPress={setIsVisible} />
           </Pressable>
         </View>

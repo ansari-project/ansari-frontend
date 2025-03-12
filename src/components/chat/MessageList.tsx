@@ -56,6 +56,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
           backgroundColor: theme.sendIconColor,
         }}
         onPress={() => {
+          setDisplayScrollButton(false)
           scrollViewRef.current?.scrollToEnd()
         }}
       >
@@ -81,9 +82,17 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
         <ScrollView
           ref={scrollViewRef}
           className={`mb-${isSmallScreen ? '1' : '2'}`}
-          scrollEventThrottle={50}
+          scrollEventThrottle={250}
           onScroll={(event) => {
-            setDisplayScrollButton(event.nativeEvent.contentOffset.y > 250)
+            if (isSending) return
+
+            const scrollOffset = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height
+            setDisplayScrollButton(scrollOffset < event.nativeEvent.contentSize.height - 250)
+          }}
+          onContentSizeChange={(contentWidth: number, contentHeight: number) => {
+            if (!isSending) return
+
+            setDisplayScrollButton(true)
           }}
         >
           {filteredMessages.map((message: Message) => {

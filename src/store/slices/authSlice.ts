@@ -71,7 +71,6 @@ const authSlice = createSlice({
         return newState
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log('login fulfilled', action.payload)
         const newState = {
           ...state,
           isAuthenticated: true,
@@ -96,7 +95,6 @@ const authSlice = createSlice({
         state.error = null
       })
       .addCase(guestLogin.fulfilled, (state, action) => {
-        console.log('guest login fulfilled', action.payload)
         const newState = {
           ...state,
           isAuthenticated: true,
@@ -147,7 +145,6 @@ export async function loadAuthState() {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'X-Mobile-Ansari': 'ANSARI',
       },
     },
     () => {

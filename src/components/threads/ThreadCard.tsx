@@ -1,4 +1,4 @@
-import { useDirection, useScreenInfo } from '@/hooks'
+import { useDirection } from '@/hooks'
 import { AppDispatch, RootState, Thread, toggleSharePopup, toggleSideMenu } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -31,7 +31,6 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
-  const { isSmallScreen } = useScreenInfo()
   const { isRTL } = useDirection()
   const [isThreadHovered, setIsThreadHovered] = useState(false)
   const lengthThreshold = 90
@@ -102,7 +101,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
           {editing ? (
             <TextInput
               ref={inputRef}
-              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              className={`px-[6px] py-[6px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
               style={{ color: theme.textColor, width: 250 }}
               value={editedName}
               onChangeText={setEditedName}
@@ -114,7 +113,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
             />
           ) : (
             <Text
-              className={`px-[6px] py-[6px] font-medium font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
+              className={`px-[6px] py-[6px] font-['Inter'] ${isRTL ? 'text-right' : 'text-left'}`}
               style={{ color: theme.textColor }}
             >
               {threadName ?? t('newChat')}

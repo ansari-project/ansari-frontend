@@ -5,7 +5,8 @@
     "slug": "ansari-chat",
     "version": "1.0.0",
     "scheme": "ansarichat",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
+    "orientation": "portrait",
     "newArchEnabled": true,
     "icon": "./src/assets/images/icon.png",
     "web": {
@@ -28,7 +29,18 @@
         {
           "backgroundColor": "#FFFFFF",
           "image": "./src/assets/images/splash-icon.png",
-          "imageWidth": 200
+          "dark": {
+            "backgroundColor": "#0F0F0F",
+            "image": "./src/assets/images/splash-icon-dark.png"
+          },
+          "imageWidth": 200,
+          "resizeMode": "contain"
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "PORTRAIT"
         }
       ]
     ],
@@ -46,8 +58,9 @@
     },
     "ios": {
       "bundleIdentifier": "chat.ansari.app",
+      "supportsTablet": false,
       "infoPlist": {
-        "ExpoLocalization_supportsRTL": true
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "runtimeVersion": {

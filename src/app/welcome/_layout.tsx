@@ -1,9 +1,8 @@
-import { useAuth, useScreenInfo } from '@/hooks'
-import { RootState } from '@/store'
+import RootImageBackground from '@/components/RootImageBackground'
+import { useAuth } from '@/hooks'
 import { Redirect, Slot } from 'expo-router'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View } from 'react-native'
 
 /**
  * WelcomeLayout Component.
@@ -13,25 +12,17 @@ import { useSelector } from 'react-redux'
  */
 export const WelcomeLayout = () => {
   const { isAuthenticated, accessToken } = useAuth()
-  // Hook to get screen information
-  const { width, height } = useScreenInfo()
 
   if (isAuthenticated && accessToken) {
     return <Redirect href='/' />
   }
 
   return (
-    <ImageBackground
-      style={{ width, height }}
-      className='bg-repeat bg-contain'
-      source={require('@/assets/images/background.png')}
-    >
-      <KeyboardAvoidingView className='flex-1' behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
-        <View className='flex-grow'>
-          <Slot />
-        </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+    <RootImageBackground>
+      <View className='flex-1'>
+        <Slot />
+      </View>
+    </RootImageBackground>
   )
 }
 

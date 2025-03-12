@@ -1,3 +1,5 @@
+import { ColorSchemeName } from 'react-native'
+
 // Define the interface for the theme object
 export interface Theme {
   primaryColor: string
@@ -86,4 +88,8 @@ export const darkTheme: Theme = {
   sendIconColor: '#302E2D',
   scrollColor: '#D9D9E3CC',
   yellowColor: '#F29B00',
+}
+
+export const getThemeStyle = (colorSchema: ColorSchemeName, property: string) => {
+  return colorSchema === 'dark' ? darkTheme[property as keyof Theme] : lightTheme[property as keyof Theme]
 }

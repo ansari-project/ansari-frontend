@@ -1,3 +1,4 @@
+import { fetch } from 'expo/fetch'
 import { TokenRefreshError } from '@/errors'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
 import StorageService from './StorageService'
@@ -28,7 +29,6 @@ class ApiService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Mobile-Ansari': 'ANSARI',
       },
       body: JSON.stringify(data),
     })
@@ -46,7 +46,6 @@ class ApiService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-mobile-ansari': 'ANSARI',
       },
       body: JSON.stringify(data),
     })
@@ -72,7 +71,6 @@ class ApiService {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${refreshToken}`,
-        'x-mobile-ansari': 'ANSARI',
       },
     })
 
@@ -84,11 +82,14 @@ class ApiService {
     }
 
     const data = (await response.json()) as RefreshTokenResponse
-    refreshTokensCallback(data)
+
     if (data.status !== 'success') {
       resetAuthCallback()
       throw new TokenRefreshError('Token refresh failed: ' + data.status)
     }
+
+    await this.storageService.saveTokens(data.access_token, data.refresh_token)
+    refreshTokensCallback(data)
 
     return data.access_token
   }
@@ -134,7 +135,6 @@ class ApiService {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'x-mobile-ansari': 'ANSARI',
       },
     })
 

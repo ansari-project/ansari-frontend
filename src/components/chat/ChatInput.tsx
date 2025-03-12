@@ -4,10 +4,9 @@ import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+  Keyboard,
   KeyboardEvent,
   NativeSyntheticEvent,
-  PixelRatio,
-  Platform,
   Pressable,
   TextInput,
   TextInputContentSizeChangeEventData,
@@ -26,37 +25,23 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange, isSending, onCancelSend }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
   const chatInputRef = useRef<TextInput>(null)
-  const [chatInputHeight, setChatInputHeight] = useState<number>(22)
   const [showExpandCollapseIcon, setShowExpandCollapseIcon] = useState<boolean>(false)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
   const { t } = useTranslation()
   const { isRTL } = useDirection()
-  const { width, height, isMobile, isSmallScreen } = useScreenInfo()
+  const { isMobile, isSmallScreen } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
   const dispatch = useDispatch<AppDispatch>()
 
   const handleContentSizeChange = (event: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
-    if (value.length === 0) {
-      setChatInputHeight(22)
-    } else if (Platform.OS === 'web') {
-      setChatInputHeight(event.nativeEvent.contentSize.height)
-    } else {
-      setChatInputHeight(event.nativeEvent.contentSize.height * PixelRatio.get())
+    if (isMobile || isSmallScreen) {
+      setShowExpandCollapseIcon(event.nativeEvent.contentSize.height > 70)
     }
   }
 
   const handleChange = (text: string) => {
     if (text.length === 0) {
-      setChatInputHeight(22)
       dispatch(tootleInputFullMode(false))
-    }
-
-    if (isMobile || isSmallScreen) {
-      if (chatInputHeight > 60) {
-        setShowExpandCollapseIcon(true)
-      } else {
-        setShowExpandCollapseIcon(false)
-      }
     }
 
     if (onInputChange) {
@@ -72,6 +57,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   }
 
   const submit = () => {
+    Keyboard.dismiss()
     dispatch(tootleInputFullMode(false))
     onSendPress()
   }
@@ -90,7 +76,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   return (
     <Pressable onPress={focusInput}>
       <View
-        className={`flex-row justify-start items-center rounded p-4 px-5 ${
+        className={`flex-row justify-start items-stretch rounded p-4 px-5 ${
           isInputFullMode ? 'fixed bottom-0 h-full border-0' : ''
         }`}
         style={{
@@ -106,12 +92,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
           onChangeText={handleChange}
           onContentSizeChange={handleContentSizeChange}
-          className={`flex-1 rounded text-sm leading-[22px] ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
+          className={`flex-1 rounded text-sm ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
           style={{
             color: theme.textColor,
             outlineWidth: 0,
             overflowY: 'auto',
-            height: isInputFullMode ? '100%' : chatInputHeight,
+            height: isInputFullMode ? '100%' : 'auto',
             maxHeight: isInputFullMode ? '100%' : isSmallScreen ? 100 : 300,
           }}
           value={value}
@@ -119,9 +105,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           placeholderTextColor={theme.primaryColor}
           multiline={true}
           textAlignVertical='top'
-          rows={1}
+          numberOfLines={3}
         />
-        <View className={`${showExpandCollapseIcon ? 'justify-between' : 'justify-end'}`}>
+        <View className={`flex-col ${showExpandCollapseIcon ? 'justify-between' : 'justify-center'}`}>
           {showExpandCollapseIcon && (
             <Pressable onPress={updateInputFullMode} type='submit'>
               <View className='justify-center'>

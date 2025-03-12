@@ -14,7 +14,7 @@ import { Platform } from 'react-native'
  * @returns {boolean} - `true` if the value is considered blank, otherwise `false`.
  */
 const isBlank = (
-  value: string | number | boolean | null | undefined | Array<unknown> | Record<string, unknown>,
+  value: string | number | boolean | null | undefined | unknown[] | Record<string, unknown>,
 ): boolean => {
   // Check for null or undefined
   if (value === null || value === undefined) {

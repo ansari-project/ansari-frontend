@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactNativeSvg, { Props } from './ReactNativeSvg'
-import { Path } from 'react-native-svg'
 
 const FullscreenexitIcon: React.FC<Props> = (props: Props) => {
   return (

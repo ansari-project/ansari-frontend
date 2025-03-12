@@ -1,7 +1,4 @@
-import { SettingIcon } from '@/components/svg'
-import { useAuth } from '@/hooks'
 import React, { useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 import { Avatar } from '@kolking/react-native-avatar'
@@ -17,12 +14,10 @@ type NameContainerProps = {
 }
 
 const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayName = true, initial }) => {
-  const { t } = useTranslation()
-  const { isGuest } = useAuth()
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const touchableRef = useRef(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
-  if (nameColor == undefined) {
+  if (nameColor === undefined) {
     nameColor = theme.textColor
   }
 
@@ -72,7 +67,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             </Pressable>
           )} */}
 
-          <Pressable className={`flex-row items-center py-4 ${!isGuest ? 'border-t' : ''}`}>
+          <Pressable className={'flex-row items-center py-4'}>
             <LogoutButton onHandelPress={setIsVisible} />
           </Pressable>
         </View>

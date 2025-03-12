@@ -1,11 +1,10 @@
 import { useScreenInfo } from '@/hooks'
-import { RootState } from '@/store'
 import React from 'react'
-import { ImageBackground, KeyboardAvoidingView, Platform, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View } from 'react-native'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Slot } from 'expo-router'
+import RootImageBackground from '@/components/RootImageBackground'
 
 /**
  * ShareLayout Component.
@@ -14,46 +13,29 @@ import { Slot } from 'expo-router'
  * @returns JSX element representing the ShareLayout component.
  */
 export const ShareLayout = () => {
-  // Hook to get screen information
-  const { isSmallScreen, isMobile, width, height } = useScreenInfo()
-  // Redux hook to get theme data
-  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { isSmallScreen, isMobile } = useScreenInfo()
 
   return (
-    <ImageBackground
-      style={{ width, height }}
-      className='bg-repeat bg-contain'
-      source={require('@/assets/images/background.png')}
-    >
-      <KeyboardAvoidingView
-        className={'flex-1 w-full'}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        enabled
-      >
-        <View className='flex-grow w-full items-center justify-between font-inter'>
-          <View className='flex-1 w-full'>
+    <RootImageBackground>
+      <View className='flex-1'>
+        <View className='items-center'>
+          <View className=''>
             {isMobile && (
-              <View className={`flex-row justify-end w-full items-center p-${isSmallScreen ? '2' : '4'}`}>
+              <View className={`flex-row justify-end items-center p-${isSmallScreen ? '2' : '4'}`}>
                 <ActionButtons isTop={true} />
               </View>
             )}
 
-            <View className='flex-1 flex-grow w-full'>
-              <View className='flex-1 w-full'>
-                <View
-                  className={`flex-grow justify-center items-center w-full self-center font-inter ${
-                    isSmallScreen ? 'pb-1' : ''
-                  }`}
-                >
-                  <Slot />
-                </View>
+            <View className='flex-1'>
+              <View className={`flex-1 justify-center items-center ${isSmallScreen ? 'pb-1' : ''}`}>
+                <Slot />
               </View>
-              <Footer />
             </View>
+            <Footer />
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+      </View>
+    </RootImageBackground>
   )
 }
 

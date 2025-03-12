@@ -1,7 +1,7 @@
 import { ChatIcon, DeleteIcon, RenameIcon, ShareIcon } from '@/components/svg'
 import { RootState, Thread } from '@/store'
 import React from 'react'
-import { Pressable, View } from 'react-native'
+import { Platform, Pressable, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 type IconContainerProps = {
@@ -32,7 +32,7 @@ const IconContainer: React.FC<IconContainerProps> = ({
           <ChatIcon width='22' height='22' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>
       )}
-      {onThreadRename && (
+      {Platform.OS === 'web' && onThreadRename && (
         <Pressable onPress={() => onThreadRename(thread)} className='py-2 px-4'>
           <RenameIcon width='22' height='22' fill={theme.iconFill} hoverFill={theme.hoverColor} />
         </Pressable>

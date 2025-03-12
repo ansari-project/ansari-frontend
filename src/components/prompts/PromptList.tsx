@@ -63,7 +63,7 @@ const PromptList: React.FC<PromptListProps> = ({ onPromptSelect }) => {
         {prompts.map((prompt, index) => (
           <PromptCard
             key={prompt.id}
-            isMiddle={index == 1}
+            isMiddle={index === 1}
             title={prompt.title}
             subtitle={prompt.subtitle}
             Icon={prompt.Icon as typeof ReactNativeSvg}

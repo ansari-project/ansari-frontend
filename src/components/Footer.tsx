@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
       {(!isAuthenticated || isGuest) && !isMobile && <ActionButtons isTop={false} />}
       {isAuthenticated && (
         <View className='flex-1'>
-          <View className='flex-row items-center justify-center p-1.5'>
+          <View className='flex-row items-center justify-center px-1.5'>
             <StyledText className='text-xs leading-[21px] font-light'>{t('authorizedFooterText')}</StyledText>
             <Subscription />
           </View>

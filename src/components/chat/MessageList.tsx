@@ -42,38 +42,37 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const scrollViewRef = useRef<ScrollView>(null)
     const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
-    const { width: dynamicWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
+    const { isSmallScreen } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
 
-    const scrollToBottomPosition = dynamicWidth / 2 - 22 // 22 is the half of the width of the button
     // Scroll to Bottom Button component
     const ScrollToBottomButton = () => (
-      <Pressable
-        className='absolute p-[10px] items-center justify-center rounded-[15px]'
-        style={{
-          bottom: 25,
-          right: scrollToBottomPosition,
-          backgroundColor: theme.sendIconColor,
-        }}
-        onPress={() => {
-          setDisplayScrollButton(false)
-          scrollViewRef.current?.scrollToEnd()
-        }}
-      >
-        <ScrollToBottomIcon
-          name='Scroll to Bottom'
-          width={24}
-          height={24}
-          fill={theme.iconFill}
-          hoverFill={theme.hoverColor}
-        />
-      </Pressable>
+      <View className='absolute bottom-[25px] items-center justify-center w-full'>
+        <Pressable
+          className='rounded-[15px] p-[10px]'
+          style={{
+            backgroundColor: theme.sendIconColor,
+          }}
+          onPress={() => {
+            setDisplayScrollButton(false)
+            scrollViewRef.current?.scrollToEnd()
+          }}
+        >
+          <ScrollToBottomIcon
+            name='Scroll to Bottom'
+            width={24}
+            height={24}
+            fill={theme.iconFill}
+            hoverFill={theme.hoverColor}
+          />
+        </Pressable>
+      </View>
     )
 
     const filteredMessages = (activeThread?.messages || []).filter((message) => typeof message.content === 'string')
 
     return (
-      <View className={'flex-1 mx-auto'}>
+      <View className={'flex-1'}>
         {isSending && (
           <View className='items-center justify-center'>
             <ActivityIndicator size='small' color={theme.hoverColor} />

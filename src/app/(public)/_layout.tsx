@@ -1,6 +1,6 @@
 import { useAuth, useScreenInfo } from '@/hooks'
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Redirect, Slot } from 'expo-router'
@@ -30,12 +30,10 @@ export const PublicLayout = () => {
           </View>
         )}
 
-        <View className='flex-1'>
-          <View className={`flex-1 ${isSmallScreen ? 'pb-1' : ''}`}>
-            <Slot />
-          </View>
-          <Footer />
-        </View>
+        <ScrollView className='flex-1'>
+          <Slot />
+        </ScrollView>
+        <Footer />
       </View>
     </RootImageBackground>
   )

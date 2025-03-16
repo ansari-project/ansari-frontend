@@ -1,6 +1,6 @@
 import { useScreenInfo } from '@/hooks'
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Slot } from 'expo-router'
@@ -18,22 +18,16 @@ export const ShareLayout = () => {
   return (
     <RootImageBackground>
       <View className='flex-1'>
-        <View className='items-center'>
-          <View className=''>
-            {isMobile && (
-              <View className={`flex-row justify-end items-center p-${isSmallScreen ? '2' : '4'}`}>
-                <ActionButtons isTop={true} />
-              </View>
-            )}
-
-            <View className='flex-1'>
-              <View className={`flex-1 justify-center items-center ${isSmallScreen ? 'pb-1' : ''}`}>
-                <Slot />
-              </View>
-            </View>
-            <Footer />
+        {isMobile && (
+          <View className={`flex-row justify-end items-center p-${isSmallScreen ? '2' : '4'}`}>
+            <ActionButtons isTop={true} />
           </View>
-        </View>
+        )}
+
+        <ScrollView className='flex-1'>
+          <Slot />
+        </ScrollView>
+        <Footer />
       </View>
     </RootImageBackground>
   )

@@ -4,7 +4,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import SideMenuBody from './SideMenuBody'
-import { useAuth, useScreenInfo } from '@/hooks'
+import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 
 export type Props = {
   children: React.ReactNode
@@ -12,6 +12,7 @@ export type Props = {
 
 const MenuDrawer: React.FC<Props> = ({ children }) => {
   const isSideMenuOpened = useSelector((state: RootState) => state.sideMenu.isOpen)
+  const { isRTL } = useDirection()
   const { isMobile } = useScreenInfo()
   const { isGuest } = useAuth()
   const dispatch = useDispatch<AppDispatch>()
@@ -25,6 +26,7 @@ const MenuDrawer: React.FC<Props> = ({ children }) => {
     <Drawer
       drawerType={isGuest || isMobile || !isSideMenuOpened ? 'front' : 'permanent'}
       open={isSideMenuOpened}
+      direction={isRTL ? 'rtl' : 'ltr'}
       drawerStyle={{
         backgroundColor: theme.sideMenuBackgroundColor,
         width: 300,

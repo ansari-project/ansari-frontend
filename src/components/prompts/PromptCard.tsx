@@ -25,7 +25,7 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
 
   return (
     <Pressable
-      className={`flex-row p-4 rounded ${isSmallScreen ? 'mb-4' : ''} ${isMiddle && !isSmallScreen ? 'mx-4' : ''}`}
+      className={`flex-1 flex-row p-4 rounded ${isSmallScreen ? 'mb-4' : ''} ${isMiddle && !isSmallScreen ? 'mx-4' : ''}`}
       style={[
         {
           backgroundColor: isActive ? theme.promptBackgroundHoverColor : theme.popupBackgroundColor,

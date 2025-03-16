@@ -7,7 +7,7 @@ import { createGeneralThemedStyles } from '@/utils'
 import { useRegisterSchema } from '@/validation'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
@@ -44,6 +44,7 @@ const ResetPasswordScreen: React.FC = () => {
 
   // Submits the form after validation
   const handleSubmit = async () => {
+    Keyboard.dismiss()
     setIsSubmitting(true)
     try {
       await validatePassword()

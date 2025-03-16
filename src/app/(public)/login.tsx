@@ -8,6 +8,7 @@ import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+  Keyboard,
   KeyboardAvoidingView,
   NativeSyntheticEvent,
   Platform,
@@ -46,6 +47,7 @@ const LoginScreen: React.FC = () => {
   })
 
   const handleSubmit = (values: LoginRequest, formikHelpers: FormikHelpers<LoginRequest>) => {
+    Keyboard.dismiss()
     formikHelpers.setSubmitting(true)
     setErrorMessage(null)
     dispatch(login(values))

@@ -7,7 +7,16 @@ import { useRegisterSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, Text, TextInput, View } from 'react-native'
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  NativeSyntheticEvent,
+  Platform,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from 'react-native'
 import Checkbox from 'expo-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
@@ -46,6 +55,7 @@ const RegisterScreen: React.FC = () => {
   }
 
   const handleSubmit = (values: RegisterFormValues, formikHelpers: FormikHelpers<RegisterFormValues>) => {
+    Keyboard.dismiss()
     formikHelpers.setSubmitting(true)
     setErrorMessage(null)
     const registerRequest: RegisterRequest = {

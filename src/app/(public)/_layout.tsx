@@ -30,7 +30,7 @@ export const PublicLayout = () => {
           </View>
         )}
 
-        <ScrollView className='flex-1'>
+        <ScrollView className='flex-1' keyboardShouldPersistTaps='handled'>
           <Slot />
         </ScrollView>
         <Footer />

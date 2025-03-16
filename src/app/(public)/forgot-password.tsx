@@ -5,7 +5,16 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, TextInput, View, Text } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  NativeSyntheticEvent,
+  Platform,
+  Pressable,
+  TextInput,
+  View,
+  Text,
+  Keyboard,
+} from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
@@ -39,6 +48,7 @@ const ForgetPasswordScreen: React.FC = () => {
     try {
       await validateEmail(emailState.email)
       if (emailState.email.trim().length !== 0 && Object.keys(errors).length === 0) {
+        Keyboard.dismiss()
         await UserService.requestPasswordReset(emailState.email)
         setEmailState({ ...emailState, submitted: true })
       }

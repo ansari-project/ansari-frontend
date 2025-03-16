@@ -115,7 +115,7 @@ const authSlice = createSlice({
         return newState
       })
       .addMatcher(
-        (action) => action.type.startsWith('auth/logout'),
+        (action) => action.type.startsWith('auth/logout') || action.type.startsWith('auth/deleteAccount'),
         (state) => {
           return initialAuthState
         },

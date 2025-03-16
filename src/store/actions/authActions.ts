@@ -93,6 +93,19 @@ export const logout = createAsyncThunk<void, string, { rejectValue: FailurePaylo
   },
 )
 
+export const deleteAccount = createAsyncThunk<void, string, { rejectValue: FailurePayload }>(
+  'auth/deleteAccount',
+  async (accessToken: string, { rejectWithValue }) => {
+    try {
+      const apiService = new ApiService()
+      await apiService.deleteAccount(accessToken)
+    } catch (error) {
+      const message = (error instanceof Error && error.message) || 'Account deletion failed'
+      return rejectWithValue({ message: message })
+    }
+  },
+)
+
 /**
  * Async thunk for guest login.
  * This function generates guest credentials, registers the guest, and logs them in.

@@ -23,7 +23,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ onHandelPress }) => {
   return (
     <Pressable onPress={handleLogout} className='flex-1 flex-row items-center'>
       <LogoutIcon stroke={theme.textColor} />
-      <Text className='text-[16px] font-medium px-[10px]' style={{ color: theme.textColor }}>
+      <Text className='text-[16px] font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
         {t('logout')}
       </Text>
     </Pressable>

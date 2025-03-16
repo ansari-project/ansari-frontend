@@ -5,6 +5,9 @@ import { Avatar } from '@kolking/react-native-avatar'
 import LogoutButton from '../Logout'
 import { RootState } from '@/store'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { useRouter } from 'expo-router'
+import { CloseIcon } from '@/components/svg'
 
 type NameContainerProps = {
   name: string
@@ -17,6 +20,9 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const touchableRef = useRef(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const { t } = useTranslation('common')
+  const router = useRouter()
+
   if (nameColor === undefined) {
     nameColor = theme.textColor
   }
@@ -46,7 +52,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
         onRequestClose={() => setIsVisible(false)}
         popoverShift={{ x: -1, y: 0.8 }}
         popoverStyle={{
-          width: 180,
+          width: 200,
           borderRadius: 4,
           padding: 16,
           position: 'absolute',
@@ -66,6 +72,19 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
               </Text>
             </Pressable>
           )} */}
+
+          <Pressable
+            className='flex-row items-center py-4'
+            onPress={() => {
+              setIsVisible(false)
+              router.push('/delete-account')
+            }}
+          >
+            <CloseIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
+            <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+              {t('deleteAccount')}
+            </Text>
+          </Pressable>
 
           <Pressable className={'flex-row items-center py-4'}>
             <LogoutButton onHandelPress={setIsVisible} />

@@ -14,6 +14,7 @@ type ConfirmationDialogProps = {
   onCancel: () => void // Function to call when the cancel action is triggered
   title?: string // Optional title text
   message: React.ReactNode // Message content, can be a string or a component for custom styling
+  confirmButtonText?: string // Optional custom text for the confirm button
 }
 
 /**
@@ -28,6 +29,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   onCancel,
   title,
   message,
+  confirmButtonText,
 }) => {
   const { t } = useTranslation()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -85,7 +87,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
               onMouseLeave={() => setIsHover(-1)}
             >
               <Text style={[generalStyle.buttonSecondaryText, isHover === 1 && generalStyle.buttonPrimaryText]}>
-                {t('delete')}
+                {confirmButtonText || t('delete')}
               </Text>
             </Pressable>
           </View>

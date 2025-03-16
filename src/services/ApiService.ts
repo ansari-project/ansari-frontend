@@ -147,6 +147,23 @@ class ApiService {
 
     await this.storageService.removeTokens()
   }
+
+  async deleteAccount(accessToken: string): Promise<void> {
+    const response = await fetch(`${this.baseURL}/users/me`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    if (!response.ok) {
+      // Handle HTTP errors
+      console.error(`HTTP error! status: ${response.status}`)
+      throw new Error('Failed to delete account')
+    }
+
+    await this.storageService.removeTokens()
+  }
 }
 
 export default ApiService

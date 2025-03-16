@@ -1,4 +1,4 @@
-export { login, logout, register, guestLogin } from './authActions'
+export { login, logout, register, guestLogin, deleteAccount } from './authActions'
 export {
   addMessage,
   createThread,

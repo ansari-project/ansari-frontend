@@ -38,13 +38,23 @@ export interface MessageListRef {
  */
 
 const MessageList = forwardRef<MessageListRef, MessageListProps>(
-  ({ activeThread, isSending, reactionsEnabled = true, scrollToBottomEnabled = true, width, isShare }, ref) => {
+  (
+    { isLoading, activeThread, isSending, reactionsEnabled = true, scrollToBottomEnabled = true, width, isShare },
+    ref,
+  ) => {
     const scrollViewRef = useRef<ScrollView>(null)
     const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
     const { isSmallScreen } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
 
+    if (isLoading) {
+      return (
+        <View className='flex-1 items-center justify-center'>
+          <ActivityIndicator size='large' color={theme.hoverColor} />
+        </View>
+      )
+    }
     // Scroll to Bottom Button component
     const ScrollToBottomButton = () => (
       <View className='absolute bottom-[25px] items-center justify-center w-full'>

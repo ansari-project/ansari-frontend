@@ -45,10 +45,7 @@ const ChatScreen: React.FC = () => {
   }, [])
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      className='flex-1 items-center justify-between w-full'
-    >
+    <View className='flex-1 items-center justify-between w-full'>
       <ChatContainer isHome={false} />
       {getEnv('ENABLE_SHARE') && !isSmallScreen && (
         <View
@@ -61,7 +58,7 @@ const ChatScreen: React.FC = () => {
         </View>
       )}
       <SharePopup visible={isSharePopupVisible} onClose={() => dispatch(toggleSharePopup(!isSharePopupVisible))} />
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

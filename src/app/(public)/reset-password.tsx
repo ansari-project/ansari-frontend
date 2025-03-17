@@ -7,10 +7,11 @@ import { createGeneralThemedStyles } from '@/utils'
 import { useRegisterSchema } from '@/validation'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Keyboard, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 // TypeScript interface for the component's state
 interface PasswordState {
@@ -160,7 +161,7 @@ const ResetPasswordScreen: React.FC = () => {
 
   // Main reset password form
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
       <LogoIcon fill={theme.iconFill} width={52} height={52} />
       <View style={generalStyle.form}>
         <Text style={styles.title}>{t('passwordReset')}</Text>
@@ -211,7 +212,7 @@ const ResetPasswordScreen: React.FC = () => {
           </Text>
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   )
 }
 

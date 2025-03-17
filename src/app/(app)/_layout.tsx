@@ -1,4 +1,4 @@
-import { useAuth, useScreenInfo } from '@/hooks'
+import { useAuth } from '@/hooks'
 import React from 'react'
 import { View } from 'react-native'
 import Footer from '@/components/Footer'

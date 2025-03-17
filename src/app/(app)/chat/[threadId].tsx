@@ -5,7 +5,7 @@ import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThread, toggleSharePopup } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 

@@ -1,6 +1,6 @@
 import { useAuth, useScreenInfo } from '@/hooks'
 import React from 'react'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import ActionButtons from '@/components/ActionButtons'
 import Footer from '@/components/Footer'
 import { Redirect, Slot } from 'expo-router'
@@ -30,9 +30,9 @@ export const PublicLayout = () => {
           </View>
         )}
 
-        <ScrollView className='flex-1' keyboardShouldPersistTaps='handled'>
+        <View className='flex-1'>
           <Slot />
-        </ScrollView>
+        </View>
         <Footer />
       </View>
     </RootImageBackground>

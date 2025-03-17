@@ -7,21 +7,12 @@ import { useLoginSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  NativeSyntheticEvent,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import { Keyboard, NativeSyntheticEvent, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import * as Yup from 'yup'
 import StyledText from '@/components/StyledText'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 const LoginScreen: React.FC = () => {
   const router = useRouter()
@@ -81,13 +72,13 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
         </View>
         {successMessage && <Text style={styles.successText}>{successMessage}</Text>}
-        <StyledText variant='h2' color='primary' className='mb-6'>
+        <StyledText variant='h2' color='primary' className='mb-6' textAlign='center'>
           {t('title')}
         </StyledText>
         <Formik
@@ -134,6 +125,7 @@ const LoginScreen: React.FC = () => {
 
               <View className='flex-row justify-end' style={generalStyle.prompt}>
                 <Pressable
+                  hitSlop={8}
                   onMouseEnter={() => setHovered(1)}
                   onMouseLeave={() => setHovered(0)}
                   onPress={() => router.push('/forgot-password')}
@@ -172,6 +164,7 @@ const LoginScreen: React.FC = () => {
               >
                 <StyledText style={generalStyle.primaryColorText}>{t('dontHaveAccount')}</StyledText>
                 <Pressable
+                  hitSlop={8}
                   onMouseEnter={() => setHovered(2)}
                   onMouseLeave={() => setHovered(0)}
                   onPress={() => router.push('/register')}
@@ -183,7 +176,7 @@ const LoginScreen: React.FC = () => {
           )}
         </Formik>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   )
 }
 

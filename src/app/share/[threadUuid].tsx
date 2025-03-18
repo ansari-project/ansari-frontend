@@ -4,7 +4,7 @@ import { AppDispatch } from '@/store'
 import { fetchSharedThread } from '@/store/actions'
 import { Helpers } from '@/utils'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform } from 'react-native'
+import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -39,12 +39,9 @@ const ShareScreen: React.FC = () => {
   }, [])
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      className='flex-1 items-center justify-between w-full'
-    >
+    <View className='flex-1 items-center justify-between w-full'>
       <ShareContainer />
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

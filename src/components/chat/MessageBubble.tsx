@@ -72,7 +72,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
-  const mdContent = message.content.replace('<thinking>', '```').replace('</thinking>', '```')
+  const mdContent = message.content.replaceAll('`', '\\`').replace('<thinking>', '```').replace('</thinking>', '```')
 
   return (
     <View

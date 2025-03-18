@@ -31,11 +31,9 @@ export const PublicLayout = () => {
         )}
 
         <View className='flex-1'>
-          <View className={`flex-1 ${isSmallScreen ? 'pb-1' : ''}`}>
-            <Slot />
-          </View>
-          <Footer />
+          <Slot />
         </View>
+        <Footer />
       </View>
     </RootImageBackground>
   )

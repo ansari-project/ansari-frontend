@@ -7,12 +7,13 @@ import { useRegisterSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, Text, TextInput, View } from 'react-native'
+import { Keyboard, NativeSyntheticEvent, Platform, Pressable, Text, TextInput, View } from 'react-native'
 import Checkbox from 'expo-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 import StyledText from '@/components/StyledText'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 interface RegisterFormValues {
   email: string
@@ -46,6 +47,7 @@ const RegisterScreen: React.FC = () => {
   }
 
   const handleSubmit = (values: RegisterFormValues, formikHelpers: FormikHelpers<RegisterFormValues>) => {
+    Keyboard.dismiss()
     formikHelpers.setSubmitting(true)
     setErrorMessage(null)
     const registerRequest: RegisterRequest = {
@@ -86,12 +88,12 @@ const RegisterScreen: React.FC = () => {
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
         </View>
-        <StyledText variant='h2' color='primary' className='mb-6'>
+        <StyledText variant='h2' color='primary' className='mb-6' textAlign='center'>
           {t('title')}
         </StyledText>
         <Formik
@@ -215,6 +217,7 @@ const RegisterScreen: React.FC = () => {
               >
                 <StyledText style={generalStyle.primaryColorText}>{t('alreadyHaveAccount')}</StyledText>
                 <Pressable
+                  hitSlop={8}
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                   onPress={() => router.push('/login')}
@@ -226,7 +229,7 @@ const RegisterScreen: React.FC = () => {
           )}
         </Formik>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   )
 }
 

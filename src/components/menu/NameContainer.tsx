@@ -2,12 +2,11 @@ import React, { useRef, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
 import { Avatar } from '@kolking/react-native-avatar'
-import LogoutButton from '../Logout'
-import { RootState } from '@/store'
-import { useSelector } from 'react-redux'
+import { AppDispatch, RootState, toggleSideMenu } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
-import { CloseIcon } from '@/components/svg'
+import { CloseIcon, LogoutIcon } from '@/components/svg'
 
 type NameContainerProps = {
   name: string
@@ -22,6 +21,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { t } = useTranslation('common')
   const router = useRouter()
+  const dispatch = useDispatch<AppDispatch>()
 
   if (nameColor === undefined) {
     nameColor = theme.textColor
@@ -77,6 +77,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             className='flex-row items-center py-4'
             onPress={() => {
               setIsVisible(false)
+              dispatch(toggleSideMenu(false))
               router.push('/delete-account')
             }}
           >
@@ -86,8 +87,18 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             </Text>
           </Pressable>
 
-          <Pressable className={'flex-row items-center py-4'}>
-            <LogoutButton onHandelPress={setIsVisible} />
+          <Pressable
+            className={'flex-row items-center py-4'}
+            onPress={() => {
+              setIsVisible(false)
+              dispatch(toggleSideMenu(false))
+              router.push('/logout')
+            }}
+          >
+            <LogoutIcon stroke={theme.textColor} />
+            <Text className='text-[16px] font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
+              {t('logout')}
+            </Text>
           </Pressable>
         </View>
       </Popover>

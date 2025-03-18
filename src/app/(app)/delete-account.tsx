@@ -4,7 +4,7 @@ import { createGeneralThemedStyles } from '@/utils'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, Platform, Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import StyledText from '@/components/StyledText'
 import { LogoIcon } from '@/components/svg'
@@ -45,7 +45,7 @@ const DeleteAccountScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={generalStyle.formContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <View style={generalStyle.formContainer}>
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -81,7 +81,7 @@ const DeleteAccountScreen: React.FC = () => {
         isSmallScreen={isSmallScreen}
         confirmButtonText={t('deleteAccountConfirm')}
       />
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

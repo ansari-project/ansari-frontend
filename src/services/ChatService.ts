@@ -188,6 +188,7 @@ class ChatService {
       {
         method: 'POST',
         headers: this.createHeaders(),
+        body: JSON.stringify({}),
       },
       dispatch,
     )

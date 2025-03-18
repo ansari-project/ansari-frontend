@@ -5,11 +5,12 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, TextInput, View, Text } from 'react-native'
+import { NativeSyntheticEvent, Platform, Pressable, TextInput, View, Text, Keyboard } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 import StyledText from '@/components/StyledText'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 // TypeScript interface for the initial state
 interface EmailState {
@@ -39,6 +40,7 @@ const ForgetPasswordScreen: React.FC = () => {
     try {
       await validateEmail(emailState.email)
       if (emailState.email.trim().length !== 0 && Object.keys(errors).length === 0) {
+        Keyboard.dismiss()
         await UserService.requestPasswordReset(emailState.email)
         setEmailState({ ...emailState, submitted: true })
       }
@@ -81,10 +83,7 @@ const ForgetPasswordScreen: React.FC = () => {
 
   if (emailState.submitted) {
     return (
-      <KeyboardAvoidingView
-        style={[generalStyle.formContainer]}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
+      <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
         <View style={generalStyle.form}>
           <View className='items-center py-2'>
             <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -107,17 +106,17 @@ const ForgetPasswordScreen: React.FC = () => {
             </Pressable>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     )
   }
 
   return (
-    <KeyboardAvoidingView style={[generalStyle.formContainer]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
         </View>
-        <StyledText variant='h2' color='primary' className='font-semibold mb-6'>
+        <StyledText variant='h2' color='primary' className='font-semibold mb-6' textAlign='center'>
           {t('forgotYourPassword')}
         </StyledText>
         <StyledText color='primary' className='mb-5 text-[16px]'>
@@ -155,7 +154,7 @@ const ForgetPasswordScreen: React.FC = () => {
           </Pressable>
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   )
 }
 

@@ -5,7 +5,7 @@ import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, fetchThread, toggleSharePopup } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React, { useEffect } from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -45,10 +45,7 @@ const ChatScreen: React.FC = () => {
   }, [])
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      className='flex-1 items-center justify-between w-full'
-    >
+    <View className='flex-1 items-center justify-between w-full'>
       <ChatContainer isHome={false} />
       {getEnv('ENABLE_SHARE') && !isSmallScreen && (
         <View
@@ -61,7 +58,7 @@ const ChatScreen: React.FC = () => {
         </View>
       )}
       <SharePopup visible={isSharePopupVisible} onClose={() => dispatch(toggleSharePopup(!isSharePopupVisible))} />
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

@@ -7,7 +7,7 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 
@@ -22,7 +22,7 @@ const Welcome: React.FC = () => {
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 
   return (
-    <KeyboardAvoidingView className='flex-1' behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <View className='flex-1'>
       <View className={`flex-1 w-full flex ${isSmallScreen ? 'flex-col' : 'flex-row'} justify-center items-center`}>
         <View className={`${isSmallScreen ? 'w-full h-auto' : 'w-[70%] h-full'} justify-between p-6`}>
           <View className={`${isSmallScreen ? 'flex-col' : 'flex-row'} items-center ${isSmallScreen ? 'mb-6' : ''}`}>
@@ -94,7 +94,7 @@ const Welcome: React.FC = () => {
           <TermsAndPrivacy marginLeft={0} />
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

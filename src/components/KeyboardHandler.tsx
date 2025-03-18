@@ -1,9 +1,8 @@
 import React from 'react'
-import { Platform, Text } from 'react-native'
 import { useKeyboardHandler } from 'react-native-keyboard-controller'
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
 
-const PADDING_BOTTOM = Platform.OS === 'ios' ? 25 : 0
+const PADDING_BOTTOM = 0
 
 const useGradualAnimation = () => {
   const height = useSharedValue(PADDING_BOTTOM)
@@ -32,11 +31,7 @@ const KeyboardHandler: React.FC = () => {
     }
   })
 
-  return (
-    <Animated.View style={animatedStyle}>
-      <Text className='text-white'>I AM HERE!</Text>
-    </Animated.View>
-  )
+  return <Animated.View style={animatedStyle}></Animated.View>
 }
 
 export default KeyboardHandler

@@ -5,6 +5,7 @@ import { Helpers } from '@/utils'
 import { Dispatch, UnknownAction } from 'redux'
 import ApiService from './ApiService'
 import { resetAuth, refreshTokens } from '@/store/slices/authSlice'
+import { FetchRequestInit } from 'expo/fetch'
 
 class ChatService {
   accessToken: string | null
@@ -27,7 +28,7 @@ class ChatService {
     }
   }
 
-  async fetchWithAuthRetry(url: string, options: RequestInit, dispatch: Dispatch<UnknownAction>) {
+  async fetchWithAuthRetry(url: string, options: FetchRequestInit, dispatch: Dispatch<UnknownAction>) {
     const response = await this.apiService.fetchWithAuthRetry(
       url,
       options,
@@ -48,6 +49,7 @@ class ChatService {
       {
         method: 'POST',
         headers: this.createHeaders(),
+        body: JSON.stringify({}),
       },
       dispatch,
     )

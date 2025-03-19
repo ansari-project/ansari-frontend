@@ -5,7 +5,7 @@ import { Text, TextProps } from 'react-native'
 import { useSelector } from 'react-redux'
 
 interface StyledTextProps extends TextProps {
-  variant?: 'h1' | 'h2' | 'body' | 'button'
+  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'button'
   color?: string
   textAlign?: 'left' | 'center' | 'right'
 }
@@ -51,9 +51,11 @@ export const StyledText: React.FC<StyledTextProps> = ({
   const getVariantClasses = () => {
     switch (variant) {
       case 'h1':
-        return `${isSmallScreen ? 'text-[18px] leading-[21px]' : 'text-[42px] leading-[50px]'}`
+        return `${isSmallScreen ? 'text-[28px] leading-[32px]' : 'text-[42px] leading-[50px]'}`
       case 'h2':
         return 'font-semibold text-[24px] leading-[29px]'
+      case 'h3':
+        return 'font-semibold text-[20px] leading-[22px]'
       default:
         return ''
     }

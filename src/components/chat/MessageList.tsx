@@ -3,7 +3,7 @@ import { useScreenInfo } from '@/hooks'
 import { Message, RootState, Thread, UserRole } from '@/store'
 import { Helpers } from '@/utils'
 import React, { forwardRef, useRef, useState } from 'react'
-import { ActivityIndicator, Pressable, ScrollView, View } from 'react-native'
+import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import MessageBubble, { MessageBubbleProps } from './MessageBubble'
 
@@ -45,10 +45,10 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const scrollViewRef = useRef<ScrollView>(null)
     const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
-    const { isSmallScreen } = useScreenInfo(sideMenuWidth)
+    const { isSmallScreen, height } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
 
-    if (isLoading) {
+    if (isLoading && !isSending) {
       return (
         <View className='flex-1 items-center justify-center'>
           <ActivityIndicator size='large' color={theme.hoverColor} />
@@ -80,37 +80,30 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     )
 
     const filteredMessages = (activeThread?.messages || []).filter((message) => typeof message.content === 'string')
+    const lastAssistantMessageIndex = filteredMessages.findLastIndex((message) => message.role === UserRole.Assistant)
 
     return (
-      <View className={'flex-1'}>
-        {isSending && (
-          <View className='items-center justify-center'>
-            <ActivityIndicator size='small' color={theme.hoverColor} />
-          </View>
-        )}
+      <View className='flex-1'>
         <ScrollView
           ref={scrollViewRef}
           className={`mb-${isSmallScreen ? '1' : '2'}`}
           scrollEventThrottle={250}
-          onScroll={(event) => {
+          onContentSizeChange={(contentWidth: number, contentHeight: number) => {
             if (isSending) return
 
-            const scrollOffset = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height
-            setDisplayScrollButton(scrollOffset < event.nativeEvent.contentSize.height - 250)
-          }}
-          onContentSizeChange={(contentWidth: number, contentHeight: number) => {
-            if (!isSending) return
-
-            setDisplayScrollButton(true)
+            // Display the scroll button if the content height is greater than the screen height
+            // excluding the average height of the fixed header + footer.
+            setDisplayScrollButton(contentHeight > height - 100)
           }}
         >
-          {filteredMessages.map((message: Message) => {
+          {filteredMessages.map((message: Message, index) => {
             const id = message.id || Helpers.generateUniqueId() + (isSending ? '-sending' : '')
 
             return (
               <MessageBubbleMemo
                 key={id}
                 isSending={isSending}
+                displayActivity={isSending && lastAssistantMessageIndex === index}
                 isOutgoing={message.role === UserRole.User}
                 message={message}
                 threadId={String(activeThread?.id)}
@@ -121,7 +114,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
             )
           })}
         </ScrollView>
-        {displayScrollButton && scrollToBottomEnabled && <ScrollToBottomButton />}
+        {Platform.OS !== 'web' && displayScrollButton && scrollToBottomEnabled && <ScrollToBottomButton />}
       </View>
     )
   },

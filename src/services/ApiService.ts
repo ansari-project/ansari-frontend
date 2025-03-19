@@ -1,9 +1,10 @@
-import { fetch } from 'expo/fetch'
+import { fetch, FetchRequestInit } from 'expo/fetch'
 import { TokenRefreshError } from '@/errors'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
 import StorageService from './StorageService'
+import { FetchResponse } from 'expo/build/winter/fetch/FetchResponse'
 
-interface CustomFetchOptions extends RequestInit {
+interface CustomFetchOptions extends FetchRequestInit {
   skipRefresh?: boolean // Custom option to skip refresh logic
 }
 
@@ -99,12 +100,16 @@ class ApiService {
     options: CustomFetchOptions = {},
     resetAuthCallback: () => void,
     refreshTokensCallback: (tokens: RefreshTokenResponse) => void,
-  ): Promise<Response> {
-    const response = await fetch(url, options)
-
-    // If not 401 or we've already tried refreshing the token, return the original response
-    if (response.status !== 401 || options.skipRefresh) {
-      return response
+  ): Promise<FetchResponse> {
+    try {
+      const response = await fetch(url, options)
+      // If not 401 or we've already tried refreshing the token, return the original response
+      if (response.status !== 401 || options.skipRefresh) {
+        return response
+      }
+    } catch (error) {
+      console.error('Fetch error:', error)
+      throw error
     }
 
     try {
@@ -121,7 +126,6 @@ class ApiService {
         },
         skipRefresh: true, // Prevent further refresh attempts
       }
-
       return fetch(url, newOptions) // Retry the fetch with the new token
     } catch (error) {
       // If token refresh fails, throw or handle as needed

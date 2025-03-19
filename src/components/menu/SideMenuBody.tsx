@@ -81,7 +81,7 @@ const SideMenuBody: React.FC = () => {
           <ThreadsList onSelectCard={onSelectCard} />
         </View>
       </View>
-      <View className='w-full bottom-0 z-[1] items-center justify-start flex-row px-4'>
+      <View className='w-full bottom-0 z-[1] items-center justify-start flex-row p-4'>
         <View className='flex-row'>
           <NameContainer name={`${user?.firstName} ${user?.lastName}`} />
           {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}

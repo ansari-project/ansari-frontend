@@ -74,7 +74,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
             }}
           >
             <View className='items-center justify-end flex-1'>
-              <View className='items-center pt-[40px] pb-[150px]'>
+              <View className={`items-center pt-[40px] ${isSmallScreen ? 'pb-[100px]' : 'pb-[150px]'}`}>
                 {!isSmallScreen && (
                   <View className='m-6'>
                     <LogoIcon fill={theme.iconFill} width={122} height={122} />

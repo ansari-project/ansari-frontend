@@ -4,10 +4,12 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Modal, Pressable, SafeAreaView, Text, View, StyleSheet } from 'react-native'
+import { Linking, Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Platform, ScrollView } from 'react-native'
+import * as Application from 'expo-application'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import Subscription from './Subscription'
+import StyledText from './StyledText'
 
 const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
@@ -115,18 +117,23 @@ const InfoPopup: React.FC = () => {
                 <CloseIcon fill={theme.primaryColor} hoverFill={theme.hoverColor} className='border-0' />
               </Pressable>
             </View>
-            <View
+            <ScrollView
               className={`my-${isSmallScreen ? '3' : '5'} mx-${isSmallScreen ? '2' : '3'} rounded-none p-[10px] elevation-5 gap-${isSmallScreen ? '2' : '4'}`}
             >
               {isAuthenticated && isGuest && guestMessage()}
               {isAuthenticated && !isGuest && authenticatedMessage()}
 
               <View className='items-center mt-auto'>{isSmallScreen && !isGuest && <Subscription />}</View>
-            </View>
-            <View className='w-full p-4 flex-row justify-center gap-4 items-center'>
+            </ScrollView>
+            <View className='w-full p-4 flex-col justify-center gap-4 items-center'>
               <Pressable style={generalStyle.buttonSecondary} onPress={() => togglePopup()}>
                 <Text style={generalStyle.buttonSecondaryText}>{t('common:close')}</Text>
               </Pressable>
+              {Platform.OS !== 'web' && (
+                <StyledText textAlign='center' color='text' className='font-bold'>
+                  Ansari Chat {Application.nativeApplicationVersion}
+                </StyledText>
+              )}
             </View>
           </View>
         </SafeAreaView>

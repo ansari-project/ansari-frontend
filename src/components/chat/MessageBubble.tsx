@@ -4,7 +4,7 @@ import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFe
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
-import { StyleSheet, View, Platform } from 'react-native'
+import { StyleSheet, View, Platform, ActivityIndicator } from 'react-native'
 import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
@@ -13,6 +13,7 @@ import StyledText from '../StyledText'
 export type MessageBubbleProps = {
   threadId: string
   isSending: boolean
+  displayActivity: boolean
   isOutgoing: boolean
   message: Message
   reactionsEnabled?: boolean
@@ -23,6 +24,7 @@ export type MessageBubbleProps = {
 const MessageBubble: React.FC<MessageBubbleProps> = ({
   threadId,
   isSending,
+  displayActivity,
   isOutgoing,
   message,
   reactionsEnabled,
@@ -90,14 +92,18 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         </View>
       ) : (
         <View className='rounded px-5 py-2 w-8 h-8 items-center justify-center'>
-          <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
+          {displayActivity ? (
+            <ActivityIndicator size='small' color={theme.hoverColor} />
+          ) : (
+            <LogoRoundIcon width='32' height='32' fill={theme.iconFill} color={theme.buttonPrimaryBackground} />
+          )}
         </View>
       )}
       <View className='flex-shrink w-full'>
         <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary' textAlign='left'>
           {isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}
         </StyledText>
-        <View className='flex-1'>
+        <View className='flex-1 px-1'>
           <Markdown
             style={{
               body: [styles.messageText, textStyle],

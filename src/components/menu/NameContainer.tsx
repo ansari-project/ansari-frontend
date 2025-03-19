@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
-import Popover, { PopoverMode, PopoverPlacement } from 'react-native-popover-view'
+import Popover, { PopoverMode } from 'react-native-popover-view'
 import { Avatar } from '@kolking/react-native-avatar'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
 import { CloseIcon, LogoutIcon } from '@/components/svg'
+import { useAuth } from '@/hooks'
 
 type NameContainerProps = {
   name: string
@@ -17,6 +18,7 @@ type NameContainerProps = {
 
 const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayName = true, initial }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
+  const { isGuest } = useAuth()
   const touchableRef = useRef(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { t } = useTranslation('common')
@@ -28,9 +30,9 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
   }
 
   return (
-    <View className='flex-1'>
+    <View className=''>
       <Pressable ref={touchableRef} onPress={() => setIsVisible(!isVisible)}>
-        <View className='flex-grow flex-row items-center py-4'>
+        <View className='flex-grow flex-row items-center'>
           <Avatar
             size={34}
             name={initial || name}
@@ -47,19 +49,13 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
       <Popover
         from={touchableRef}
         mode={PopoverMode.RN_MODAL}
-        placement={PopoverPlacement.FLOATING}
         isVisible={isVisible}
         onRequestClose={() => setIsVisible(false)}
-        popoverShift={{ x: -1, y: 0.8 }}
         popoverStyle={{
           width: 200,
           borderRadius: 4,
           padding: 16,
-          position: 'absolute',
-          marginLeft: 40,
-          marginRight: 40,
           backgroundColor: theme.popupBackgroundColor,
-          overflow: 'visible',
         }}
       >
         <View className='w-full'>
@@ -73,20 +69,21 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             </Pressable>
           )} */}
 
-          <Pressable
-            className='flex-row items-center py-4'
-            onPress={() => {
-              setIsVisible(false)
-              dispatch(toggleSideMenu(false))
-              router.push('/delete-account')
-            }}
-          >
-            <CloseIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
-            <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
-              {t('deleteAccount')}
-            </Text>
-          </Pressable>
-
+          {!isGuest && (
+            <Pressable
+              className='flex-row items-center py-4'
+              onPress={() => {
+                setIsVisible(false)
+                dispatch(toggleSideMenu(false))
+                router.push('/delete-account')
+              }}
+            >
+              <CloseIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
+              <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+                {t('deleteAccount')}
+              </Text>
+            </Pressable>
+          )}
           <Pressable
             className={'flex-row items-center py-4'}
             onPress={() => {

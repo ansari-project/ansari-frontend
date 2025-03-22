@@ -101,15 +101,10 @@ class ApiService {
     resetAuthCallback: () => void,
     refreshTokensCallback: (tokens: RefreshTokenResponse) => void,
   ): Promise<FetchResponse> {
-    try {
-      const response = await fetch(url, options)
-      // If not 401 or we've already tried refreshing the token, return the original response
-      if (response.status !== 401 || options.skipRefresh) {
-        return response
-      }
-    } catch (error) {
-      console.error('Fetch error:', error)
-      throw error
+    const response = await fetch(url, options)
+    // If not 401 or we've already tried refreshing the token, return the original response
+    if (response.status !== 401 || options.skipRefresh) {
+      return response
     }
 
     try {

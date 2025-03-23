@@ -23,6 +23,12 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
 })
 
+const replayIntegration = Sentry.mobileReplayIntegration({
+  maskAllText: true,
+  maskAllImages: false,
+  maskAllVectors: false,
+})
+
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: false,
@@ -33,12 +39,11 @@ Sentry.init({
   tracesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
   // Keep profilesSampleRate in sync with tracesSampleRate since profiles are tied to transactions
   profilesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
-  integrations: [
-    // Pass integration
-    navigationIntegration,
-    captureConsoleIntegration({ levels: ['error'] }),
-  ],
+  replaysSessionSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [replayIntegration, navigationIntegration, captureConsoleIntegration({ levels: ['error'] })],
   enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
+  ignoreErrors: ['Token refresh failed'],
 })
 
 const RootLayout = () => {

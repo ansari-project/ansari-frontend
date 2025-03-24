@@ -15,7 +15,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as Sentry from '@sentry/react-native'
 import { captureConsoleIntegration } from '@sentry/core'
 import { isRunningInExpoGo } from 'expo'
-import { StatusBar, useColorScheme } from 'react-native'
+import { Platform, StatusBar, useColorScheme } from 'react-native'
 import { getThemeStyle } from '@/utils'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 
@@ -23,17 +23,25 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
 })
 
-const replayIntegration = Sentry.mobileReplayIntegration({
-  maskAllText: true,
-  maskAllImages: false,
-  maskAllVectors: false,
-})
+let replayIntegration
+if (Platform.OS === 'web') {
+  replayIntegration = Sentry.browserReplayIntegration({
+    maskAllText: true,
+    blockAllMedia: false,
+  })
+} else {
+  replayIntegration = Sentry.mobileReplayIntegration({
+    maskAllText: true,
+    maskAllImages: false,
+    maskAllVectors: false,
+  })
+}
 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: false,
   environment: process.env.EXPO_PUBLIC_ENVIRONMENT,
-  enabled: !__DEV__,
+  // enabled: !__DEV__,
   // In staging, capture all transactions for better debugging
   // In production, sample 20% of transactions to balance insights with performance
   tracesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,
@@ -43,7 +51,7 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
   integrations: [replayIntegration, navigationIntegration, captureConsoleIntegration({ levels: ['error'] })],
   enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
-  ignoreErrors: ['Token refresh failed'],
+  ignoreErrors: ['Token refresh failed', 'getRectForRef', 'Cannot manually set color scheme'],
 })
 
 const RootLayout = () => {

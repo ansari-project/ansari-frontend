@@ -69,7 +69,7 @@ class UserService {
       return await response.json()
     } catch (error) {
       console.error('Error updating password:', error)
-      throw new ApplicationError('Failed to update password: ' + (error instanceof Error && error.message))
+      throw error
     }
   }
 }

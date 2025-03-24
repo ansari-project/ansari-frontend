@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
+import StyledText from '@/components/StyledText'
 
 // TypeScript interface for the component's state
 interface PasswordState {
@@ -50,7 +51,8 @@ const ResetPasswordScreen: React.FC = () => {
     try {
       await validatePassword()
       if (!passwordState.password || Object.keys(errors).length !== 0) {
-        throw new Error('Validation failed')
+        setErrors({ error: 'Validation failed' })
+        return
       }
       await UserService.updatePassword(String(token), passwordState.password)
       setPasswordState((prevState) => ({ ...prevState, submitted: true }))
@@ -131,14 +133,17 @@ const ResetPasswordScreen: React.FC = () => {
   if (passwordState.submitted) {
     // Display success message after password reset
     return (
-      <View style={generalStyle.formContainer}>
-        <LogoIcon fill={theme.iconFill} width={52} height={52} />
+      <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
         <View style={generalStyle.form}>
-          <Text style={styles.title}>{t('passwordResetSuccess')}</Text>
-          <View style={styles.iconContainer}>
-            <DoubleCheckIcon width='50' />
+          <View className='items-center py-2'>
+            <LogoIcon fill={theme.iconFill} width={52} height={52} />
           </View>
-          <Text style={styles.description}>{t('passwordResetSuccessMessage')}</Text>
+          <StyledText variant='h2' color='primary' className='mb-6'>
+            {t('passwordResetSuccess')}
+          </StyledText>
+          <StyledText color='primary' className='mb-5 text-[16px]'>
+            {t('passwordResetSuccessMessage')}
+          </StyledText>
 
           <View style={styles.buttonContainer}>
             <Text
@@ -155,16 +160,20 @@ const ResetPasswordScreen: React.FC = () => {
             </Text>
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 
   // Main reset password form
   return (
     <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
-      <LogoIcon fill={theme.iconFill} width={52} height={52} />
       <View style={generalStyle.form}>
-        <Text style={styles.title}>{t('passwordReset')}</Text>
+        <View className='items-center py-2'>
+          <LogoIcon fill={theme.iconFill} width={52} height={52} />
+        </View>
+        <StyledText variant='h2' color='primary' className='font-semibold mb-6' textAlign='center'>
+          {t('passwordReset')}
+        </StyledText>
         {['password', 'confirmPassword'].map((field) => (
           <View key={field} style={styles.passwordInputContainer}>
             <View key={field} style={styles.passwordInputField}>

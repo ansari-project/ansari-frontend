@@ -55,6 +55,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
     messageText: {
       fontFamily: 'Inter',
       textAlign: isRTL ? 'right' : 'left',
+      width: '100%',
     },
     outgoingText: {
       color: theme.primaryColor,

@@ -41,7 +41,7 @@ Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: false,
   environment: process.env.EXPO_PUBLIC_ENVIRONMENT,
-  // enabled: !__DEV__,
+  enabled: !__DEV__,
   // In staging, capture all transactions for better debugging
   // In production, sample 20% of transactions to balance insights with performance
   tracesSampleRate: process.env.EXPO_PUBLIC_ENVIRONMENT === 'production' ? 0.2 : 1.0,

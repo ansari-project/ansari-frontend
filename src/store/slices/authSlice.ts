@@ -139,44 +139,49 @@ export async function loadAuthState() {
     return createAuthState(initialAuthState)
   }
 
-  const userRes = await apiService.fetchWithAuthRetry(
-    `${baseURL}/users/me`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+  try {
+    const userRes = await apiService.fetchWithAuthRetry(
+      `${baseURL}/users/me`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    },
-    () => {
-      accessToken = refreshToken = null
-    },
-    (tokens: RefreshTokenResponse) => {
-      accessToken = tokens.access_token
-      refreshToken = tokens.refresh_token
-    },
-  )
+      () => {
+        accessToken = refreshToken = null
+      },
+      (tokens: RefreshTokenResponse) => {
+        accessToken = tokens.access_token
+        refreshToken = tokens.refresh_token
+      },
+    )
 
-  if (!userRes.ok) {
+    if (!userRes.ok) {
+      return createAuthState(initialAuthState)
+    }
+
+    const userDetails = await userRes.json()
+
+    const userState = {
+      ...initialAuthState,
+      isAuthenticated: true,
+      isGuest: false,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      user: {
+        id: userDetails.user_id,
+        firstName: userDetails.first_name,
+        lastName: userDetails.last_name,
+        email: userDetails.email,
+      },
+    }
+
+    return createAuthState(userState)
+  } catch (error) {
+    console.error('Error loading auth state:', error)
     return createAuthState(initialAuthState)
   }
-
-  const userDetails = await userRes.json()
-
-  const userState = {
-    ...initialAuthState,
-    isAuthenticated: true,
-    isGuest: false,
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-    user: {
-      id: userDetails.user_id,
-      firstName: userDetails.first_name,
-      lastName: userDetails.last_name,
-      email: userDetails.email,
-    },
-  }
-
-  return createAuthState(userState)
 }
 
 /**

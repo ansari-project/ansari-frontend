@@ -7,7 +7,7 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
-import { LoadingScreen } from '@/components'
+import { MaintenanceScreen, LoadingScreen } from '@/components'
 // eslint-disable-next-line camelcase
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 import RootContainer from '@/components/RootContainer'
@@ -80,6 +80,10 @@ const RootLayout = () => {
 
   if (!reduxStore || !fontsLoaded) {
     return <LoadingScreen />
+  }
+
+  if (process.env.EXPO_PUBLIC_MAINTENANCE_MODE === 'true') {
+    return <MaintenanceScreen />
   }
 
   let backgroundColor = getThemeStyle(colorScheme, 'backgroundColor')

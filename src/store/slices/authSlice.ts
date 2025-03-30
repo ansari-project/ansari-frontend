@@ -130,6 +130,10 @@ export async function loadAuthState() {
     }>
   }
 
+  if (process.env.EXPO_PUBLIC_MAINTENANCE_MODE === 'true') {
+    return createAuthState(initialAuthState)
+  }
+
   const apiService = new ApiService()
   const baseURL = process.env.EXPO_PUBLIC_API_V2_URL
   let accessToken = await apiService.getAccessTokenFromStorage()

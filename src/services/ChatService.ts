@@ -184,7 +184,7 @@ class ChatService {
     }
   }
 
-  async getShareThreadUUID(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
+  async getShareThreadId(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
     const response = await this.fetchWithAuthRetry(
       `${this.baseURL}/share/${threadId}`,
       {
@@ -196,16 +196,16 @@ class ChatService {
     )
 
     if (!response.ok) {
-      throw new Error('Error getting share uuid for a thread')
+      throw new Error('Error getting share id for a thread')
     }
 
     return await response.json()
   }
 
-  async getSharedThread(sharedThreadUUID: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
+  async getSharedThread(shareThreadId: string, dispatch: Dispatch<UnknownAction>): Promise<Thread> {
     // This is a public sharing endpoint which doesn't require an access token
     const response = await this.fetchWithAuthRetry(
-      `${this.baseURL}/share/${sharedThreadUUID}`,
+      `${this.baseURL}/share/${shareThreadId}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -214,17 +214,17 @@ class ChatService {
       dispatch,
     )
     if (!response.ok) {
-      throw new ApplicationError('Error fetching shared thread ' + sharedThreadUUID)
+      throw new ApplicationError('Error fetching shared thread ' + shareThreadId)
     }
     const data = await response.json()
 
     if (Helpers.isBlank(data)) {
-      throw new NotFoundError('Unable to load shared thread ' + sharedThreadUUID)
+      throw new NotFoundError('Unable to load shared thread ' + shareThreadId)
     } else {
       // The API returns { thread_id: 1 } and we need to convert it to the Thread type
       // No messages are returned in the creation response, so initializing with an empty array
       const thread: Thread = {
-        id: String(sharedThreadUUID), // Convert thread_id to a string to match the Thread interface
+        id: String(shareThreadId), // Convert thread_id to a string to match the Thread interface
         name: data.content.thread_name ?? null, // API response doesn't include name
         messages: data.content.messages, // Initialize with an empty array since the API response doesn't include messages
       }

@@ -218,19 +218,19 @@ export const setThreadName = createAsyncThunk(
 )
 
 /**
- * Get Share uuid for a thread asynchronously.
+ * Get Share id for a thread asynchronously.
  *
  * @param threadId - The ID of the thread.
- * @returns A Promise that resolves when the share thread uuid generated successfully.
+ * @returns A Promise that resolves when the share thread id generated successfully.
  */
-export const getShareThreadUUID = createAsyncThunk(
-  'chat/getShareThreadUUID',
+export const getShareThreadId = createAsyncThunk(
+  'chat/getShareThreadId',
   async ({ threadId }: { threadId: string }, { dispatch, getState }) => {
     try {
       const { isAuthenticated, accessToken } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
-      const response = await chatService.getShareThreadUUID(threadId, dispatch)
+      const response = await chatService.getShareThreadId(threadId, dispatch)
       if (response.status === 'success') {
         return response as ShareThreadResponse
       }
@@ -245,7 +245,7 @@ export const getShareThreadUUID = createAsyncThunk(
 /**
  * Fetches a shared thread from the chat service.
  *
- * @param sharedThreadUUID - The uuid of the shared thread to fetch.
+ * @param shareThreadId - The id of the shared thread to fetch.
  * @param dispatch - The dispatch function from the Redux store.
  * @param getState - The getState function from the Redux store.
  * @returns A Promise that resolves to the fetched thread.
@@ -254,12 +254,12 @@ export const getShareThreadUUID = createAsyncThunk(
  */
 export const fetchSharedThread = createAsyncThunk(
   'chat/fetchSharedThread',
-  async (sharedThreadUUID: string, { dispatch, getState }) => {
+  async (shareThreadId: string, { dispatch, getState }) => {
     try {
       const { isAuthenticated, accessToken } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
-      const thread = await chatService.getSharedThread(sharedThreadUUID, dispatch)
+      const thread = await chatService.getSharedThread(shareThreadId, dispatch)
       if (!thread.messages) {
         throw NotFoundError
       }

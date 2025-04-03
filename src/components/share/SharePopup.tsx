@@ -2,7 +2,7 @@
 import { CheckIcon, CloseIcon } from '@/components/svg'
 import { useChat, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState } from '@/store'
-import { getShareThreadUUID } from '@/store/actions/chatActions'
+import { getShareThreadId } from '@/store/actions/chatActions'
 import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -44,11 +44,11 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
     const threadId = activeThread?.id
     setIsCopying(1)
     const response = await dispatch(
-      getShareThreadUUID({
+      getShareThreadId({
         threadId: threadId!,
       }),
     ).unwrap()
-    Clipboard.setString(`${shareURL}/share/${response?.share_uuid}`)
+    Clipboard.setString(`${shareURL}/share/${response?.share_id}`)
     setIsCopying(2)
     setTimeout(() => {
       setIsCopying(0)

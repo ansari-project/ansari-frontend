@@ -13,23 +13,23 @@ import { useRouter, useLocalSearchParams } from 'expo-router'
  * Handles thread creation and message sending with real-time updates.
  */
 const ShareScreen: React.FC = () => {
-  const { threadUuid } = useLocalSearchParams<{ threadUuid?: string }>()
+  const { shareThreadId } = useLocalSearchParams<{ shareThreadId?: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const { abortRequest } = useChat()
   const router = useRouter()
 
   // Fetches thread details on threadId change
   useEffect(() => {
-    if (threadUuid && Helpers.isValidateUUID(threadUuid)) {
-      dispatch(fetchSharedThread(threadUuid))
+    if (shareThreadId) {
+      dispatch(fetchSharedThread(shareThreadId))
         .unwrap()
-        .catch(() => {
+        .catch((error) => {
           router.push('/404')
         })
     } else {
       router.push('/404')
     }
-  }, [threadUuid, dispatch, router])
+  }, [shareThreadId, dispatch, router])
 
   // Clean up the abort controller on unmount or when the component is no longer active
   useEffect(() => {

@@ -65,5 +65,11 @@
     "successCopy": "Paylaşılan konuşma URL'si panoya kopyalandı!"
   },
   "pageNotFound": "Sayfa Bulunamadı",
-  "notfoundMessage": "Sayfa bulunamadı."
+  "notfoundMessage": "Sayfa bulunamadı.",
+  "updateRequired": "Güncelleme Gerekli",
+  "updateAvailable": "Güncelleme Mevcut",
+  "updateRequiredDescription": "Ansari Chat'i kullanmaya devam etmek için yeni bir sürüm gerekiyor. Lütfen şimdi güncelleyin.",
+  "updateAvailableDescription": "Yeni özellikler ve iyileştirmelerle Ansari Chat'in yeni bir sürümü mevcut.",
+  "updateNow": "Şimdi Güncelle",
+  "updateLater": "Daha Sonra"
 }

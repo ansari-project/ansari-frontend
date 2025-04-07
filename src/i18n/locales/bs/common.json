@@ -65,5 +65,11 @@
     "successCopy": "Kopiran URL dijaloga u međuspremnik!"
   },
   "pageNotFound": "Stranica nije pronađena",
-  "notfoundMessage": "Stranica nije pronađena."
+  "notfoundMessage": "Stranica nije pronađena.",
+  "updateRequired": "Ažuriranje obavezno",
+  "updateAvailable": "Ažuriranje dostupno",
+  "updateRequiredDescription": "Nova verzija je potrebna za nastavak korištenja Ansari Chata. Molimo vas da ažurirate odmah.",
+  "updateAvailableDescription": "Nova verzija Ansari Chata je dostupna s novim funkcijama i poboljšanjima.",
+  "updateNow": "Ažuriraj sada",
+  "updateLater": "Kasnije"
 }

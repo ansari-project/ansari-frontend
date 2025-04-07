@@ -65,5 +65,11 @@
     "successCopy": "تم نسخ رابط المحادثة المشتركة إلى الحافظة!"
   },
   "pageNotFound": "الصفحة غير موجودة",
-  "notfoundMessage": "تعذر العثور على الصفحة."
+  "notfoundMessage": "تعذر العثور على الصفحة.",
+  "updateRequired": "تحديث مطلوب",
+  "updateAvailable": "تحديث متاح",
+  "updateRequiredDescription": "مطلوب إصدار جديد لمواصلة استخدام أنصاري. يرجى التحديث الآن.",
+  "updateAvailableDescription": "يتوفر إصدار جديد من أنصاري مع ميزات وتحسينات جديدة.",
+  "updateNow": "التحديث الآن",
+  "updateLater": "لاحقاً"
 }

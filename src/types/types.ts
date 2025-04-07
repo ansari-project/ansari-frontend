@@ -59,3 +59,17 @@ export type ShareThreadResponse = {
 }
 
 export type ResetPasswordResponse = { status: string }
+
+// Type for app version check request
+export type AppVersionCheckRequest = {
+  native_application_version: string
+  native_build_version: string
+  platform: 'web' | 'ios' | 'android'
+}
+
+// Type for app version check response
+export type AppVersionCheckResponse = {
+  maintenance_mode: boolean
+  update_available: boolean
+  force_update_required: boolean
+}

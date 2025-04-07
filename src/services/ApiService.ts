@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { fetch, FetchRequestInit } from 'expo/fetch'
 import { TokenRefreshError } from '@/errors'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
@@ -163,6 +164,50 @@ class ApiService {
     }
 
     await this.storageService.removeTokens()
+  }
+
+  async checkAppVersion(
+    platform: string,
+    applicationVersion: string,
+    buildVersion: string,
+  ): Promise<{
+    maintenance_mode: boolean
+    update_available: boolean
+    force_update_required: boolean
+  }> {
+    try {
+      const response = await fetch(`${this.baseURL}/app-check`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          native_application_version: applicationVersion,
+          native_build_version: buildVersion,
+          platform: platform,
+        }),
+      })
+
+      if (!response.ok) {
+        console.error(`App version check failed with status: ${response.status}`)
+        // Return default values if the check fails
+        return {
+          maintenance_mode: false,
+          update_available: false,
+          force_update_required: false,
+        }
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error('App version check error:', error)
+      // Return default values on error
+      return {
+        maintenance_mode: false,
+        update_available: false,
+        force_update_required: false,
+      }
+    }
   }
 }
 

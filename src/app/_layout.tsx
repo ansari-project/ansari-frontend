@@ -7,7 +7,7 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
-import { MaintenanceScreen, LoadingScreen } from '@/components'
+import { MaintenanceScreen, LoadingScreen, AppUpdatePopup } from '@/components'
 // eslint-disable-next-line camelcase
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 import RootContainer from '@/components/RootContainer'
@@ -18,6 +18,9 @@ import { isRunningInExpoGo } from 'expo'
 import { Platform, StatusBar, useColorScheme } from 'react-native'
 import { getThemeStyle } from '@/utils'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
+import ApiService from '@/services/ApiService'
+import { AppVersionCheckResponse } from '@/types'
+import * as Application from 'expo-application'
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
@@ -58,6 +61,8 @@ const RootLayout = () => {
   // Capture the NavigationContainer ref and register it with the integration
   const ref = useNavigationContainerRef()
   const colorScheme = useColorScheme()
+  const [appVersionStatus, setAppVersionStatus] = useState<AppVersionCheckResponse | null>(null)
+  const [appUpdatePopupVisible, setAppUpdatePopupVisible] = useState(false)
 
   useEffect(() => {
     if (ref?.current) {
@@ -78,11 +83,45 @@ const RootLayout = () => {
     })
   }, [])
 
+  // Check app version
+  useEffect(() => {
+    async function checkAppVersion() {
+      try {
+        const apiService = new ApiService()
+
+        // Get native app version and build version
+        let appVersion = '1.0.0'
+        let buildVersion = '1'
+
+        if (Platform.OS === 'ios' || Platform.OS === 'android') {
+          appVersion = Application.nativeApplicationVersion!
+          buildVersion = Application.nativeBuildVersion!
+        }
+
+        const appVersionCheckResults = await apiService.checkAppVersion(
+          Platform.OS, // Pass Platform.OS directly (web, ios, android)
+          appVersion,
+          buildVersion,
+        )
+
+        setAppVersionStatus(appVersionCheckResults)
+        setAppUpdatePopupVisible(
+          appVersionCheckResults.force_update_required || appVersionCheckResults.update_available,
+        )
+      } catch (error) {
+        console.error('Failed to check app version:', error)
+      }
+    }
+
+    checkAppVersion()
+  }, [])
+
   if (!reduxStore || !fontsLoaded) {
     return <LoadingScreen />
   }
 
-  if (process.env.EXPO_PUBLIC_MAINTENANCE_MODE === 'true') {
+  // Maintenance mode check from API response
+  if (appVersionStatus && appVersionStatus.maintenance_mode) {
     return <MaintenanceScreen />
   }
 
@@ -94,6 +133,14 @@ const RootLayout = () => {
         <I18nextProvider i18n={i18n}>
           <Provider store={reduxStore}>
             <RootContainer>
+              {appVersionStatus && (
+                <AppUpdatePopup
+                  isForced={appVersionStatus.force_update_required}
+                  visible={appUpdatePopupVisible}
+                  onDismiss={appVersionStatus.force_update_required ? undefined : () => setAppUpdatePopupVisible(false)}
+                />
+              )}
+
               <Stack
                 screenOptions={{
                   headerShown: false,

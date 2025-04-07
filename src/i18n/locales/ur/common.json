@@ -65,5 +65,11 @@
     "successCopy": "شیئر شدہ گفتگو کا URL کلپ بورڈ پر کاپی ہوگیا!"
   },
   "pageNotFound": "صفحہ نہیں ملا",
-  "notfoundMessage": "صفحہ نہیں ملا۔"
+  "notfoundMessage": "صفحہ نہیں ملا۔",
+  "updateRequired": "اپڈیٹ ضروری ہے",
+  "updateAvailable": "اپڈیٹ دستیاب ہے",
+  "updateRequiredDescription": "انصاری چیٹ کو استعمال کرنے کے لیے نیا ورژن درکار ہے۔ براہ کرم ابھی اپڈیٹ کریں۔",
+  "updateAvailableDescription": "نئی خصوصیات اور بہتریوں کے ساتھ انصاری چیٹ کا نیا ورژن دستیاب ہے۔",
+  "updateNow": "ابھی اپڈیٹ کریں",
+  "updateLater": "بعد میں"
 }

@@ -67,5 +67,11 @@
     "successCopy": "Tautan percakapan yang dibagikan telah disalin ke papan klip!"
   },
   "pageNotFound": "Halaman Tidak Ditemukan",
-  "notfoundMessage": "Halaman tidak dapat ditemukan."
+  "notfoundMessage": "Halaman tidak dapat ditemukan.",
+  "updateRequired": "Pembaruan Diperlukan",
+  "updateAvailable": "Pembaruan Tersedia",
+  "updateRequiredDescription": "Versi baru diperlukan untuk melanjutkan menggunakan Ansari Chat. Silakan perbarui sekarang.",
+  "updateAvailableDescription": "Versi baru Ansari Chat tersedia dengan fitur dan peningkatan baru.",
+  "updateNow": "Perbarui Sekarang",
+  "updateLater": "Nanti"
 }

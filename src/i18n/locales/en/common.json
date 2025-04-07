@@ -65,5 +65,11 @@
     "successCopy": "Copied shared conversation URL to clipboard!"
   },
   "pageNotFound": "Page Not Found",
-  "notfoundMessage": "The page could not be found."
+  "notfoundMessage": "The page could not be found.",
+  "updateRequired": "Update Required",
+  "updateAvailable": "Update Available",
+  "updateRequiredDescription": "A new version is required to continue using Ansari Chat. Please update now.",
+  "updateAvailableDescription": "A new version of Ansari Chat is available with new features and improvements.",
+  "updateNow": "Update Now",
+  "updateLater": "Later"
 }

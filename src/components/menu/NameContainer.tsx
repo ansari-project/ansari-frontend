@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { Linking, Platform, Pressable, Text, View } from 'react-native'
 import Popover, { PopoverMode } from 'react-native-popover-view'
 import { Avatar } from '@kolking/react-native-avatar'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
-import { CloseIcon, LogoutIcon } from '@/components/svg'
+import { CloseIcon, LikeIcon, LogoutIcon } from '@/components/svg'
 import { useAuth } from '@/hooks'
 
 type NameContainerProps = {
@@ -52,7 +52,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
         isVisible={isVisible}
         onRequestClose={() => setIsVisible(false)}
         popoverStyle={{
-          width: 200,
+          width: 225,
           borderRadius: 4,
           padding: 16,
           backgroundColor: theme.popupBackgroundColor,
@@ -68,6 +68,25 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
               </Text>
             </Pressable>
           )} */}
+
+          {(Platform.OS === 'ios' || Platform.OS === 'android') && (
+            <Pressable
+              className='flex-row items-center py-4'
+              onPress={() => {
+                setIsVisible(false)
+                const appStoreUrl =
+                  Platform.OS === 'ios'
+                    ? 'itms-apps://itunes.apple.com/app/viewContentsUserReviews/id6743072108?action=write-review'
+                    : 'market://details?id=chat.ansari.app&showAllReviews=true'
+                Linking.openURL(appStoreUrl)
+              }}
+            >
+              <LikeIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
+              <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+                {t('rateApp')}
+              </Text>
+            </Pressable>
+          )}
 
           {!isGuest && (
             <Pressable

@@ -48,7 +48,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const { isSmallScreen, height } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
 
-    if (isLoading && !isSending) {
+    if (isLoading && !isSending && !activeThread) {
       return (
         <View className='flex-1 items-center justify-center'>
           <ActivityIndicator size='large' color={theme.hoverColor} />

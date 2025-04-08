@@ -75,6 +75,7 @@ class ApiService {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
       },
+      body: JSON.stringify({}),
     })
 
     if (!response.ok) {
@@ -137,6 +138,7 @@ class ApiService {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      body: JSON.stringify({}),
     })
 
     if (!response.ok) {

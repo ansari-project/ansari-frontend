@@ -141,11 +141,13 @@ const markdownStyles = {
     flexDirection: 'row',
     fontSize: 18,
     lineHeight: 24,
+    marginVertical: 5,
   },
   heading3: {
     flexDirection: 'row',
     fontSize: 18,
     lineHeight: 24,
+    marginVertical: 5,
   },
   heading4: {
     flexDirection: 'row',

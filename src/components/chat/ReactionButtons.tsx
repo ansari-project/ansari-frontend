@@ -87,7 +87,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
     }
 
     return (
-      <View className='flex-row flex-wrap'>
+      <View className='flex-row flex-wrap gap-x-2'>
         {feedbackOptions.map((option) => (
           <Pressable
             key={option.value}

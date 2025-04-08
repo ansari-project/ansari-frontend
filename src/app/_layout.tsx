@@ -93,7 +93,8 @@ const RootLayout = () => {
         let appVersion = '1.0.0'
         let buildVersion = '1'
 
-        if (Platform.OS === 'ios' || Platform.OS === 'android') {
+        const appMode = Platform.OS === 'ios' || Platform.OS === 'android'
+        if (appMode) {
           appVersion = Application.nativeApplicationVersion!
           buildVersion = Application.nativeBuildVersion!
         }
@@ -106,7 +107,7 @@ const RootLayout = () => {
 
         setAppVersionStatus(appVersionCheckResults)
         setAppUpdatePopupVisible(
-          appVersionCheckResults.force_update_required || appVersionCheckResults.update_available,
+          appMode && (appVersionCheckResults.force_update_required || appVersionCheckResults.update_available),
         )
       } catch (error) {
         console.error('Failed to check app version:', error)

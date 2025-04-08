@@ -30,7 +30,7 @@ const AppUpdatePopup: React.FC<AppUpdatePopupProps> = ({ isForced, visible, onDi
 
   const openAppStore = useCallback(async (appId: string) => {
     try {
-      await Linking.openURL(`itms://itunes.apple.com/app/id${appId}`)
+      await Linking.openURL(`itms-apps://itunes.apple.com/app/id${appId}`)
     } catch (error) {
       console.error('Error opening App Store:', error)
       await Linking.openURL(`https://apps.apple.com/app/id${appId}`)

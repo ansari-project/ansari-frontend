@@ -43,7 +43,7 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
     >
       <View className='flex-1'>
         <StyledText
-          className='text-sm leading-[21px] font-bold'
+          className='text-base font-bold'
           textAlign='left'
           style={{ color: isActive ? theme.hoverColor : theme.textColor }}
         >
@@ -51,7 +51,7 @@ const PromptCard: React.FC<Props> = ({ title, subtitle, Icon, onPress, isMiddle 
         </StyledText>
         <StyledText
           textAlign='left'
-          className='text-sm leading-[21px] font-normal'
+          className='text-base font-normal'
           style={{ color: isActive ? theme.hoverColor : theme.textColor }}
         >
           {subtitle}

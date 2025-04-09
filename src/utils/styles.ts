@@ -82,6 +82,7 @@ const createThemedStyles = (
       color: theme.buttonPrimaryColor,
       fontWeight: 'bold',
       fontFamily: 'Inter',
+      fontSize: 16,
     },
     buttonSecondary: {
       cursor: 'pointer',
@@ -98,6 +99,7 @@ const createThemedStyles = (
       color: theme.buttonSecondaryColor,
       fontWeight: 'bold',
       fontFamily: 'Inter',
+      fontSize: 16,
     },
     buttonTextDisabled: {
       color: theme.textColor,

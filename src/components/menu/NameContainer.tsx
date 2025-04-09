@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
 import { CloseIcon, LikeIcon, LogoutIcon } from '@/components/svg'
-import { useAuth } from '@/hooks'
+import { useAuth, useLogout } from '@/hooks'
 
 type NameContainerProps = {
   name: string
@@ -24,6 +24,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
   const { t } = useTranslation('common')
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
+  const doLogout = useLogout()
 
   if (nameColor === undefined) {
     nameColor = theme.textColor
@@ -105,10 +106,11 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
           )}
           <Pressable
             className={'flex-row items-center py-4'}
-            onPress={() => {
+            onPress={async () => {
               setIsVisible(false)
               dispatch(toggleSideMenu(false))
-              router.push('/logout')
+              await doLogout()
+              router.push('/')
             }}
           >
             <LogoutIcon stroke={theme.textColor} />

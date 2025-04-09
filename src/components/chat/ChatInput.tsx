@@ -92,7 +92,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
           onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
           onChangeText={handleChange}
           onContentSizeChange={handleContentSizeChange}
-          className={`flex-1 rounded text-sm ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
+          className={`flex-1 rounded text-base ${isRTL ? 'ml-2.5 text-right' : 'mr-2.5 text-left'}`}
           style={{
             color: theme.textColor,
             outlineWidth: 0,

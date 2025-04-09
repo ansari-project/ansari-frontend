@@ -62,7 +62,8 @@ class UserService {
 
       // Checking if the response is OK (status code in the range 200-299)
       if (!response.ok) {
-        throw new ApplicationError('Failed to update password')
+        const error = await response.json()
+        throw new ApplicationError(error.detail || error.error || error.message || 'Failed to update password')
       }
 
       // Parsing the JSON response

@@ -37,3 +37,4 @@ jobs:
         with:
           profile: preview
           branch: preview
+          environment: preview

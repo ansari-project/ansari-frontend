@@ -115,7 +115,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           </Markdown>
         </View>
         {!isOutgoing && !isSending && reactionsEnabled && (
-          <View className='flex flex-row' key={message.id}>
+          <View className='flex flex-row pb-4' key={message.id}>
             <ReactionButtons
               threadId={threadId}
               messageId={message.id}

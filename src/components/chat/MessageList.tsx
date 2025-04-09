@@ -6,6 +6,7 @@ import React, { forwardRef, useRef, useState } from 'react'
 import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import MessageBubble, { MessageBubbleProps } from './MessageBubble'
+import { useLocalSearchParams } from 'expo-router'
 
 // Memoize MessageBubble to avoid unnecessary re-renders
 const areEqual = (prevProps: MessageBubbleProps, nextProps: MessageBubbleProps) =>
@@ -47,8 +48,10 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
     const { isSmallScreen, height } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
+    const { threadId } = useLocalSearchParams<{ threadId: string }>()
 
-    if (isLoading && !isSending && !activeThread) {
+    const validThread = activeThread && activeThread.id === threadId
+    if (isLoading && !isSending && !validThread) {
       return (
         <View className='flex-1 items-center justify-center'>
           <ActivityIndicator size='large' color={theme.hoverColor} />
@@ -87,7 +90,14 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
         <ScrollView
           ref={scrollViewRef}
           className={`mb-${isSmallScreen ? '1' : '2'}`}
-          scrollEventThrottle={250}
+          scrollEventThrottle={50}
+          onScroll={(event) => {
+            const { contentOffset, layoutMeasurement } = event.nativeEvent
+            // 250 accounts for the height of the fixed header + chat input + footer note
+            const isAtBottom = contentOffset.y >= event.nativeEvent.contentSize.height - layoutMeasurement.height - 250
+
+            setDisplayScrollButton(!isAtBottom)
+          }}
           onContentSizeChange={(contentWidth: number, contentHeight: number) => {
             if (isSending) return
 

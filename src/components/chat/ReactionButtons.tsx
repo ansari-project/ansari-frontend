@@ -116,12 +116,12 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
 
   return (
     <View className='w-full'>
-      <View className='flex flex-row w-full'>
-        <Pressable onPress={copyMessage} className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}>
+      <View className='flex flex-row w-full gap-x-4'>
+        <Pressable onPress={copyMessage} className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`} hitSlop={8}>
           {copySuccess ? (
-            <CheckIcon fill={theme.hoverColor} />
+            <CheckIcon fill={theme.hoverColor} width={24} height={24} />
           ) : (
-            <CopyIcon fill={theme.iconFill} hoverFill={theme.hoverColor} />
+            <CopyIcon fill={theme.iconFill} hoverFill={theme.hoverColor} width={24} height={24} />
           )}
         </Pressable>
         <Pressable
@@ -130,10 +130,13 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             setEditing(true)
           }}
           className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}
+          hitSlop={8}
         >
           <LikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsUp ? theme.hoverColor : theme.iconFill}
             hoverFill={theme.hoverColor}
+            width={24}
+            height={24}
           />
         </Pressable>
         <Pressable
@@ -142,21 +145,24 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
             setEditing(true)
           }}
           className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}
+          hitSlop={8}
         >
           <DislikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsDown ? theme.hoverColor : theme.iconFill}
             hoverFill={theme.hoverColor}
+            width={24}
+            height={24}
           />
         </Pressable>
       </View>
       {modalVisible && (
-        <View className={`w-full h-0 mt-6 ${modalVisible ? 'h-auto' : ''}`}>
+        <View className={`w-full mt-6 ${modalVisible ? 'h-auto' : ''}`}>
           <View
             className='w-full px-2 sm:px-5 py-4 items-start rounded'
             style={{ backgroundColor: theme.inputBackgroundColor }}
           >
             <View className='flex-row w-full items-center'>
-              <View className='flex-2 flex-row gap-2.5'>
+              <View className='flex-2 flex-row gap-2'>
                 <Text style={[{ color: theme.primaryColor, fontFamily: 'Inter', fontWeight: '500' }]}>
                   {t('whyDidYouChooseThisRating')}
                 </Text>

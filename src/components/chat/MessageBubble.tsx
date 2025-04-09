@@ -155,11 +155,11 @@ const markdownStyles = {
   },
   heading5: {
     flexDirection: 'row',
-    fontSize: 13,
+    fontSize: 16,
   },
   heading6: {
     flexDirection: 'row',
-    fontSize: 11,
+    fontSize: 16,
   },
 
   // Horizontal Rule

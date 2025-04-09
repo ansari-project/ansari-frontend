@@ -75,4 +75,5 @@ jobs:
         with:
           profile: production
           branch: production
+          environment: production
           # auto-submit-builds: true

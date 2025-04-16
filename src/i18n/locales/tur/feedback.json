@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "Saldırgan / Tehlikeli",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "Tamamen Doğru Değil",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "Diğer",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "Saldırgan / Tehlikeli",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "Diğer",
       "value": "other"
     }

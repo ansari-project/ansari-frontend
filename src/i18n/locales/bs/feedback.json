@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "Neprikladno / Neposredno",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "Nepravilno faktično",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "Drugo",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "Neprikladno / Neposredno",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "Drugo",
       "value": "other"
     }

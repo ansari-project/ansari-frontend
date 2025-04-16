@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "توہین آمیز / نا محفوظ",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "حقائقی طور پر غلط",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "دیگر",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "توہین آمیز / نا محفوظ",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "دیگر",
       "value": "other"
     }

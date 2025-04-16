@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "அவமதிப்பான/மனத்தை புண்படுத்துகிற/பாதுகாப்பற்ற தகவல் ",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "உண்மையற்றது/தவறான தகவல்",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "தவறான தகவல்",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "அவமதிப்பான/மனத்தை புண்படுத்துகிற/பாதுகாப்பற்ற தகவல் ",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "தவறான தகவல்",
       "value": "other"
     }

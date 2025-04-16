@@ -17,6 +17,7 @@ export type Feedback = {
 export type FeedbacksByCategory = {
   good: Feedback[]
   bad: Feedback[]
+  redflag: Feedback[]
   [key: string]: Feedback[]
 }
 

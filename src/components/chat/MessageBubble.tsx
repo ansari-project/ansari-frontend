@@ -80,7 +80,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   return (
     <View
       className={`mx-1 my-1 rounded flex flex-row flex-grow self-start ${isSmallScreen ? 'p-2 gap-2' : 'p-2.5 gap-4'}`}
-      style={{ width: width || contentWidth }}
     >
       {isOutgoing ? (
         <View className='rounded px-5 py-2 w-8 h-8 items-center justify-center'>

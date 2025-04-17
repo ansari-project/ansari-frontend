@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "Kasar / Tidak aman",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "Tidak benar fakta",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "Lainnya",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "Kasar / Tidak aman",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "Lainnya",
       "value": "other"
     }

@@ -18,17 +18,24 @@
   ],
   "bad": [
     {
-      "id": "bad1",
-      "label": "Offensive / Unsafe",
-      "value": "offensive"
-    },
-    {
       "id": "bad2",
       "label": "Not factually correct",
       "value": "incorrect"
     },
     {
       "id": "bad3",
+      "label": "Other",
+      "value": "other"
+    }
+  ],
+  "redflag": [
+    {
+      "id": "redflag1",
+      "label": "Offensive / Unsafe",
+      "value": "offensive"
+    },
+    {
+      "id": "redflag2",
       "label": "Other",
       "value": "other"
     }

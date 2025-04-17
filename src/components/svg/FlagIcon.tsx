@@ -12,7 +12,8 @@ const FlagIcon: React.FC<Props> = (props: Props) => {
       width={props.width || '24'}
       height={props.height || '24'}
       viewBox={props.viewBox || '0 0 24 24'}
-      fill={props.fill || '#08786B'}
+      fill={props.fill || 'currentColor'}
+      stroke={props.stroke || 'currentColor'}
       transform={props.transform || transform}
     >
       <G>

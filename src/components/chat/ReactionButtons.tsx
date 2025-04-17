@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon, CopyIcon, DislikeIcon, LikeIcon } from '@/components/svg'
+import { CheckIcon, CloseIcon, CopyIcon, DislikeIcon, FlagIcon, LikeIcon } from '@/components/svg'
 import { useDirection, useFeedbackHandler, useFeedbackService, useScreenInfo } from '@/hooks'
 import { FeedbackClass, Message, ReactionButtonsState, RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
@@ -86,6 +86,10 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
       feedbackOptions = feedbacks.bad || []
     }
 
+    if (selectedFeedbackClass === FeedbackClass.RedFlag) {
+      feedbackOptions = feedbacks.redflag || []
+    }
+
     return (
       <View className='flex-row flex-wrap gap-x-2'>
         {feedbackOptions.map((option) => (
@@ -149,6 +153,21 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
         >
           <DislikeIcon
             fill={selectedIcon === FeedbackClass.ThumbsDown ? theme.hoverColor : theme.iconFill}
+            hoverFill={theme.hoverColor}
+            width={24}
+            height={24}
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            handleFeedbackAction(FeedbackClass.RedFlag)
+            setEditing(true)
+          }}
+          className={`w-5 h-5 ${isRTL ? 'mr-2' : 'ml-2'}`}
+          hitSlop={8}
+        >
+          <FlagIcon
+            fill={selectedIcon === FeedbackClass.RedFlag ? theme.hoverColor : theme.iconFill}
             hoverFill={theme.hoverColor}
             width={24}
             height={24}

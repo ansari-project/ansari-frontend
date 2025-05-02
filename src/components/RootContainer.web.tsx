@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { i18n } from '@/i18n'
 import { View } from 'react-native'
+import { inject } from '@vercel/analytics'
+
+inject()
 
 export type Props = {
   children: React.ReactNode

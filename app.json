@@ -54,7 +54,9 @@
       }
     },
     "android": {
-      "package": "chat.ansari.app"
+      "package": "chat.ansari.app",
+      "minSdkVersion": 35,
+      "edgeToEdgeEnabled": true
     },
     "ios": {
       "bundleIdentifier": "chat.ansari.app",

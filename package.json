@@ -39,7 +39,7 @@
     "history": "^5.3.0",
     "i18next": "^25.4.1",
     "lodash.debounce": "^4.0.8",
-    "nativewind": "^4.1.23",
+    "nativewind": "4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-i18next": "^15.7.3",
@@ -120,7 +120,6 @@
     "jest-expo": "~53.0.10",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
-    "react-native-worklets": "^0.5.1",
     "react-test-renderer": "19.0.0",
     "tailwindcss": "^3.4.0",
     "typescript": "~5.8.3"

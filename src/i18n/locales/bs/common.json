@@ -72,5 +72,15 @@
   "updateRequiredDescription": "Nova verzija je potrebna za nastavak korištenja Ansari Chata. Molimo vas da ažurirate odmah.",
   "updateAvailableDescription": "Nova verzija Ansari Chata je dostupna s novim funkcijama i poboljšanjima.",
   "updateNow": "Ažuriraj sada",
-  "updateLater": "Kasnije"
+  "updateLater": "Kasnije",
+  "welcomeHeadingSmall": "ESSALAMU ALEJKUM",
+  "welcomeHeadingMain": "DOBRODOŠLI U ANSARI",
+  "welcomeBlurb": "Napravljen od muslimana, obučen s pažnjom – vođen izvorima, ne nagađanjima.",
+  "welcomeFeatureSourceBased": "Vodič zasnovan na izvorima u bilo koje vrijeme",
+  "welcomeFeatureSaveChats": "Sačuvajte razgovore i nastavite gdje ste stali.",
+  "welcomeFeatureQuickEasy": "Brza i jednostavna registracija",
+  "welcomeFeatureJoinToday": "Pridružite se Ansariju danas!",
+  "createAccount": "Kreiraj račun",
+  "logInCta": "Prijava",
+  "continueAsGuestLimited": "Nastavi kao gost (ograničen pristup)"
 }

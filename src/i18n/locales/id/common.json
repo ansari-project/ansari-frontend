@@ -74,5 +74,15 @@
   "updateRequiredDescription": "Versi baru diperlukan untuk melanjutkan menggunakan Ansari Chat. Silakan perbarui sekarang.",
   "updateAvailableDescription": "Versi baru Ansari Chat tersedia dengan fitur dan peningkatan baru.",
   "updateNow": "Perbarui Sekarang",
-  "updateLater": "Nanti"
+  "updateLater": "Nanti",
+  "welcomeHeadingSmall": "ASSALAMU ALAIKUM",
+  "welcomeHeadingMain": "SELAMAT DATANG DI ANSARI",
+  "welcomeBlurb": "Dibangun oleh Muslim, dilatih dengan hati-hati – dirancang untuk membimbing dengan sumber, bukan tebakan.",
+  "welcomeFeatureSourceBased": "Bimbingan berbasis sumber kapan saja",
+  "welcomeFeatureSaveChats": "Simpan obrolan Anda dan lanjutkan dari tempat terakhir.",
+  "welcomeFeatureQuickEasy": "Pendaftaran cepat dan mudah",
+  "welcomeFeatureJoinToday": "Bergabunglah dengan Ansari hari ini!",
+  "createAccount": "Buat akun",
+  "logInCta": "Masuk",
+  "continueAsGuestLimited": "Lanjut sebagai tamu (akses terbatas)"
 }

@@ -57,7 +57,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
 
   const handlePromptSelect = (description: string) => {
     setInputText(description)
-    // handleSendPress(description)
+    handleSendPress(description)
   }
 
   return (

@@ -9,6 +9,9 @@
     "orientation": "portrait",
     "newArchEnabled": true,
     "icon": "./src/assets/images/icon.png",
+    "assetBundlePatterns": [
+      "src/assets/fonts/*"
+    ],
     "web": {
       "bundler": "metro"
     },

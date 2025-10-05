@@ -1,9 +1,7 @@
 import { LogoIcon } from '@/components/svg'
 import ActionButtons from '@/components/ActionButtons'
 import StyledText from '@/components/StyledText'
-import WelcomeFeatureRow from '@/components/welcome/WelcomeFeatureRow'
-import WelcomeFooter from '@/components/welcome/WelcomeFooter'
-import { ENButton, TextButton } from '@/components/buttons'
+import { ENButton, WelcomeFeatureRow, WelcomeFooter } from '@/components'
 import { useDirection, useGuest, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
@@ -49,15 +47,14 @@ const Welcome: React.FC = () => {
               variant='h3'
               textAlign='center'
               className='uppercase tracking-widest'
-              style={{ color: theme.darkGreenColor, marginBottom: 6 }}
+              style={{ color: theme.darkGreenColor, marginBottom: 6, fontFamily: 'Exo2' }}
             >
               {t('welcomeHeadingSmall', { defaultValue: t('greeting') })}
             </StyledText>
             <StyledText
               variant='h1'
               textAlign='center'
-              className='font-extrabold'
-              style={{ color: theme.darkGreenColor, width: 500 }}
+              style={{ color: theme.darkGreenColor, width: 500, fontFamily: 'Exo2-Bold' }}
             >
               {t('welcomeHeadingMain', { defaultValue: t('ansariChat') })}
             </StyledText>
@@ -77,10 +74,11 @@ const Welcome: React.FC = () => {
               }}
             >
               <Text
-                className='text-[16px] leading-[24px] italic font-extrabold text-center'
+                className='text-[16px] leading-[24px] text-center'
                 style={{
                   color: '#000000',
                   fontStyle: 'italic',
+                  fontFamily: 'Exo2-Bold-Italic',
                 }}
               >
                 {t('welcomeBlurb', {
@@ -151,18 +149,20 @@ const Welcome: React.FC = () => {
                 fontSize: 20,
               }}
             />
-            <TextButton
-              title={
-                guestLoading
-                  ? t('login:submitting')
-                  : t('continueAsGuestLimited', { defaultValue: 'Continue as guest (limited access)' })
-              }
-              onPress={handleGuestLogin}
-              disabled={guestLoading}
-              loading={guestLoading}
-              accessibilityRole='link'
-              accessibilityLabel={t('continueAsGuestLimited', { defaultValue: 'Continue as guest (limited access)' })}
-              textStyle={{ color: '#000000' }}
+            <ENButton
+              text={t('continueAsGuestLimited', { defaultValue: 'Continue as guest (limited access)' })}
+              submittingText={t('login:submitting')}
+              onClick={handleGuestLogin}
+              isSubmitting={guestLoading}
+              buttonStyle={{
+                backgroundColor: 'transparent',
+                marginTop: 4,
+              }}
+              buttonTextStyle={{
+                color: '#000000',
+                fontSize: 14,
+                textAlign: 'center',
+              }}
             />
           </View>
         </View>

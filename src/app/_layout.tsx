@@ -8,8 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { MaintenanceScreen, LoadingScreen, AppUpdatePopup } from '@/components'
-// eslint-disable-next-line camelcase
-import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
+import { useCustomFonts } from '@/hooks'
 import RootContainer from '@/components/RootContainer'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as Sentry from '@sentry/react-native'
@@ -72,10 +71,7 @@ const RootLayout = () => {
 
   // Specify the type of the state to be either null or an EnhancedStore instance
   const [reduxStore, setReduxStore] = useState<EnhancedStore<RootState> | null>(null)
-  let [fontsLoaded] = useFonts({
-    // eslint-disable-next-line camelcase
-    Inter: Inter_400Regular,
-  })
+  const { fontsLoaded } = useCustomFonts()
 
   useEffect(() => {
     initStore().then((store) => {

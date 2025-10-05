@@ -5,7 +5,10 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@expo-google-fonts/exo-2": "^0.4.2",
     "@expo-google-fonts/inter": "^0.2.3",
+    "@expo-google-fonts/open-sans": "^0.4.2",
+    "@expo-google-fonts/roboto": "^0.4.1",
     "@expo/vector-icons": "^14.1.0",
     "@kolking/react-native-avatar": "^2.1.4",
     "@react-native-async-storage/async-storage": "2.1.2",

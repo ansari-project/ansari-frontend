@@ -60,6 +60,7 @@ export function useChat(): UseChatReturn {
         }
       }
       if (threadId && content.trim()) {
+        setInputText('') // Clear input text immediately
         await dispatch(
           addMessage({
             threadId: threadId,
@@ -74,7 +75,6 @@ export function useChat(): UseChatReturn {
       setIsSending(false)
       return { threadId: undefined, error } // Include error feedback
     } finally {
-      setInputText('') // Clear input text on successful send
       setIsSending(false)
       abortControllerRef.current = null
     }

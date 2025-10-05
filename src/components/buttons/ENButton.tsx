@@ -2,7 +2,7 @@ import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React, { useState } from 'react'
-import { Pressable, Text, ViewStyle } from 'react-native'
+import { Pressable, Text, TextStyle, ViewStyle } from 'react-native'
 import { useSelector } from 'react-redux'
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
   isSubmitting?: boolean
   buttonStyle?: ViewStyle
   buttonHoverStyle?: ViewStyle
-  buttonTextStyle?: ViewStyle
-  buttonHoverTextStyle?: ViewStyle
+  buttonTextStyle?: TextStyle
+  buttonHoverTextStyle?: TextStyle
 }
 
 const ENButton: React.FC<Props> = ({

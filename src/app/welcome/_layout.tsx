@@ -1,4 +1,5 @@
-import RootImageBackground from '@/components/RootImageBackground'
+
+import WelcomeRootImageBackground from '@/components/welcome/WelcomRootImageBackground'
 import { useAuth } from '@/hooks'
 import { Redirect, Slot } from 'expo-router'
 import React from 'react'
@@ -18,11 +19,11 @@ export const WelcomeLayout = () => {
   }
 
   return (
-    <RootImageBackground>
+    <WelcomeRootImageBackground>
       <View className='flex-1'>
         <Slot />
       </View>
-    </RootImageBackground>
+    </WelcomeRootImageBackground>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { CheckIcon, ChatIcon, LogoRoundIcon, InformationGreenIcon } from '@/components/svg'
+import { LogoRoundIcon } from '@/components/svg'
 import { useDirection } from '@/hooks'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -45,11 +45,9 @@ const WelcomeFeatureRow: React.FC<WelcomeFeatureRowProps> = ({ iconName, text })
 
   const renderText = () => {
     const baseStyle = {
-      color: '#231414',
       textAlign: isRTL ? 'right' as const : 'left' as const
     }
     const boldStyle = {
-      color: '#231414',
       fontWeight: 'bold' as const,
       textAlign: isRTL ? 'right' as const : 'left' as const
     }
@@ -71,7 +69,6 @@ const WelcomeFeatureRow: React.FC<WelcomeFeatureRowProps> = ({ iconName, text })
         </Text>
       )
     }
-
     // Fallback: return normal text
     return <Text style={baseStyle}>{text}</Text>
   }

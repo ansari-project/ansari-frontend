@@ -29,6 +29,9 @@ export interface Theme {
   scrollColor: string
   yellowColor: string
   darkGreenColor: string
+  greyColor: string
+  blackColor: string
+  whiteColor: string
 }
 
 // Define the light theme object
@@ -60,6 +63,9 @@ export const lightTheme: Theme = {
   scrollColor: '#D9D9E3CC',
   yellowColor: '#F29B00',
   darkGreenColor: "#097468",
+  greyColor: "#666666",
+  blackColor: "#000000",
+  whiteColor: "#FFFFFF",
 }
 
 // Define the dark theme object
@@ -91,6 +97,9 @@ export const darkTheme: Theme = {
   scrollColor: '#D9D9E3CC',
   yellowColor: '#F29B00',
   darkGreenColor: "#097468",
+  greyColor: "#666666",
+  blackColor: "#000000",
+  whiteColor: "#FFFFFF",
 }
 
 export const getThemeStyle = (colorSchema: ColorSchemeName, property: string) => {

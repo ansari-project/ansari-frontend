@@ -76,7 +76,7 @@ const Welcome: React.FC = () => {
               <Text
                 className='text-[16px] leading-[24px] text-center'
                 style={{
-                  color: '#000000',
+                  color: theme.blackColor,
                   fontStyle: 'italic',
                   fontFamily: 'Exo2-Bold-Italic',
                 }}
@@ -126,7 +126,7 @@ const Welcome: React.FC = () => {
               }}
               buttonTextStyle={{
                 fontSize: 20,
-                color: '#FFFFFF',
+                color: theme.whiteColor,
               }}
             />
             <ENButton
@@ -145,7 +145,7 @@ const Welcome: React.FC = () => {
 
               }}
               buttonTextStyle={{
-                color: '#000000',
+                color: theme.blackColor,
                 fontSize: 20,
               }}
             />
@@ -159,7 +159,7 @@ const Welcome: React.FC = () => {
                 marginTop: 4,
               }}
               buttonTextStyle={{
-                color: '#000000',
+                color: theme.blackColor,
                 fontSize: 14,
                 textAlign: 'center',
               }}

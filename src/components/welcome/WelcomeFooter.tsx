@@ -1,12 +1,14 @@
 import StyledText from '@/components/StyledText'
+import { RootState } from '@/store'
 import getEnv from '@/utils/getEnv'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Linking, Pressable, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 const WelcomeFooter: React.FC = () => {
   const { t } = useTranslation()
-
+  const theme = useSelector((state: RootState) => state.theme.theme)
   const handleUrlPress = (url: string) => {
     if (typeof window !== 'undefined' && 'open' in window) {
       window.open(url, '_blank')
@@ -22,16 +24,16 @@ const WelcomeFooter: React.FC = () => {
           className='px-2'
           onPress={() => handleUrlPress(getEnv('TERMS_URL'))}
         >
-          <StyledText style={{ color: '#666666', fontSize: 12 }}>
+          <StyledText style={{ color: theme.greyColor, fontSize: 12 }}>
             {t('termOfUse')}
           </StyledText>
         </Pressable>
-        <StyledText style={{ color: '#666666', fontSize: 12 }}>|</StyledText>
+        <StyledText style={{ color: theme.greyColor, fontSize: 12 }}>|</StyledText>
         <Pressable
           className='px-2'
           onPress={() => handleUrlPress(getEnv('PRIVACY_URL'))}
         >
-          <StyledText style={{ color: '#666666', fontSize: 12 }}>
+          <StyledText style={{ color: theme.greyColor, fontSize: 12 }}>
             {t('privacyPolicy')}
           </StyledText>
         </Pressable>

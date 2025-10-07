@@ -8,7 +8,7 @@ interface WelcomeRootImageBackgroundProps {
 
 const WelcomeRootImageBackground: React.FC<WelcomeRootImageBackgroundProps> = ({ children, className }) => {
   return (
-    <ImageBackground source={require('@/assets/images/welcome-background.png')} className={`flex-1 ${className}`}>
+    <ImageBackground source={require('@/assets/images/welcome-background.png')} className={`flex-1 bg-white ${className}`}>
       {children}
     </ImageBackground>
   )

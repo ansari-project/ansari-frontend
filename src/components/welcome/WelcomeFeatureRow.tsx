@@ -3,6 +3,8 @@ import { View, Text } from 'react-native'
 import { LogoRoundIcon } from '@/components/svg'
 import { useDirection } from '@/hooks'
 import { Ionicons } from '@expo/vector-icons'
+import { RootState } from '@/store'
+import { useSelector } from 'react-redux'
 
 type IconName = 'information' | 'chat' | 'check' | 'logo'
 
@@ -13,7 +15,7 @@ type WelcomeFeatureRowProps = {
 
 const WelcomeFeatureRow: React.FC<WelcomeFeatureRowProps> = ({ iconName, text }) => {
   const { isRTL } = useDirection()
-
+  const theme = useSelector((state: RootState) => state.theme.theme)
   // Define which text should be bold for each icon
   const boldTextMap = {
     information: 'Get Source-Based',
@@ -26,16 +28,16 @@ const WelcomeFeatureRow: React.FC<WelcomeFeatureRowProps> = ({ iconName, text })
     const iconProps = {
       width: 20,
       height: 20,
-      fill: '#08786B'
+      fill: theme.darkGreenColor
     }
 
     switch (name) {
       case 'information':
-        return <Ionicons name='book' size={20} color='#08786B' />
+        return <Ionicons name='book' size={20} color={theme.darkGreenColor} />
       case 'chat':
-        return <Ionicons name='chatbox-ellipses' size={20} color='#08786B' />
+        return <Ionicons name='chatbox-ellipses' size={20} color={theme.darkGreenColor} />
       case 'check':
-        return <Ionicons name='checkmark-circle' size={20} color='#08786B' />
+        return <Ionicons name='checkmark-circle' size={20} color={theme.darkGreenColor} />
       case 'logo':
         return <LogoRoundIcon {...iconProps} width={22} height={22} />
       default:

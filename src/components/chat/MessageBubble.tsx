@@ -103,7 +103,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary' textAlign='left'>
           {isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}
         </StyledText>
-        <View className='flex-1 px-1'>
+        <View className='px-1'>
           <Markdown
             style={{
               body: [styles.messageText, textStyle],

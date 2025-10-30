@@ -107,7 +107,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
           }}
         >
           {filteredMessages.map((message: Message, index) => {
-            const id = message.id || Helpers.generateUniqueId() + (isSending ? '-sending' : '')
+            const id = message.id || `${index}-sending`
 
             return (
               <MessageBubbleMemo

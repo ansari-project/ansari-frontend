@@ -49,3 +49,5 @@
 - Base new features on `develop` branch
 - Keep commits focused on single concerns
 - Include relevant context in commit messages
+- **NEVER use Co-Authored-By or Claude Code attribution in commit messages**
+- Keep commit messages clean and professional without AI generation footers

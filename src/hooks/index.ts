@@ -1,5 +1,6 @@
 export * from './chat'
 export { useAuth } from './useAuth'
+export { useCustomFonts } from './useCustomFonts'
 export { useDirection } from './useDirection'
 export { useGuest } from './useGuest'
 export { useLogout } from './useLogout'

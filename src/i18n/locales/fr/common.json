@@ -72,5 +72,15 @@
   "updateRequiredDescription": "Une nouvelle version est nécessaire pour continuer à utiliser Ansari Chat. Veuillez mettre à jour maintenant.",
   "updateAvailableDescription": "Une nouvelle version d'Ansari Chat est disponible avec de nouvelles fonctionnalités et améliorations.",
   "updateNow": "Mettre à jour maintenant",
-  "updateLater": "Plus tard"
+  "updateLater": "Plus tard",
+  "welcomeHeadingSmall": "ASSALAMU ALAIKUM",
+  "welcomeHeadingMain": "BIENVENUE CHEZ ANSARI",
+  "welcomeBlurb": "Conçu par des musulmans, entraîné avec soin – guidé par les sources, pas par les suppositions.",
+  "welcomeFeatureSourceBased": "Des conseils fondés sur les sources à tout moment",
+  "welcomeFeatureSaveChats": "Enregistrez vos discussions et reprenez où vous vous êtes arrêté.",
+  "welcomeFeatureQuickEasy": "Inscription simple et rapide",
+  "welcomeFeatureJoinToday": "Rejoignez Ansari dès aujourd’hui !",
+  "createAccount": "Créer un compte",
+  "logInCta": "Se connecter",
+  "continueAsGuestLimited": "Continuer en tant qu’invité (accès limité)"
 }

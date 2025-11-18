@@ -18,7 +18,10 @@ module.exports = {
         black: '#020202',
       },
       fontFamily: {
-        roboto: ['Roboto'],
+        exo2: ['Exo2'],
+        'exo2-semibold': ['Exo2-SemiBold'],
+        'exo2-bold': ['Exo2-Bold'],
+        'exo2-bold-italic': ['Exo2-Bold-Italic'],
       },
       width: {
         116: '460px',

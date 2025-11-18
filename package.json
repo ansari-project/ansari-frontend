@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@expo-google-fonts/exo-2": "^0.4.2",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo/vector-icons": "^14.1.0",
     "@kolking/react-native-avatar": "^2.1.4",
@@ -25,6 +26,7 @@
     "expo-dev-client": "~5.2.4",
     "expo-font": "~13.3.2",
     "expo-haptics": "~14.1.4",
+    "expo-linear-gradient": "^15.0.7",
     "expo-linking": "~7.1.7",
     "expo-localization": "~16.1.6",
     "expo-router": "~5.1.7",

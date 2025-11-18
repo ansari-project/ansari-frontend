@@ -72,5 +72,15 @@
   "updateRequiredDescription": "مطلوب إصدار جديد لمواصلة استخدام أنصاري. يرجى التحديث الآن.",
   "updateAvailableDescription": "يتوفر إصدار جديد من أنصاري مع ميزات وتحسينات جديدة.",
   "updateNow": "التحديث الآن",
-  "updateLater": "لاحقاً"
+  "updateLater": "لاحقاً",
+  "welcomeHeadingSmall": "السلام عليكم",
+  "welcomeHeadingMain": "مرحبًا بك في أنصاري",
+  "welcomeBlurb": "مبني بأيدي المسلمين ومدرب بعناية – يهدف إلى الإرشاد بالمصادر، لا بالتخمينات.",
+  "welcomeFeatureSourceBased": "احصل على إرشاد مبني على المصادر في أي وقت",
+  "welcomeFeatureSaveChats": "احفظ محادثاتك وتابع من حيث توقفت.",
+  "welcomeFeatureQuickEasy": "تسجيل سريع وسهل",
+  "welcomeFeatureJoinToday": "انضم إلى أنصاري اليوم!",
+  "createAccount": "إنشاء حساب",
+  "logInCta": "تسجيل الدخول",
+  "continueAsGuestLimited": "المتابعة كضيف (وصول محدود)"
 }

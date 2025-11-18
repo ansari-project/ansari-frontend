@@ -72,5 +72,15 @@
   "updateRequiredDescription": "انصاری چیٹ کو استعمال کرنے کے لیے نیا ورژن درکار ہے۔ براہ کرم ابھی اپڈیٹ کریں۔",
   "updateAvailableDescription": "نئی خصوصیات اور بہتریوں کے ساتھ انصاری چیٹ کا نیا ورژن دستیاب ہے۔",
   "updateNow": "ابھی اپڈیٹ کریں",
-  "updateLater": "بعد میں"
+  "updateLater": "بعد میں",
+  "welcomeHeadingSmall": "السلام علیکم",
+  "welcomeHeadingMain": "انصاری میں خوش آمدید",
+  "welcomeBlurb": "مسلمانوں کے ذریعے تیار، پوری توجہ سے تربیت یافتہ — اندازوں سے نہیں، حوالہ جات سے رہنمائی۔",
+  "welcomeFeatureSourceBased": "کسی بھی وقت حوالہ جاتی رہنمائی حاصل کریں",
+  "welcomeFeatureSaveChats": "اپنی چیٹس محفوظ کریں اور وہیں سے جاری رکھیں جہاں چھوڑا تھا۔",
+  "welcomeFeatureQuickEasy": "تیز اور آسان رجسٹریشن",
+  "welcomeFeatureJoinToday": "آج ہی انصاری میں شامل ہوں!",
+  "createAccount": "اکاؤنٹ بنائیں",
+  "logInCta": "لاگ اِن",
+  "continueAsGuestLimited": "مہمان کے طور پر جاری رکھیں (محدود رسائی)"
 }

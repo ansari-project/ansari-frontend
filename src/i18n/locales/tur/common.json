@@ -72,5 +72,15 @@
   "updateRequiredDescription": "Ansari Chat'i kullanmaya devam etmek için yeni bir sürüm gerekiyor. Lütfen şimdi güncelleyin.",
   "updateAvailableDescription": "Yeni özellikler ve iyileştirmelerle Ansari Chat'in yeni bir sürümü mevcut.",
   "updateNow": "Şimdi Güncelle",
-  "updateLater": "Daha Sonra"
+  "updateLater": "Daha Sonra",
+  "welcomeHeadingSmall": "ESSALAMU ALEYKUM",
+  "welcomeHeadingMain": "ANSARI'YE HOŞ GELDİNİZ",
+  "welcomeBlurb": "Müslümanlar tarafından yapıldı, özenle eğitildi – tahminlerle değil, kaynaklarla rehberlik eder.",
+  "welcomeFeatureSourceBased": "Her zaman kaynak temelli rehberlik",
+  "welcomeFeatureSaveChats": "Sohbetlerinizi kaydedin ve kaldığınız yerden devam edin.",
+  "welcomeFeatureQuickEasy": "Hızlı ve kolay kayıt",
+  "welcomeFeatureJoinToday": "Bugün Ansari'ye katılın!",
+  "createAccount": "Hesap oluştur",
+  "logInCta": "Giriş yap",
+  "continueAsGuestLimited": "Misafir olarak devam et (sınırlı erişim)"
 }

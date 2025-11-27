@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Linking, Platform, Pressable, Text, View } from 'react-native'
-import Popover, { PopoverMode } from 'react-native-popover-view'
 import { Avatar } from '@kolking/react-native-avatar'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
 import { CloseIcon, LikeIcon, LogoutIcon } from '@/components/svg'
 import { useAuth, useLogout } from '@/hooks'
+import PopupMenu, { PopupMenuSeparator } from '@/components/PopupMenu'
 
 type NameContainerProps = {
   name: string
@@ -19,7 +19,6 @@ type NameContainerProps = {
 const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayName = true, initial }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const { isGuest } = useAuth()
-  const touchableRef = useRef(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { t } = useTranslation('common')
   const router = useRouter()
@@ -32,7 +31,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
 
   return (
     <View className=''>
-      <Pressable ref={touchableRef} onPress={() => setIsVisible(!isVisible)}>
+      <Pressable onPress={() => setIsVisible(!isVisible)}>
         <View className='flex-grow flex-row items-center'>
           <Avatar
             size={34}
@@ -47,30 +46,14 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
           )}
         </View>
       </Pressable>
-      <Popover
-        from={touchableRef}
-        mode={PopoverMode.RN_MODAL}
-        isVisible={isVisible}
-        onRequestClose={() => setIsVisible(false)}
-        popoverStyle={{
-          width: 225,
-          borderRadius: 4,
-          padding: 16,
-          backgroundColor: theme.popupBackgroundColor,
-        }}
+      <PopupMenu
+        visible={isVisible}
+        onClose={() => setIsVisible(false)}
+        position='bottom-left'
+        menuStyle={{ width: 225 }}
       >
-        <View className='w-full'>
-          {/* Not implemented  */}
-          {/* {!isGuest && (
-            <Pressable className='flex-row items-center py-4' onPress={() => setIsVisible(false)}>
-              <SettingIcon width={24} height={24} />
-              <Text className="text-base font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
-                {t('setting')}
-              </Text>
-            </Pressable>
-          )} */}
-
-          {(Platform.OS === 'ios' || Platform.OS === 'android') && (
+        {(Platform.OS === 'ios' || Platform.OS === 'android') && (
+          <>
             <Pressable
               className='flex-row items-center py-4'
               onPress={() => {
@@ -87,9 +70,12 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
                 {t('rateApp')}
               </Text>
             </Pressable>
-          )}
+            <PopupMenuSeparator />
+          </>
+        )}
 
-          {!isGuest && (
+        {!isGuest && (
+          <>
             <Pressable
               className='flex-row items-center py-4'
               onPress={() => {
@@ -103,23 +89,25 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
                 {t('deleteAccount')}
               </Text>
             </Pressable>
-          )}
-          <Pressable
-            className={'flex-row items-center py-4'}
-            onPress={async () => {
-              setIsVisible(false)
-              dispatch(toggleSideMenu(false))
-              await doLogout()
-              router.push('/')
-            }}
-          >
-            <LogoutIcon stroke={theme.textColor} />
-            <Text className='text-[16px] font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
-              {t('logout')}
-            </Text>
-          </Pressable>
-        </View>
-      </Popover>
+            <PopupMenuSeparator />
+          </>
+        )}
+
+        <Pressable
+          className='flex-row items-center py-4'
+          onPress={async () => {
+            setIsVisible(false)
+            dispatch(toggleSideMenu(false))
+            await doLogout()
+            router.push('/')
+          }}
+        >
+          <LogoutIcon stroke={theme.textColor} />
+          <Text className='text-[16px] font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
+            {t('logout')}
+          </Text>
+        </Pressable>
+      </PopupMenu>
     </View>
   )
 }

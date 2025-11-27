@@ -43,16 +43,6 @@
           "initialOrientation": "PORTRAIT"
         }
       ],
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0"
-          }
-        }
-      ],
       "expo-web-browser"
     ],
     "extra": {
@@ -65,8 +55,7 @@
       }
     },
     "android": {
-      "package": "chat.ansari.app",
-      "edgeToEdgeEnabled": false
+      "package": "chat.ansari.app"
     },
     "ios": {
       "bundleIdentifier": "chat.ansari.app",

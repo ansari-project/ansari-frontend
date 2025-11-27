@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Linking, Platform, Pressable, Text, View } from 'react-native'
+import * as Application from 'expo-application'
 import { Avatar } from '@kolking/react-native-avatar'
 import { AppDispatch, RootState, toggleSideMenu } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'expo-router'
-import { CloseIcon, LikeIcon, LogoutIcon } from '@/components/svg'
+import { CloseIcon, InfoIcon, LikeIcon, LogoutIcon } from '@/components/svg'
 import { useAuth, useLogout } from '@/hooks'
 import PopupMenu, { PopupMenuSeparator } from '@/components/PopupMenu'
 
@@ -89,6 +90,18 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
                 {t('deleteAccount')}
               </Text>
             </Pressable>
+            <PopupMenuSeparator />
+          </>
+        )}
+
+        {Platform.OS !== 'web' && (
+          <>
+            <View className='flex-row items-center py-4'>
+              <InfoIcon width={24} height={24} stroke={theme.textColor} />
+              <Text className="text-base font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+                {t('version')} {Application.nativeApplicationVersion}
+              </Text>
+            </View>
             <PopupMenuSeparator />
           </>
         )}

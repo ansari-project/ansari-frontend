@@ -72,5 +72,6 @@
   "updateRequiredDescription": "مطلوب إصدار جديد لمواصلة استخدام أنصاري. يرجى التحديث الآن.",
   "updateAvailableDescription": "يتوفر إصدار جديد من أنصاري مع ميزات وتحسينات جديدة.",
   "updateNow": "التحديث الآن",
-  "updateLater": "لاحقاً"
+  "updateLater": "لاحقاً",
+  "version": "الإصدار"
 }

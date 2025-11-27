@@ -187,7 +187,7 @@ const ResetPasswordScreen: React.FC = () => {
                 autoCapitalize='none'
               />
               <Pressable onPress={() => setPasswordVisible(!passwordVisible)} style={generalStyle.eyeIcon}>
-                <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
+                <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
               </Pressable>
             </View>
             {errors[field as keyof typeof errors] && (

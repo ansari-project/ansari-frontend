@@ -1,6 +1,10 @@
 import React from 'react'
 import { Path } from 'react-native-svg'
-import ReactNativeSvg, { Props } from './ReactNativeSvg'
+import ReactNativeSvg, { Props as BaseProps } from './ReactNativeSvg'
+
+type Props = BaseProps & {
+  name?: 'eye' | 'eye-slash'
+}
 
 const EyeIcon: React.FC<Props> = (props: Props) => {
   return (

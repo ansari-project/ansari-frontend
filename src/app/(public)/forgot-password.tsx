@@ -119,7 +119,7 @@ const ForgetPasswordScreen: React.FC = () => {
         <StyledText variant='h2' color='primary' className='font-semibold mb-6' textAlign='center'>
           {t('forgotYourPassword')}
         </StyledText>
-        <StyledText color='primary' className='mb-5 text-[16px]'>
+        <StyledText color='primary' className='mb-5 text-base'>
           {t('forgotMessage')}
         </StyledText>
         <TextInput

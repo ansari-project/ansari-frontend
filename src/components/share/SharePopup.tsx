@@ -82,7 +82,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
             </View>
             {/* Modal body */}
             <ScrollView className={`w-full ${isSmallScreen ? 'p-2' : 'p-4'}`} contentContainerClassName='items-center'>
-              <StyledText className='font-bold text-sm leading-[21px] mb-4'>{t('share.message')}</StyledText>
+              <StyledText className='font-bold text-base mb-4'>{t('share.message')}</StyledText>
               <View
                 className=''
                 style={{
@@ -123,7 +123,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
           message={
             <View className='flex-row'>
               <CheckIcon fill={theme.iconFill} />
-              <StyledText className={`font-bold text-sm leading-[21px] ${isRTL ? 'mr-2' : 'ml-2'}`}>
+              <StyledText className={`font-bold text-base ${isRTL ? 'mr-2' : 'ml-2'}`}>
                 {t('share.successCopy')}
               </StyledText>
             </View>

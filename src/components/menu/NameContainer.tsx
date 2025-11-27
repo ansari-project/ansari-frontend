@@ -40,7 +40,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
             textStyle={{ fontWeight: 'bold', fontSize: 14, color: theme.textColor }}
           />
           {displayName && (
-            <Text className="font-semibold text-[16px] px-[10px] font-['Inter']" style={{ color: nameColor }}>
+            <Text className="font-semibold text-base px-[10px] font-['Inter']" style={{ color: nameColor }}>
               {name}
             </Text>
           )}
@@ -66,7 +66,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
               }}
             >
               <LikeIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
-              <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+              <Text className="text-base font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
                 {t('rateApp')}
               </Text>
             </Pressable>
@@ -85,7 +85,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
               }}
             >
               <CloseIcon width={24} height={24} fill={theme.textColor} stroke={theme.textColor} />
-              <Text className="text-[16px] font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
+              <Text className="text-base font-medium px-[10px] font-['Inter']" style={{ color: theme.textColor }}>
                 {t('deleteAccount')}
               </Text>
             </Pressable>
@@ -103,7 +103,7 @@ const NameContainer: React.FC<NameContainerProps> = ({ name, nameColor, displayN
           }}
         >
           <LogoutIcon stroke={theme.textColor} />
-          <Text className='text-[16px] font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
+          <Text className='text-base font-medium px-[10px] font-[Inter]' style={{ color: theme.textColor }}>
             {t('logout')}
           </Text>
         </Pressable>

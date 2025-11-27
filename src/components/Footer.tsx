@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         />
         {!isMobile && <ActionButtons isTop={false} />}
         <View className='flex-1 px-1'>
-          <StyledText className='text-xs leading-[21px] font-light'>{t('authorizedFooterText')}</StyledText>
+          <StyledText className='text-sm font-light'>{t('authorizedFooterText')}</StyledText>
         </View>
         <Subscription />
       </Pressable>
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
     <Pressable onPress={Keyboard.dismiss} className='w-full flex-row justify-start items-center pt-2 px-2'>
       <View className='flex-1'>
         <View className='flex-row items-center justify-center px-1.5'>
-          <StyledText className='text-xs leading-[21px] font-light'>{t('authorizedFooterText')}</StyledText>
+          <StyledText className='text-base font-light'>{t('authorizedFooterText')}</StyledText>
           <Subscription />
         </View>
       </View>

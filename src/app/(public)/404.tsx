@@ -56,7 +56,7 @@ const NotFoundScreen: React.FC = () => {
         <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-2xl leading-7'>
           404 |{' '}
         </Text>
-        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-base leading-[21px]'>
+        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-base'>
           {t('notfoundMessage')}
         </Text>
       </View>

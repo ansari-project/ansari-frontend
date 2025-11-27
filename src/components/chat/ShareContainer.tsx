@@ -50,6 +50,7 @@ const ShareContainer: React.FC = () => {
           isLoading={false}
           isSending={false}
           reactionsEnabled={false}
+          scrollToBottomEnabled={false}
           isShare={true}
         />
       </View>

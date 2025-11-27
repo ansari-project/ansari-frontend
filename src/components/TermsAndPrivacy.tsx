@@ -31,11 +31,11 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
           }
         }}
       >
-        <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+        <Text className="text-base font-light font-['Inter']" style={{ color: theme.textColor }}>
           {t('termOfUse')}
         </Text>
       </Pressable>
-      <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+      <Text className="text-base font-light font-['Inter']" style={{ color: theme.textColor }}>
         |
       </Text>
       <Pressable
@@ -49,7 +49,7 @@ const TermsAndPrivacy: React.FC<Props> = ({ marginLeft = -40 }) => {
           }
         }}
       >
-        <Text className="text-xs leading-[21px] font-light font-['Inter']" style={{ color: theme.textColor }}>
+        <Text className="text-base font-light font-['Inter']" style={{ color: theme.textColor }}>
           {t('privacyPolicy')}
         </Text>
       </Pressable>

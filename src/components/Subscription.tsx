@@ -37,7 +37,7 @@ const Subscription: React.FC = () => {
           }
         }}
       >
-        <Text className='text-xs font-light font-[Inter]' style={{ color: theme.textColor }}>
+        <Text className='text-base font-light font-[Inter]' style={{ color: theme.textColor }}>
           {/* The `Trans` component from `react-i18next` is used to render translated text.
             - `components` prop allows embedding React components within the translated text.
             - In this case, a span element with green color and underline is used for part of the text.

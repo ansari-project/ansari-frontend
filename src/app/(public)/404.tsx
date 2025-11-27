@@ -5,7 +5,7 @@ import { useAuth, useDirection } from '@/hooks'
 import { AppDispatch, RootState, setActiveThread } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, SafeAreaView, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -48,7 +48,7 @@ const NotFoundScreen: React.FC = () => {
   }, [errorMessage])
 
   return (
-    <SafeAreaView className='flex-1 items-center justify-between h-screen w-full'>
+    <View className='flex-1 items-center justify-between h-screen w-full'>
       <Pressable className='cursor-pointer' onPress={() => router.push('/')}>
         <LogoIcon fill={theme.iconFill} />
       </Pressable>
@@ -56,12 +56,12 @@ const NotFoundScreen: React.FC = () => {
         <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-2xl leading-7'>
           404 |{' '}
         </Text>
-        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-base leading-[21px]'>
+        <Text style={{ color: theme.textColor, fontFamily: 'Inter' }} className='text-base'>
           {t('notfoundMessage')}
         </Text>
       </View>
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
-    </SafeAreaView>
+    </View>
   )
 }
 

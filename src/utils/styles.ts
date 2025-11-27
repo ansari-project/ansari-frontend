@@ -112,8 +112,7 @@ const createThemedStyles = (
       fontFamily: 'Inter',
     },
     link: {
-      fontSize: 14,
-      fontHeight: 17.5,
+      fontSize: 16,
       color: theme.linkColor,
       textDecorationLine: 'none',
       marginLeft: isRTL ? 0 : 10,
@@ -145,8 +144,10 @@ const createThemedStyles = (
       position: 'absolute',
       right: isRTL ? 'auto' : 10,
       left: isRTL ? 10 : 'auto',
+      color: theme.primaryColor,
     },
     primaryColorText: {
+      fontSize: 16,
       color: theme.primaryColor,
     },
     fullWidth: {

@@ -4,7 +4,8 @@ import { RootState } from '@/store'
 import { createGeneralThemedStyles, GetEnv } from '@/utils'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Linking, Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Platform, ScrollView } from 'react-native'
+import { Linking, Modal, Pressable, Text, View, StyleSheet, Platform, ScrollView } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import * as Application from 'expo-application'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
@@ -15,6 +16,7 @@ const InfoPopup: React.FC = () => {
   const { t, i18n } = useTranslation()
   const { isSmallScreen, width } = useScreenInfo()
   const { isRTL } = useDirection()
+  const insets = useSafeAreaInsets()
   const isInfoPopupOpen = useSelector((state: RootState) => state.informationPopup.isOpen)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const { isAuthenticated, isGuest } = useAuth()
@@ -106,10 +108,12 @@ const InfoPopup: React.FC = () => {
       </Pressable>
 
       <Modal animationType='fade' transparent={true} visible={isInfoPopupOpen}>
-        <SafeAreaView className={`flex-1 justify-center items-end bg-[${theme.splashBackgroundColor}]`}>
+        <View
+          className={`flex-1 justify-center items-end bg-[${theme.splashBackgroundColor}]`}
+        >
           <View
             className={'h-full relative w-full max-w-[420px] rounded-none px-[5px] elevation-5'}
-            style={{ backgroundColor: theme.popupBackgroundColor }}
+            style={{ backgroundColor: theme.popupBackgroundColor, paddingTop: insets.top, paddingBottom: insets.bottom }}
           >
             <View className='flex-row w-full px-6 py-4 justify-between items-center gap-2 inline-flex'>
               <Text style={styles.titleText}>{t('welcomeMessageTitle')}</Text>
@@ -136,7 +140,7 @@ const InfoPopup: React.FC = () => {
               )}
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </Modal>
     </View>
   )

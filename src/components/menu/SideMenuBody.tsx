@@ -46,8 +46,8 @@ const SideMenuBody: React.FC = () => {
   }
 
   return (
-    <SafeAreaView
-      className={'flex-1 justify-center items-start w-full'}
+    <View
+      className={'flex-1 justify-center items-start p-2 w-full'}
       style={{ backgroundColor: theme.sideMenuBackgroundColor }}
     >
       <View
@@ -88,7 +88,7 @@ const SideMenuBody: React.FC = () => {
           {!isSmallScreen && <ActionButtons isTop={false} margin={8} />}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

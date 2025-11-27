@@ -141,7 +141,7 @@ const ResetPasswordScreen: React.FC = () => {
           <StyledText variant='h2' color='primary' className='mb-6'>
             {t('passwordResetSuccess')}
           </StyledText>
-          <StyledText color='primary' className='mb-5 text-[16px]'>
+          <StyledText color='primary' className='mb-5 text-base'>
             {t('passwordResetSuccessMessage')}
           </StyledText>
 
@@ -187,7 +187,7 @@ const ResetPasswordScreen: React.FC = () => {
                 autoCapitalize='none'
               />
               <Pressable onPress={() => setPasswordVisible(!passwordVisible)} style={generalStyle.eyeIcon}>
-                <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
+                <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
               </Pressable>
             </View>
             {errors[field as keyof typeof errors] && (

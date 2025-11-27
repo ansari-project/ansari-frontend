@@ -165,7 +165,7 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
+                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
                 </Pressable>
               </View>
               {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
@@ -182,7 +182,7 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} stroke='gray' />
+                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
                 </Pressable>
               </View>
               {touched.confirmPassword && errors.confirmPassword && (
@@ -195,7 +195,7 @@ const RegisterScreen: React.FC = () => {
                   onValueChange={(value: boolean) => setFieldValue('registerToMailList', value)}
                   className={isRTL ? 'ml-2' : 'mr-2'}
                 />
-                <StyledText className='text-sm leading-4 font-light' color='text'>
+                <StyledText className='text-base font-light' color='text'>
                   {t('mailListText')}
                 </StyledText>
               </View>
@@ -212,7 +212,7 @@ const RegisterScreen: React.FC = () => {
               </Pressable>
 
               <View
-                className='flex-row justify-end'
+                className='flex-row justify-end items-center'
                 style={[generalStyle.prompt, Platform.OS === 'web' && hovered ? generalStyle.boldUnderlineText : null]}
               >
                 <StyledText style={generalStyle.primaryColorText}>{t('alreadyHaveAccount')}</StyledText>

@@ -6,7 +6,6 @@ import Header from '@/components/Header'
 import { MenuDrawer } from '@/components/menu'
 import { Redirect, Slot } from 'expo-router'
 import RootImageBackground from '@/components/RootImageBackground'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import KeyboardHandler from '@/components/KeyboardHandler'
 
 /**
@@ -27,20 +26,16 @@ export const AppLayout = () => {
   return (
     <RootImageBackground>
       <MenuDrawer>
-        <SafeAreaView className='flex-1'>
-          <View className='flex-1 overflow-y-auto'>
-            <View className='flex-1'>
-              <Header />
-              <View className='flex-1'>
-                <View className={'flex-grow justify-center items-center self-center'}>
-                  <Slot />
-                  {showFooter && <Footer />}
-                  <KeyboardHandler />
-                </View>
-              </View>
+        <View className='flex-1'>
+          <Header />
+          <View className='flex-1'>
+            <View className={'flex-grow justify-center items-center self-center'}>
+              <Slot />
+              {showFooter && <Footer />}
+              <KeyboardHandler />
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </MenuDrawer>
     </RootImageBackground>
   )

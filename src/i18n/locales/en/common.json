@@ -72,5 +72,6 @@
   "updateRequiredDescription": "A new version is required to continue using Ansari Chat. Please update now.",
   "updateAvailableDescription": "A new version of Ansari Chat is available with new features and improvements.",
   "updateNow": "Update Now",
-  "updateLater": "Later"
+  "updateLater": "Later",
+  "version": "Version"
 }

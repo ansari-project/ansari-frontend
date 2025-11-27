@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
     return null
   }
 
-  const containerClass = 'w-full flex-row justify-start items-center py-2 px-2'
+  const containerClass = 'w-full flex-row justify-start items-center pt-2 px-2'
 
   if (!isAuthenticated) {
     return (
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <Pressable onPress={Keyboard.dismiss} className='w-full flex-row justify-start items-center py-2 px-2'>
+    <Pressable onPress={Keyboard.dismiss} className='w-full flex-row justify-start items-center pt-2 px-2'>
       <View className='flex-1'>
         <View className='flex-row items-center justify-center px-1.5'>
           <StyledText className='text-xs leading-[21px] font-light'>{t('authorizedFooterText')}</StyledText>

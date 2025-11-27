@@ -6,7 +6,6 @@ import { AppDispatch, RootState, setActiveThread } from '@/store'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 
@@ -49,7 +48,7 @@ const NotFoundScreen: React.FC = () => {
   }, [errorMessage])
 
   return (
-    <SafeAreaView className='flex-1 items-center justify-between h-screen w-full'>
+    <View className='flex-1 items-center justify-between h-screen w-full'>
       <Pressable className='cursor-pointer' onPress={() => router.push('/')}>
         <LogoIcon fill={theme.iconFill} />
       </Pressable>
@@ -62,7 +61,7 @@ const NotFoundScreen: React.FC = () => {
         </Text>
       </View>
       {toastVisible && <Toast message={errorMessage} duration={3000} onDismiss={() => setToastVisible(false)} />}
-    </SafeAreaView>
+    </View>
   )
 }
 

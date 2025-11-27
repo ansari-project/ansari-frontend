@@ -1,5 +1,6 @@
 import React from 'react'
-import { ImageBackground } from 'react-native'
+import { ImageBackground, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface RootImageBackgroundProps {
   children: React.ReactNode
@@ -7,9 +8,13 @@ interface RootImageBackgroundProps {
 }
 
 const RootImageBackground: React.FC<RootImageBackgroundProps> = ({ children, className }) => {
+  const insets = useSafeAreaInsets()
+
   return (
     <ImageBackground source={require('@/assets/images/background.png')} className={`flex-1 ${className}`}>
-      {children}
+      <View className="flex-1" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+        {children}
+      </View>
     </ImageBackground>
   )
 }

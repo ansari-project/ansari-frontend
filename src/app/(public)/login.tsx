@@ -7,12 +7,12 @@ import { useLoginSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Keyboard, NativeSyntheticEvent, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { NativeSyntheticEvent, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import * as Yup from 'yup'
 import StyledText from '@/components/StyledText'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
+import { KeyboardAwareScrollView, KeyboardController } from 'react-native-keyboard-controller'
 
 const LoginScreen: React.FC = () => {
   const router = useRouter()
@@ -38,7 +38,7 @@ const LoginScreen: React.FC = () => {
   })
 
   const handleSubmit = (values: LoginRequest, formikHelpers: FormikHelpers<LoginRequest>) => {
-    Keyboard.dismiss()
+    KeyboardController.dismiss()
     formikHelpers.setSubmitting(true)
     setErrorMessage(null)
     dispatch(login(values))

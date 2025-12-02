@@ -2,36 +2,48 @@ import React from 'react'
 import { useKeyboardHandler } from 'react-native-keyboard-controller'
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
 
-const PADDING_BOTTOM = 0
+const LOG_KEYBOARD_EVENTS = false
 
 const useGradualAnimation = () => {
-  const height = useSharedValue(PADDING_BOTTOM)
+  const height = useSharedValue(0)
+  const progress = useSharedValue(0)
 
   useKeyboardHandler(
     {
+      onStart: (event) => {
+        'worklet'
+        if (LOG_KEYBOARD_EVENTS) console.log('[KeyboardHandler] onStart', event)
+      },
       onMove: (event) => {
         'worklet'
-        height.value = Math.max(event.height, PADDING_BOTTOM)
+        if (LOG_KEYBOARD_EVENTS) console.log('[KeyboardHandler] onMove', event)
+        height.value = event.height
+        progress.value = event.progress
+      },
+      onEnd: (event) => {
+        'worklet'
+        if (LOG_KEYBOARD_EVENTS) console.log('[KeyboardHandler] onEnd', event)
+        progress.value = event.progress
+        height.value = event.height
       },
     },
     [],
   )
 
-  return { height }
+  return { height, progress }
 }
 
 const KeyboardHandler: React.FC = () => {
-  const { height } = useGradualAnimation()
+  const { height, progress } = useGradualAnimation()
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      height: Math.abs(height.value),
-      marginBottom: height.value > 0 ? 0 : PADDING_BOTTOM,
-      width: 'auto',
+      // Use height as-is, but fallback to 0 if progress indicates keyboard is hidden
+      height: progress.value === 0 ? 0 : height.value,
     }
   })
 
-  return <Animated.View style={animatedStyle}></Animated.View>
+  return <Animated.View style={animatedStyle} />
 }
 
 export default KeyboardHandler

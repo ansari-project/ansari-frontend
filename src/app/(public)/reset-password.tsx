@@ -7,11 +7,11 @@ import { createGeneralThemedStyles } from '@/utils'
 import { useRegisterSchema } from '@/validation'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Keyboard, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import * as Yup from 'yup'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
+import { KeyboardAwareScrollView, KeyboardController } from 'react-native-keyboard-controller'
 import StyledText from '@/components/StyledText'
 
 // TypeScript interface for the component's state
@@ -46,7 +46,7 @@ const ResetPasswordScreen: React.FC = () => {
 
   // Submits the form after validation
   const handleSubmit = async () => {
-    Keyboard.dismiss()
+    KeyboardController.dismiss()
     setIsSubmitting(true)
     try {
       await validatePassword()

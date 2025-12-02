@@ -4,7 +4,6 @@ import { AppDispatch, RootState, tootleInputFullMode } from '@/store'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  Keyboard,
   KeyboardEvent,
   NativeSyntheticEvent,
   Pressable,
@@ -12,6 +11,7 @@ import {
   TextInputContentSizeChangeEventData,
   View,
 } from 'react-native'
+import { KeyboardController } from 'react-native-keyboard-controller'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface ChatInputProps {
@@ -57,7 +57,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
   }
 
   const submit = () => {
-    Keyboard.dismiss()
+    KeyboardController.dismiss()
     dispatch(tootleInputFullMode(false))
     onSendPress()
   }

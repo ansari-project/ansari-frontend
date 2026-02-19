@@ -67,9 +67,8 @@ export function useChat(): UseChatReturn {
             signal: abortControllerRef.current.signal,
           }),
         ).unwrap()
-        if (!currentThreadId) {
-          dispatch(fetchThreads())
-        }
+        dispatch(fetchThreads())
+        setTimeout(() => dispatch(fetchThreads()), 2000)
         return { threadId } // Plus any additional success feedback
       }
     } catch (error) {

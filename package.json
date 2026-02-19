@@ -84,6 +84,9 @@
     "web": "expo start --web",
     "lint": "expo lint"
   },
+  "overrides": {
+    "react-server-dom-webpack": "^19.0.2"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

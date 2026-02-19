@@ -1,0 +1,7 @@
+{
+  "shell": {
+    "architect": "claude --dangerously-skip-permissions",
+    "builder": "claude --dangerously-skip-permissions",
+    "shell": "bash"
+  }
+}

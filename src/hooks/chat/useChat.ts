@@ -1,4 +1,4 @@
-import { addMessage, AppDispatch, createThread, RootState, setActiveThread, Thread } from '@/store'
+import { addMessage, AppDispatch, createThread, fetchThreads, RootState, setActiveThread, Thread } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -67,6 +67,9 @@ export function useChat(): UseChatReturn {
             signal: abortControllerRef.current.signal,
           }),
         ).unwrap()
+        if (!currentThreadId) {
+          dispatch(fetchThreads())
+        }
         return { threadId } // Plus any additional success feedback
       }
     } catch (error) {

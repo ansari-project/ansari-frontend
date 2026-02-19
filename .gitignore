@@ -47,3 +47,8 @@ yarn-error.log*
 node_modules
 
 .metro-health-check*
+# Codev
+.agent-farm/
+.consult/
+codev/.update-hashes.json
+.builders/

@@ -54,8 +54,9 @@ export type Error = {
 
 // Type for ShareThred response data
 export type ShareThreadResponse = {
-  status: string
-  share_uuid: string
+  id: string
+  share_url: string
+  created_at: string
 }
 
 export type ResetPasswordResponse = { status: string }

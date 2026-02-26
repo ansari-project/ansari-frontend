@@ -186,7 +186,7 @@ class ChatService {
 
   async getShareThreadUUID(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
     const response = await this.fetchWithAuthRetry(
-      `${this.baseURL}/share/${threadId}`,
+      `${this.baseURL}/threads/${threadId}/share`,
       {
         method: 'POST',
         headers: this.createHeaders(),

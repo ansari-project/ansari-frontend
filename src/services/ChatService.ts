@@ -225,8 +225,8 @@ class ChatService {
       // No messages are returned in the creation response, so initializing with an empty array
       const thread: Thread = {
         id: String(sharedThreadUUID), // Convert thread_id to a string to match the Thread interface
-        name: data.content.thread_name ?? null, // API response doesn't include name
-        messages: data.content.messages, // Initialize with an empty array since the API response doesn't include messages
+        name: data.thread_name ?? null,
+        messages: data.messages,
       }
       return thread
     }

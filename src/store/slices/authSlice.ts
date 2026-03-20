@@ -170,7 +170,7 @@ export async function loadAuthState() {
       accessToken: accessToken,
       refreshToken: refreshToken,
       user: {
-        id: userDetails.user_id,
+        id: userDetails.id,
         firstName: userDetails.first_name,
         lastName: userDetails.last_name,
         email: userDetails.email,

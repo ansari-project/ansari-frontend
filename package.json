@@ -3,6 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.4.0",
   "private": true,
+  "packageManager": "npm@10.0.0",
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo-google-fonts/inter": "^0.2.3",

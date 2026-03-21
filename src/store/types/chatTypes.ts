@@ -11,9 +11,9 @@ export enum UserRole {
  * Enum representing different feedback classes.
  */
 export enum FeedbackClass {
-  ThumbsUp = 'thumbsup',
-  ThumbsDown = 'thumbsdown',
-  RedFlag = 'redflag',
+  ThumbsUp = 'thumbs_up',
+  ThumbsDown = 'thumbs_down',
+  RedFlag = 'report',
 }
 
 /* eslint-disable no-unused-vars */

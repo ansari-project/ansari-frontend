@@ -48,7 +48,7 @@ const SharePopup: React.FC<Props> = ({ visible, onClose }) => {
         threadId: threadId!,
       }),
     ).unwrap()
-    Clipboard.setString(`${shareURL}/share/${response?.share_id}`)
+    Clipboard.setString(`${shareURL}/share/${response?.id}`)
     setIsCopying(2)
     setTimeout(() => {
       setIsCopying(0)

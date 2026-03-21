@@ -73,9 +73,9 @@ class ApiService {
     const response = await fetch(`${this.baseURL}/users/refresh_token`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${refreshToken}`,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ refresh_token: refreshToken }),
     })
 
     if (!response.ok) {
@@ -87,9 +87,9 @@ class ApiService {
 
     const data = (await response.json()) as RefreshTokenResponse
 
-    if (data.status !== 'success') {
+    if (!data.access_token || !data.refresh_token) {
       resetAuthCallback()
-      throw new TokenRefreshError('Token refresh failed: ' + data.status)
+      throw new TokenRefreshError('Token refresh failed: missing tokens')
     }
 
     await this.storageService.saveTokens(data.access_token, data.refresh_token)

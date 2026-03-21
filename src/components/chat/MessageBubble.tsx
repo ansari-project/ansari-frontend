@@ -17,7 +17,7 @@ export type MessageBubbleProps = {
   isOutgoing: boolean
   message: Message
   reactionsEnabled?: boolean
-  width?: string | number
+  width?: number
   isShare?: boolean
 }
 

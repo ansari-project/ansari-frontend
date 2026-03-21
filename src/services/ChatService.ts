@@ -186,7 +186,7 @@ class ChatService {
 
   async getShareThreadId(threadId: string, dispatch: Dispatch<UnknownAction>): Promise<ShareThreadResponse> {
     const response = await this.fetchWithAuthRetry(
-      `${this.baseURL}/share/${threadId}`,
+      `${this.baseURL}/threads/${threadId}/share`,
       {
         method: 'POST',
         headers: this.createHeaders(),
@@ -224,9 +224,9 @@ class ChatService {
       // The API returns { thread_id: 1 } and we need to convert it to the Thread type
       // No messages are returned in the creation response, so initializing with an empty array
       const thread: Thread = {
-        id: String(shareThreadId), // Convert thread_id to a string to match the Thread interface
-        name: data.content.thread_name ?? null, // API response doesn't include name
-        messages: data.content.messages, // Initialize with an empty array since the API response doesn't include messages
+        id: String(sharedThreadUUID), // Convert thread_id to a string to match the Thread interface
+        name: data.thread_name ?? null,
+        messages: data.messages,
       }
       return thread
     }

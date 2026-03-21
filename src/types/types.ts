@@ -35,9 +35,9 @@ export type LoginResponse = {
 
 // Type for RefreshToken Response data
 export type RefreshTokenResponse = {
-  status: string
   access_token: string
   refresh_token: string
+  token_type?: string
 }
 
 // Type for Application User
@@ -52,10 +52,11 @@ export type Error = {
   message: string
 }
 
-// Type for ShareThred response data
+// Type for ShareThread response data
 export type ShareThreadResponse = {
-  status: string
-  share_id: string
+  id: string
+  share_url: string
+  created_at: string
 }
 
 export type ResetPasswordResponse = { status: string }

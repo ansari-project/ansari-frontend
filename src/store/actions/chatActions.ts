@@ -230,7 +230,7 @@ export const getShareThreadId = createAsyncThunk(
       const { isAuthenticated, accessToken } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, accessToken)
       dispatch(setLoading(true))
-      const response = await chatService.getShareThreadId(threadId, dispatch)
+      const response = await chatService.getShareThreadUUID(threadId, dispatch)
       return response as ShareThreadResponse
     } catch (error) {
       dispatch(setError(error.toString()))

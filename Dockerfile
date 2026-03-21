@@ -1,0 +1,52 @@
+# Build stage
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Build arguments for Expo environment variables
+ARG EXPO_PUBLIC_API_V2_URL
+ARG EXPO_PUBLIC_API_TIMEOUT
+ARG EXPO_PUBLIC_SUBSCRIBE_URL
+ARG EXPO_PUBLIC_FEEDBACK_EMAIL
+ARG EXPO_PUBLIC_COMPREHENSIVE_GUIDE_URL
+ARG EXPO_PUBLIC_PRIVACY_URL
+ARG EXPO_PUBLIC_TERMS_URL
+ARG EXPO_PUBLIC_ENABLE_SHARE
+ARG EXPO_PUBLIC_SHARE_URL
+
+# Set as environment variables for the build
+ENV EXPO_PUBLIC_API_V2_URL=$EXPO_PUBLIC_API_V2_URL
+ENV EXPO_PUBLIC_API_TIMEOUT=$EXPO_PUBLIC_API_TIMEOUT
+ENV EXPO_PUBLIC_SUBSCRIBE_URL=$EXPO_PUBLIC_SUBSCRIBE_URL
+ENV EXPO_PUBLIC_FEEDBACK_EMAIL=$EXPO_PUBLIC_FEEDBACK_EMAIL
+ENV EXPO_PUBLIC_COMPREHENSIVE_GUIDE_URL=$EXPO_PUBLIC_COMPREHENSIVE_GUIDE_URL
+ENV EXPO_PUBLIC_PRIVACY_URL=$EXPO_PUBLIC_PRIVACY_URL
+ENV EXPO_PUBLIC_TERMS_URL=$EXPO_PUBLIC_TERMS_URL
+ENV EXPO_PUBLIC_ENABLE_SHARE=$EXPO_PUBLIC_ENABLE_SHARE
+ENV EXPO_PUBLIC_SHARE_URL=$EXPO_PUBLIC_SHARE_URL
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build the Expo web app
+RUN npm run build
+
+# Production stage with Caddy
+FROM caddy:2-alpine
+
+# Copy built files from builder stage
+COPY --from=builder /app/dist /usr/share/caddy
+
+# Copy Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
+
+# Expose port (Railway provides PORT env var)
+EXPOSE 8080
+
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

@@ -48,3 +48,12 @@ yarn-error.log*
 node_modules
 
 .metro-health-check*
+# Environment
+dotenv.local
+dotenv.old
+
+# Codev
+.agent-farm/
+.consult/
+codev/.update-hashes.json
+.builders/

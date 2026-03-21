@@ -23,7 +23,7 @@ interface MessageListProps {
   isSending: boolean
   scrollToBottomEnabled?: boolean
   reactionsEnabled?: boolean
-  width?: string | number
+  width?: number
   isShare?: boolean
 }
 
@@ -46,7 +46,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
     const scrollViewRef = useRef<ScrollView>(null)
     const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
-    const { isSmallScreen, height } = useScreenInfo(sideMenuWidth)
+    const { isSmallScreen, height, contentWidth } = useScreenInfo(sideMenuWidth)
     const theme = useSelector((state: RootState) => state.theme.theme)
     const { threadId } = useLocalSearchParams<{ threadId: string }>()
 
@@ -84,13 +84,15 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
 
     const filteredMessages = (activeThread?.messages || []).filter((message) => typeof message.content === 'string')
     const lastAssistantMessageIndex = filteredMessages.findLastIndex((message) => message.role === UserRole.Assistant)
+    const lastMessage = filteredMessages[filteredMessages.length - 1]
+    const showThinkingIndicator = isSending && (!lastMessage || lastMessage.role === UserRole.User)
 
     return (
       <View className='flex-1'>
         <ScrollView
           ref={scrollViewRef}
           className={`mb-${isSmallScreen ? '1' : '2'}`}
-          scrollEventThrottle={50}
+          scrollEventThrottle={250}
           onScroll={(event) => {
             const { contentOffset, layoutMeasurement } = event.nativeEvent
             // 250 accounts for the height of the fixed header + chat input + footer note
@@ -98,7 +100,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
 
             setDisplayScrollButton(!isAtBottom)
           }}
-          onContentSizeChange={(contentWidth: number, contentHeight: number) => {
+          onContentSizeChange={(_contentWidth: number, contentHeight: number) => {
             if (isSending) return
 
             // Display the scroll button if the content height is greater than the screen height
@@ -123,6 +125,16 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
               />
             )
           })}
+          {showThinkingIndicator && (
+            <View
+              className={`mx-1 my-1 rounded flex flex-row flex-grow self-start ${isSmallScreen ? 'p-2 gap-2' : 'p-2.5 gap-4'}`}
+              style={{ width: width || contentWidth }}
+            >
+              <View className='rounded px-5 py-2 w-8 h-8 items-center justify-center'>
+                <ActivityIndicator size='small' color={theme.hoverColor} />
+              </View>
+            </View>
+          )}
         </ScrollView>
         {Platform.OS !== 'web' && displayScrollButton && scrollToBottomEnabled && <ScrollToBottomButton />}
       </View>

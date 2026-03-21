@@ -54,7 +54,8 @@ export type Error = {
 
 // Type for ShareThread response data
 export type ShareThreadResponse = {
-  share_uuid: string
+  id: string
+  share_url: string
   created_at: string
 }
 

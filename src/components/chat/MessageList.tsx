@@ -3,7 +3,9 @@ import { useScreenInfo } from '@/hooks'
 import { Message, RootState, Thread, UserRole } from '@/store'
 import { Helpers } from '@/utils'
 import React, { forwardRef, useRef, useState } from 'react'
-import { ActivityIndicator, Platform, Pressable, ScrollView, View } from 'react-native'
+import { ActivityIndicator, Platform, Pressable, View } from 'react-native'
+import { KeyboardChatScrollView } from 'react-native-keyboard-controller'
+import { SharedValue } from 'react-native-reanimated'
 import { useSelector } from 'react-redux'
 import MessageBubble, { MessageBubbleProps } from './MessageBubble'
 import { useLocalSearchParams } from 'expo-router'
@@ -25,6 +27,7 @@ interface MessageListProps {
   reactionsEnabled?: boolean
   width?: number
   isShare?: boolean
+  blankSpace?: SharedValue<number>
 }
 
 export interface MessageListRef {
@@ -40,10 +43,19 @@ export interface MessageListRef {
 
 const MessageList = forwardRef<MessageListRef, MessageListProps>(
   (
-    { isLoading, activeThread, isSending, reactionsEnabled = true, scrollToBottomEnabled = true, width, isShare },
+    {
+      isLoading,
+      activeThread,
+      isSending,
+      reactionsEnabled = true,
+      scrollToBottomEnabled = true,
+      width,
+      isShare,
+      blankSpace,
+    },
     ref,
   ) => {
-    const scrollViewRef = useRef<ScrollView>(null)
+    const scrollViewRef = useRef<React.ElementRef<typeof KeyboardChatScrollView>>(null)
     const [displayScrollButton, setDisplayScrollButton] = useState(false)
     const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
     const { isSmallScreen, height, contentWidth } = useScreenInfo(sideMenuWidth)
@@ -89,8 +101,11 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
 
     return (
       <View className='flex-1'>
-        <ScrollView
+        <KeyboardChatScrollView
           ref={scrollViewRef}
+          keyboardLiftBehavior='whenAtEnd'
+          applyWorkaroundForContentInsetHitTestBug
+          blankSpace={blankSpace}
           className={`mb-${isSmallScreen ? '1' : '2'}`}
           scrollEventThrottle={250}
           onScroll={(event) => {
@@ -135,7 +150,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
               </View>
             </View>
           )}
-        </ScrollView>
+        </KeyboardChatScrollView>
         {Platform.OS !== 'web' && displayScrollButton && scrollToBottomEnabled && <ScrollToBottomButton />}
       </View>
     )

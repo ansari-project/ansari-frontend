@@ -2,7 +2,8 @@ import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import { useChat, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import React, { useCallback, useEffect } from 'react'
-import { View } from 'react-native'
+import { useWindowDimensions, View } from 'react-native'
+import { useSharedValue, withTiming } from 'react-native-reanimated'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'expo-router'
 import PromptList from '../prompts/PromptList'
@@ -19,8 +20,14 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
+  const { height: windowHeight } = useWindowDimensions()
 
-  // State to track the last known content height
+  const blankSpace = useSharedValue(0)
+
+  useEffect(() => {
+    blankSpace.value = withTiming(isSending ? windowHeight * 0.3 : 0, { duration: 200 })
+  }, [isSending, windowHeight])
+
   const messageListRef = React.useRef<MessageListRef>(null)
   const { width, contentWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
 
@@ -64,7 +71,14 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
     <View className='flex-1 justify-end'>
       {isHome ? (
         isLoading || activeThread?.messages ? (
-          <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} scrollToBottomEnabled={false} />
+          <MessageList
+            ref={messageListRef}
+            activeThread={activeThread}
+            isLoading={isLoading}
+            isSending={isSending}
+            scrollToBottomEnabled={false}
+            blankSpace={blankSpace}
+          />
         ) : (
           <View
             className='flex-grow'
@@ -89,7 +103,14 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
           </View>
         )
       ) : (
-        <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} scrollToBottomEnabled={false} />
+        <MessageList
+          ref={messageListRef}
+          activeThread={activeThread}
+          isLoading={isLoading}
+          isSending={isSending}
+          scrollToBottomEnabled={false}
+          blankSpace={blankSpace}
+        />
       )}
       <View
         style={{

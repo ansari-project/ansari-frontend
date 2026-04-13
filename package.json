@@ -42,13 +42,13 @@
     "i18next": "^25.4.1",
     "lodash.debounce": "^4.0.8",
     "nativewind": "4.1.23",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-i18next": "^15.7.3",
     "react-native": "0.83.4",
     "react-native-drawer-layout": "^4.2.0",
     "react-native-gesture-handler": "~2.30.0",
-    "react-native-keyboard-controller": "1.19.6",
+    "react-native-keyboard-controller": "1.21.5",
     "react-native-markdown-display": "^7.0.2",
     "react-native-reanimated": "4.2.1",
     "react-native-safe-area-context": "~5.6.0",
@@ -133,5 +133,8 @@
         "react-native-keyboard-controller"
       ]
     }
+  },
+  "react-native-reanimated": {
+    "USE_COMMIT_HOOK_ONLY_FOR_REACT_COMMITS": true
   }
 }

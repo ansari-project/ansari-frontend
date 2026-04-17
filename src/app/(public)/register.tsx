@@ -1,7 +1,7 @@
 import { EyeIcon, LogoIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
-import { AppDispatch, RootState, register } from '@/store'
-import { RegisterRequest } from '@/types'
+import { AppDispatch, RootState, login, register } from '@/store'
+import { LoginRequest, RegisterRequest } from '@/types'
 import { createGeneralThemedStyles } from '@/utils'
 import { useRegisterSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
@@ -65,9 +65,18 @@ const RegisterScreen: React.FC = () => {
       .then((response) => {
         if (response.status === 'error') {
           setErrorMessage(response.message || t('registerFailure'))
-        } else {
-          router.push('/login?s=' + t('registerSuccess'))
+          return
         }
+        const loginRequest: LoginRequest = { email: values.email, password: values.password }
+        return dispatch(login(loginRequest))
+          .unwrap()
+          .then((loginResponse) => {
+            if (loginResponse.status === 'error') {
+              router.push('/login?s=' + t('registerSuccess'))
+            } else {
+              router.push('/')
+            }
+          })
       })
       .catch((error) => {
         formikHelpers.setSubmitting(false)

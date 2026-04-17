@@ -165,7 +165,12 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
+                  <EyeIcon
+                    name={passwordVisible ? 'eye-slash' : 'eye'}
+                    height={16}
+                    width={16}
+                    fill={theme.primaryColor}
+                  />
                 </Pressable>
               </View>
               {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
@@ -182,7 +187,12 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
+                  <EyeIcon
+                    name={passwordVisible ? 'eye-slash' : 'eye'}
+                    height={16}
+                    width={16}
+                    fill={theme.primaryColor}
+                  />
                 </Pressable>
               </View>
               {touched.confirmPassword && errors.confirmPassword && (

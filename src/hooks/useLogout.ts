@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth'
 import { AppDispatch, logout } from '@/store'
 import { useDispatch } from 'react-redux'
-import { resetChatState, resetReactionButtons } from '../store/slices'
+import { resetChatState, resetReactionButtons, resetOtaState, reloadForCleanup } from '../store/slices'
 
 export const useLogout = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -15,6 +15,8 @@ export const useLogout = () => {
     } finally {
       dispatch(resetChatState())
       dispatch(resetReactionButtons())
+      dispatch(resetOtaState())
+      await reloadForCleanup()
     }
   }
 

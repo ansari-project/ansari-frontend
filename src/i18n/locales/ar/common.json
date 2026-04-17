@@ -73,5 +73,7 @@
   "updateAvailableDescription": "يتوفر إصدار جديد من أنصاري مع ميزات وتحسينات جديدة.",
   "updateNow": "التحديث الآن",
   "updateLater": "لاحقاً",
+  "otaUpdateAvailable": "التحديث جاهز",
+  "otaUpdateDescription": "تم تنزيل تحديث جديد وهو جاهز للتثبيت. سيتم إعادة تشغيل التطبيق لفترة وجيزة.",
   "version": "الإصدار"
 }

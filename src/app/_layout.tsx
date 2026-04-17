@@ -7,7 +7,7 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import React, { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
-import { MaintenanceScreen, LoadingScreen, AppUpdatePopup } from '@/components'
+import { MaintenanceScreen, LoadingScreen, AppUpdatePopup, OtaUpdateManager } from '@/components'
 // eslint-disable-next-line camelcase
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter'
 import RootContainer from '@/components/RootContainer'
@@ -141,6 +141,8 @@ const RootLayout = () => {
                   onDismiss={appVersionStatus.force_update_required ? undefined : () => setAppUpdatePopupVisible(false)}
                 />
               )}
+
+              <OtaUpdateManager suppressWhenForced={appVersionStatus?.force_update_required} />
 
               <Stack
                 screenOptions={{

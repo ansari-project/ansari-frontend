@@ -47,6 +47,7 @@
       "expo-build-properties"
     ],
     "extra": {
+      "criticalIndex": 0,
       "supportsRTL": true,
       "router": {
         "origin": false

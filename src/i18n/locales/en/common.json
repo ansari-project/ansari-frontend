@@ -73,5 +73,7 @@
   "updateAvailableDescription": "A new version of Ansari Chat is available with new features and improvements.",
   "updateNow": "Update Now",
   "updateLater": "Later",
+  "otaUpdateAvailable": "Update Ready",
+  "otaUpdateDescription": "A new update has been downloaded and is ready to install. The app will restart briefly.",
   "version": "Version"
 }

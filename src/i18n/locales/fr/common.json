@@ -73,5 +73,7 @@
   "updateAvailableDescription": "Une nouvelle version d'Ansari Chat est disponible avec de nouvelles fonctionnalités et améliorations.",
   "updateNow": "Mettre à jour maintenant",
   "updateLater": "Plus tard",
+  "otaUpdateAvailable": "Mise à jour prête",
+  "otaUpdateDescription": "Une nouvelle mise à jour a été téléchargée et est prête à être installée. L'application redémarrera brièvement.",
   "version": "Version"
 }

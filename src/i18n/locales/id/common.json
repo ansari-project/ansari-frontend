@@ -75,5 +75,7 @@
   "updateAvailableDescription": "Versi baru Ansari Chat tersedia dengan fitur dan peningkatan baru.",
   "updateNow": "Perbarui Sekarang",
   "updateLater": "Nanti",
+  "otaUpdateAvailable": "Pembaruan Siap",
+  "otaUpdateDescription": "Pembaruan baru telah diunduh dan siap dipasang. Aplikasi akan dimulai ulang sebentar.",
   "version": "Versi"
 }

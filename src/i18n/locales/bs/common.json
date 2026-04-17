@@ -73,5 +73,7 @@
   "updateAvailableDescription": "Nova verzija Ansari Chata je dostupna s novim funkcijama i poboljšanjima.",
   "updateNow": "Ažuriraj sada",
   "updateLater": "Kasnije",
+  "otaUpdateAvailable": "Ažuriranje spremno",
+  "otaUpdateDescription": "Novo ažuriranje je preuzeto i spremno za instalaciju. Aplikacija će se nakratko ponovo pokrenuti.",
   "version": "Verzija"
 }

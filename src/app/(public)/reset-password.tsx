@@ -133,7 +133,11 @@ const ResetPasswordScreen: React.FC = () => {
   if (passwordState.submitted) {
     // Display success message after password reset
     return (
-      <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+      <KeyboardAwareScrollView
+        bottomOffset={50}
+        contentContainerStyle={generalStyle.formContainer}
+        keyboardShouldPersistTaps='handled'
+      >
         <View style={generalStyle.form}>
           <View className='items-center py-2'>
             <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -166,7 +170,11 @@ const ResetPasswordScreen: React.FC = () => {
 
   // Main reset password form
   return (
-    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+    <KeyboardAwareScrollView
+      bottomOffset={50}
+      contentContainerStyle={generalStyle.formContainer}
+      keyboardShouldPersistTaps='handled'
+    >
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useKeyboardHandler } from 'react-native-keyboard-controller'
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const LOG_KEYBOARD_EVENTS = false
 
@@ -35,11 +36,12 @@ const useGradualAnimation = () => {
 
 const KeyboardHandler: React.FC = () => {
   const { height, progress } = useGradualAnimation()
+  const insets = useSafeAreaInsets()
 
   const animatedStyle = useAnimatedStyle(() => {
+    // Subtract bottom safe area — the parent already reserves that space via paddingBottom
     return {
-      // Use height as-is, but fallback to 0 if progress indicates keyboard is hidden
-      height: progress.value === 0 ? 0 : height.value,
+      height: progress.value === 0 ? 0 : Math.max(0, height.value - insets.bottom),
     }
   })
 

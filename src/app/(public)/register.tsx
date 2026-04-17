@@ -88,7 +88,11 @@ const RegisterScreen: React.FC = () => {
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+    <KeyboardAwareScrollView
+      bottomOffset={50}
+      contentContainerStyle={generalStyle.formContainer}
+      keyboardShouldPersistTaps='handled'
+    >
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -138,6 +142,7 @@ const RegisterScreen: React.FC = () => {
                 placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
+                autoCapitalize='words'
               />
               {touched.firstName && errors.firstName && <Text style={generalStyle.errorText}>{errors.firstName}</Text>}
 
@@ -150,6 +155,7 @@ const RegisterScreen: React.FC = () => {
                 placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
+                autoCapitalize='words'
               />
               {touched.lastName && errors.lastName && <Text style={generalStyle.errorText}>{errors.lastName}</Text>}
 

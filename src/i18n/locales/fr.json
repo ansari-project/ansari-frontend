@@ -24,6 +24,6 @@
     "conversationLostWarning": "Veuillez noter que la conversation précédente sera perdue.",
     "cancel": "Annuler",
     "yes": "Oui",
-    "backendErrorMessage": "Quelque chose s'est mal passé. Si ce problème persiste, veuillez nous contacter via notre centre d'aide à <1>feedback@ansari.chat</1>",
+    "backendErrorMessage": "Quelque chose s'est mal passé. Si ce problème persiste, veuillez nous contacter via notre centre d'aide à <1>feedback@askansari.ai</1>",
     "subscribe": "Propulsé par Ansari"
 }

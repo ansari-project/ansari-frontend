@@ -77,6 +77,10 @@ const RegisterScreen: React.FC = () => {
               router.push('/')
             }
           })
+          .catch(() => {
+            // Registration succeeded but auto-login failed — still a successful signup
+            router.push('/login?s=' + t('registerSuccess'))
+          })
       })
       .catch((error) => {
         formikHelpers.setSubmitting(false)

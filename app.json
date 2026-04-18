@@ -43,7 +43,6 @@
         }
       ],
       "expo-web-browser",
-      "@sentry/react-native",
       "expo-build-properties"
     ],
     "extra": {

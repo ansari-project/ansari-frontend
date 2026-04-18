@@ -2,6 +2,7 @@ import { LogoIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
+import { Redirect } from 'expo-router'
 import React from 'react'
 import { Pressable, Text, TextInput, View } from 'react-native'
 import { useSelector } from 'react-redux'
@@ -12,6 +13,10 @@ const ScrollTestScreen: React.FC = () => {
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
+
+  if (!__DEV__) {
+    return <Redirect href='/login' />
+  }
 
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 

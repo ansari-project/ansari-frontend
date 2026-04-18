@@ -50,13 +50,13 @@
     "react-native-gesture-handler": "~2.30.0",
     "react-native-keyboard-controller": "1.20.7",
     "react-native-markdown-display": "^7.0.2",
-    "react-native-reanimated": "4.2.1",
+    "react-native-reanimated": "4.3.0",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.23.0",
     "react-native-svg": "15.15.3",
     "react-native-web": "^0.21.0",
     "react-native-webview": "13.16.0",
-    "react-native-worklets": "0.7.2",
+    "react-native-worklets": "0.8.1",
     "react-redux": "^9.1.0",
     "redux": "^5.0.1",
     "redux-first-history": "^5.2.0",
@@ -126,8 +126,5 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2"
-  },
-  "react-native-reanimated": {
-    "USE_COMMIT_HOOK_ONLY_FOR_REACT_COMMITS": true
   }
 }

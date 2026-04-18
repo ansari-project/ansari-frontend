@@ -25,20 +25,22 @@ const Welcome: React.FC = () => {
     <View className='flex-1'>
       <View className={`flex-1 w-full flex ${isSmallScreen ? 'flex-col' : 'flex-row'} justify-center items-center`}>
         <View className={`${isSmallScreen ? 'w-full h-auto' : 'w-[70%] h-full'} justify-between p-6`}>
-          <View className={`${isSmallScreen ? 'flex-col' : 'flex-row'} items-center ${isSmallScreen ? 'mb-6' : ''}`}>
-            <LogoIcon fill={theme.iconFill} width={52} height={52} />
-            <LogoTextIcon
-              fill={theme.logoColor}
-              width={81}
-              className={`${isRTL || isSmallScreen ? '' : 'ml-2'} ${isRTL && !isSmallScreen ? 'mr-2' : ''}`}
-            />
+          <View className={isSmallScreen ? 'items-center mb-6' : ''}>
+            <View className={`${isSmallScreen ? 'flex-col' : 'flex-row'} items-center`}>
+              <LogoIcon fill={theme.iconFill} width={52} height={52} />
+              <LogoTextIcon
+                fill={theme.logoColor}
+                width={81}
+                className={`${isRTL || isSmallScreen ? '' : 'ml-2'} ${isRTL && !isSmallScreen ? 'mr-2' : ''}`}
+              />
+            </View>
+            <StyledText variant='h2' className='mt-2 font-bold' color='yellow'>
+              {t('tagline')}
+            </StyledText>
           </View>
           <View>
             <StyledText variant='h1' className='font-normal' color={theme.textColor}>
               {t('greeting')}
-            </StyledText>
-            <StyledText variant='h1' className='font-bold' color='yellow'>
-              {t('ansariChat')}
             </StyledText>
           </View>
           <View>{!isSmallScreen && <ActionButtons isTop={false} />}</View>

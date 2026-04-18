@@ -25,7 +25,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <meta name='theme-color' content='#F2F2F2' />
         <meta name='description' content='Islamic Chat System' />
 
-        <title>Ansari Chat</title>
+        <title>Ansari</title>
 
         {/*
           Disable body scrolling on web. This makes ScrollView components work closer to how they do on native.

@@ -86,6 +86,7 @@
     "update:development": "eas update --channel development --environment development",
     "update:preview": "eas update --channel preview --environment preview",
     "update:production": "eas update --channel production --environment production",
+    "submit:production": "eas submit --platform all",
     "web": "expo start --web",
     "lint": "expo lint"
   },

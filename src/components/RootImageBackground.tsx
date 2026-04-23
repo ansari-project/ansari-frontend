@@ -12,7 +12,7 @@ const RootImageBackground: React.FC<RootImageBackgroundProps> = ({ children, cla
 
   return (
     <ImageBackground source={require('@/assets/images/background.png')} className={`flex-1 ${className}`}>
-      <View className="flex-1" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <View className='flex-1' style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
         {children}
       </View>
     </ImageBackground>

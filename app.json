@@ -1,13 +1,12 @@
 {
   "expo": {
-    "name": "Ansari Chat",
+    "name": "Ansari",
     "owner": "ansari-project",
     "slug": "ansari-chat",
-    "version": "1.4.0",
+    "version": "3.5.0",
     "scheme": "ansarichat",
     "userInterfaceStyle": "automatic",
     "orientation": "portrait",
-    "newArchEnabled": true,
     "icon": "./src/assets/images/icon.png",
     "web": {
       "bundler": "metro"
@@ -43,9 +42,11 @@
           "initialOrientation": "PORTRAIT"
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-build-properties"
     ],
     "extra": {
+      "criticalIndex": 0,
       "supportsRTL": true,
       "router": {
         "origin": false

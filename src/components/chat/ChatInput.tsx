@@ -89,6 +89,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value, onSendPress, onInputChange
       >
         <TextInput
           ref={chatInputRef}
+          nativeID='chat-input'
           onKeyPress={(event: KeyboardEvent) => handleKeyPress(event)}
           onChangeText={handleChange}
           onContentSizeChange={handleContentSizeChange}

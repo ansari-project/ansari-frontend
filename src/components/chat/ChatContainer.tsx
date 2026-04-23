@@ -20,7 +20,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
 
-  // State to track the last known content height
   const messageListRef = React.useRef<MessageListRef>(null)
   const { width, contentWidth, isSmallScreen } = useScreenInfo(sideMenuWidth)
 
@@ -64,7 +63,13 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
     <View className='flex-1 justify-end'>
       {isHome ? (
         isLoading || activeThread?.messages ? (
-          <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} scrollToBottomEnabled={false} />
+          <MessageList
+            ref={messageListRef}
+            activeThread={activeThread}
+            isLoading={isLoading}
+            isSending={isSending}
+            scrollToBottomEnabled={false}
+          />
         ) : (
           <View
             className='flex-grow'
@@ -89,7 +94,13 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
           </View>
         )
       ) : (
-        <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} scrollToBottomEnabled={false} />
+        <MessageList
+          ref={messageListRef}
+          activeThread={activeThread}
+          isLoading={isLoading}
+          isSending={isSending}
+          scrollToBottomEnabled={false}
+        />
       )}
       <View
         style={{

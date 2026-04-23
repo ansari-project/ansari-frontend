@@ -1,4 +1,4 @@
-import { LogoIcon } from '@/components/svg'
+import { EyeIcon, LogoIcon } from '@/components/svg'
 import { useDirection, useGuest, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, login } from '@/store'
 import { LoginRequest } from '@/types'
@@ -28,6 +28,7 @@ const LoginScreen: React.FC = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hovered, setHovered] = useState<number>(0)
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
   const theme = useSelector((state: RootState) => state.theme.theme)
 
   // Styles
@@ -72,7 +73,11 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+    <KeyboardAwareScrollView
+      bottomOffset={50}
+      contentContainerStyle={generalStyle.formContainer}
+      keyboardShouldPersistTaps='handled'
+    >
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -106,19 +111,29 @@ const LoginScreen: React.FC = () => {
               />
               {touched.email && errors.email && <Text style={generalStyle.errorText}>{errors.email}</Text>}
 
-              <TextInput
-                id='password'
-                name='password'
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
-                value={values.password}
-                placeholder={t('password')}
-                placeholderTextColor={theme.inputColor}
-                secureTextEntry
-                style={[generalStyle.input]}
-                autoComplete='current-password'
-              />
+              <View className='justify-center'>
+                <TextInput
+                  id='password'
+                  name='password'
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  onKeyPress={(event: NativeSyntheticEvent<TextInput>) => handleKeyPress(event, submitForm)}
+                  value={values.password}
+                  placeholder={t('password')}
+                  placeholderTextColor={theme.inputColor}
+                  secureTextEntry={!passwordVisible}
+                  style={[generalStyle.input]}
+                  autoComplete='current-password'
+                />
+                <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
+                  <EyeIcon
+                    name={passwordVisible ? 'eye-slash' : 'eye'}
+                    height={16}
+                    width={16}
+                    fill={theme.primaryColor}
+                  />
+                </Pressable>
+              </View>
               {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
 
               {errorMessage && <Text style={generalStyle.errorText}>{errorMessage}</Text>}

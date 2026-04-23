@@ -1,7 +1,7 @@
 import { EyeIcon, LogoIcon } from '@/components/svg'
 import { useDirection, useScreenInfo } from '@/hooks'
-import { AppDispatch, RootState, register } from '@/store'
-import { RegisterRequest } from '@/types'
+import { AppDispatch, RootState, login, register } from '@/store'
+import { LoginRequest, RegisterRequest } from '@/types'
 import { createGeneralThemedStyles } from '@/utils'
 import { useRegisterSchema } from '@/validation'
 import { Formik, FormikHelpers } from 'formik'
@@ -65,9 +65,22 @@ const RegisterScreen: React.FC = () => {
       .then((response) => {
         if (response.status === 'error') {
           setErrorMessage(response.message || t('registerFailure'))
-        } else {
-          router.push('/login?s=' + t('registerSuccess'))
+          return
         }
+        const loginRequest: LoginRequest = { email: values.email, password: values.password }
+        return dispatch(login(loginRequest))
+          .unwrap()
+          .then((loginResponse) => {
+            if (loginResponse.status === 'error') {
+              router.push('/login?s=' + t('registerSuccess'))
+            } else {
+              router.push('/')
+            }
+          })
+          .catch(() => {
+            // Registration succeeded but auto-login failed — still a successful signup
+            router.push('/login?s=' + t('registerSuccess'))
+          })
       })
       .catch((error) => {
         formikHelpers.setSubmitting(false)
@@ -88,7 +101,11 @@ const RegisterScreen: React.FC = () => {
   const generalStyle = createGeneralThemedStyles(theme, isRTL, isSmallScreen, width)
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+    <KeyboardAwareScrollView
+      bottomOffset={50}
+      contentContainerStyle={generalStyle.formContainer}
+      keyboardShouldPersistTaps='handled'
+    >
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -138,6 +155,7 @@ const RegisterScreen: React.FC = () => {
                 placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
+                autoCapitalize='words'
               />
               {touched.firstName && errors.firstName && <Text style={generalStyle.errorText}>{errors.firstName}</Text>}
 
@@ -150,6 +168,7 @@ const RegisterScreen: React.FC = () => {
                 placeholderTextColor={theme.inputColor}
                 style={generalStyle.input}
                 autocomplete='off'
+                autoCapitalize='words'
               />
               {touched.lastName && errors.lastName && <Text style={generalStyle.errorText}>{errors.lastName}</Text>}
 
@@ -165,7 +184,12 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
+                  <EyeIcon
+                    name={passwordVisible ? 'eye-slash' : 'eye'}
+                    height={16}
+                    width={16}
+                    fill={theme.primaryColor}
+                  />
                 </Pressable>
               </View>
               {touched.password && errors.password && <Text style={generalStyle.errorText}>{errors.password}</Text>}
@@ -182,7 +206,12 @@ const RegisterScreen: React.FC = () => {
                   style={generalStyle.input}
                 />
                 <Pressable style={generalStyle.eyeIcon} onPress={() => setPasswordVisible(!passwordVisible)}>
-                  <EyeIcon name={passwordVisible ? 'eye-slash' : 'eye'} height={16} width={16} fill={theme.primaryColor} />
+                  <EyeIcon
+                    name={passwordVisible ? 'eye-slash' : 'eye'}
+                    height={16}
+                    width={16}
+                    fill={theme.primaryColor}
+                  />
                 </Pressable>
               </View>
               {touched.confirmPassword && errors.confirmPassword && (

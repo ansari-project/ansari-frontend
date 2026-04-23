@@ -17,3 +17,11 @@ export { default as reactionButtonsReducer, resetReactionButtons, setReactionBut
 export { default as themeReducer, setTheme } from './themeSlice'
 export { default as shareReducer, toggleSharePopup } from './shareSlice'
 export type { ReactionButtonsState } from './reactionButtonsSlice'
+export {
+  default as otaUpdateReducer,
+  checkForOtaUpdate,
+  dismissOtaUpdate,
+  resetOtaState,
+  applyOtaUpdate,
+  reloadForCleanup,
+} from './otaUpdateSlice'

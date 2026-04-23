@@ -12,7 +12,7 @@ const MaintenanceScreen: React.FC = () => {
           <View className='w-full p-8 items-center justify-start gap-4'>
             <LogoIcon />
             <Text className='text-center text-white text-xl' style={{ fontFamily: 'Inter' }}>
-              Ansari Chat is currently under maintenance.
+              Ansari is currently under maintenance.
             </Text>
             <Text className='text-center text-white text-xl' style={{ fontFamily: 'Inter' }}>
               We are working hard to bring you the best experience possible.

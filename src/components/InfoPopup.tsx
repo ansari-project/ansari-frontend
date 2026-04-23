@@ -135,7 +135,7 @@ const InfoPopup: React.FC = () => {
               </Pressable>
               {Platform.OS !== 'web' && (
                 <StyledText textAlign='center' color='text' className='font-bold'>
-                  Ansari Chat {Application.nativeApplicationVersion}
+                  Ansari {Application.nativeApplicationVersion}
                 </StyledText>
               )}
             </View>

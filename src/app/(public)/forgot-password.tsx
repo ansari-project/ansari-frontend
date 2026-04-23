@@ -83,7 +83,11 @@ const ForgetPasswordScreen: React.FC = () => {
 
   if (emailState.submitted) {
     return (
-      <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+      <KeyboardAwareScrollView
+        bottomOffset={50}
+        contentContainerStyle={generalStyle.formContainer}
+        keyboardShouldPersistTaps='handled'
+      >
         <View style={generalStyle.form}>
           <View className='items-center py-2'>
             <LogoIcon fill={theme.iconFill} width={52} height={52} />
@@ -111,7 +115,11 @@ const ForgetPasswordScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={generalStyle.formContainer} keyboardShouldPersistTaps='handled'>
+    <KeyboardAwareScrollView
+      bottomOffset={50}
+      contentContainerStyle={generalStyle.formContainer}
+      keyboardShouldPersistTaps='handled'
+    >
       <View style={generalStyle.form}>
         <View className='items-center py-2'>
           <LogoIcon fill={theme.iconFill} width={52} height={52} />

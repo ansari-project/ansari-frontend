@@ -6,6 +6,7 @@ import {
   informationPopupReducer,
   inputFullModeReducer,
   loadAuthState,
+  otaUpdateReducer,
   reactionButtonsReducer,
   shareReducer,
   sideMenuReducer,
@@ -21,7 +22,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   share: shareReducer,
   input: inputFullModeReducer,
-  // Add other reducers here...
+  otaUpdate: otaUpdateReducer,
 })
 
 const initStore = async () => {

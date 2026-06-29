@@ -1,0 +1,12 @@
+id: bugfix-69
+title: auth-concurrent-token-refresh-
+protocol: bugfix
+phase: verified
+plan_phases: []
+current_plan_phase: null
+gates: {}
+iteration: 1
+build_complete: false
+history: []
+started_at: '2026-06-29T00:03:56.245Z'
+updated_at: '2026-06-29T00:26:46.701Z'

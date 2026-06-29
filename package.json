@@ -82,7 +82,8 @@
     "update:preview": "eas update --channel preview --environment preview",
     "update:production": "eas update --channel production --environment production",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "jest"
   },
   "overrides": {
     "react-server-dom-webpack": "^19.0.2"

@@ -8,6 +8,20 @@ interface CustomFetchOptions extends FetchRequestInit {
   skipRefresh?: boolean // Custom option to skip refresh logic
 }
 
+// Single-flight token refresh, shared across ALL ApiService instances.
+//
+// Every request flows through its own `new ApiService()` (see ChatService,
+// chatActions and authActions), so this MUST live at module scope — an instance
+// field would not dedupe concurrent 401s originating from different instances.
+//
+// The backend rotates the refresh token on every refresh, so without dedup the
+// concurrent refreshes each present (and thereby invalidate) the same token:
+// the first succeeds, the rest get 401 "Refresh token not found" and the app
+// logs the user out. Holding a single in-flight promise makes all concurrent
+// 401s await the one refresh and retry with its result. It is cleared once
+// settled so the next expiry cycle starts a fresh refresh.
+let refreshTokenPromise: Promise<string> | null = null
+
 class ApiService {
   baseURL: string | undefined
   storageService: StorageService
@@ -97,6 +111,24 @@ class ApiService {
     return data.access_token
   }
 
+  /**
+   * Single-flight wrapper around {@link refreshAccessToken}. Concurrent callers
+   * share one in-flight refresh instead of each hitting /users/refresh_token,
+   * which would invalidate the rotating refresh token for the others.
+   */
+  async refreshAccessTokenDeduped(
+    resetAuthCallback: () => void,
+    refreshTokensCallback: (tokens: RefreshTokenResponse) => void,
+  ): Promise<string> {
+    if (!refreshTokenPromise) {
+      refreshTokenPromise = this.refreshAccessToken(resetAuthCallback, refreshTokensCallback).finally(() => {
+        refreshTokenPromise = null
+      })
+    }
+
+    return refreshTokenPromise
+  }
+
   async fetchWithAuthRetry(
     url: string,
     options: CustomFetchOptions = {},
@@ -110,8 +142,8 @@ class ApiService {
     }
 
     try {
-      // Attempt to refresh the token
-      const newAccessToken = await this.refreshAccessToken(resetAuthCallback, refreshTokensCallback)
+      // Attempt to refresh the token (single-flight: concurrent 401s share one refresh)
+      const newAccessToken = await this.refreshAccessTokenDeduped(resetAuthCallback, refreshTokensCallback)
       // Store the new token as needed, e.g., in localStorage or state management
 
       // Retry the original request with the new token

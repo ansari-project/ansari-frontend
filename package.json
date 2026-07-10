@@ -83,7 +83,9 @@
     "update:preview": "eas update --channel preview --environment preview",
     "update:production": "eas update --channel production --environment production",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "jest",
+    "generate:lk-map": "node scripts/generateLkHadithLineMap.mjs"
   },
   "browserslist": {
     "production": [

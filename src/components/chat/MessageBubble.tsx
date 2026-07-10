@@ -4,7 +4,8 @@ import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFe
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
-import { StyleSheet, View, Platform, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Platform, ActivityIndicator, Linking } from 'react-native'
+import { linkifyLkIds } from '@/utils/lkCitations'
 import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactionButtons from './ReactionButtons'
@@ -51,6 +52,16 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
     [],
   )
 
+  const handleLinkPress = useCallback((url: string): boolean => {
+    // Open links in a new tab on web, and in the system browser on native
+    if (typeof window !== 'undefined' && 'open' in window) {
+      window.open(url, '_blank')
+    } else {
+      Linking.openURL(url)
+    }
+    return false
+  }, [])
+
   const styles = StyleSheet.create({
     messageText: {
       fontFamily: 'Inter',
@@ -75,7 +86,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   })
 
   const textStyle = isOutgoing ? styles.outgoingText : styles.incomingText
-  const mdContent = message.content.replaceAll('`', '\\`').replace('<thinking>', '```').replace('</thinking>', '```')
+  const mdContent = linkifyLkIds(message.content)
+    .replaceAll('`', '\\`')
+    .replace('<thinking>', '```')
+    .replace('</thinking>', '```')
 
   return (
     <View
@@ -109,6 +123,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
               body: [styles.messageText, textStyle],
               ...markdownStyles,
             }}
+            onLinkPress={handleLinkPress}
           >
             {mdContent}
           </Markdown>

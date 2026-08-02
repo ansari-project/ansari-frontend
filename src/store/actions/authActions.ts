@@ -143,8 +143,9 @@ export const guestLogin = createAsyncThunk<GuestLoginSuccessPayload, undefined, 
         return rejectWithValue({ message: 'Guest registration failed' })
       }
     } catch (error) {
-      // Handle errors for both registration and login
-      const message = (error instanceof Error && error.message) || 'Guest login failed'
+      // unwrap() rejects with the thunk's rejectValue payload ({ message }), not an
+      // Error — read .message off either shape so the parsed server text survives
+      const message = (error as { message?: string } | null)?.message || 'Guest login failed'
       return rejectWithValue({ message })
     }
   },

@@ -2,8 +2,9 @@
  * Tests for ApiService.register/login error surfacing (issue #74).
  *
  * Before this fix, register did `error.detail || error.error || error.message`,
- * so an object detail (weak-password 400 from backend PR #15) or an array
- * detail (422 validation) rendered as `[object Object]` on the register screen.
+ * so a non-string detail rendered as `[object Object]` on the register screen.
+ * The confirmed backend contract (PR #15) is a flat-string `{ detail }`; the
+ * object/array bodies here exercise the parser's compatibility hedging.
  */
 import { fetch } from 'expo/fetch'
 import ApiService from '../ApiService'

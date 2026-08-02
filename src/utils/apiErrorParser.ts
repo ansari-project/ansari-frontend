@@ -1,12 +1,15 @@
 /**
  * Turns a backend error-response body into a human-readable message.
  *
- * The backend returns several error shapes depending on the failure:
- * - `{ detail: 'Account not found' }` — plain string detail
- * - `{ detail: { message: 'Password is too weak. ...', suggestions: ['Add uppercase letters.'] } }`
- *   — password-policy 400s (message rendered verbatim, suggestions appended)
- * - `{ detail: [{ msg: 'String should have at most 128 characters', ... }] }`
- *   — validation 422s, an array of issues (`msg` or `message` per item)
+ * Current contract (confirmed on iaser-ai/ansari PR #15): every error body
+ * from the auth routes is a flat string detail — `{ detail: 'Password is too
+ * weak. ...' }` — including password-policy 400s and length 422s.
+ *
+ * The remaining shapes are compatibility hedging, not the contract; framework
+ * defaults could reintroduce them and they must degrade readably:
+ * - `{ detail: { message, suggestions } }` — structured policy errors
+ *   (message rendered verbatim, suggestions appended)
+ * - `{ detail: [{ msg | message, ... }] }` — FastAPI/Zod-style issue arrays
  * - `{ error: '...' }` / `{ message: '...' }` — legacy shapes
  *
  * Anything unrecognized falls back to the provided default so the user never

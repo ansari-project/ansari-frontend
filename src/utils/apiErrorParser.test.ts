@@ -1,10 +1,11 @@
 /**
  * Tests for extractApiErrorMessage (issue #74).
  *
- * Backend PR #15 (auth hardening) introduces error bodies the frontend never
- * handled: weak-password 400s with `{detail: {message, suggestions}}` and
- * validation 422s with an array detail. These tests pin that every known shape
- * produces a readable message — and never `[object Object]`.
+ * The confirmed backend contract (iaser-ai/ansari PR #15) is a flat string
+ * detail: `{ detail: string }` for all auth-route errors. The object/array
+ * cases below exercise the parser's compatibility hedging — shapes framework
+ * defaults could reintroduce — pinning that every shape degrades to a readable
+ * message and never `[object Object]`.
  */
 import extractApiErrorMessage from './apiErrorParser'
 

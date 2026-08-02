@@ -5,6 +5,8 @@
  * on ANY non-2xx, so the backend's password-policy message (backend PR #15)
  * never reached the reset-password screen. These tests pin that the server's
  * error body is parsed into the thrown ApplicationError, with the real status.
+ * The confirmed contract is a flat-string `{ detail }`; the object/array
+ * bodies here exercise the parser's compatibility hedging.
  */
 import { ApplicationError } from '@/errors'
 import { userService } from '../UserService'

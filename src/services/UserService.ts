@@ -1,5 +1,6 @@
 import { ApplicationError } from '@/errors'
 import { ResetPasswordResponse } from '@/types'
+import extractApiErrorMessage from '@/utils/apiErrorParser'
 
 // UserService class definition
 class UserService {
@@ -31,7 +32,8 @@ class UserService {
 
       // Checking if the response is OK (status code in the range 200-299)
       if (!response.ok) {
-        throw new ApplicationError('Failed to request password reset')
+        const body = await response.json().catch(() => null)
+        throw new ApplicationError(extractApiErrorMessage(body, 'Failed to request password reset'), response.status)
       }
 
       // Parsing the JSON response
@@ -62,7 +64,8 @@ class UserService {
 
       // Checking if the response is OK (status code in the range 200-299)
       if (!response.ok) {
-        throw new ApplicationError('Failed to update password')
+        const body = await response.json().catch(() => null)
+        throw new ApplicationError(extractApiErrorMessage(body, 'Failed to update password'), response.status)
       }
 
       // Parsing the JSON response

@@ -30,5 +30,6 @@
   "minUppercaseMessage": "au moins {{min}} lettre(s) majuscule(s)",
   "minNumberMessage": "au moins {{min}} chiffre(s)",
   "minSymbolsMessage": "au moins {{min}} caractère(s) spécial(aux)",
+  "maxLengthMessage": "Le mot de passe ne doit pas dépasser {{max}} caractères.",
   "mailListText": "Abonnez-vous à notre liste de diffusion pour les mises à jour !"
 }

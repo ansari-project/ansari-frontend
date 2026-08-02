@@ -30,5 +30,6 @@
   "minUppercaseMessage": "setidaknya {{min}} huruf kapital",
   "minNumberMessage": "setidaknya {{min}} angka",
   "minSymbolsMessage": "setidaknya {{min}} karakter khusus",
+  "maxLengthMessage": "Kata sandi tidak boleh lebih dari {{max}} karakter.",
   "mailListText": "Berlangganan ke daftar surat kami untuk pembaruan!"
 }

@@ -30,5 +30,6 @@
   "minUppercaseMessage": "najmanje {{min}} velikih slova",
   "minNumberMessage": "najmanje {{min}} brojeva",
   "minSymbolsMessage": "najmanje {{min}} posebnih znakova",
+  "maxLengthMessage": "Lozinka ne smije imati više od {{max}} znakova.",
   "mailListText": "Pretplatite se na našu mailing listu za ažuriranja!"
 }

@@ -1,5 +1,6 @@
 import { fetch, FetchRequestInit } from 'expo/fetch'
 import { TokenRefreshError } from '@/errors'
+import extractApiErrorMessage from '@/utils/apiErrorParser'
 import { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, RegisterResponse } from '@/types'
 import StorageService from './StorageService'
 import { FetchResponse } from 'expo/build/winter/fetch/FetchResponse'
@@ -53,8 +54,8 @@ class ApiService {
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.detail || error.error || error.message || 'Registration failed')
+      const body = await response.json().catch(() => null)
+      throw new Error(extractApiErrorMessage(body, 'Registration failed'))
     }
 
     return await response.json()
@@ -70,8 +71,8 @@ class ApiService {
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.detail || error.error || error.message || 'Login failed')
+      const body = await response.json().catch(() => null)
+      throw new Error(extractApiErrorMessage(body, 'Login failed'))
     }
 
     const res = (await response.json()) as LoginResponse

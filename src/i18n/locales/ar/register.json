@@ -30,5 +30,6 @@
   "minUppercaseMessage": "على الأقل {{min}} حرفًا كبيرًا",
   "minNumberMessage": "على الأقل {{min}} رقمًا",
   "minSymbolsMessage": "على الأقل {{min}} رمزًا خاصًا",
+  "maxLengthMessage": "يجب ألا تتجاوز كلمة المرور {{max}} حرفًا.",
   "mailListText": "اشترك في قائمتنا البريدية للحصول على التحديثات!"
 }

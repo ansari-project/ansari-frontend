@@ -30,5 +30,6 @@
   "minUppercaseMessage": "en az {{min}} büyük harf içermelidir",
   "minNumberMessage": "en az {{min}} rakam içermelidir",
   "minSymbolsMessage": "en az {{min}} özel karakter içermelidir",
+  "maxLengthMessage": "Şifre en fazla {{max}} karakter olmalıdır.",
   "mailListText": "Güncellemeler için posta listemize abone olun!"
 }

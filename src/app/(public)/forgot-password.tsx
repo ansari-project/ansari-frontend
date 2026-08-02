@@ -26,6 +26,7 @@ const ForgetPasswordScreen: React.FC = () => {
   const [emailState, setEmailState] = useState<EmailState>({ email: '', submitted: false })
   const [hovered, setHovered] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ email?: string }>({})
+  const [serverError, setServerError] = useState<string | null>(null)
   const theme = useSelector((state: RootState) => state.theme.theme)
 
   const handleEmailChange = (email: string) => {
@@ -38,6 +39,7 @@ const ForgetPasswordScreen: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
+      setServerError(null)
       await validateEmail(emailState.email)
       if (emailState.email.trim().length !== 0 && Object.keys(errors).length === 0) {
         Keyboard.dismiss()
@@ -46,6 +48,7 @@ const ForgetPasswordScreen: React.FC = () => {
       }
     } catch (error) {
       console.error('Error sending password reset email:', error)
+      setServerError((error instanceof Error && error.message) || t('unexpectedError'))
     }
   }
 
@@ -138,6 +141,7 @@ const ForgetPasswordScreen: React.FC = () => {
           inputMode='email'
         />
         {errors.email && <StyledText color='yellow'>{errors.email}</StyledText>}
+        {serverError && <Text style={generalStyle.errorText}>{serverError}</Text>}
         <Pressable style={generalStyle.buttonPrimary} onPress={handleSubmit}>
           <Text style={generalStyle.buttonPrimaryText}>{t('continue')}</Text>
         </Pressable>

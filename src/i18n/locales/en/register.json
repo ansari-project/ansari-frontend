@@ -30,5 +30,6 @@
   "minUppercaseMessage": "at least {{min}} uppercase letter(s)",
   "minNumberMessage": "at least {{min}} number(s)",
   "minSymbolsMessage": "at least {{min}} special character(s)",
+  "maxLengthMessage": "Password must be no more than {{max}} characters.",
   "mailListText": "Subscribe to our mailing list for updates!"
 }

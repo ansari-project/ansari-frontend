@@ -8,6 +8,7 @@ const useRegisterSchema = () => {
   const passwordStrength = (minLength: number, minUppercase: number, minNumbers: number, minSymbols: number) =>
     Yup.string()
       .required(t('passwordRequired'))
+      .max(128, t('maxLengthMessage', { max: 128 }))
       .test('password-strength', 'Password does not meet requirements', (value = '') => {
         const errors = []
         // Check for minimum length

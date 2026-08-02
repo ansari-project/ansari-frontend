@@ -30,5 +30,6 @@
   "minUppercaseMessage": "کم از کم {{min}} بڑے حرف ہونے چاہئے",
   "minNumberMessage": "کم از کم {{min}} نمبرز ہونے چاہئے",
   "minSymbolsMessage": "کم از کم {{min}} خاص حروف ہونے چاہئے",
+  "maxLengthMessage": "پاس ورڈ {{max}} حروف سے زیادہ نہیں ہونا چاہیے۔",
   "mailListText": "اپ ڈیٹس کے لئے ہماری میلنگ لسٹ میں شامل ہوں!"
 }

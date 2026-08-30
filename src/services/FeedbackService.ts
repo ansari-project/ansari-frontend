@@ -39,7 +39,10 @@ const fetchFeedbacksForLanguage = async (language: string): Promise<FeedbacksByC
     ur: urFeedback,
   }
 
-  return data[language] || data.en // Default to English if language not found
+  // Region-tagged locales (e.g. 'en-US', 'ar-EG') must resolve to their base language
+  const baseLanguage = language.split('-')[0]
+
+  return data[baseLanguage] || data.en // Default to English if language not found
 }
 
 export default fetchFeedbacksForLanguage

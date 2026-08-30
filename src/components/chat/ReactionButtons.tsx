@@ -150,7 +150,7 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ threadId, messageId, 
         </Pressable>
       </View>
       {modalVisible && (
-        <View className={`w-full h-0 mt-6 ${modalVisible ? 'h-auto' : ''}`}>
+        <View className='w-full mt-6'>
           <View
             className='w-full px-2 sm:px-5 py-4 items-start rounded'
             style={{ backgroundColor: theme.inputBackgroundColor }}

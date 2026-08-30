@@ -70,6 +70,13 @@ export const addMessage = createAsyncThunk(
           content: responseMessage,
           timestamp: new Date().getTime().toString(),
         }
+        // Reconcile client-generated ids with the server's message UUIDs.
+        // Streamed messages carry Helpers.generateUniqueId() placeholders, which
+        // POST /api/v2/feedback rejects (422: z.string().uuid()). The backend
+        // persists the assistant message before closing the stream, so refetching
+        // here returns the completed turn with real ids — the same pattern the
+        // chat screen already uses on mount (app/(app)/chat/[threadId].tsx).
+        await dispatch(fetchThread(threadId))
         return message
       } catch (error) {
         dispatch(setError('Error adding message ' + error))

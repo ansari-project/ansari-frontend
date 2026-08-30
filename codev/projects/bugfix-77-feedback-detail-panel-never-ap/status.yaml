@@ -1,7 +1,7 @@
 id: bugfix-77
 title: feedback-detail-panel-never-ap
 protocol: bugfix
-phase: pr
+phase: verified
 plan_phases: []
 current_plan_phase: null
 gates: {}
@@ -9,4 +9,4 @@ iteration: 1
 build_complete: false
 history: []
 started_at: '2026-08-30T05:59:43.975Z'
-updated_at: '2026-08-30T06:03:12.404Z'
+updated_at: '2026-08-30T06:12:22.735Z'

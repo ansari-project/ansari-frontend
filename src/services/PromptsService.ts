@@ -41,7 +41,15 @@ const fetchPromptsForLanguage = async (language: string): Promise<PromptsByCateg
     ur: urPrompts,
   }
 
-  const promptsByLanguage = data[language] || data.en // Default to English if language not found
+  // Region-tagged locales (e.g. 'en-US', 'ar-EG') must resolve to their base language
+  const baseLanguage = (language || '').split('-')[0]
+
+  // Our locale keys use nonstandard codes for Turkish and Tamil, while devices
+  // and i18n report the ISO codes — map those onto our keys before the lookup
+  const localeAliases: { [key: string]: string } = { tr: 'tur', ta: 'tml' }
+  const localeKey = localeAliases[baseLanguage] || baseLanguage
+
+  const promptsByLanguage = data[localeKey] || data.en // Default to English if language not found
 
   // Initialize an empty object to store one random prompt per category
   const randomPrompts: PromptsByCategory = { dua: [], perspectives: [], remedies: [] }

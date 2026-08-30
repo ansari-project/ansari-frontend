@@ -39,7 +39,15 @@ const fetchFeedbacksForLanguage = async (language: string): Promise<FeedbacksByC
     ur: urFeedback,
   }
 
-  return data[language] || data.en // Default to English if language not found
+  // Region-tagged locales (e.g. 'en-US', 'ar-EG') must resolve to their base language
+  const baseLanguage = (language || '').split('-')[0]
+
+  // Our locale keys use nonstandard codes for Turkish and Tamil, while devices
+  // and i18n report the ISO codes — map those onto our keys before the lookup
+  const localeAliases: { [key: string]: string } = { tr: 'tur', ta: 'tml' }
+  const localeKey = localeAliases[baseLanguage] || baseLanguage
+
+  return data[localeKey] || data.en // Default to English if language not found
 }
 
 export default fetchFeedbacksForLanguage

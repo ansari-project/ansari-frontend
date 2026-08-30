@@ -299,7 +299,9 @@ export const sendFeedback = createAsyncThunk(
     try {
       const { isAuthenticated, accessToken } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, accessToken)
-      dispatch(setLoading(true))
+      // Never toggle the global chat.loading flag here: it swaps MessageList for a
+      // full-screen spinner, unmounting ReactionButtons and losing the feedback
+      // detail panel's local state mid-click (issue #77).
       await chatService.sendFeedback(
         feedbackRequest.threadId,
         feedbackRequest.messageId,
@@ -307,11 +309,8 @@ export const sendFeedback = createAsyncThunk(
         feedbackRequest.comment,
         dispatch,
       )
-      // dispatch(setFeedback) // refresh the list of threads after deletion
     } catch (error) {
       dispatch(setError(error.toString()))
-    } finally {
-      dispatch(setLoading(false))
     }
   },
 )

@@ -16,8 +16,9 @@ describe('fetchFeedbacksForLanguage', () => {
     expect(turkish.bad).toBeDefined()
   })
 
-  it('falls back to English for unknown languages', async () => {
+  it('falls back to English for unknown or missing languages', async () => {
     const english = await fetchFeedbacksForLanguage('en')
     expect(await fetchFeedbacksForLanguage('xx')).toBe(english)
+    expect(await fetchFeedbacksForLanguage(undefined as unknown as string)).toBe(english)
   })
 })

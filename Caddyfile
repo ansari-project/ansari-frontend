@@ -1,24 +1,24 @@
 :{$PORT:8080} {
-    root * {$SITE_ROOT:/usr/share/caddy}
-    encode gzip
+	root * {$SITE_ROOT:/usr/share/caddy}
+	encode gzip
 
-    # Hashed build output (content-addressed filenames): cache forever.
-    # A missing file here must 404, never fall back to index.html —
-    # otherwise a bundle from a previous deploy is served as HTML and the
-    # browser fails with "Unexpected token '<'".
-    @assets path /_expo/* /assets/*
-    handle @assets {
-        @existing file
-        header @existing Cache-Control "public, max-age=31536000, immutable"
-        file_server
-    }
+	# Hashed build output (content-addressed filenames): cache forever.
+	# A missing file here must 404, never fall back to index.html —
+	# otherwise a bundle from a previous deploy is served as HTML and the
+	# browser fails with "Unexpected token '<'".
+	@assets path /_expo/* /assets/*
+	handle @assets {
+		@existing file
+		header @existing Cache-Control "public, max-age=31536000, immutable"
+		file_server
+	}
 
-    # index.html and everything else: browsers may cache but must
-    # revalidate (etag makes that a cheap 304), so a new deploy is picked
-    # up on the next load instead of after a hard refresh.
-    handle {
-        header Cache-Control "no-cache"
-        try_files {path} /index.html
-        file_server
-    }
+	# index.html and everything else: browsers may cache but must
+	# revalidate (etag makes that a cheap 304), so a new deploy is picked
+	# up on the next load instead of after a hard refresh.
+	handle {
+		header Cache-Control "no-cache"
+		try_files {path} /index.html
+		file_server
+	}
 }

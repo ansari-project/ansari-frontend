@@ -1,0 +1,12 @@
+id: bugfix-79
+title: stale-cached-html-breaks-the-s
+protocol: bugfix
+phase: investigate
+plan_phases: []
+current_plan_phase: null
+gates: {}
+iteration: 1
+build_complete: false
+history: []
+started_at: '2026-08-31T03:00:09.248Z'
+updated_at: '2026-08-31T03:00:09.249Z'

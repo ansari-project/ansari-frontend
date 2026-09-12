@@ -9,10 +9,14 @@ export const LANGUAGE_STORAGE_KEY = 'ac-language'
 
 const deviceLanguage = getLocales()[0].languageCode
 
+const supportedLanguages = ['ar', 'bs', 'en', 'fr', 'id', 'tml', 'tur', 'ur']
+
 i18n.use(initReactI18next).init({
   resources,
   lng: deviceLanguage || 'en',
   fallbackLng: 'en',
+  supportedLngs: supportedLanguages,
+  nonExplicitSupportedLngs: true,
   debug: false,
   ns: ['common', 'login', 'register'], // defining namespaces
   defaultNS: 'common',
@@ -24,7 +28,7 @@ i18n.use(initReactI18next).init({
   },
 })
 
-i18n.languages = ['ar', 'bs', 'en', 'fr', 'id', 'tml', 'tur', 'ur']
+i18n.languages = supportedLanguages
 
 /**
  * Get the list of available languages with names and active status

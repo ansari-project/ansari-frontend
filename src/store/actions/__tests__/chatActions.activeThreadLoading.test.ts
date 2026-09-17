@@ -25,7 +25,8 @@ const activeThreadLoadingValues = (dispatch: jest.Mock): boolean[] =>
 
 describe('activeThreadLoading (issue #84)', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    mockGetThread.mockReset()
+    mockGetAllThreads.mockReset()
   })
 
   it('is raised while opening a thread that is not on screen yet', async () => {
@@ -49,7 +50,28 @@ describe('activeThreadLoading (issue #84)', () => {
     const dispatch = jest.fn()
     await fetchThread('thread-1')(dispatch, stateWithActiveThread(thread), undefined)
 
-    expect(activeThreadLoadingValues(dispatch)).not.toContain(true)
+    expect(activeThreadLoadingValues(dispatch)).toEqual([])
+  })
+
+  it('is not cleared by a same-thread refetch that finishes while a thread switch is in flight', async () => {
+    let resolveSwitch: (value: Thread) => void = () => undefined
+    mockGetThread.mockImplementation((threadId: string) =>
+      threadId === 'thread-2'
+        ? new Promise<Thread>((resolve) => {
+            resolveSwitch = resolve
+          })
+        : Promise.resolve(thread),
+    )
+    const dispatch = jest.fn()
+    const getState = stateWithActiveThread(thread)
+
+    const switching = fetchThread('thread-2')(dispatch, getState, undefined)
+    await fetchThread('thread-1')(dispatch, getState, undefined)
+    expect(activeThreadLoadingValues(dispatch)).toEqual([true])
+
+    resolveSwitch({ ...thread, id: 'thread-2' })
+    await switching
+    expect(activeThreadLoadingValues(dispatch)).toEqual([true, false])
   })
 
   it('is cleared when opening a thread fails', async () => {

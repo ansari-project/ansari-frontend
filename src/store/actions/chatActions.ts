@@ -154,14 +154,14 @@ export const deleteThread = createAsyncThunk('chat/deleteThread', async (threadI
  * @throws {ApplicationError} If an application error occurs.
  */
 export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId: string, { dispatch, getState }) => {
+  // Only opening a different thread may blank the chat. Refetching the thread that is
+  // already on screen (e.g. the post-stream id reconciliation in addMessage) must keep
+  // the message list mounted, or the reader is thrown back to the top (issue #84).
+  const isOpeningThread = (getState() as RootState).chat.activeThread?.id !== threadId
   try {
     const { isAuthenticated, accessToken } = (getState() as RootState).auth
     const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
-    // Only opening a different thread may blank the chat. Refetching the thread that is
-    // already on screen (e.g. the post-stream id reconciliation in addMessage) must keep
-    // the message list mounted, or the reader is thrown back to the top (issue #84).
-    const isOpeningThread = (getState() as RootState).chat.activeThread?.id !== threadId
     if (isOpeningThread) {
       dispatch(setActiveThreadLoading(true))
     }
@@ -182,7 +182,11 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
     }
   } finally {
     dispatch(setLoading(false))
-    dispatch(setActiveThreadLoading(false))
+    // Only the request that raised the flag clears it, so a same-thread refetch finishing
+    // first cannot hide the spinner of a thread switch that is still in flight.
+    if (isOpeningThread) {
+      dispatch(setActiveThreadLoading(false))
+    }
   }
 })
 

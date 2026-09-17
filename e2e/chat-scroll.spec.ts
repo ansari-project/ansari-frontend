@@ -25,6 +25,9 @@ const ANSWER_LATENCY_MS = 1500
 // The app refetches the thread list right after the answer and again 2s later.
 const OBSERVATION_WINDOW_MS = 3500
 
+// API calls the fake backend does not know; checked after every test so a new endpoint fails loudly.
+const unmockedCalls: string[] = []
+
 type ApiMessage = { id: string; role: 'user' | 'assistant'; content: string }
 
 const uuid = (n: number): string => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`
@@ -39,6 +42,7 @@ const json = (route: Route, body: unknown): Promise<void> =>
  * threadLatencyMs delays the thread fetch so the opening spinner can be observed.
  */
 async function mockBackend(page: Page, threadLatencyMs = 0): Promise<void> {
+  unmockedCalls.length = 0
   const messages: ApiMessage[] = Array.from({ length: 30 }, (_, i) => ({
     id: uuid(i),
     role: i % 2 === 0 ? 'user' : 'assistant',
@@ -76,7 +80,8 @@ async function mockBackend(page: Page, threadLatencyMs = 0): Promise<void> {
       )
       return route.fulfill({ status: 200, contentType: 'text/event-stream', body: ANSWER })
     }
-    throw new Error(`Unmocked API call: ${method} ${path}`)
+    unmockedCalls.push(`${method} ${path}`)
+    return route.fulfill({ status: 501 })
   })
 }
 
@@ -89,6 +94,10 @@ async function authenticate(page: Page): Promise<void> {
     window.localStorage.setItem('ac-rt', 'e2e-refresh-token')
   })
 }
+
+test.afterEach(() => {
+  expect(unmockedCalls, 'the app called API routes the fake backend does not mock').toEqual([])
+})
 
 type ProbeResult = { spinnerSeen: boolean; listUnmounted: boolean; minScrollTop: number; finalScrollTop: number }
 

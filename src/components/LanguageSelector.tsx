@@ -33,6 +33,11 @@ const LanguageSelector: React.FC<Props> = (props: Props) => {
     // find the index of the selected language in the languages array
     const selectedLanguageIndex = languages.findIndex((language) => language.code === selectedLanguage)
 
+    // the selected language may not be in the list (unsupported locale) - skip reordering
+    if (selectedLanguageIndex === -1) {
+      return languages
+    }
+
     // get the languages that come before the selected language
     const languagesBeforeSelected = languages.slice(0, selectedLanguageIndex)
 

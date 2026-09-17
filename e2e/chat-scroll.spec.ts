@@ -36,8 +36,9 @@ const json = (route: Route, body: unknown): Promise<void> =>
 
 /**
  * Installs a stateful fake backend: a long thread that gains a question/answer pair when a message is posted.
+ * threadLatencyMs delays the thread fetch so the opening spinner can be observed.
  */
-async function mockBackend(page: Page): Promise<void> {
+async function mockBackend(page: Page, threadLatencyMs = 0): Promise<void> {
   const messages: ApiMessage[] = Array.from({ length: 30 }, (_, i) => ({
     id: uuid(i),
     role: i % 2 === 0 ? 'user' : 'assistant',
@@ -63,6 +64,7 @@ async function mockBackend(page: Page): Promise<void> {
       return json(route, [{ thread_id: 1, thread_name: 'Long thread', updated_at: '2026-01-01T00:00:00Z' }])
     }
     if (method === 'GET' && path === `/threads/${THREAD_ID}`) {
+      await sleep(threadLatencyMs)
       return json(route, { thread_name: 'Long thread', messages })
     }
     if (method === 'POST' && path === `/threads/${THREAD_ID}`) {
@@ -78,14 +80,21 @@ async function mockBackend(page: Page): Promise<void> {
   })
 }
 
-type ProbeResult = { spinnerSeen: boolean; listUnmounted: boolean; minScrollTop: number; finalScrollTop: number }
-
-test('sending a message keeps the message list mounted and its scroll position', async ({ page }) => {
-  await mockBackend(page)
+/**
+ * Signs the browser in by seeding the tokens the app reads from AsyncStorage (localStorage on web).
+ */
+async function authenticate(page: Page): Promise<void> {
   await page.addInitScript(() => {
     window.localStorage.setItem('ac-at', 'e2e-access-token')
     window.localStorage.setItem('ac-rt', 'e2e-refresh-token')
   })
+}
+
+type ProbeResult = { spinnerSeen: boolean; listUnmounted: boolean; minScrollTop: number; finalScrollTop: number }
+
+test('sending a message keeps the message list mounted and its scroll position', async ({ page }) => {
+  await mockBackend(page)
+  await authenticate(page)
 
   await page.goto(`/chat/${THREAD_ID}`)
   const list = page.getByTestId('message-list-scroll')
@@ -141,4 +150,14 @@ test('sending a message keeps the message list mounted and its scroll position',
   expect
     .soft(probe.finalScrollTop, 'the list ended up scrolled away from where the reader was')
     .toBeGreaterThanOrEqual(scrolledTo - 5)
+})
+
+test('opening a thread still shows a spinner until the thread has loaded', async ({ page }) => {
+  await mockBackend(page, 1000)
+  await authenticate(page)
+
+  await page.goto(`/chat/${THREAD_ID}`)
+  await expect(page.getByTestId('message-list-loading')).toBeVisible()
+  await expect(page.getByTestId('message-list-scroll').getByText('Seed message 30.')).toBeVisible()
+  await expect(page.getByTestId('message-list-loading')).toHaveCount(0)
 })

@@ -8,6 +8,7 @@ interface ChatState {
   threads: Thread[] // Array to store threads
   activeThread: Thread | null // Currently active thread
   loading: boolean // Loading state for async actions
+  activeThreadLoading: boolean // True only while a thread that is not on screen yet is being opened
   error: string | null // Error state
 }
 
@@ -18,6 +19,7 @@ const initialState: ChatState = {
   threads: [],
   activeThread: null,
   loading: false,
+  activeThreadLoading: false,
   error: null,
 }
 
@@ -92,6 +94,17 @@ const chatSlice = createSlice({
     },
 
     /**
+     * Sets whether the active thread is being opened. This is the only flag allowed to
+     * replace the message list with a spinner: background refreshes must never do so,
+     * because swapping the list out resets the reader's scroll position (issue #84).
+     * @param state - The current state of the chat slice.
+     * @param action - The payload action containing the loading value.
+     */
+    setActiveThreadLoading(state, action: PayloadAction<boolean>) {
+      state.activeThreadLoading = action.payload
+    },
+
+    /**
      * Sets the error state in the chat slice.
      * @param state - The current state of the chat slice.
      * @param action - The payload action containing the error message.
@@ -119,6 +132,7 @@ export const {
   addStreamMessageToActiveThread,
   resetChatState,
   setActiveThread,
+  setActiveThreadLoading,
   setError,
   setLoading,
   setThreads,

@@ -22,14 +22,14 @@ interface UseChatReturn {
  * A custom hook to manage chat functionalities including sending messages and managing the active thread.
  *
  * @returns An object containing:
- * - isLoading: Boolean indicating if a chat-related request is in progress.
+ * - isLoading: Boolean indicating if the active thread is being opened and has no content to show yet.
  * - activeThread: The currently active thread or null if no thread is active.
  * - sendNewMessage: Function to send a new message to a thread. It handles thread creation if necessary.
  * - abortRequest: Function to abort the ongoing message send request.
  */
 export function useChat(): UseChatReturn {
   const dispatch = useDispatch<AppDispatch>()
-  const isLoading = useSelector((state: RootState) => state.chat.loading)
+  const isLoading = useSelector((state: RootState) => state.chat.activeThreadLoading)
   const activeThread = useSelector((state: RootState) => state.chat.activeThread)
   const abortControllerRef = useRef<AbortController | null>(null)
   const [inputText, setInputText] = useState<string>('')

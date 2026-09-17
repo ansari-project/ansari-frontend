@@ -28,6 +28,9 @@ credentials.json
 
 # testing
 /coverage
+/dist-e2e
+/test-results
+/playwright-report
 
 # production
 /build

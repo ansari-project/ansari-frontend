@@ -63,7 +63,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   return (
     <View className='flex-1 justify-end'>
       {isHome ? (
-        isLoading || activeThread?.messages ? (
+        isLoading || isSending || activeThread?.messages ? (
           <MessageList ref={messageListRef} activeThread={activeThread} isLoading={isLoading} isSending={isSending} />
         ) : (
           <View

@@ -50,7 +50,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
 
     if (isLoading && !isSending) {
       return (
-        <View className='flex-1 items-center justify-center'>
+        <View testID='message-list-loading' className='flex-1 items-center justify-center'>
           <ActivityIndicator size='large' color={theme.hoverColor} />
         </View>
       )
@@ -88,6 +88,7 @@ const MessageList = forwardRef<MessageListRef, MessageListProps>(
       <View className='flex-1'>
         <ScrollView
           ref={scrollViewRef}
+          testID='message-list-scroll'
           className={`mb-${isSmallScreen ? '1' : '2'}`}
           scrollEventThrottle={250}
           onContentSizeChange={(_contentWidth: number, contentHeight: number) => {

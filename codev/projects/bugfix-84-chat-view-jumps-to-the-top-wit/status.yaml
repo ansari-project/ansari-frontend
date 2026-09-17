@@ -1,7 +1,7 @@
 id: bugfix-84
 title: chat-view-jumps-to-the-top-wit
 protocol: bugfix
-phase: investigate
+phase: fix
 plan_phases: []
 current_plan_phase: null
 gates: {}
@@ -9,4 +9,4 @@ iteration: 1
 build_complete: false
 history: []
 started_at: '2026-09-17T17:20:49.221Z'
-updated_at: '2026-09-17T17:20:49.222Z'
+updated_at: '2026-09-17T17:26:06.194Z'

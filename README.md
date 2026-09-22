@@ -1,5 +1,17 @@
 # Ansari Chat - AI-Powered Islamic Knowledge Assistant
 
+> [!IMPORTANT]
+> **This repository is no longer maintained.** Development of Ansari has moved to
+> **[iaser-ai/ansari](https://github.com/iaser-ai/ansari)**. Please open new issues
+> and pull requests there.
+>
+> The code here is kept for reference only and will not receive updates, bug fixes
+> or security patches.
+>
+> The final state of this repository is preserved in the new repository under
+> [`legacy/`](https://github.com/iaser-ai/ansari/tree/develop/legacy): the `develop`
+> branch as `legacy/frontend-app` and the `multisage` branch as `legacy/frontend-web`.
+
 <div align="center">
   <img src="./src/assets/images/icon.png" alt="Ansari Chat Logo" width="150"/>
   

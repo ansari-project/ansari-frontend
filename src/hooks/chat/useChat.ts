@@ -1,4 +1,5 @@
 import { addMessage, AppDispatch, createThread, fetchThreads, RootState, setActiveThread, Thread } from '@/store'
+import { PendingImage } from '@/utils/imageAttachments'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,12 +9,17 @@ interface UseChatReturn {
   inputText: string
   // eslint-disable-next-line no-unused-vars
   setInputText: (text: string) => void
+  pendingImages: PendingImage[]
+  // eslint-disable-next-line no-unused-vars
+  setPendingImages: (images: PendingImage[]) => void
   isSending: boolean
   sendNewMessage: (
     // eslint-disable-next-line no-unused-vars
     content: string,
     // eslint-disable-next-line no-unused-vars
     threadId?: string,
+    // eslint-disable-next-line no-unused-vars
+    images?: PendingImage[],
   ) => Promise<{ threadId: string | undefined }>
   abortRequest: () => void
 }
@@ -33,6 +39,7 @@ export function useChat(): UseChatReturn {
   const activeThread = useSelector((state: RootState) => state.chat.activeThread)
   const abortControllerRef = useRef<AbortController | null>(null)
   const [inputText, setInputText] = useState<string>('')
+  const [pendingImages, setPendingImages] = useState<PendingImage[]>([])
   const [isSending, setIsSending] = useState<boolean>(false)
 
   /**
@@ -40,11 +47,13 @@ export function useChat(): UseChatReturn {
    *
    * @param content The content of the message to be sent.
    * @param currentThreadId Optional. The ID of the thread to send the message to. If not provided, a new thread is created.
+   * @param images Optional. Images to send with the message.
    * @returns A promise that resolves when the message has been sent or the operation has been aborted.
    */
   const sendNewMessage = async (
     content: string,
     currentThreadId?: string,
+    images: PendingImage[] = [],
   ): Promise<{ threadId: string | undefined; error?: Error }> => {
     setIsSending(true)
     abortControllerRef.current = new AbortController()
@@ -59,12 +68,14 @@ export function useChat(): UseChatReturn {
           threadId = resultAction.id
         }
       }
-      if (threadId && content.trim()) {
+      if (threadId && (content.trim() || images.length > 0)) {
         setInputText('') // Clear input text immediately
+        setPendingImages([])
         await dispatch(
           addMessage({
             threadId: threadId,
             content: content,
+            images,
             signal: abortControllerRef.current.signal,
           }),
         ).unwrap()
@@ -105,6 +116,8 @@ export function useChat(): UseChatReturn {
     activeThread,
     inputText,
     setInputText,
+    pendingImages,
+    setPendingImages,
     isSending,
     sendNewMessage,
     abortRequest,

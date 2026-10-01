@@ -2,6 +2,8 @@ import { ApplicationError, NotFoundError } from '@/errors'
 import { ChatService } from '@/services/'
 import { ShareThreadResponse } from '@/types'
 import { Helpers } from '@/utils'
+import { PendingImage } from '@/utils/imageAttachments'
+import { keepSessionImages } from '@/utils/messageImages'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
   addMessageToActiveThread,
@@ -19,21 +21,40 @@ import { FeedbackRequest, Message, Thread, ThreadNameRequest, UserRole } from '.
  *
  * @param threadId - The ID of the thread where the message will be added.
  * @param content - The content of the message.
+ * @param images - Images to send with the message (optional).
  * @param signal - An AbortSignal object that can be used to abort the message addition process.
  * @returns A Promise that resolves to the added message.
  */
 export const addMessage = createAsyncThunk(
   'chat/addMessage',
   async (
-    { threadId, content, signal }: { threadId: string; content: string; signal: AbortSignal },
+    {
+      threadId,
+      content,
+      images = [],
+      signal,
+    }: { threadId: string; content: string; images?: PendingImage[]; signal: AbortSignal },
     { dispatch, getState },
   ) => {
     try {
       const { isAuthenticated, accessToken } = (getState() as RootState).auth
       const chatService = new ChatService(isAuthenticated, accessToken)
       const requestMessageId = Helpers.generateUniqueId()
-      dispatch(addMessageToActiveThread({ id: requestMessageId, content, role: UserRole.User }))
-      const stream = await chatService.addMessage(threadId, { content, role: UserRole.User }, signal, dispatch)
+      dispatch(
+        addMessageToActiveThread({
+          id: requestMessageId,
+          content,
+          role: UserRole.User,
+          ...(images.length > 0 && { images: images.map((image) => image.uri), imageCount: images.length }),
+        }),
+      )
+      const attachments = images.map((image) => ({ mediaType: image.mediaType, data: image.base64 }))
+      const stream = await chatService.addMessage(
+        threadId,
+        { content, role: UserRole.User, ...(attachments.length > 0 && { attachments }) },
+        signal,
+        dispatch,
+      )
 
       if (!stream || stream === null || stream === undefined) {
         dispatch(setError('Error adding message'))
@@ -151,7 +172,7 @@ export const fetchThread = createAsyncThunk('chat/fetchThread', async (threadId:
     const chatService = new ChatService(isAuthenticated, accessToken)
     dispatch(setLoading(true))
     const thread = await chatService.getThread(threadId, dispatch)
-    dispatch(setActiveThread(thread))
+    dispatch(setActiveThread(keepSessionImages((getState() as RootState).chat.activeThread, thread)))
   } catch (error) {
     if (error instanceof NotFoundError) {
       dispatch(setError(error.toString()))

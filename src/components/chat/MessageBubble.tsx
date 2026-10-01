@@ -1,10 +1,10 @@
-import { LogoRoundIcon } from '@/components/svg'
+import { ImageIcon, LogoRoundIcon } from '@/components/svg'
 import { useAuth, useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, FeedbackClass, FeedbackRequest, Message, RootState, sendFeedback } from '@/store'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Markdown from 'react-native-markdown-display'
-import { StyleSheet, View, Platform, ActivityIndicator, Linking } from 'react-native'
+import { StyleSheet, View, Platform, ActivityIndicator, Linking, Image } from 'react-native'
 import { linkifyLkIds } from '@/utils/lkCitations'
 import { Avatar } from '@kolking/react-native-avatar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -117,17 +117,44 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         <StyledText className='text-base leading-5 font-semibold mb-3 mt-1.5' color='primary' textAlign='left'>
           {isOutgoing ? (isShare ? t('anonymous') : t('you')) : t('ansariChat')}
         </StyledText>
-        <View className='px-1'>
-          <Markdown
-            style={{
-              body: [styles.messageText, textStyle],
-              ...markdownStyles,
-            }}
-            onLinkPress={handleLinkPress}
-          >
-            {mdContent}
-          </Markdown>
-        </View>
+        {message.images && message.images.length > 0 ? (
+          <View className='flex-row flex-wrap gap-2 px-1 mb-3'>
+            {message.images.map((uri, index) => (
+              <Image
+                key={`${message.id}-${index}`}
+                source={{ uri }}
+                className='w-32 h-32 rounded'
+                resizeMode='cover'
+                accessibilityLabel={t('attachedImage')}
+              />
+            ))}
+          </View>
+        ) : (
+          !!message.imageCount && (
+            <View
+              className='flex-row items-center self-start gap-2 rounded px-3 py-2 mx-1 mb-3'
+              style={{ backgroundColor: theme.inputBackgroundColor }}
+            >
+              <ImageIcon fill={theme.iconFill} width={18} height={18} />
+              <StyledText className='text-sm' color='primary'>
+                {message.imageCount > 1 ? `${t('imageAttached')} ×${message.imageCount}` : t('imageAttached')}
+              </StyledText>
+            </View>
+          )
+        )}
+        {!!message.content && (
+          <View className='px-1'>
+            <Markdown
+              style={{
+                body: [styles.messageText, textStyle],
+                ...markdownStyles,
+              }}
+              onLinkPress={handleLinkPress}
+            >
+              {mdContent}
+            </Markdown>
+          </View>
+        )}
         {!isOutgoing && !isSending && reactionsEnabled && (
           <View className='flex flex-row pb-4' key={message.id}>
             <ReactionButtons

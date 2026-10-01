@@ -78,5 +78,11 @@
   "updateLater": "Nanti",
   "otaUpdateAvailable": "Pembaruan Siap",
   "otaUpdateDescription": "Pembaruan baru telah diunduh dan siap dipasang. Aplikasi akan dimulai ulang sebentar.",
-  "version": "Versi"
+  "version": "Versi",
+  "attachImage": "Lampirkan gambar",
+  "removeImage": "Hapus gambar",
+  "attachedImage": "Gambar terlampir",
+  "imageAttached": "Gambar terlampir",
+  "imageTooLarge": "Gambar ini terlalu besar. Silakan pilih yang lebih kecil.",
+  "imageAttachFailed": "Gagal melampirkan gambar. Silakan coba lagi."
 }

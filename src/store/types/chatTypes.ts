@@ -31,6 +31,26 @@ export interface AddMessageRequest {
    * The content of the message.
    */
   content: string
+
+  /**
+   * Images sent to Ansari for this message only; the backend does not store them.
+   */
+  attachments?: ImageAttachment[]
+}
+
+/**
+ * Represents an image attached to a message request.
+ */
+export interface ImageAttachment {
+  /**
+   * The image's media type, e.g. image/jpeg.
+   */
+  mediaType: string
+
+  /**
+   * The base64-encoded image data.
+   */
+  data: string
 }
 
 /**
@@ -63,6 +83,14 @@ export interface Message {
    * Timestamp of when the message was sent.
    */
   timestamp?: string
+  /**
+   * Data URIs of images attached in this session, for display only (images are not stored by the backend).
+   */
+  images?: string[]
+  /**
+   * Number of images the user attached to this message, as reported by the backend.
+   */
+  imageCount?: number
 }
 
 /**

@@ -76,5 +76,11 @@
   "updateLater": "Daha Sonra",
   "otaUpdateAvailable": "Güncelleme Hazır",
   "otaUpdateDescription": "Yeni bir güncelleme indirildi ve yüklenmeye hazır. Uygulama kısa süreliğine yeniden başlatılacak.",
-  "version": "Sürüm"
+  "version": "Sürüm",
+  "attachImage": "Resim ekle",
+  "removeImage": "Resmi kaldır",
+  "attachedImage": "Eklenen resim",
+  "imageAttached": "Resim eklendi",
+  "imageTooLarge": "Bu resim çok büyük. Lütfen daha küçük bir resim seçin.",
+  "imageAttachFailed": "Resim eklenemedi. Lütfen tekrar deneyin."
 }

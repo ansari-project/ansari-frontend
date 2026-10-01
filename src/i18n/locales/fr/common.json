@@ -76,5 +76,11 @@
   "updateLater": "Plus tard",
   "otaUpdateAvailable": "Mise à jour prête",
   "otaUpdateDescription": "Une nouvelle mise à jour a été téléchargée et est prête à être installée. L'application redémarrera brièvement.",
-  "version": "Version"
+  "version": "Version",
+  "attachImage": "Joindre une image",
+  "removeImage": "Supprimer l'image",
+  "attachedImage": "Image jointe",
+  "imageAttached": "Image jointe",
+  "imageTooLarge": "Cette image est trop volumineuse. Veuillez en choisir une plus petite.",
+  "imageAttachFailed": "Impossible de joindre l'image. Veuillez réessayer."
 }

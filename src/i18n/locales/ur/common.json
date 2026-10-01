@@ -76,5 +76,11 @@
   "updateLater": "بعد میں",
   "otaUpdateAvailable": "اپ ڈیٹ تیار ہے",
   "otaUpdateDescription": "ایک نئی اپ ڈیٹ ڈاؤن لوڈ ہو چکی ہے اور انسٹال کے لیے تیار ہے۔ ایپ مختصر وقت کے لیے دوبارہ شروع ہوگی۔",
-  "version": "ورژن"
+  "version": "ورژن",
+  "attachImage": "تصویر منسلک کریں",
+  "removeImage": "تصویر ہٹائیں",
+  "attachedImage": "منسلک تصویر",
+  "imageAttached": "تصویر منسلک ہے",
+  "imageTooLarge": "یہ تصویر بہت بڑی ہے۔ براہ کرم چھوٹی تصویر منتخب کریں۔",
+  "imageAttachFailed": "تصویر منسلک نہیں ہو سکی۔ براہ کرم دوبارہ کوشش کریں۔"
 }

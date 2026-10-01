@@ -2,6 +2,7 @@ import { ApplicationError, NotFoundError } from '@/errors'
 import { AddMessageRequest, FeedbackClass, Message, Thread, ThreadNameRequest } from '@/store'
 import { RefreshTokenResponse, ShareThreadResponse } from '@/types'
 import { Helpers } from '@/utils'
+import { toMessages } from '@/utils/messageImages'
 import { Dispatch, UnknownAction } from 'redux'
 import ApiService from './ApiService'
 import { resetAuth, refreshTokens } from '@/store/slices/authSlice'
@@ -85,7 +86,17 @@ class ChatService {
       {
         method: 'POST',
         headers,
-        body: JSON.stringify(message),
+        body: JSON.stringify({
+          role: message.role,
+          content: message.content,
+          ...(message.attachments && {
+            attachments: message.attachments.map((attachment) => ({
+              // eslint-disable-next-line camelcase
+              media_type: attachment.mediaType,
+              data: attachment.data,
+            })),
+          }),
+        }),
         signal: signal, // Pass the signal for cancellation
       },
       dispatch,
@@ -118,7 +129,7 @@ class ChatService {
       const thread: Thread = {
         id: String(threadId), // Convert thread_id to a string to match the Thread interface
         name: data.thread_name ?? null, // API response doesn't include name
-        messages: data.messages, // Initialize with an empty array since the API response doesn't include messages
+        messages: toMessages(data.messages), // Initialize with an empty array since the API response doesn't include messages
       }
       return thread
     }
@@ -226,7 +237,7 @@ class ChatService {
       const thread: Thread = {
         id: String(sharedThreadUUID), // Convert thread_id to a string to match the Thread interface
         name: data.thread_name ?? null,
-        messages: data.messages,
+        messages: toMessages(data.messages),
       }
       return thread
     }

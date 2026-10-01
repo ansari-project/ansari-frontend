@@ -15,7 +15,17 @@ type ChatContainerProps = {
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   const router = useRouter()
-  const { isLoading, activeThread, inputText, setInputText, isSending, sendNewMessage, abortRequest } = useChat()
+  const {
+    isLoading,
+    activeThread,
+    inputText,
+    setInputText,
+    pendingImages,
+    setPendingImages,
+    isSending,
+    sendNewMessage,
+    abortRequest,
+  } = useChat()
   const sideMenuWidth = useSelector((state: RootState) => state.sideMenu.width)
   const theme = useSelector((state: RootState) => state.theme.theme)
   const isInputFullMode = useSelector((state: RootState) => state.input.fullMode)
@@ -26,9 +36,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
   const handleSendPress = useCallback(
     async (prompt?: string) => {
       const promptToPass = typeof prompt === 'string' ? prompt : inputText
-      if (!promptToPass.trim() || isSending) return
+      // Suggested prompts are sent on their own, without any images being prepared in the input
+      const imagesToPass = typeof prompt === 'string' ? [] : pendingImages
+      if ((!promptToPass.trim() && imagesToPass.length === 0) || isSending) return
 
-      const result = await sendNewMessage(promptToPass, activeThread?.id)
+      const result = await sendNewMessage(promptToPass, activeThread?.id, imagesToPass)
       if (result.error) {
         console.error('Message sending error:', result.error)
         // Handle error (e.g., show a toast notification)
@@ -37,7 +49,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
         router.push(`/chat/${result.threadId}`) // Navigate to the chat screen with the new thread ID
       }
     },
-    [inputText, isSending, activeThread?.id, isHome, sendNewMessage, router],
+    [inputText, pendingImages, isSending, activeThread?.id, isHome, sendNewMessage, router],
   )
 
   const handleCancelSend = useCallback(() => {
@@ -114,6 +126,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ isHome }) => {
           onSendPress={handleSendPress}
           isSending={isSending}
           onCancelSend={handleCancelSend}
+          images={pendingImages}
+          onImagesChange={setPendingImages}
         />
       </View>
     </View>

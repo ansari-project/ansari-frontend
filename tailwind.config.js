@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   presets: [require('nativewind/preset')],
+  // The app manages its own theme; 'media' makes NativeWind throw on web
+  // ("Cannot manually set color scheme, as dark mode is type 'media'")
+  darkMode: 'class',
   theme: {
     container: {
       center: true,

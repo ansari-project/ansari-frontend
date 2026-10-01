@@ -76,5 +76,11 @@
   "updateLater": "Later",
   "otaUpdateAvailable": "Update Ready",
   "otaUpdateDescription": "A new update has been downloaded and is ready to install. The app will restart briefly.",
-  "version": "Version"
+  "version": "Version",
+  "attachImage": "Attach image",
+  "removeImage": "Remove image",
+  "attachedImage": "Attached image",
+  "imageAttached": "Image attached",
+  "imageTooLarge": "This image is too large. Please choose a smaller one.",
+  "imageAttachFailed": "Couldn't attach the image. Please try again."
 }

@@ -76,5 +76,11 @@
   "updateLater": "لاحقاً",
   "otaUpdateAvailable": "التحديث جاهز",
   "otaUpdateDescription": "تم تنزيل تحديث جديد وهو جاهز للتثبيت. سيتم إعادة تشغيل التطبيق لفترة وجيزة.",
-  "version": "الإصدار"
+  "version": "الإصدار",
+  "attachImage": "إرفاق صورة",
+  "removeImage": "إزالة الصورة",
+  "attachedImage": "صورة مرفقة",
+  "imageAttached": "تم إرفاق صورة",
+  "imageTooLarge": "هذه الصورة كبيرة جدًا. يرجى اختيار صورة أصغر.",
+  "imageAttachFailed": "تعذّر إرفاق الصورة. يرجى المحاولة مرة أخرى."
 }

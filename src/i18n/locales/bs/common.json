@@ -76,5 +76,11 @@
   "updateLater": "Kasnije",
   "otaUpdateAvailable": "Ažuriranje spremno",
   "otaUpdateDescription": "Novo ažuriranje je preuzeto i spremno za instalaciju. Aplikacija će se nakratko ponovo pokrenuti.",
-  "version": "Verzija"
+  "version": "Verzija",
+  "attachImage": "Priloži sliku",
+  "removeImage": "Ukloni sliku",
+  "attachedImage": "Priložena slika",
+  "imageAttached": "Slika priložena",
+  "imageTooLarge": "Ova slika je prevelika. Molimo odaberite manju.",
+  "imageAttachFailed": "Slika nije mogla biti priložena. Molimo pokušajte ponovo."
 }

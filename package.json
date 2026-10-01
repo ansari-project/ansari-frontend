@@ -26,6 +26,8 @@
     "expo-dev-client": "~55.0.27",
     "expo-font": "~55.0.6",
     "expo-haptics": "~55.0.14",
+    "expo-image-manipulator": "~55.0.21",
+    "expo-image-picker": "~55.0.24",
     "expo-linking": "~55.0.13",
     "expo-localization": "~55.0.13",
     "expo-router": "~55.0.12",

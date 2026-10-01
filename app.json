@@ -43,7 +43,15 @@
         }
       ],
       "expo-web-browser",
-      "expo-build-properties"
+      "expo-build-properties",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Ansari needs access to your photos so you can attach images to your questions.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ]
     ],
     "extra": {
       "criticalIndex": 0,

@@ -62,6 +62,10 @@ const Welcome: React.FC = () => {
             Use the old version of Ansari
           </StyledText>
         </Pressable>
+
+        <StyledText variant='body' className='text-center mt-4 opacity-80' color={theme.textColor}>
+          This version of Ansari will no longer be available after November 3, 2026. Please move to the new version.
+        </StyledText>
       </View>
     </View>
   )

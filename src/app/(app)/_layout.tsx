@@ -8,6 +8,7 @@ import { Redirect, Slot } from 'expo-router'
 import RootImageBackground from '@/components/RootImageBackground'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import KeyboardHandler from '@/components/KeyboardHandler'
+import DeprecationBanner from '@/components/DeprecationBanner'
 
 /**
  * AppLayout Component.
@@ -30,6 +31,7 @@ export const AppLayout = () => {
         <SafeAreaView className='flex-1'>
           <View className='flex-1 overflow-y-auto'>
             <View className='flex-1'>
+              <DeprecationBanner />
               <Header />
               <View className='flex-1'>
                 <View className={'flex-grow justify-center items-center self-center'}>

@@ -1,5 +1,5 @@
 import { LogoIcon } from '@/components/svg'
-import { useDirection, useGuest, useScreenInfo } from '@/hooks'
+import { useDirection, useScreenInfo } from '@/hooks'
 import { AppDispatch, RootState, login } from '@/store'
 import { LoginRequest } from '@/types'
 import { createGeneralThemedStyles } from '@/utils'
@@ -22,7 +22,6 @@ const LoginScreen: React.FC = () => {
   const { t } = useTranslation('login')
   const loginSchema = useLoginSchema()
   const dispatch = useDispatch<AppDispatch>()
-  const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
 
@@ -145,16 +144,6 @@ const LoginScreen: React.FC = () => {
               >
                 <Text style={[generalStyle.buttonPrimaryText, isSubmitting && generalStyle.buttonTextDisabled]}>
                   {isSubmitting ? t('submitting') : t('submit')}
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[generalStyle.buttonSecondary, guestLoading && generalStyle.buttonDisabled]}
-                onPress={handleGuestLogin}
-                disabled={guestLoading}
-              >
-                <Text style={[generalStyle.buttonSecondaryText, guestLoading && generalStyle.buttonTextDisabled]}>
-                  {guestLoading ? t('submitting') : t('guestLogin')}
                 </Text>
               </Pressable>
 

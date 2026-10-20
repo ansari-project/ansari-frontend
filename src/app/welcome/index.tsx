@@ -2,7 +2,7 @@ import { LogoIcon, LogoTextIcon } from '@/components/svg'
 import ActionButtons from '@/components/ActionButtons'
 import StyledText from '@/components/StyledText'
 import TermsAndPrivacy from '@/components/TermsAndPrivacy'
-import { useDirection, useGuest, useScreenInfo } from '@/hooks'
+import { useDirection, useScreenInfo } from '@/hooks'
 import { RootState } from '@/store'
 import { createGeneralThemedStyles } from '@/utils'
 import React from 'react'
@@ -15,7 +15,6 @@ const Welcome: React.FC = () => {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const { guestLoading, handleGuestLogin } = useGuest()
   const { isRTL } = useDirection()
   const { isSmallScreen, width } = useScreenInfo()
   const theme = useSelector((state: RootState) => state.theme.theme)
@@ -60,33 +59,6 @@ const Welcome: React.FC = () => {
               onPress={() => router.push('/login')}
             >
               <StyledText style={generalStyle.buttonPrimaryText}>{t('login')}</StyledText>
-            </Pressable>
-            <Pressable
-              className='border'
-              style={[
-                generalStyle.buttonPrimary,
-                generalStyle.fullWidth,
-                {
-                  backgroundColor: theme.popupBackgroundColor,
-                  borderColor: theme.buttonSecondaryBorderColor,
-                },
-              ]}
-              onPress={() => router.push('/register')}
-            >
-              <StyledText style={generalStyle.buttonSecondaryText}>{t('register')}</StyledText>
-            </Pressable>
-            <Pressable
-              style={[
-                generalStyle.buttonSecondary,
-                generalStyle.fullWidth,
-                guestLoading && generalStyle.buttonDisabled,
-              ]}
-              onPress={handleGuestLogin}
-              disabled={guestLoading}
-            >
-              <StyledText style={[generalStyle.buttonSecondaryText, guestLoading && generalStyle.buttonTextDisabled]}>
-                {guestLoading ? t('login:submitting') : t('login:guestLogin')}
-              </StyledText>
             </Pressable>
           </View>
         </View>

@@ -146,21 +146,6 @@ const LoginScreen: React.FC = () => {
                   {isSubmitting ? t('submitting') : t('submit')}
                 </Text>
               </Pressable>
-
-              <View
-                className='flex-row justify-end'
-                style={[generalStyle.prompt, Platform.OS === 'web' && hovered === 2 ? generalStyle.boldText : null]}
-              >
-                <StyledText style={generalStyle.primaryColorText}>{t('dontHaveAccount')}</StyledText>
-                <Pressable
-                  hitSlop={8}
-                  onMouseEnter={() => setHovered(2)}
-                  onMouseLeave={() => setHovered(0)}
-                  onPress={() => router.push('/register')}
-                >
-                  <StyledText style={generalStyle.link}>{t('register')}</StyledText>
-                </Pressable>
-              </View>
             </View>
           )}
         </Formik>

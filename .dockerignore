@@ -1,0 +1,34 @@
+# Keep the Docker build context small. Only what `expo export --platform web`
+# needs should upload on each Railway build.
+.git
+node_modules
+dist
+web-build
+build
+.expo
+.eas
+.turbo
+coverage
+
+# Native projects are not used by the web export
+ios
+android
+
+# Secrets and local config
+.env
+.env.*
+google-service-account
+.vercel
+
+# Tooling and docs
+.github
+.husky
+.vscode
+.claude
+.codev
+.codex
+.builders
+codev
+docs
+*.md
+.DS_Store

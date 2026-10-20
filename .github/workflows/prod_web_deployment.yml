@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  # Manual deploy of any branch to production. Pick the branch in the
+  # "Use workflow from" dropdown on the Actions page (or `gh workflow run ... --ref <branch>`).
+  workflow_dispatch:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -13,12 +16,12 @@ jobs:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - name: 🏗 Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
 
       - name: 📦 Install Vercel CLI
         run: npm install --global vercel@latest
